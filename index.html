@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>For Iris — 5 Months</title>
+  <meta name="theme-color" content="#1a1028" />
+  <style>
+    :root{
+      --bg1:#140b22;
+      --bg2:#2a1442;
+      --bg3:#0f081b;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.12);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.93);
+      --muted: rgba(255,255,255,.72);
+      --lav:#cbb7ff;
+      --lav2:#a992ff;
+      --pink:#ffb6d9;
+      --rose:#ff8ac6;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 26px;
+      --radius2: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body { height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% 10%, rgba(203,183,255,.22), transparent 55%),
+        radial-gradient(900px 600px at 90% 18%, rgba(255,182,217,.16), transparent 60%),
+        radial-gradient(900px 700px at 45% 110%, rgba(169,146,255,.16), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* dreamy vignette + film grain */
+    .vignette{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(circle at 50% 35%, transparent 35%, rgba(0,0,0,.35) 85%),
+        radial-gradient(circle at 50% 120%, rgba(0,0,0,.45), transparent 55%);
+      mix-blend-mode: multiply;
+    }
+    .grain{
+      position:fixed; inset:-60px; pointer-events:none; z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      opacity:.09;
+      mix-blend-mode: overlay;
+      animation: grainMove 9s steps(10) infinite;
+    }
+    @keyframes grainMove{
+      0%{ transform:translate(0,0) }
+      20%{ transform:translate(-20px,10px) }
+      40%{ transform:translate(12px,-18px) }
+      60%{ transform:translate(-8px,-10px) }
+      80%{ transform:translate(18px,16px) }
+      100%{ transform:translate(0,0) }
+    }
+
+    /* floating sparkles */
+    .sparkles{
+      position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+    }
+    .sparkles i{
+      position:absolute;
+      width:6px; height:6px;
+      border-radius:50%;
+      background:rgba(255,255,255,.85);
+      opacity:.0;
+      filter: blur(.2px);
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp{
+      from { transform: translateY(112vh) scale(.8); opacity:0 }
+      12% { opacity:.55 }
+      60% { opacity:.35 }
+      to   { transform: translateY(-15vh) scale(1.12); opacity:0 }
+    }
+
+    .wrap{
+      position:relative;
+      z-index:2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: max(16px, env(safe-area-inset-top)) 14px 72px;
+    }
+
+    /* header */
+    header{
+      padding: 18px 6px 10px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .badge{
+      width: fit-content;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      font-size:13px;
+      color:var(--muted);
+    }
+    .badge b{ color:var(--text); }
+
+    h1{
+      margin:0;
+      font-size: clamp(30px, 5.2vw, 54px);
+      line-height:1.02;
+      letter-spacing:-.9px;
+    }
+    .sub{
+      margin:0;
+      max-width: 70ch;
+      color:var(--muted);
+      font-size: clamp(14px, 2.5vw, 17px);
+      line-height:1.45;
+    }
+
+    /* layout */
+    .grid{
+      margin-top:14px;
+      display:grid;
+      gap:14px;
+      grid-template-columns: 1fr;
+    }
+    @media(min-width: 900px){
+      .grid{ grid-template-columns: 1.2fr .8fr; }
+    }
+
+    /* cards */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.06));
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,182,217,.15), transparent 55%),
+        radial-gradient(circle at 70% 35%, rgba(203,183,255,.20), transparent 55%),
+        radial-gradient(circle at 50% 75%, rgba(255,255,255,.08), transparent 60%);
+      transform: rotate(14deg);
+      pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1; }
+
+    .card h2{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+
+    .note{
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius2);
+      padding: 14px;
+      line-height: 1.55;
+      font-size: 15.5px;
+    }
+    @media(min-width: 900px){
+      .note{ font-size: 16px; }
+    }
+    .muted{ color:var(--muted); }
+
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 12px;
+      align-items:center;
+    }
+    .pill{
+      padding:7px 10px;
+      border-radius: 999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      font-size: 13px;
+      color:var(--muted);
+    }
+    .pill b{ color:var(--text); }
+
+    /* buttons */
+    .btnRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 12px;
+    }
+    button{
+      appearance:none;
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:700;
+      letter-spacing:.2px;
+      cursor:pointer;
+      color: rgba(20,10,35,.95);
+      background: linear-gradient(90deg, var(--lav), var(--pink));
+      box-shadow: 0 14px 28px rgba(0,0,0,.28);
+      transition: transform .12s ease, filter .12s ease;
+      touch-action: manipulation;
+    }
+    button:active{ transform: scale(.98); }
+    button.secondary{
+      color: var(--text);
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.12);
+      margin: 12px 0;
+    }
+
+    /* reasons deck */
+    .deck{
+      display:grid;
+      gap:10px;
+    }
+    .deckCard{
+      padding:12px;
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .deckCard b{ color: var(--lav); }
+
+    /* timeline */
+    .timeline{
+      display:grid; gap:10px;
+      margin-top:10px;
+    }
+    .step{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:12px;
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(90deg, var(--lav2), var(--rose));
+      box-shadow: 0 0 18px rgba(203,183,255,.35);
+      margin-top:6px;
+      flex:0 0 auto;
+    }
+
+    /* finale */
+    .finale{
+      text-align:center;
+      padding: 18px;
+    }
+    .finale h2{ margin-bottom: 8px; }
+    .finale p{ margin: 10px auto; max-width: 72ch; }
+    .heart{
+      display:inline-block;
+      animation: beat 1.35s ease-in-out infinite;
+      transform-origin:center;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+    }
+    @keyframes beat{
+      0%,100%{ transform: scale(1); }
+      40%{ transform: scale(1.12); }
+      70%{ transform: scale(1.04); }
+    }
+
+    /* modal */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background: rgba(0,0,0,.55);
+      z-index:50;
+    }
+    .modal.open{ display:flex; }
+    .modalCard{
+      width:100%;
+      max-width:760px;
+      border-radius: 26px;
+      padding: 18px;
+      background: rgba(18,10,30,.92);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 22px 70px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(14px);
+    }
+    .modalCard::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(203,183,255,.20), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(255,182,217,.14), transparent 55%);
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .modalCard > *{ position:relative; z-index:1; }
+
+    .close{
+      position:absolute;
+      right:12px; top:12px;
+      width:40px; height:40px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      cursor:pointer;
+    }
+
+    /* toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      transform:translateX(-50%);
+      background: rgba(18,10,30,.92);
+      border:1px solid rgba(255,255,255,.16);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      display:none;
+      gap:10px;
+      align-items:center;
+      box-shadow: var(--shadow);
+      z-index:60;
+      font-size: 13px;
+      backdrop-filter: blur(12px);
+    }
+    .toast.show{ display:flex; }
+
+    /* tap hearts (screen particles) */
+    .tapHint{
+      margin-top:10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer{
+      margin-top: 14px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 8px 0 0;
+    }
+
+    /* accessibility */
+    @media (prefers-reduced-motion: reduce){
+      .sparkles i, .grain, .heart { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+  <div class="sparkles" id="sparkles"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="badge">🌙 <b>Five months</b> of pursuing you — softly, sincerely, and still choosing you</div>
+      <h1>Hi Iris,</h1>
+      <p class="sub">
+        This is a small lavender page made for you — not to ask for anything,
+        but to say what my heart keeps saying:
+        <b>thank you for existing in my life.</b>
+      </p>
+      <p class="sub muted">
+        (Tip: tap anywhere on the screen for little hearts ✨)
+      </p>
+    </header>
+
+    <section class="grid">
+      <!-- MAIN LETTER -->
+      <div class="card">
+        <h2>A letter that feels like you</h2>
+        <div class="note" id="mainLetter">
+          Iris, happy five months to us. 💜<br><br>
+
+          I don’t know how to explain it in one sentence,
+          but being with you feels like a quiet kind of miracle —
+          like my chest finally learned how to breathe softer.<br><br>
+
+          These months of pursuing you didn’t feel like chasing.
+          It felt like choosing.
+          Choosing patience.
+          Choosing understanding.
+          Choosing to love you in a way that never pressures you to be more than you are.<br><br>
+
+          I appreciate the way you exist — even when you’re tired,
+          even when you’re overwhelmed,
+          even when you don’t have the energy to give the world your brightest smile.
+          You are still you… and that has always been enough for me.<br><br>
+
+          Thank you for letting me be close in the ways you can.
+          Thank you for trusting me with pieces of you.
+          Thank you for the quiet moments, the small replies, the simple presence —
+          because with you, even “small” feels precious.<br><br>
+
+          If love has a language, then mine is this:
+          I will be gentle with your heart.
+          I will be patient with your pace.
+          I will keep showing you that my love is safe.
+        </div>
+
+        <div class="pillRow">
+          <div class="pill">From: <b>Ali</b> 💜</div>
+          <div class="pill">To: <b>Iris</b></div>
+          <div class="pill">Theme: <b>Lavender nights</b></div>
+        </div>
+
+        <div class="btnRow">
+          <button id="openModal">Open a secret love note</button>
+          <button class="secondary" id="copyLetter">Copy this letter</button>
+          <button class="secondary" id="magic">Tap for magic</button>
+        </div>
+
+        <div class="tapHint">Little interaction: tap the background for floating hearts and sparkles.</div>
+      </div>
+
+      <!-- RIGHT SIDE STACK -->
+      <div class="deck">
+        <div class="card">
+          <h2>Reasons I appreciate you</h2>
+          <div class="note" id="reasonBox">
+            I appreciate how you protect your peace — it reminds me that love should feel safe, not draining.
+          </div>
+          <div class="btnRow">
+            <button class="secondary" id="newReason">Another reason</button>
+            <button class="secondary" id="openReasons">Open the full list</button>
+          </div>
+          <p class="muted" style="margin:8px 0 0; font-size:13px">
+            Gentle reminders, like little love receipts.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Our five months</h2>
+          <div class="timeline">
+            <div class="step"><div class="dot"></div><div><b>Month 1</b><div class="muted">A beginning that felt like a soft yes.</div></div></div>
+            <div class="step"><div class="dot"></div><div><b>Month 2</b><div class="muted">Learning your pace — and honoring it.</div></div></div>
+            <div class="step"><div class="dot"></div><div><b>Month 3</b><div class="muted">Comfort forming, slowly and beautifully.</div></div></div>
+            <div class="step"><div class="dot"></div><div><b>Month 4</b><div class="muted">Patience over pride — love over noise.</div></div></div>
+            <div class="step"><div class="dot"></div><div><b>Month 5</b><div class="muted">Still choosing you. Still grateful it’s you.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMISES -->
+    <section class="grid" style="margin-top:14px">
+      <div class="card">
+        <h2>Three quiet promises</h2>
+        <div class="deckCard"><b>1)</b> I’ll love you with patience — the kind that doesn’t rush your heart.</div>
+        <div class="deckCard"><b>2)</b> I’ll be consistent — not only when it’s easy, but when you need it most.</div>
+        <div class="deckCard"><b>3)</b> I’ll be gentle — because your softness deserves safety.</div>
+        <div class="divider"></div>
+        <p class="muted" style="margin:0">
+          Not perfect promises — real promises. The kind I plan to live.
+        </p>
+      </div>
+
+      <div class="card finale">
+        <h2>The closing paragraph</h2>
+        <div class="note" id="closing">
+          Iris… if you ever wonder how I see you, here’s the truth:
+          you are not a hassle, not a burden, not “too much.”
+          You are the kind of person that makes love feel worth the effort.
+          So if the world gets loud and your heart gets tired,
+          please remember this —
+          I’m not here to demand anything from you.
+          I’m here to love you gently,
+          to choose you steadily,
+          and to keep proving that with me…
+          your heart can rest.
+        </div>
+        <div style="margin-top:10px; font-size:18px">
+          Always, <span class="heart">💜</span><br>
+          <span class="muted" style="font-size:13px">— Ali</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Made in lavender & sincerity — tap the screen for tiny magic ✨
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modalCard">
+      <button class="close" id="close">✕</button>
+      <h2 style="margin:0 0 10px">A secret love note for Iris</h2>
+      <div class="note" id="secretNote" style="font-size:16px"></div>
+      <div class="btnRow" style="margin-top:12px">
+        <button class="secondary" id="anotherNote">Another note</button>
+        <button class="secondary" id="copyNote">Copy this note</button>
+      </div>
+      <div class="divider"></div>
+      <div class="note" id="allReasons" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">✅ Copied</div>
+
+  <script>
+    // Sparkles
+    const sparkles = document.getElementById("sparkles");
+    function makeSparkles(count=26){
+      sparkles.innerHTML = "";
+      for(let i=0;i<count;i++){
+        const s = document.createElement("i");
+        const left = Math.random()*100;
+        const size = 4 + Math.random()*6;
+        const dur = 6 + Math.random()*9;
+        const delay = Math.random()*6;
+        s.style.left = left + "vw";
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        s.style.animationDuration = dur + "s";
+        s.style.animationDelay = delay + "s";
+        s.style.opacity = (0.2 + Math.random()*0.55).toFixed(2);
+        sparkles.appendChild(s);
+      }
+    }
+    makeSparkles();
+
+    // Content
+    const reasons = [
+      "I appreciate how your presence feels like calm — the kind that makes the world quieter.",
+      "I appreciate your honesty, even when it’s difficult to say the truth out loud.",
+      "I appreciate your boundaries — they show me how to love you gently and correctly.",
+      "I appreciate how you don’t pretend… you’re real, and that’s rare.",
+      "I appreciate your patience with me — even when my feelings are loud.",
+      "I appreciate the small moments: a reply, a presence, a simple ‘I’m here’.",
+      "I appreciate how you protect your energy — it reminds me love should never drain you.",
+      "I appreciate how you still try, even when you’re tired.",
+      "I appreciate you for being you — not a version you think you need to be."
+    ];
+
+    const secretNotes = [
+      "Iris, you don’t have to earn my love by being perfect. I’m here for the real you — the quiet, the tired, the soft, the strong.",
+      "If my love ever feels too much, tell me. I’ll adjust — not to shrink my love, but to make it feel safe for you.",
+      "You are the kind of person I don’t want to rush. I want to love you slowly, correctly, and gently.",
+      "Even on days you feel distant, my intentions stay close: I want you to feel safe with me.",
+      "I love you in a way that respects your pace — because your heart deserves patience, not pressure.",
+      "If the world is heavy, let my love be the place your heart can rest for a while."
+    ];
+
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+    // Modal
+    const modal = document.getElementById("modal");
+    const secretNote = document.getElementById("secretNote");
+    const allReasons = document.getElementById("allReasons");
+
+    function openModal(mode="note"){
+      modal.classList.add("open");
+      allReasons.style.display = "none";
+      if(mode === "reasons"){
+        secretNote.textContent = "Here’s every reason on the page — all about you, Iris.";
+        allReasons.style.display = "block";
+        allReasons.innerHTML = reasons.map((r,i)=>`<div style="margin:10px 0"><b>${i+1}.</b> ${r}</div>`).join("");
+      } else {
+        secretNote.textContent = pick(secretNotes);
+      }
+      miniConfetti();
+    }
+    function closeModal(){ modal.classList.remove("open"); }
+
+    document.getElementById("openModal").addEventListener("click", () => openModal("note"));
+    document.getElementById("openReasons").addEventListener("click", () => openModal("reasons"));
+    document.getElementById("close").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+
+    document.getElementById("anotherNote").addEventListener("click", () => {
+      secretNote.textContent = pick(secretNotes);
+      allReasons.style.display = "none";
+      miniConfetti();
+    });
+
+    // Reasons shuffle
+    const reasonBox = document.getElementById("reasonBox");
+    document.getElementById("newReason").addEventListener("click", () => {
+      reasonBox.textContent = pick(reasons);
+      miniConfetti();
+    });
+
+    // Toast
+    const toast = document.getElementById("toast");
+    let toastTimer = null;
+    const showToast = (msg="✅ Copied") => {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+    };
+
+    // Copy
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("✅ Copied");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("✅ Copied");
+      }
+    }
+
+    document.getElementById("copyLetter").addEventListener("click", () => {
+      copyText(document.getElementById("mainLetter").innerText.trim());
+    });
+
+    document.getElementById("copyNote").addEventListener("click", () => {
+      copyText(secretNote.innerText.trim());
+    });
+
+    // Magic button
+    document.getElementById("magic").addEventListener("click", () => {
+      miniConfetti(28);
+      makeSparkles(32);
+      showToast("✨ Lavender magic");
+      // subtle shake / glow
+      document.body.animate([
+        { filter: "brightness(1)" },
+        { filter: "brightness(1.07)" },
+        { filter: "brightness(1)" }
+      ], { duration: 500, easing: "ease-out" });
+    });
+
+    // Tap anywhere = heart particles
+    document.addEventListener("pointerdown", (e) => {
+      // avoid spamming if user is pressing buttons
+      if(e.target.tagName === "BUTTON" || e.target.classList.contains("close")) return;
+      burstAt(e.clientX, e.clientY);
+    }, { passive:true });
+
+    function burstAt(x, y){
+      const count = 10;
+      for(let i=0;i<count;i++){
+        const el = document.createElement("div");
+        el.textContent = Math.random() > 0.55 ? "💜" : "✨";
+        el.style.position = "fixed";
+        el.style.left = (x + (Math.random()*18-9)) + "px";
+        el.style.top  = (y + (Math.random()*18-9)) + "px";
+        el.style.fontSize = (14 + Math.random()*18) + "px";
+        el.style.opacity = "0.98";
+        el.style.zIndex = "80";
+        el.style.pointerEvents = "none";
+        el.style.filter = "drop-shadow(0 10px 16px rgba(0,0,0,.35))";
+        document.body.appendChild(el);
+
+        const drift = (Math.random()*140 - 70);
+        const rise  = (140 + Math.random()*220);
+        const dur   = (650 + Math.random()*650);
+
+        const start = performance.now();
+        const anim = (t) => {
+          const p = Math.min(1, (t-start)/dur);
+          const ease = 1 - Math.pow(1-p, 3);
+          el.style.transform = `translate(${drift*ease}px, ${-rise*ease}px) rotate(${ease*180}deg)`;
+          el.style.opacity = String(0.98*(1-p));
+          if(p < 1) requestAnimationFrame(anim);
+          else el.remove();
+        };
+        requestAnimationFrame(anim);
+      }
+    }
+
+    // Confetti hearts from bottom
+    function miniConfetti(amount=18){
+      for(let i=0;i<amount;i++){
+        const el = document.createElement("div");
+        el.textContent = Math.random() > 0.5 ? "💜" : "✨";
+        el.style.position = "fixed";
+        el.style.left = (Math.random()*100) + "vw";
+        el.style.top  = (72 + Math.random()*18) + "vh";
+        el.style.fontSize = (14 + Math.random()*18) + "px";
+        el.style.opacity = "0.96";
+        el.style.zIndex = "80";
+        el.style.pointerEvents = "none";
+        el.style.filter = "drop-shadow(0 10px 16px rgba(0,0,0,.35))";
+        document.body.appendChild(el);
+
+        const drift = (Math.random()*160 - 80);
+        const rise  = (220 + Math.random()*260);
+        const dur   = (900 + Math.random()*700);
+
+        const start = performance.now();
+        const anim = (t) => {
+          const p = Math.min(1, (t-start)/dur);
+          const ease = 1 - Math.pow(1-p, 3);
+          el.style.transform = `translate(${drift*ease}px, ${-rise*ease}px) rotate(${ease*180}deg)`;
+          el.style.opacity = String(0.96*(1-p));
+          if(p < 1) requestAnimationFrame(anim);
+          else el.remove();
+        };
+        requestAnimationFrame(anim);
+      }
+    }
+
+    // First load: a tiny welcome sparkle
+    setTimeout(() => miniConfetti(14), 500);
+  </script>
+</body>
+</html>
