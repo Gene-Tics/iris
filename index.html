@@ -3,774 +3,534 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For My Precious Love</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>For Iris</title>
 
   <style>
     :root{
-      --lav:#f3e8ff;
-      --pink:#ffe4f0;
-      --sky:#e0f7ff;
-      --rose:#fff0f6;
-      --ink:#2b1b2f;
-      --violet:#6a0572;
-      --mag:#b83280;
-      --card: rgba(255,255,255,0.78);
-      --card2: rgba(255,255,255,0.62);
-      --shadow: 0 14px 45px rgba(0,0,0,0.10);
-      --shadow2: 0 8px 24px rgba(0,0,0,0.10);
+      --bg1:#fff5fb;
+      --bg2:#f7f0ff;
+      --card:#ffffffcc;
+      --text:#2a1f2a;
+      --muted:#6b556b;
+      --accent:#c04a86;
+      --accent2:#7f57c9;
+      --shadow: 0 18px 45px rgba(27, 8, 25, .10);
+      --shadow2: 0 10px 28px rgba(27, 8, 25, .10);
       --radius: 22px;
     }
 
     *{ box-sizing:border-box; }
-
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family:'Poppins', sans-serif;
-      color: var(--ink);
-      background: linear-gradient(-45deg,var(--lav),var(--pink),var(--sky),var(--rose));
-      background-size: 400% 400%;
-      animation: gradient 16s ease infinite;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 5%, rgba(192,74,134,.16), transparent 60%),
+        radial-gradient(900px 520px at 80% 15%, rgba(127,87,201,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    @keyframes gradient{
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
+    /* soft floating hearts */
+    .float-layer{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      opacity:.6;
+    }
+    .heart{
+      position:absolute;
+      width:14px; height:14px;
+      transform: rotate(45deg);
+      background: rgba(192,74,134,.18);
+      border-radius: 3px;
+      animation: drift linear infinite;
+      filter: blur(.2px);
+    }
+    .heart:before,.heart:after{
+      content:"";
+      position:absolute;
+      width:14px; height:14px;
+      background: inherit;
+      border-radius:50%;
+    }
+    .heart:before{ left:-7px; top:0; }
+    .heart:after{ left:0; top:-7px; }
+
+    @keyframes drift{
+      0%{ transform: translateY(110vh) rotate(45deg); opacity:0; }
+      12%{ opacity:.9; }
+      100%{ transform: translateY(-20vh) translateX(40px) rotate(45deg); opacity:0; }
     }
 
-    .container{
-      max-width:1050px;
-      margin:auto;
-      padding:42px 18px 70px;
-      text-align:center;
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width:1100px;
+      margin:0 auto;
+      padding:32px 16px 80px;
     }
 
     .hero{
-      padding: 28px 16px 6px;
+      padding:46px 18px 24px;
+      text-align:center;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.45));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.7);
+      overflow:hidden;
+      position:relative;
     }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-30%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(192,74,134,.18), transparent 40%),
+        radial-gradient(circle at 70% 20%, rgba(127,87,201,.16), transparent 45%),
+        radial-gradient(circle at 55% 65%, rgba(255, 166, 214, .12), transparent 50%);
+      filter: blur(10px);
+      z-index:0;
+    }
+    .hero > *{ position:relative; z-index:1; }
 
+    .kicker{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      color: rgba(107,85,107,.9);
+      margin:0 0 10px;
+    }
     h1{
-      font-family:'Playfair Display', serif;
-      font-size: clamp(2.05rem, 4.5vw, 3.0rem);
-      color: var(--violet);
-      margin: 8px 0 10px;
-      letter-spacing: 0.2px;
+      margin:0;
+      font-size: clamp(2.0rem, 4.2vw, 3.2rem);
+      line-height:1.05;
+      color: #2a1f2a;
     }
-
-    .subtitle{
-      max-width: 780px;
-      margin: 0 auto;
+    .sub{
+      margin:14px auto 0;
+      max-width: 58ch;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       font-size: 1.02rem;
-      line-height: 1.8;
-      opacity: 0.9;
+      line-height: 1.7;
+      color: rgba(43, 30, 43, .78);
     }
 
-    .pillrow{
+    .pill-row{
+      margin-top:18px;
       display:flex;
+      flex-wrap:wrap;
       gap:10px;
       justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 16px;
     }
-
     .pill{
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(120,60,130,0.12);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-      backdrop-filter: blur(10px);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:.9rem;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.7);
+      border:1px solid rgba(255,255,255,.85);
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+      color: rgba(43, 30, 43, .78);
+    }
+    .pill b{ color: var(--accent); font-weight:700; }
+
+    .grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:16px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
     }
 
-    .section{
+    .card{
       background: var(--card);
-      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: var(--shadow2);
       border-radius: var(--radius);
-      padding: 26px 18px;
-      margin: 28px 0;
-      box-shadow: var(--shadow);
-      transition: transform .35s ease, box-shadow .35s ease;
-      border: 1px solid rgba(110,20,120,0.08);
-      position: relative;
-      overflow:hidden;
+      backdrop-filter: blur(10px);
+      padding: 22px 18px;
     }
 
-    .section::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(circle at 10% 0%, rgba(184,50,128,0.10), transparent 45%),
-                  radial-gradient(circle at 90% 20%, rgba(106,5,114,0.10), transparent 46%),
-                  radial-gradient(circle at 30% 120%, rgba(0,140,255,0.06), transparent 55%);
-      pointer-events:none;
+    .card h2{
+      margin:0 0 10px;
+      font-size: 1.4rem;
+      color: var(--accent);
+      text-align:center;
     }
-
-    .section:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 18px 58px rgba(0,0,0,0.12);
-    }
-
-    .section > *{ position:relative; z-index:1; }
-
-    .section h2{
-      font-family:'Playfair Display', serif;
-      color: var(--mag);
-      margin: 2px 0 12px;
-      font-size: clamp(1.5rem, 3.2vw, 2.0rem);
-    }
-
-    .section p{
-      max-width: 860px;
-      margin: 0 auto;
-      line-height: 1.85;
-      font-size: 1.02rem;
-      opacity: 0.95;
+    .card p{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.75;
+      color: rgba(43, 30, 43, .80);
+      text-align:center;
     }
 
     .divider{
-      height: 1px;
-      width: min(520px, 80%);
-      margin: 14px auto 0;
-      background: linear-gradient(90deg, transparent, rgba(184,50,128,0.35), transparent);
+      margin:18px auto 0;
+      width:min(720px, 100%);
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(192,74,134,.28), rgba(127,87,201,.26), transparent);
     }
 
-    /* Floating hearts */
-    .heart{
-      position:fixed;
-      font-size: 18px;
-      animation: float 7s linear infinite;
-      opacity:0.55;
-      filter: blur(0.0px);
-      z-index:0;
-      pointer-events:none;
-      user-select:none;
-    }
-
-    @keyframes float{
-      0%{transform:translateY(110vh) translateX(0) scale(0.95); opacity:0.0;}
-      10%{opacity:0.55;}
-      100%{transform:translateY(-12vh) translateX(18px) scale(1.15); opacity:0;}
-    }
-
-    /* Gallery */
-    .gallery-wrap{
-      margin-top: 18px;
-      text-align:left;
-    }
-
-    .hint{
+    .section-title{
+      margin:28px 0 12px;
       text-align:center;
-      margin: 0 auto 14px;
-      font-size: 0.95rem;
-      opacity: 0.78;
+      font-size: 1.7rem;
+      color: #3a2b3a;
+    }
+    .section-sub{
+      margin:0 auto 16px;
+      max-width: 70ch;
+      text-align:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: rgba(43, 30, 43, .72);
+      line-height:1.7;
     }
 
+    /* gallery */
     .gallery{
       display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
     }
+    @media (max-width: 980px){ .gallery{ grid-template-columns: repeat(3, 1fr);} }
+    @media (max-width: 680px){ .gallery{ grid-template-columns: repeat(2, 1fr);} }
 
-    /* Responsive grid sizes */
-    .tile{ grid-column: span 6; }
-    @media (min-width: 700px){ .tile{ grid-column: span 4; } }
-    @media (min-width: 980px){ .tile{ grid-column: span 3; } }
-
-    figure{
-      margin:0;
-      background: var(--card2);
-      border-radius: 20px;
+    .tile{
+      position:relative;
+      border-radius: 18px;
       overflow:hidden;
-      box-shadow: var(--shadow2);
-      border: 1px solid rgba(110,20,120,0.08);
+      background: rgba(255,255,255,.55);
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+      cursor:pointer;
       transform: translateZ(0);
     }
-
-    .imgbtn{
-      all:unset;
-      display:block;
-      cursor:pointer;
-      width:100%;
+    .tile:after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(400px 220px at 30% 20%, rgba(255,255,255,.30), transparent 60%),
+                  linear-gradient(180deg, transparent 55%, rgba(0,0,0,.12));
+      opacity:.0;
+      transition: opacity .25s ease;
+      pointer-events:none;
     }
-
-    .imgbox{
-      position:relative;
-      overflow:hidden;
-      aspect-ratio: 4 / 5;
-      background: rgba(255,255,255,0.35);
-    }
-
-    img{
+    .tile img{
       width:100%;
-      height:100%;
+      height: 220px;
       object-fit: cover;
       display:block;
-      transform: scale(1.01);
-      transition: transform .45s ease;
+      transition: transform .35s ease, filter .35s ease;
+      filter: saturate(1.02) contrast(1.02);
     }
-
-    figure:hover img{ transform: scale(1.06); }
-
-    figcaption{
-      padding: 12px 12px 14px;
-      font-size: 0.93rem;
-      line-height: 1.55;
-      opacity: 0.92;
+    @media (max-width:680px){
+      .tile img{ height: 210px; }
     }
-
-    .capTitle{
-      font-weight: 500;
-      color: rgba(106,5,114,0.92);
-      display:block;
-      margin-bottom: 4px;
-      letter-spacing: 0.15px;
+    .tile:hover img{
+      transform: scale(1.05);
+      filter: saturate(1.08) contrast(1.06);
     }
+    .tile:hover:after{ opacity:1; }
 
-    .capText{
-      opacity: 0.92;
-    }
-
-    /* Little overlay kiss sparkle */
-    .sparkle{
-      position:absolute;
-      inset:auto 10px 10px auto;
-      background: rgba(255,255,255,0.65);
-      border: 1px solid rgba(184,50,128,0.15);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 0.85rem;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
-      transform: translateY(0);
-      transition: transform .35s ease, opacity .35s ease;
-      opacity: 0.92;
-    }
-    figure:hover .sparkle{ transform: translateY(-2px); }
-
-    /* Lightbox */
-    .lightbox{
-      position:fixed;
-      inset:0;
-      background: rgba(20,10,22,0.72);
+    /* modal */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(10, 6, 12, .62);
       display:none;
       align-items:center;
       justify-content:center;
       padding: 18px;
-      z-index:999;
+      z-index: 50;
+      backdrop-filter: blur(6px);
     }
-    .lightbox.open{ display:flex; }
-
-    .lbCard{
-      width: min(920px, 96vw);
-      background: rgba(255,255,255,0.92);
+    .modal.open{ display:flex; }
+    .modal-box{
+      width:min(960px, 100%);
       border-radius: 22px;
       overflow:hidden;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(255,255,255,.8);
+      box-shadow: 0 22px 60px rgba(0,0,0,.25);
+      position:relative;
     }
-
-    .lbTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding: 12px 14px;
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      gap: 10px;
-    }
-
-    .lbTitle{
-      font-family:'Playfair Display', serif;
-      color: var(--mag);
-      font-size: 1.1rem;
-      margin:0;
-      line-height:1.2;
-    }
-
-    .lbClose{
-      all:unset;
-      cursor:pointer;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(106,5,114,0.10);
-      border: 1px solid rgba(106,5,114,0.14);
-      font-weight: 500;
-    }
-
-    .lbImg{
+    .modal-img{
       width:100%;
-      max-height: 72vh;
+      height: min(76vh, 720px);
       object-fit: contain;
-      background: rgba(240,235,245,0.65);
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(245,240,255,.7));
       display:block;
     }
 
-    .lbCap{
-      padding: 14px 16px 16px;
-      text-align:left;
-      line-height: 1.7;
-      font-size: 0.98rem;
-      opacity: 0.95;
+    .modal-controls{
+      position:absolute; inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      pointer-events:none;
+      padding: 10px;
+    }
+    .btn{
+      pointer-events:auto;
+      border:0;
+      width:46px; height:46px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition: transform .15s ease, background .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: scale(1.05); background: rgba(255,255,255,1); }
+    .btn:active{ transform: scale(.98); }
+    .btn svg{ width:22px; height:22px; }
+
+    .close{
+      position:absolute;
+      top:12px; right:12px;
+      width:46px; height:46px;
+      border-radius:999px;
+      border:0;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition: transform .15s ease;
+    }
+    .close:hover{ transform: scale(1.05); }
+    .close svg{ width:22px; height:22px; }
+
+    .footer{
+      margin-top: 26px;
+      text-align:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: rgba(43, 30, 43, .72);
+      line-height:1.7;
+      padding: 10px 6px 0;
+    }
+    .footer strong{
+      color: var(--accent);
+      font-weight: 800;
     }
 
-    footer{
-      margin-top: 34px;
-      font-size: 0.92rem;
-      opacity: 0.78;
-    }
-
-    .signature{
-      font-family:'Playfair Display', serif;
-      color: rgba(106,5,114,0.85);
-      font-size: 1.05rem;
-      margin-top: 8px;
+    /* little glow */
+    .glow{
+      position:absolute;
+      left:50%;
+      transform: translateX(-50%);
+      bottom:-120px;
+      width:560px;
+      height:260px;
+      background: radial-gradient(circle, rgba(192,74,134,.22), rgba(127,87,201,.14), transparent 62%);
+      filter: blur(18px);
+      z-index:0;
+      opacity:.7;
     }
   </style>
 </head>
 
 <body>
-  <script>
-    // Floating hearts
-    const hearts = ["🤍","🩷","💗","💞","✨"];
-    for(let i=0;i<26;i++){
-      let h=document.createElement("div");
-      h.className="heart";
-      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
-      h.style.left = Math.random()*100+"vw";
-      h.style.animationDuration = (4 + Math.random()*6) + "s";
-      h.style.fontSize = (14 + Math.random()*12) + "px";
-      h.style.animationDelay = (Math.random()*4) + "s";
-      document.body.appendChild(h);
-    }
-  </script>
+  <div class="float-layer" aria-hidden="true" id="floatLayer"></div>
 
-  <div class="container">
-    <div class="hero">
-      <h1>For The Most Beautiful Soul</h1>
-      <p class="subtitle">
-        This page is just me… holding your moments gently, the way I want to hold you in life too —
-        with patience, with softness, with the kind of love that never rushes you.
+  <div class="wrap">
+    <section class="hero">
+      <div class="glow" aria-hidden="true"></div>
+      <p class="kicker">a small page for you</p>
+      <h1>Iris</h1>
+      <p class="sub">
+        I don’t really need big words to prove anything<br>
+        I just want you to feel how soft my love is when it sits beside you<br>
+        Quiet steady and real
       </p>
-      <div class="pillrow">
-        <div class="pill">soft love only</div>
-        <div class="pill">you are my peace</div>
-        <div class="pill">my favorite view</div>
-        <div class="pill">always admired</div>
+
+      <div class="pill-row">
+        <span class="pill">I admire you in the most <b>gentle</b> way</span>
+        <span class="pill">I appreciate you more than you think</span>
+        <span class="pill">I’m here with <b>patience</b> and warmth</span>
       </div>
-    </div>
 
-    <div class="section">
-      <h2>You</h2>
-      <p>
-        You are softness and strength in one heart.
-        The kind of beauty that doesn’t need to try — it just exists.
-        Your presence is quiet but powerful,
-        and every time I think of you, I feel like my chest gets warm in the gentlest way.
-      </p>
       <div class="divider"></div>
-    </div>
 
-    <div class="section">
-      <h2>What I See</h2>
-      <p>
-        I see grace in the way you carry yourself.
-        I see a heart worth protecting and a soul worth understanding.
-        And no matter what the day looks like,
-        you still find a way to be lovely — the kind of lovely that stays in my mind even when you’re not around.
-      </p>
-      <div class="divider"></div>
-    </div>
+      <div class="grid">
+        <div class="card">
+          <h2>What I Feel</h2>
+          <p>
+            I feel lucky to know you<br>
+            Lucky to witness your little moods and soft moments<br>
+            Lucky to care about you without rushing you<br><br>
+            Every photo of you feels like a memory I want to keep close<br>
+            Not to own it<br>
+            Just to cherish it
+          </p>
+        </div>
 
-    <div class="section">
-      <h2>What I Feel</h2>
-      <p>
-        I feel lucky to admire you.
-        Lucky to appreciate you.
-        Lucky to love you gently.
-        Every photo of you feels like a memory I want to keep forever —
-        because you are my favorite kind of beautiful: the kind that feels like home.
-      </p>
-      <div class="divider"></div>
-    </div>
-
-    <div class="section">
-      <h2>Your Moments</h2>
-
-      <p class="hint">Tap any photo 🤍 it opens with its own little caption</p>
-
-      <!--
-        IMPORTANT:
-        Put your images inside a folder named: Photos
-        And name them exactly like this:
-        Photo1.jpg ... Photo15.jpg
-
-        Example path used below: Photos/Photo1.jpg
-      -->
-      <div class="gallery-wrap">
-        <div class="gallery" id="gallery">
-
-          <!-- Photo 1 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo1.jpg"
-                data-title="Photo 1"
-                data-caption="Even in the quiet moments, you look like a soft kind of masterpiece — the kind I could stare at and still want more.">
-                <div class="imgbox">
-                  <img src="Photos/Photo1.jpg" alt="Photo 1">
-                  <div class="sparkle">tap ✨</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">A calm kind of beautiful</span>
-                <span class="capText">Even your silence looks gentle on you.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 2 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo2.jpg"
-                data-title="Photo 2"
-                data-caption="That little pose of yours is my weakness — cute, confident, and somehow it still feels like you’re hugging my heart.">
-                <div class="imgbox">
-                  <img src="Photos/Photo2.jpg" alt="Photo 2">
-                  <div class="sparkle">tap 🩷</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">My favorite kind of cute</span>
-                <span class="capText">You make “simple” look unforgettable.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 3 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo3.jpg"
-                data-title="Photo 3"
-                data-caption="Your face this close feels unfair — like my heart has no choice but to melt and stay there.">
-                <div class="imgbox">
-                  <img src="Photos/Photo3.jpg" alt="Photo 3">
-                  <div class="sparkle">tap 💗</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Too pretty up close</span>
-                <span class="capText">You’re the kind of beauty that lingers.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 4 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo4.jpg"
-                data-title="Photo 4"
-                data-caption="That wink feels like you’re teasing my soul — and honestly… I’m happily losing every time.">
-                <div class="imgbox">
-                  <img src="Photos/Photo4.jpg" alt="Photo 4">
-                  <div class="sparkle">tap 💞</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">One wink, I fold</span>
-                <span class="capText">You don’t even try and I’m done.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 5 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo5.jpg"
-                data-title="Photo 5"
-                data-caption="You in glasses is dangerous — pretty, classy, and the exact kind of cute that makes me want to protect you more.">
-                <div class="imgbox">
-                  <img src="Photos/Photo5.jpg" alt="Photo 5">
-                  <div class="sparkle">tap ✨</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Soft + stunning</span>
-                <span class="capText">You look like a sweet kind of magic.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 6 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo6.jpg"
-                data-title="Photo 6"
-                data-caption="This one feels like a little date with you through the screen — and I’d still choose you in every crowd.">
-                <div class="imgbox">
-                  <img src="Photos/Photo6.jpg" alt="Photo 6">
-                  <div class="sparkle">tap 🩷</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">My eyes find you</span>
-                <span class="capText">Always the highlight of any place.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 7 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo7.jpg"
-                data-title="Photo 7"
-                data-caption="You standing there looks like a scene I’d replay — because you make ordinary places feel like they matter.">
-                <div class="imgbox">
-                  <img src="Photos/Photo7.jpg" alt="Photo 7">
-                  <div class="sparkle">tap 💗</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Effortless elegance</span>
-                <span class="capText">You look good without trying, always.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 8 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo8.jpg"
-                data-title="Photo 8"
-                data-caption="This close-up is soft and strong at the same time… like you’re calm, but you still own the room.">
-                <div class="imgbox">
-                  <img src="Photos/Photo8.jpg" alt="Photo 8">
-                  <div class="sparkle">tap 💞</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Quietly powerful</span>
-                <span class="capText">Your beauty has a calm confidence.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 9 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo9.jpg"
-                data-title="Photo 9"
-                data-caption="You look like you belong in a movie scene here — and I’m the happiest person just to witness you.">
-                <div class="imgbox">
-                  <img src="Photos/Photo9.jpg" alt="Photo 9">
-                  <div class="sparkle">tap ✨</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">A whole vibe</span>
-                <span class="capText">You make memories look beautiful.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 10 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo10.jpg"
-                data-title="Photo 10"
-                data-caption="You holding flowers while looking like that… feels like my heart is getting spoiled too.">
-                <div class="imgbox">
-                  <img src="Photos/Photo10.jpg" alt="Photo 10">
-                  <div class="sparkle">tap 🩷</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Soft like a bouquet</span>
-                <span class="capText">Pretty holding pretty — it fits you.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 11 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo11.jpg"
-                data-title="Photo 11"
-                data-caption="That little wink again… like you’re casually stealing my heart and acting like it’s normal.">
-                <div class="imgbox">
-                  <img src="Photos/Photo11.jpg" alt="Photo 11">
-                  <div class="sparkle">tap 💗</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">You’re my weakness</span>
-                <span class="capText">One look and I’m yours again.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 12 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo12.jpg"
-                data-title="Photo 12"
-                data-caption="This pose is so you — cute, confident, and quietly telling the world you’re one of a kind.">
-                <div class="imgbox">
-                  <img src="Photos/Photo12.jpg" alt="Photo 12">
-                  <div class="sparkle">tap 💞</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">My favorite smile</span>
-                <span class="capText">Even your “serious” looks adorable.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 13 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo13.jpg"
-                data-title="Photo 13"
-                data-caption="Another you-in-the-mall moment… and somehow you still look like the main character of my day.">
-                <div class="imgbox">
-                  <img src="Photos/Photo13.jpg" alt="Photo 13">
-                  <div class="sparkle">tap ✨</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Main character energy</span>
-                <span class="capText">You turn places into memories.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 14 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo14.jpg"
-                data-title="Photo 14"
-                data-caption="Flowers again… and you look like someone I’d choose a thousand times, in every version of life.">
-                <div class="imgbox">
-                  <img src="Photos/Photo14.jpg" alt="Photo 14">
-                  <div class="sparkle">tap 🩷</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Chosen, always</span>
-                <span class="capText">You + flowers = my heart smiling.</span>
-              </figcaption>
-            </figure>
-          </div>
-
-          <!-- Photo 15 -->
-          <div class="tile">
-            <figure>
-              <button class="imgbtn" type="button"
-                data-src="Photos/Photo15.jpg"
-                data-title="Photo 15"
-                data-caption="Even in the simplest setting, you glow — and it reminds me why I’m so proud to admire you.">
-                <div class="imgbox">
-                  <img src="Photos/Photo15.jpg" alt="Photo 15">
-                  <div class="sparkle">tap 🤍</div>
-                </div>
-              </button>
-              <figcaption>
-                <span class="capTitle">Soft ending, sweet feeling</span>
-                <span class="capText">You’re the kind of beauty I keep thanking God for.</span>
-              </figcaption>
-            </figure>
-          </div>
-
+        <div class="card">
+          <h2>How I Love</h2>
+          <p>
+            I love in a way that protects your peace<br>
+            I won’t force anything from you<br>
+            I’ll stay kind even when it’s hard<br><br>
+            If you need space I’ll respect it<br>
+            And if you need softness I’ll be that too
+          </p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="section">
-      <h2>My Promise</h2>
-      <p>
-        I will always cherish you.
-        I will always appreciate you.
-        I will love you in the softest way possible —
-        the kind that listens, the kind that understands, the kind that never pressures you.
-        You deserve to feel valued, safe, and loved… every single day.
-      </p>
-      <div class="divider"></div>
-    </div>
+    <h2 class="section-title">Your Moments</h2>
+    <p class="section-sub">
+      No captions needed<br>
+      You already say everything just by being you<br>
+      Tap any photo to view it
+    </p>
 
-    <footer>
-      Made with pure admiration 🤍
-      <div class="signature">— Ali</div>
-    </footer>
+    <section class="card">
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <div class="footer">
+      I’m not here to rush you or pressure you<br>
+      I’m here to love you gently and consistently<br>
+      And if you ever choose me fully one day<br>
+      I’ll still be the same person who chose you first with <strong>respect</strong> and <strong>patience</strong>
+    </div>
   </div>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lbCard" role="dialog" aria-modal="true" aria-label="Photo viewer">
-      <div class="lbTop">
-        <p class="lbTitle" id="lbTitle">Photo</p>
-        <button class="lbClose" id="lbClose" type="button">Close</button>
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button class="close" id="closeBtn" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <img class="modal-img" id="modalImg" alt="Photo" />
+
+      <div class="modal-controls">
+        <button class="btn" id="prevBtn" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <button class="btn" id="nextBtn" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
       </div>
-      <img class="lbImg" id="lbImg" src="" alt="Selected photo" />
-      <div class="lbCap" id="lbCap"></div>
     </div>
   </div>
 
   <script>
-    const lb = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lbImg");
-    const lbTitle = document.getElementById("lbTitle");
-    const lbCap = document.getElementById("lbCap");
-    const lbClose = document.getElementById("lbClose");
-
-    function openLB(src, title, caption){
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden","false");
-      lbImg.src = src;
-      lbTitle.textContent = title || "Photo";
-      lbCap.textContent = caption || "";
-      document.body.style.overflow = "hidden";
+    // Floating hearts generator
+    const layer = document.getElementById("floatLayer");
+    const HEARTS = 18;
+    for (let i = 0; i < HEARTS; i++) {
+      const h = document.createElement("div");
+      h.className = "heart";
+      const left = Math.random() * 100;
+      const delay = Math.random() * 10;
+      const dur = 10 + Math.random() * 12;
+      const size = 10 + Math.random() * 10;
+      h.style.left = left + "vw";
+      h.style.animationDelay = delay + "s";
+      h.style.animationDuration = dur + "s";
+      h.style.width = size + "px";
+      h.style.height = size + "px";
+      h.style.background = `rgba(192,74,134,${0.12 + Math.random()*0.14})`;
+      layer.appendChild(h);
     }
 
-    function closeLB(){
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden","true");
-      lbImg.src = "";
-      document.body.style.overflow = "";
-    }
+    // Photos (Capital P + Photos folder)
+    const photos = [
+      { src: "Photos/Photo1.jpg" },
+      { src: "Photos/Photo2.jpg" },
+      { src: "Photos/Photo3.jpg" },
+      { src: "Photos/Photo4.jpg" },
+      { src: "Photos/Photo5.jpg" },
+      { src: "Photos/Photo6.jpg" },
+      { src: "Photos/Photo7.jpg" },
+      { src: "Photos/Photo8.jpg" },
+      { src: "Photos/Photo9.jpg" },
+      { src: "Photos/Photo10.jpg" },
+      { src: "Photos/Photo11.jpg" },
+      { src: "Photos/Photo12.jpg" },
+      { src: "Photos/Photo13.jpg" },
+      { src: "Photos/Photo14.jpg" },
+      { src: "Photos/Photo15.jpg" }
+    ];
 
-    document.querySelectorAll(".imgbtn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        openLB(btn.dataset.src, btn.dataset.title, btn.dataset.caption);
+    const gallery = document.getElementById("gallery");
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = document.getElementById("closeBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    function renderGallery(){
+      gallery.innerHTML = "";
+      photos.forEach((p, i) => {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        tile.innerHTML = `<img src="${p.src}" alt="Photo ${i+1}" loading="lazy" />`;
+        tile.addEventListener("click", () => openModal(i));
+        gallery.appendChild(tile);
       });
+    }
+
+    function openModal(i){
+      currentIndex = i;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      updateModal();
+    }
+
+    function closeModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    function updateModal(){
+      modalImg.src = photos[currentIndex].src;
+      modalImg.alt = `Photo ${currentIndex + 1}`;
+    }
+
+    function prev(){
+      currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+      updateModal();
+    }
+
+    function next(){
+      currentIndex = (currentIndex + 1) % photos.length;
+      updateModal();
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    prevBtn.addEventListener("click", prev);
+    nextBtn.addEventListener("click", next);
+
+    modal.addEventListener("click", (e) => {
+      if(e.target === modal) closeModal();
     });
 
-    lbClose.addEventListener("click", closeLB);
-    lb.addEventListener("click", (e)=>{
-      if(e.target === lb) closeLB();
+    window.addEventListener("keydown", (e) => {
+      if(!modal.classList.contains("open")) return;
+      if(e.key === "Escape") closeModal();
+      if(e.key === "ArrowLeft") prev();
+      if(e.key === "ArrowRight") next();
     });
 
-    document.addEventListener("keydown", (e)=>{
-      if(e.key === "Escape") closeLB();
-    });
+    renderGallery();
   </script>
 </body>
 </html>
