@@ -3,97 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Precious Love</title>
+<title>For My Precious Love 🤍</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    font-family:'Poppins', sans-serif;
+    font-family:'Poppins',sans-serif;
     background: linear-gradient(-45deg,#f3e8ff,#ffe4f0,#e0f7ff,#fff0f6);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    background-size:400% 400%;
+    animation:gradient 15s ease infinite;
+    text-align:center;
     overflow-x:hidden;
 }
 
 @keyframes gradient{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 .container{
-    max-width:1000px;
+    max-width:1100px;
     margin:auto;
     padding:40px 20px;
-    text-align:center;
 }
 
 h1{
-    font-family:'Playfair Display', serif;
-    font-size:2.5rem;
+    font-family:'Playfair Display',serif;
+    font-size:2.6rem;
     color:#6a0572;
 }
 
+.subtitle{
+    opacity:.85;
+    margin-bottom:30px;
+}
+
 .section{
-    background:rgba(255,255,255,0.75);
+    background:rgba(255,255,255,.75);
     backdrop-filter:blur(15px);
-    border-radius:20px;
+    border-radius:25px;
     padding:30px;
-    margin:40px 0;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    transition:0.4s ease;
+    margin:30px 0;
+    box-shadow:0 15px 40px rgba(0,0,0,.1);
+    transition:.4s ease;
 }
 
 .section:hover{
-    transform:translateY(-8px);
-}
-
-.section h2{
-    font-family:'Playfair Display', serif;
-    color:#b83280;
-}
-
-.section p{
-    line-height:1.7;
-    font-size:1rem;
+    transform:translateY(-6px);
 }
 
 .gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
-    margin-top:30px;
+    gap:18px;
+    margin-top:20px;
 }
 
-.gallery img{
-    width:100%;
+.card{
+    position:relative;
+    overflow:hidden;
     border-radius:20px;
-    transition:0.4s ease;
-    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
 }
 
-.gallery img:hover{
-    transform:scale(1.05);
+.card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition:.4s ease;
+    cursor:pointer;
+}
+
+.card:hover img{
+    transform:scale(1.08);
+}
+
+.caption{
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    right:10px;
+    background:rgba(255,255,255,.8);
+    padding:10px;
+    border-radius:15px;
+    font-size:.85rem;
+    opacity:0;
+    transform:translateY(10px);
+    transition:.3s ease;
+}
+
+.card:hover .caption{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .heart{
     position:fixed;
-    font-size:20px;
+    font-size:18px;
     animation:float 6s linear infinite;
-    opacity:0.6;
+    opacity:.5;
 }
 
 @keyframes float{
-    0%{transform:translateY(100vh);}
-    100%{transform:translateY(-10vh);}
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:20px;
+    background:#6a0572;
+    color:white;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-content{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    max-width:500px;
+    text-align:left;
 }
 
 footer{
-    margin-top:60px;
-    font-size:0.9rem;
-    opacity:0.7;
+    margin-top:40px;
+    opacity:.7;
 }
 </style>
 </head>
@@ -101,83 +149,54 @@ footer{
 <body>
 
 <script>
-for(let i=0;i<20;i++){
-    let heart=document.createElement("div");
-    heart.innerHTML="🤍";
-    heart.classList.add("heart");
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*5)+"s";
-    document.body.appendChild(heart);
+for(let i=0;i<25;i++){
+let heart=document.createElement("div");
+heart.innerHTML="🤍";
+heart.classList.add("heart");
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(heart);
 }
 </script>
 
 <div class="container">
 
 <h1>For The Most Beautiful Soul</h1>
+<p class="subtitle">A place where I keep my soft thoughts about you 🤍</p>
+
+<button onclick="openLetter()">Open My Love Letter</button>
 
 <div class="section">
 <h2>You</h2>
 <p>
-You are softness and strength in one heart.  
-The way you exist feels gentle yet powerful.  
-Your eyes carry stories.  
-Your smile feels like home.  
-Everything about you deserves to be cherished.
+You are softness and strength living in the same heartbeat.
+The kind of beauty that doesn’t need to try.
+When you’re around, everything feels calmer.
 </p>
 </div>
 
 <div class="section">
-<h2>What I See</h2>
-<p>
-I see grace in the way you carry yourself.  
-I see beauty that is effortless.  
-I see someone worth protecting, appreciating, and loving deeply.  
-You are not just beautiful on the outside.  
-You are rare.
-</p>
-</div>
-
-<div class="section">
-<h2>What I Feel</h2>
-<p>
-I feel lucky to admire you.  
-Lucky to appreciate you.  
-Lucky to love you gently.  
-Every photo of you feels like a memory I want to keep forever.
-</p>
-</div>
-
-<div class="section">
-<h2>Your Moments</h2>
+<h2>Your Precious Moments</h2>
 
 <div class="gallery">
-<img src="photo1.jpg">
-<img src="photo2.jpg">
-<img src="photo3.jpg">
-<img src="photo4.jpg">
-<img src="photo5.jpg">
-<img src="photo6.jpg">
-<img src="photo7.jpg">
-<img src="photo8.jpg">
-<img src="photo9.jpg">
-<img src="photo10.jpg">
-<img src="photo11.jpg">
-<img src="photo12.jpg">
-<img src="photo13.jpg">
-<img src="photo14.jpg">
-<img src="photo15.jpg">
-</div>
+
+<div class="card"><img src="photos/photo1.jpg"><div class="caption">Grace looks effortless on you.</div></div>
+<div class="card"><img src="photos/photo2.jpg"><div class="caption">Even your simplest moments feel special.</div></div>
+<div class="card"><img src="photos/photo3.jpg"><div class="caption">If I could pause time, I would keep this forever.</div></div>
+<div class="card"><img src="photos/photo4.jpg"><div class="caption">One wink and my world forgets how to stay calm.</div></div>
+<div class="card"><img src="photos/photo5.jpg"><div class="caption">You look like poetry in golden light.</div></div>
+<div class="card"><img src="photos/photo6.jpg"><div class="caption">Under open skies, you still shine brighter.</div></div>
+<div class="card"><img src="photos/photo7.jpg"><div class="caption">You quietly own every place you walk into.</div></div>
+<div class="card"><img src="photos/photo8.jpg"><div class="caption">The kind of beauty that just exists.</div></div>
+<div class="card"><img src="photos/photo9.jpg"><div class="caption">Playful, soft, and dangerously pretty.</div></div>
+<div class="card"><img src="photos/photo10.jpg"><div class="caption">Even flowers look lucky beside you.</div></div>
+<div class="card"><img src="photos/photo11.jpg"><div class="caption">Softness has your face.</div></div>
+<div class="card"><img src="photos/photo12.jpg"><div class="caption">Strong gaze. Calm presence.</div></div>
+<div class="card"><img src="photos/photo13.jpg"><div class="caption">Effortlessly beautiful.</div></div>
+<div class="card"><img src="photos/photo14.jpg"><div class="caption">You make moments unforgettable.</div></div>
+<div class="card"><img src="photos/photo15.jpg"><div class="caption">Golden light found the right person.</div></div>
 
 </div>
-
-<div class="section">
-<h2>My Promise</h2>
-<p>
-I will always cherish you.  
-I will always appreciate you.  
-I will always choose to love you in the softest way possible.  
-You deserve to feel valued every single day.
-</p>
 </div>
 
 <footer>
@@ -185,6 +204,30 @@ Made with pure admiration 🤍
 </footer>
 
 </div>
+
+<div class="modal" id="letterModal">
+<div class="modal-content">
+<h3>My Love Letter</h3>
+<p>
+I don’t want to love you loudly.
+I want to love you gently.
+Patiently.
+Consistently.
+The kind of love that feels safe.
+The kind that chooses you every day.
+</p>
+<button onclick="closeLetter()">Close</button>
+</div>
+</div>
+
+<script>
+function openLetter(){
+document.getElementById("letterModal").style.display="flex";
+}
+function closeLetter(){
+document.getElementById("letterModal").style.display="none";
+}
+</script>
 
 </body>
 </html>
