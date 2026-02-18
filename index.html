@@ -1,234 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Precious Love 🤍</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Precious Love</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
-<style>
-body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background: linear-gradient(-45deg,#f3e8ff,#ffe4f0,#e0f7ff,#fff0f6);
-    background-size:400% 400%;
-    animation:gradient 15s ease infinite;
-    text-align:center;
-    overflow-x:hidden;
-}
+  <style>
+    :root{
+      --lav:#f3e8ff;
+      --pink:#ffe4f0;
+      --sky:#e0f7ff;
+      --rose:#fff0f6;
+      --ink:#2b1b2f;
+      --violet:#6a0572;
+      --mag:#b83280;
+      --card: rgba(255,255,255,0.78);
+      --card2: rgba(255,255,255,0.62);
+      --shadow: 0 14px 45px rgba(0,0,0,0.10);
+      --shadow2: 0 8px 24px rgba(0,0,0,0.10);
+      --radius: 22px;
+    }
 
-@keyframes gradient{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
+    *{ box-sizing:border-box; }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:40px 20px;
-}
+    body{
+      margin:0;
+      font-family:'Poppins', sans-serif;
+      color: var(--ink);
+      background: linear-gradient(-45deg,var(--lav),var(--pink),var(--sky),var(--rose));
+      background-size: 400% 400%;
+      animation: gradient 16s ease infinite;
+      overflow-x:hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-h1{
-    font-family:'Playfair Display',serif;
-    font-size:2.6rem;
-    color:#6a0572;
-}
+    @keyframes gradient{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
 
-.subtitle{
-    opacity:.85;
-    margin-bottom:30px;
-}
+    .container{
+      max-width:1050px;
+      margin:auto;
+      padding:42px 18px 70px;
+      text-align:center;
+    }
 
-.section{
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(15px);
-    border-radius:25px;
-    padding:30px;
-    margin:30px 0;
-    box-shadow:0 15px 40px rgba(0,0,0,.1);
-    transition:.4s ease;
-}
+    .hero{
+      padding: 28px 16px 6px;
+    }
 
-.section:hover{
-    transform:translateY(-6px);
-}
+    h1{
+      font-family:'Playfair Display', serif;
+      font-size: clamp(2.05rem, 4.5vw, 3.0rem);
+      color: var(--violet);
+      margin: 8px 0 10px;
+      letter-spacing: 0.2px;
+    }
 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:18px;
-    margin-top:20px;
-}
+    .subtitle{
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
 
-.card{
-    position:relative;
-    overflow:hidden;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
+    .pillrow{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 16px;
+    }
 
-.card img{
-    width:100%;
-    height:260px;
-    object-fit:cover;
-    transition:.4s ease;
-    cursor:pointer;
-}
+    .pill{
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(120,60,130,0.12);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      backdrop-filter: blur(10px);
+    }
 
-.card:hover img{
-    transform:scale(1.08);
-}
+    .section{
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 26px 18px;
+      margin: 28px 0;
+      box-shadow: var(--shadow);
+      transition: transform .35s ease, box-shadow .35s ease;
+      border: 1px solid rgba(110,20,120,0.08);
+      position: relative;
+      overflow:hidden;
+    }
 
-.caption{
-    position:absolute;
-    bottom:10px;
-    left:10px;
-    right:10px;
-    background:rgba(255,255,255,.8);
-    padding:10px;
-    border-radius:15px;
-    font-size:.85rem;
-    opacity:0;
-    transform:translateY(10px);
-    transition:.3s ease;
-}
+    .section::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(circle at 10% 0%, rgba(184,50,128,0.10), transparent 45%),
+                  radial-gradient(circle at 90% 20%, rgba(106,5,114,0.10), transparent 46%),
+                  radial-gradient(circle at 30% 120%, rgba(0,140,255,0.06), transparent 55%);
+      pointer-events:none;
+    }
 
-.card:hover .caption{
-    opacity:1;
-    transform:translateY(0);
-}
+    .section:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 18px 58px rgba(0,0,0,0.12);
+    }
 
-.heart{
-    position:fixed;
-    font-size:18px;
-    animation:float 6s linear infinite;
-    opacity:.5;
-}
+    .section > *{ position:relative; z-index:1; }
 
-@keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-10vh);}
-}
+    .section h2{
+      font-family:'Playfair Display', serif;
+      color: var(--mag);
+      margin: 2px 0 12px;
+      font-size: clamp(1.5rem, 3.2vw, 2.0rem);
+    }
 
-button{
-    padding:10px 18px;
-    border:none;
-    border-radius:20px;
-    background:#6a0572;
-    color:white;
-    cursor:pointer;
-    margin-top:15px;
-}
+    .section p{
+      max-width: 860px;
+      margin: 0 auto;
+      line-height: 1.85;
+      font-size: 1.02rem;
+      opacity: 0.95;
+    }
 
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    align-items:center;
-    justify-content:center;
-}
+    .divider{
+      height: 1px;
+      width: min(520px, 80%);
+      margin: 14px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(184,50,128,0.35), transparent);
+    }
 
-.modal-content{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    max-width:500px;
-    text-align:left;
-}
+    /* Floating hearts */
+    .heart{
+      position:fixed;
+      font-size: 18px;
+      animation: float 7s linear infinite;
+      opacity:0.55;
+      filter: blur(0.0px);
+      z-index:0;
+      pointer-events:none;
+      user-select:none;
+    }
 
-footer{
-    margin-top:40px;
-    opacity:.7;
-}
-</style>
+    @keyframes float{
+      0%{transform:translateY(110vh) translateX(0) scale(0.95); opacity:0.0;}
+      10%{opacity:0.55;}
+      100%{transform:translateY(-12vh) translateX(18px) scale(1.15); opacity:0;}
+    }
+
+    /* Gallery */
+    .gallery-wrap{
+      margin-top: 18px;
+      text-align:left;
+    }
+
+    .hint{
+      text-align:center;
+      margin: 0 auto 14px;
+      font-size: 0.95rem;
+      opacity: 0.78;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    /* Responsive grid sizes */
+    .tile{ grid-column: span 6; }
+    @media (min-width: 700px){ .tile{ grid-column: span 4; } }
+    @media (min-width: 980px){ .tile{ grid-column: span 3; } }
+
+    figure{
+      margin:0;
+      background: var(--card2);
+      border-radius: 20px;
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+      border: 1px solid rgba(110,20,120,0.08);
+      transform: translateZ(0);
+    }
+
+    .imgbtn{
+      all:unset;
+      display:block;
+      cursor:pointer;
+      width:100%;
+    }
+
+    .imgbox{
+      position:relative;
+      overflow:hidden;
+      aspect-ratio: 4 / 5;
+      background: rgba(255,255,255,0.35);
+    }
+
+    img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+      transition: transform .45s ease;
+    }
+
+    figure:hover img{ transform: scale(1.06); }
+
+    figcaption{
+      padding: 12px 12px 14px;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      opacity: 0.92;
+    }
+
+    .capTitle{
+      font-weight: 500;
+      color: rgba(106,5,114,0.92);
+      display:block;
+      margin-bottom: 4px;
+      letter-spacing: 0.15px;
+    }
+
+    .capText{
+      opacity: 0.92;
+    }
+
+    /* Little overlay kiss sparkle */
+    .sparkle{
+      position:absolute;
+      inset:auto 10px 10px auto;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(184,50,128,0.15);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      transform: translateY(0);
+      transition: transform .35s ease, opacity .35s ease;
+      opacity: 0.92;
+    }
+    figure:hover .sparkle{ transform: translateY(-2px); }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background: rgba(20,10,22,0.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index:999;
+    }
+    .lightbox.open{ display:flex; }
+
+    .lbCard{
+      width: min(920px, 96vw);
+      background: rgba(255,255,255,0.92);
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    .lbTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      gap: 10px;
+    }
+
+    .lbTitle{
+      font-family:'Playfair Display', serif;
+      color: var(--mag);
+      font-size: 1.1rem;
+      margin:0;
+      line-height:1.2;
+    }
+
+    .lbClose{
+      all:unset;
+      cursor:pointer;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(106,5,114,0.10);
+      border: 1px solid rgba(106,5,114,0.14);
+      font-weight: 500;
+    }
+
+    .lbImg{
+      width:100%;
+      max-height: 72vh;
+      object-fit: contain;
+      background: rgba(240,235,245,0.65);
+      display:block;
+    }
+
+    .lbCap{
+      padding: 14px 16px 16px;
+      text-align:left;
+      line-height: 1.7;
+      font-size: 0.98rem;
+      opacity: 0.95;
+    }
+
+    footer{
+      margin-top: 34px;
+      font-size: 0.92rem;
+      opacity: 0.78;
+    }
+
+    .signature{
+      font-family:'Playfair Display', serif;
+      color: rgba(106,5,114,0.85);
+      font-size: 1.05rem;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 
 <body>
+  <script>
+    // Floating hearts
+    const hearts = ["🤍","🩷","💗","💞","✨"];
+    for(let i=0;i<26;i++){
+      let h=document.createElement("div");
+      h.className="heart";
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left = Math.random()*100+"vw";
+      h.style.animationDuration = (4 + Math.random()*6) + "s";
+      h.style.fontSize = (14 + Math.random()*12) + "px";
+      h.style.animationDelay = (Math.random()*4) + "s";
+      document.body.appendChild(h);
+    }
+  </script>
 
-<script>
-for(let i=0;i<25;i++){
-let heart=document.createElement("div");
-heart.innerHTML="🤍";
-heart.classList.add("heart");
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(4+Math.random()*5)+"s";
-document.body.appendChild(heart);
-}
-</script>
+  <div class="container">
+    <div class="hero">
+      <h1>For The Most Beautiful Soul</h1>
+      <p class="subtitle">
+        This page is just me… holding your moments gently, the way I want to hold you in life too —
+        with patience, with softness, with the kind of love that never rushes you.
+      </p>
+      <div class="pillrow">
+        <div class="pill">soft love only</div>
+        <div class="pill">you are my peace</div>
+        <div class="pill">my favorite view</div>
+        <div class="pill">always admired</div>
+      </div>
+    </div>
 
-<div class="container">
+    <div class="section">
+      <h2>You</h2>
+      <p>
+        You are softness and strength in one heart.
+        The kind of beauty that doesn’t need to try — it just exists.
+        Your presence is quiet but powerful,
+        and every time I think of you, I feel like my chest gets warm in the gentlest way.
+      </p>
+      <div class="divider"></div>
+    </div>
 
-<h1>For The Most Beautiful Soul</h1>
-<p class="subtitle">A place where I keep my soft thoughts about you 🤍</p>
+    <div class="section">
+      <h2>What I See</h2>
+      <p>
+        I see grace in the way you carry yourself.
+        I see a heart worth protecting and a soul worth understanding.
+        And no matter what the day looks like,
+        you still find a way to be lovely — the kind of lovely that stays in my mind even when you’re not around.
+      </p>
+      <div class="divider"></div>
+    </div>
 
-<button onclick="openLetter()">Open My Love Letter</button>
+    <div class="section">
+      <h2>What I Feel</h2>
+      <p>
+        I feel lucky to admire you.
+        Lucky to appreciate you.
+        Lucky to love you gently.
+        Every photo of you feels like a memory I want to keep forever —
+        because you are my favorite kind of beautiful: the kind that feels like home.
+      </p>
+      <div class="divider"></div>
+    </div>
 
-<div class="section">
-<h2>You</h2>
-<p>
-You are softness and strength living in the same heartbeat.
-The kind of beauty that doesn’t need to try.
-When you’re around, everything feels calmer.
-</p>
-</div>
+    <div class="section">
+      <h2>Your Moments</h2>
 
-<div class="section">
-<h2>Your Precious Moments</h2>
+      <p class="hint">Tap any photo 🤍 it opens with its own little caption</p>
 
-<div class="gallery">
+      <!--
+        IMPORTANT:
+        Put your images inside a folder named: Photos
+        And name them exactly like this:
+        Photo1.jpg ... Photo15.jpg
 
-<div class="card"><img src="Photos/photo1.jpg"><div class="caption">Grace looks effortless on you.</div></div>
-<div class="card"><img src="Photos/photo2.jpg"><div class="caption">Even your simplest moments feel special.</div></div>
-<div class="card"><img src="Photos/photo3.jpg"><div class="caption">If I could pause time, I would keep this forever.</div></div>
-<div class="card"><img src="Photos/photo4.jpg"><div class="caption">One wink and my world forgets how to stay calm.</div></div>
-<div class="card"><img src="Photos/photo5.jpg"><div class="caption">You look like poetry in golden light.</div></div>
-<div class="card"><img src="Photos/photo6.jpg"><div class="caption">Under open skies, you still shine brighter.</div></div>
-<div class="card"><img src="Photos/photo7.jpg"><div class="caption">You quietly own every place you walk into.</div></div>
-<div class="card"><img src="Photos/photo8.jpg"><div class="caption">The kind of beauty that just exists.</div></div>
-<div class="card"><img src="Photos/photo9.jpg"><div class="caption">Playful, soft, and dangerously pretty.</div></div>
-<div class="card"><img src="Photos/photo10.jpg"><div class="caption">Even flowers look lucky beside you.</div></div>
-<div class="card"><img src="Photos/photo11.jpg"><div class="caption">Softness has your face.</div></div>
-<div class="card"><img src="Photos/photo12.jpg"><div class="caption">Strong gaze. Calm presence.</div></div>
-<div class="card"><img src="Photos/photo13.jpg"><div class="caption">Effortlessly beautiful.</div></div>
-<div class="card"><img src="Photos/photo14.jpg"><div class="caption">You make moments unforgettable.</div></div>
-<div class="card"><img src="Photos/photo15.jpg"><div class="caption">Golden light found the right person.</div></div>
+        Example path used below: Photos/Photo1.jpg
+      -->
+      <div class="gallery-wrap">
+        <div class="gallery" id="gallery">
 
-</div>
-</div>
+          <!-- Photo 1 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo1.jpg"
+                data-title="Photo 1"
+                data-caption="Even in the quiet moments, you look like a soft kind of masterpiece — the kind I could stare at and still want more.">
+                <div class="imgbox">
+                  <img src="Photos/Photo1.jpg" alt="Photo 1">
+                  <div class="sparkle">tap ✨</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">A calm kind of beautiful</span>
+                <span class="capText">Even your silence looks gentle on you.</span>
+              </figcaption>
+            </figure>
+          </div>
 
-<footer>
-Made with pure admiration 🤍
-</footer>
+          <!-- Photo 2 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo2.jpg"
+                data-title="Photo 2"
+                data-caption="That little pose of yours is my weakness — cute, confident, and somehow it still feels like you’re hugging my heart.">
+                <div class="imgbox">
+                  <img src="Photos/Photo2.jpg" alt="Photo 2">
+                  <div class="sparkle">tap 🩷</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">My favorite kind of cute</span>
+                <span class="capText">You make “simple” look unforgettable.</span>
+              </figcaption>
+            </figure>
+          </div>
 
-</div>
+          <!-- Photo 3 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo3.jpg"
+                data-title="Photo 3"
+                data-caption="Your face this close feels unfair — like my heart has no choice but to melt and stay there.">
+                <div class="imgbox">
+                  <img src="Photos/Photo3.jpg" alt="Photo 3">
+                  <div class="sparkle">tap 💗</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Too pretty up close</span>
+                <span class="capText">You’re the kind of beauty that lingers.</span>
+              </figcaption>
+            </figure>
+          </div>
 
-<div class="modal" id="letterModal">
-<div class="modal-content">
-<h3>My Love Letter</h3>
-<p>
-I don’t want to love you loudly.
-I want to love you gently.
-Patiently.
-Consistently.
-The kind of love that feels safe.
-The kind that chooses you every day.
-</p>
-<button onclick="closeLetter()">Close</button>
-</div>
-</div>
+          <!-- Photo 4 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo4.jpg"
+                data-title="Photo 4"
+                data-caption="That wink feels like you’re teasing my soul — and honestly… I’m happily losing every time.">
+                <div class="imgbox">
+                  <img src="Photos/Photo4.jpg" alt="Photo 4">
+                  <div class="sparkle">tap 💞</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">One wink, I fold</span>
+                <span class="capText">You don’t even try and I’m done.</span>
+              </figcaption>
+            </figure>
+          </div>
 
-<script>
-function openLetter(){
-document.getElementById("letterModal").style.display="flex";
-}
-function closeLetter(){
-document.getElementById("letterModal").style.display="none";
-}
-</script>
+          <!-- Photo 5 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo5.jpg"
+                data-title="Photo 5"
+                data-caption="You in glasses is dangerous — pretty, classy, and the exact kind of cute that makes me want to protect you more.">
+                <div class="imgbox">
+                  <img src="Photos/Photo5.jpg" alt="Photo 5">
+                  <div class="sparkle">tap ✨</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Soft + stunning</span>
+                <span class="capText">You look like a sweet kind of magic.</span>
+              </figcaption>
+            </figure>
+          </div>
 
+          <!-- Photo 6 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo6.jpg"
+                data-title="Photo 6"
+                data-caption="This one feels like a little date with you through the screen — and I’d still choose you in every crowd.">
+                <div class="imgbox">
+                  <img src="Photos/Photo6.jpg" alt="Photo 6">
+                  <div class="sparkle">tap 🩷</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">My eyes find you</span>
+                <span class="capText">Always the highlight of any place.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 7 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo7.jpg"
+                data-title="Photo 7"
+                data-caption="You standing there looks like a scene I’d replay — because you make ordinary places feel like they matter.">
+                <div class="imgbox">
+                  <img src="Photos/Photo7.jpg" alt="Photo 7">
+                  <div class="sparkle">tap 💗</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Effortless elegance</span>
+                <span class="capText">You look good without trying, always.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 8 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo8.jpg"
+                data-title="Photo 8"
+                data-caption="This close-up is soft and strong at the same time… like you’re calm, but you still own the room.">
+                <div class="imgbox">
+                  <img src="Photos/Photo8.jpg" alt="Photo 8">
+                  <div class="sparkle">tap 💞</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Quietly powerful</span>
+                <span class="capText">Your beauty has a calm confidence.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 9 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo9.jpg"
+                data-title="Photo 9"
+                data-caption="You look like you belong in a movie scene here — and I’m the happiest person just to witness you.">
+                <div class="imgbox">
+                  <img src="Photos/Photo9.jpg" alt="Photo 9">
+                  <div class="sparkle">tap ✨</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">A whole vibe</span>
+                <span class="capText">You make memories look beautiful.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 10 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo10.jpg"
+                data-title="Photo 10"
+                data-caption="You holding flowers while looking like that… feels like my heart is getting spoiled too.">
+                <div class="imgbox">
+                  <img src="Photos/Photo10.jpg" alt="Photo 10">
+                  <div class="sparkle">tap 🩷</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Soft like a bouquet</span>
+                <span class="capText">Pretty holding pretty — it fits you.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 11 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo11.jpg"
+                data-title="Photo 11"
+                data-caption="That little wink again… like you’re casually stealing my heart and acting like it’s normal.">
+                <div class="imgbox">
+                  <img src="Photos/Photo11.jpg" alt="Photo 11">
+                  <div class="sparkle">tap 💗</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">You’re my weakness</span>
+                <span class="capText">One look and I’m yours again.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 12 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo12.jpg"
+                data-title="Photo 12"
+                data-caption="This pose is so you — cute, confident, and quietly telling the world you’re one of a kind.">
+                <div class="imgbox">
+                  <img src="Photos/Photo12.jpg" alt="Photo 12">
+                  <div class="sparkle">tap 💞</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">My favorite smile</span>
+                <span class="capText">Even your “serious” looks adorable.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 13 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo13.jpg"
+                data-title="Photo 13"
+                data-caption="Another you-in-the-mall moment… and somehow you still look like the main character of my day.">
+                <div class="imgbox">
+                  <img src="Photos/Photo13.jpg" alt="Photo 13">
+                  <div class="sparkle">tap ✨</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Main character energy</span>
+                <span class="capText">You turn places into memories.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 14 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo14.jpg"
+                data-title="Photo 14"
+                data-caption="Flowers again… and you look like someone I’d choose a thousand times, in every version of life.">
+                <div class="imgbox">
+                  <img src="Photos/Photo14.jpg" alt="Photo 14">
+                  <div class="sparkle">tap 🩷</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Chosen, always</span>
+                <span class="capText">You + flowers = my heart smiling.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Photo 15 -->
+          <div class="tile">
+            <figure>
+              <button class="imgbtn" type="button"
+                data-src="Photos/Photo15.jpg"
+                data-title="Photo 15"
+                data-caption="Even in the simplest setting, you glow — and it reminds me why I’m so proud to admire you.">
+                <div class="imgbox">
+                  <img src="Photos/Photo15.jpg" alt="Photo 15">
+                  <div class="sparkle">tap 🤍</div>
+                </div>
+              </button>
+              <figcaption>
+                <span class="capTitle">Soft ending, sweet feeling</span>
+                <span class="capText">You’re the kind of beauty I keep thanking God for.</span>
+              </figcaption>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>My Promise</h2>
+      <p>
+        I will always cherish you.
+        I will always appreciate you.
+        I will love you in the softest way possible —
+        the kind that listens, the kind that understands, the kind that never pressures you.
+        You deserve to feel valued, safe, and loved… every single day.
+      </p>
+      <div class="divider"></div>
+    </div>
+
+    <footer>
+      Made with pure admiration 🤍
+      <div class="signature">— Ali</div>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lbCard" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <div class="lbTop">
+        <p class="lbTitle" id="lbTitle">Photo</p>
+        <button class="lbClose" id="lbClose" type="button">Close</button>
+      </div>
+      <img class="lbImg" id="lbImg" src="" alt="Selected photo" />
+      <div class="lbCap" id="lbCap"></div>
+    </div>
+  </div>
+
+  <script>
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lbImg");
+    const lbTitle = document.getElementById("lbTitle");
+    const lbCap = document.getElementById("lbCap");
+    const lbClose = document.getElementById("lbClose");
+
+    function openLB(src, title, caption){
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden","false");
+      lbImg.src = src;
+      lbTitle.textContent = title || "Photo";
+      lbCap.textContent = caption || "";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLB(){
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden","true");
+      lbImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".imgbtn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        openLB(btn.dataset.src, btn.dataset.title, btn.dataset.caption);
+      });
+    });
+
+    lbClose.addEventListener("click", closeLB);
+    lb.addEventListener("click", (e)=>{
+      if(e.target === lb) closeLB();
+    });
+
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape") closeLB();
+    });
+  </script>
 </body>
 </html>
-
