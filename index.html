@@ -3,51 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Love</title>
+<title>For My Precious Love</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
     font-family:'Poppins', sans-serif;
-    background: linear-gradient(135deg,#f3e8ff,#ffe4f0,#e0f7ff);
-    background-size: 300% 300%;
-    animation: bgMove 15s ease infinite;
-    color:#333;
-    text-align:center;
+    background: linear-gradient(-45deg,#f3e8ff,#ffe4f0,#e0f7ff,#fff0f6);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    overflow-x:hidden;
 }
 
-@keyframes bgMove{
+@keyframes gradient{
     0%{background-position:0% 50%;}
     50%{background-position:100% 50%;}
     100%{background-position:0% 50%;}
 }
 
 .container{
-    padding:40px 20px;
-    max-width:900px;
+    max-width:1000px;
     margin:auto;
+    padding:40px 20px;
+    text-align:center;
 }
 
 h1{
     font-family:'Playfair Display', serif;
     font-size:2.5rem;
     color:#6a0572;
-    margin-bottom:10px;
-}
-
-.subtitle{
-    font-size:1rem;
-    opacity:0.8;
-    margin-bottom:40px;
 }
 
 .section{
-    margin:50px 0;
-    padding:25px;
-    background:rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(15px);
     border-radius:20px;
+    padding:30px;
+    margin:40px 0;
     box-shadow:0 10px 30px rgba(0,0,0,0.08);
     transition:0.4s ease;
 }
@@ -59,23 +53,41 @@ h1{
 .section h2{
     font-family:'Playfair Display', serif;
     color:#b83280;
-    margin-bottom:15px;
 }
 
 .section p{
     line-height:1.7;
-    font-size:0.95rem;
+    font-size:1rem;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+    margin-top:30px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:20px;
+    transition:0.4s ease;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
 }
 
 .heart{
-    font-size:2rem;
-    animation: heartbeat 1.5s infinite;
+    position:fixed;
+    font-size:20px;
+    animation:float 6s linear infinite;
+    opacity:0.6;
 }
 
-@keyframes heartbeat{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-    100%{transform:scale(1);}
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
 }
 
 footer{
@@ -83,83 +95,93 @@ footer{
     font-size:0.9rem;
     opacity:0.7;
 }
-
-@media(max-width:600px){
-    h1{font-size:2rem;}
-    .section{padding:20px;}
-}
 </style>
 </head>
 
 <body>
 
+<script>
+for(let i=0;i<20;i++){
+    let heart=document.createElement("div");
+    heart.innerHTML="🤍";
+    heart.classList.add("heart");
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*5)+"s";
+    document.body.appendChild(heart);
+}
+</script>
+
 <div class="container">
 
-<h1>For The Most Precious Soul</h1>
-<p class="subtitle">A page made only to appreciate you 🤍</p>
+<h1>For The Most Beautiful Soul</h1>
 
 <div class="section">
-<h2>Your Presence</h2>
+<h2>You</h2>
 <p>
-You walk into a room and everything feels softer.  
-Not because you try to be anything… but because your existence alone carries warmth.  
-Your eyes hold quiet strength.  
-Your smile feels like peace.  
-And even your silence feels comforting.
+You are softness and strength in one heart.  
+The way you exist feels gentle yet powerful.  
+Your eyes carry stories.  
+Your smile feels like home.  
+Everything about you deserves to be cherished.
 </p>
 </div>
 
 <div class="section">
-<h2>Your Heart</h2>
+<h2>What I See</h2>
 <p>
-You have this gentle way of loving.  
-You care deeply, even when you don’t show it loudly.  
-You think carefully.  
-You feel deeply.  
-And the way you carry yourself with grace makes me admire you more every single day.
+I see grace in the way you carry yourself.  
+I see beauty that is effortless.  
+I see someone worth protecting, appreciating, and loving deeply.  
+You are not just beautiful on the outside.  
+You are rare.
 </p>
 </div>
 
 <div class="section">
-<h2>Your Beauty</h2>
+<h2>What I Feel</h2>
 <p>
-Not just the kind people see.  
-But the kind that lingers.  
-The softness in your expressions.  
-The strength behind your calm.  
-The way you look both delicate and powerful at the same time.  
-You are effortlessly beautiful.
+I feel lucky to admire you.  
+Lucky to appreciate you.  
+Lucky to love you gently.  
+Every photo of you feels like a memory I want to keep forever.
 </p>
 </div>
 
 <div class="section">
-<h2>What You Mean</h2>
-<p>
-You are not just someone special.  
-You are someone I cherish deeply.  
-Someone I appreciate endlessly.  
-Someone I hold gently in my heart.  
-Every moment with you feels like something I want to protect.
-</p>
+<h2>Your Moments</h2>
+
+<div class="gallery">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+<img src="photo4.jpg">
+<img src="photo5.jpg">
+<img src="photo6.jpg">
+<img src="photo7.jpg">
+<img src="photo8.jpg">
+<img src="photo9.jpg">
+<img src="photo10.jpg">
+<img src="photo11.jpg">
+<img src="photo12.jpg">
+<img src="photo13.jpg">
+<img src="photo14.jpg">
+<img src="photo15.jpg">
+</div>
+
 </div>
 
 <div class="section">
 <h2>My Promise</h2>
 <p>
-I will always appreciate you.  
 I will always cherish you.  
-I will always choose to love you gently.  
-Not loudly. Not forcefully.  
-But patiently.  
-Softly.  
-With intention.
+I will always appreciate you.  
+I will always choose to love you in the softest way possible.  
+You deserve to feel valued every single day.
 </p>
 </div>
 
-<div class="heart">🤍</div>
-
 <footer>
-Made with pure admiration and love
+Made with pure admiration 🤍
 </footer>
 
 </div>
