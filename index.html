@@ -1,1398 +1,648 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Iris</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <title>For My Loving Iris 🌷</title>
   <style>
     :root{
-      --ink:#1f1624;
-      --muted:#5e5167;
-
-      --a1:#d84b8f;
-      --a2:#ff96c9;
-      --a3:#7f57c9;
-
-      --glass: rgba(255,255,255,.74);
-      --stroke: rgba(255,255,255,.70);
-
-      --shadow: 0 18px 60px rgba(0,0,0,.12);
-      --shadow2: 0 26px 90px rgba(0,0,0,.26);
-
-      --r: 28px;
-      --tileR: 22px;
+      --bg1:#0f1020;
+      --bg2:#1b1230;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.12);
+      --stroke: rgba(255,255,255,.16);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --lav:#c6a6ff;
+      --pink:#ffb3d9;
+      --mint:#a7ffe9;
+      --gold:#ffe7a7;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 22px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
-      overflow-x:hidden;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
       background:
-        radial-gradient(1100px 520px at 18% 10%, rgba(255,150,201,.22), transparent 60%),
-        radial-gradient(900px 520px at 82% 16%, rgba(127,87,201,.18), transparent 58%),
-        radial-gradient(900px 600px at 50% 95%, rgba(216,243,255,.20), transparent 62%),
-        linear-gradient(180deg, #fff7fb, #f7efff 50%, #ffeaf4);
-      -webkit-tap-highlight-color: transparent;
+        radial-gradient(1200px 700px at 20% 10%, rgba(198,166,255,.25), transparent 60%),
+        radial-gradient(1000px 600px at 80% 20%, rgba(255,179,217,.20), transparent 60%),
+        radial-gradient(1200px 700px at 50% 90%, rgba(167,255,233,.18), transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
     }
 
-    /* Ambient blobs */
-    .ambient{
-      position:fixed; inset:-20vmax;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(216,75,143,.16), transparent 48%),
-        radial-gradient(circle at 80% 40%, rgba(127,87,201,.14), transparent 52%),
-        radial-gradient(circle at 50% 90%, rgba(0,160,255,.06), transparent 62%);
-      filter: blur(14px);
+    /* floating glow dots */
+    .glow{
+      position:fixed;
+      inset:0;
       pointer-events:none;
       z-index:0;
-      animation: drift 18s ease-in-out infinite alternate;
+      opacity:.9;
+      filter: blur(0px);
+    }
+    .glow i{
+      position:absolute;
+      width:10px;height:10px;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.1));
+      box-shadow: 0 0 30px rgba(198,166,255,.35);
+      animation: drift 10s linear infinite;
+      opacity:.55;
     }
     @keyframes drift{
-      from{transform:translate3d(-10px,-8px,0) scale(1.01)}
-      to{transform:translate3d(10px,8px,0) scale(1.02)}
-    }
-
-    /* Soft film grain */
-    .grain{
-      position:fixed; inset:-40%;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-      opacity:.10;
-      transform: rotate(8deg);
-      pointer-events:none;
-      z-index:1;
-    }
-
-    /* Floating emojis */
-    .floatLayer{ position:fixed; inset:0; pointer-events:none; z-index:2; }
-    .floatItem{
-      position:absolute;
-      animation: floatUp linear infinite;
-      user-select:none;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.12));
-      opacity:0;
-    }
-    @keyframes floatUp{
-      0%{ transform: translateY(110vh) translateX(0) rotate(0deg) scale(.95); opacity:0; }
-      15%{ opacity:.75; }
-      100%{ transform: translateY(-18vh) translateX(70px) rotate(28deg) scale(1.15); opacity:0; }
-    }
-
-    /* Topbar + progress */
-    .topbar{
-      position:sticky; top:0; z-index:30;
-      padding:12px 12px 10px;
-      display:flex; justify-content:center; gap:10px;
-      flex-wrap:wrap;
-      backdrop-filter: blur(14px);
-      background: rgba(255,255,255,.33);
-      border-bottom: 1px solid rgba(255,255,255,.45);
-    }
-    .chip{
-      display:flex; align-items:center; gap:10px;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.78);
-      border:1px solid rgba(255,255,255,.88);
-      box-shadow: 0 10px 24px rgba(0,0,0,.08);
-      cursor:pointer; user-select:none;
-      transition: transform .15s ease;
-      color: rgba(35,24,44,.88);
-      font-weight:900; font-size:13px;
-      white-space:nowrap;
-    }
-    .chip:active{transform:scale(.98)}
-    .chip small{font-weight:800; opacity:.72}
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, var(--a1), var(--a3));
-      box-shadow: 0 10px 20px rgba(216,75,143,.25);
-    }
-    .progressWrap{
-      width:min(880px, 92vw);
-      margin: 8px auto 0;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.06);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.55);
-      box-shadow: 0 10px 22px rgba(0,0,0,.05);
-    }
-    .progress{
-      height:100%;
-      width:0%;
-      border-radius:999px;
-      background: linear-gradient(90deg, var(--a3), var(--a1), var(--a2));
-      transition: width .08s linear;
+      0%{transform: translate3d(0,0,0) scale(.9)}
+      50%{transform: translate3d(40px,-60px,0) scale(1.2)}
+      100%{transform: translate3d(0,0,0) scale(.9)}
     }
 
     .wrap{
       position:relative;
-      z-index:10;
-      width:min(1050px, 92vw);
-      margin:0 auto;
-      padding: 18px 0 96px;
+      z-index:1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 16px 80px;
+    }
+
+    header{
       display:flex;
       flex-direction:column;
-      gap:18px;
-    }
-
-    /* Intro overlay */
-    body.locked{ overflow:hidden; }
-    .intro{
-      position:fixed; inset:0; z-index:100;
-      display:flex; align-items:center; justify-content:center;
-      padding:18px;
-      background: rgba(12,8,16,.70);
-      backdrop-filter: blur(10px);
-    }
-    .introCard{
-      width:min(820px, 96vw);
-      border-radius: 30px;
-      background: rgba(255,255,255,.90);
-      border:1px solid rgba(255,255,255,.70);
-      box-shadow: var(--shadow2);
-      text-align:center;
-      padding: 28px 18px 20px;
-      position:relative;
-      overflow:hidden;
-    }
-    .introCard::before{
-      content:"";
-      position:absolute; inset:-40%;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(216,75,143,.22), transparent 50%),
-        radial-gradient(circle at 80% 30%, rgba(127,87,201,.18), transparent 55%),
-        radial-gradient(circle at 50% 80%, rgba(255,150,201,.15), transparent 60%);
-      filter: blur(16px);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .introCard > *{ position:relative; z-index:1; }
-    .introKicker{
-      display:inline-flex; align-items:center; gap:10px;
-      font-size:12px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.74);
-      border:1px solid rgba(255,255,255,.88);
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color: rgba(60,44,70,.85);
-    }
-    .introTitle{
-      margin:14px 0 8px;
-      font-family:"Playfair Display", serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: rgba(33,22,40,.95);
-    }
-    .introText{
-      margin: 0 auto 16px;
-      max-width: 72ch;
-      font-size: 15.6px;
-      line-height: 1.85;
-      color: rgba(35,24,44,.84);
-    }
-    .introBtns{
-      display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
-      margin-top: 8px;
-    }
-    .btn{
-      border:none;
-      cursor:pointer;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight:900;
-      font-size: 13px;
-      letter-spacing:.2px;
-      transition: transform .15s ease;
-      user-select:none;
-    }
-    .btn:active{transform:scale(.98)}
-    .btn.primary{
-      color:white;
-      background: linear-gradient(135deg, var(--a1), var(--a2));
-      box-shadow: 0 12px 26px rgba(216,75,143,.18);
-    }
-    .btn.secondary{
-      color: rgba(35,24,44,.92);
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.88);
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
-    }
-
-    /* Hero */
-    .hero{
-      position:relative;
-      padding: 46px 18px 24px;
-      border-radius: 36px;
-      background: linear-gradient(180deg, rgba(255,255,255,.80), rgba(255,255,255,.50));
+      gap:10px;
+      padding: 26px 18px;
       border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      text-align:center;
-      transform-style: preserve-3d;
+      position:relative;
     }
-    .hero::before{
+
+    header:before{
       content:"";
-      position:absolute; inset:-35%;
+      position:absolute;
+      inset:-2px;
       background:
-        radial-gradient(circle at 20% 30%, rgba(216,75,143,.22), transparent 45%),
-        radial-gradient(circle at 80% 20%, rgba(127,87,201,.18), transparent 52%),
-        radial-gradient(circle at 50% 80%, rgba(255,165,210,.14), transparent 55%);
-      filter: blur(14px);
-      z-index:0;
-      animation: drift 16s ease-in-out infinite alternate;
+        radial-gradient(400px 180px at 20% 10%, rgba(255,179,217,.22), transparent 60%),
+        radial-gradient(420px 200px at 80% 20%, rgba(198,166,255,.25), transparent 60%),
+        radial-gradient(460px 220px at 50% 110%, rgba(167,255,233,.14), transparent 60%);
+      filter: blur(0px);
+      opacity: .9;
+      pointer-events:none;
     }
-    .hero > *{ position:relative; z-index:1; }
 
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.70);
-      border: 1px solid rgba(255,255,255,.88);
-      box-shadow: 0 10px 26px rgba(0,0,0,.06);
-      font-size: 12px;
-      color: rgba(60,44,70,.86);
-      letter-spacing:.20em;
-      text-transform:uppercase;
-      user-select:none;
-    }
-    h1{
-      margin:18px 0 10px;
-      font-family:"Playfair Display", serif;
-      font-size: clamp(2.2rem, 5vw, 3.7rem);
-      color: rgba(33,22,40,.95);
-      letter-spacing:.3px;
-      text-shadow: 0 1px 0 rgba(255,255,255,.8);
-      transform: translateZ(30px);
-    }
-    .typed{
-      margin: 0 auto;
-      max-width: 76ch;
-      font-size: 15.9px;
-      line-height: 1.95;
-      color: rgba(40,28,50,.78);
-      transform: translateZ(18px);
-      min-height: 64px;
-    }
-    .cursor{
-      display:inline-block;
-      width:10px;
-      animation: blink 1s steps(1) infinite;
-      color: rgba(216,75,143,.9);
-      font-weight:900;
-      margin-left:2px;
-      user-select:none;
-    }
-    @keyframes blink{ 50%{ opacity:0; } }
-
-    .heroRow{
-      margin-top: 18px;
+    .topRow{
       display:flex;
-      justify-content:center;
-      gap:10px;
-      flex-wrap:wrap;
-      transform: translateZ(16px);
-    }
-
-    /* Heart meter + note */
-    .meterWrap{
-      margin: 16px auto 0;
-      width:min(560px, 92%);
-      background: rgba(255,255,255,.66);
-      border: 1px solid rgba(255,255,255,.88);
-      box-shadow: 0 10px 24px rgba(0,0,0,.08);
-      border-radius: 999px;
-      padding: 10px;
-      display:flex;
+      gap:14px;
       align-items:center;
-      gap:10px;
-      transform: translateZ(12px);
-      cursor:pointer;
-      user-select:none;
-    }
-    .meterBar{
-      flex:1;
-      height: 12px;
-      background: rgba(0,0,0,.06);
-      border-radius: 999px;
-      overflow:hidden;
+      justify-content:space-between;
       position:relative;
-    }
-    .meterFill{
-      height: 100%;
-      width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--a1), var(--a2));
-      transition: width .35s ease;
-    }
-    .meterText{
-      font-size: 12px;
-      font-weight:900;
-      color: rgba(40,28,50,.76);
-      white-space:nowrap;
-    }
-    .micro{
-      margin: 10px auto 0;
-      max-width: 74ch;
-      font-size: 12.5px;
-      line-height: 1.7;
-      color: rgba(55,40,68,.72);
-      transform: translateZ(10px);
+      z-index:1;
     }
 
-    /* Cards */
-    .card{
-      background: var(--glass);
-      border:1px solid var(--stroke);
-      border-radius: var(--r);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      padding: 22px 18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 240px at 10% 0%, rgba(255,150,201,.22), transparent 60%),
-        radial-gradient(560px 260px at 90% 10%, rgba(127,87,201,.18), transparent 62%);
-      pointer-events:none;
-      opacity:.75;
-    }
-    .card > *{ position:relative; z-index:1; }
-
-    .title{
-      margin:0 0 10px;
-      text-align:center;
-      font-family:"Playfair Display", serif;
-      font-size: 1.72rem;
-      color: rgba(216,75,143,.95);
-    }
-    .text{
-      margin:0 auto;
-      max-width: 86ch;
-      text-align:center;
-      line-height: 2.0;
-      font-size: 16px;
-      color: rgba(35,24,44,.88);
-    }
-    .divider{
-      width:min(560px, 90%);
-      height:1px;
-      margin: 16px auto 0;
-      background: linear-gradient(90deg, transparent, rgba(216,75,143,.35), rgba(127,87,201,.28), transparent);
-    }
-
-    /* Tap-to-reveal reasons */
-    .reasonsGrid{
-      display:grid;
-      gap:12px;
-      grid-template-columns: repeat(3, 1fr);
-      margin-top: 14px;
-    }
-    @media (max-width: 900px){ .reasonsGrid{ grid-template-columns:1fr; } }
-
-    .reason{
-      background: rgba(255,255,255,.74);
-      border:1px solid rgba(255,255,255,.88);
-      border-radius: 22px;
-      padding: 14px 14px;
-      box-shadow: 0 12px 26px rgba(0,0,0,.07);
-      position:relative;
-      overflow:hidden;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .15s ease;
-      min-height: 98px;
-    }
-    .reason:active{ transform: scale(.99); }
-    .reason strong{
-      display:block;
-      font-size: 13px;
-      color: rgba(127,87,201,.95);
-      margin-bottom:6px;
-      letter-spacing:.2px;
-    }
-    .reason .front{
-      color: rgba(45,32,56,.74);
-      font-size: 13.5px;
-      line-height:1.6;
-    }
-    .reason .back{
-      display:none;
-      color: rgba(35,24,44,.92);
-      font-size: 13.8px;
-      line-height:1.65;
-    }
-    .reason.revealed .front{ display:none; }
-    .reason.revealed .back{ display:block; }
-
-    /* Mini notes wall */
-    .notesGrid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 980px){ .notesGrid{ grid-template-columns: repeat(2,1fr); } }
-    .note{
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(255,255,255,.88);
-      border-radius: 22px;
-      box-shadow: 0 12px 26px rgba(0,0,0,.07);
-      padding: 14px 14px;
-      min-height: 110px;
-      cursor:pointer;
-      user-select:none;
-      position:relative;
-      overflow:hidden;
-      transition: transform .15s ease;
-    }
-    .note:active{ transform: scale(.99); }
-    .note .tag{
+    .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      font-weight:900;
-      font-size: 12px;
-      color: rgba(35,24,44,.88);
-      opacity:.85;
-      margin-bottom:8px;
-    }
-    .note .tag i{
-      width:10px;height:10px;border-radius:999px;
-      display:inline-block;
-      background: linear-gradient(135deg, var(--a1), var(--a3));
-    }
-    .note .content{
-      font-size: 13.4px;
-      line-height: 1.65;
-      color: rgba(45,32,56,.78);
-    }
-    .note.locked .content{
-      filter: blur(6px);
-      opacity:.55;
-    }
-    .note.locked::after{
-      content:"tap to reveal";
-      position:absolute;
-      bottom:12px; right:12px;
-      font-weight:900;
-      font-size: 11px;
-      color: rgba(127,87,201,.85);
-      background: rgba(255,255,255,.72);
-      border:1px solid rgba(255,255,255,.88);
-      padding:6px 10px;
-      border-radius:999px;
-      box-shadow: 0 10px 20px rgba(0,0,0,.08);
-    }
-
-    /* Gallery tools */
-    .tools{
-      margin-top: 12px;
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .toolBtn{
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.88);
-      background: rgba(255,255,255,.76);
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
-      cursor:pointer;
-      user-select:none;
-      font-weight:900;
-      color: rgba(35,24,44,.88);
-      font-size: 12.5px;
-    }
-    .toolBtn.active{
-      color:white;
-      background: linear-gradient(135deg, var(--a3), var(--a1));
-      border-color: rgba(255,255,255,.60);
-    }
-
-    /* Gallery */
-    .galleryHeader{
-      text-align:center;
-      font-size: 12.5px;
-      color: rgba(60,44,70,.72);
-      margin: 0 0 12px;
-    }
-    .gallery{
-      display:grid;
-      gap:12px;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @media (max-width: 980px){ .gallery{ grid-template-columns: repeat(3,1fr); } }
-    @media (max-width: 680px){ .gallery{ grid-template-columns: repeat(2,1fr); } }
-
-    .tile{
-      position:relative;
-      overflow:hidden;
-      border-radius: var(--tileR);
-      background: rgba(255,255,255,.62);
-      border:1px solid rgba(255,255,255,.82);
-      box-shadow: 0 14px 36px rgba(0,0,0,.10);
-      cursor:pointer;
-      transform: translateZ(0);
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
-    }
-    .tile:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 22px 60px rgba(0,0,0,.14);
-      filter: saturate(1.06);
-    }
-    .tile img{
-      width:100%;
-      height: 235px;
-      object-fit: cover;
-      display:block;
-      transition: transform .35s ease;
-      background:#f2f2f6;
-      user-select:none;
-      -webkit-user-drag:none;
-    }
-    .tile:hover img{ transform: scale(1.05); }
-    .tile .shine{
-      position:absolute; inset:-40%;
-      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.38), transparent 68%);
-      transform: rotate(10deg) translateX(-40%);
-      transition: transform .55s ease;
-      pointer-events:none;
-      opacity:.9;
-    }
-    .tile:hover .shine{ transform: rotate(10deg) translateX(40%); }
-    .fav{
-      position:absolute;
-      top:10px; right:10px;
-      width:38px; height:38px;
-      border-radius:999px;
-      background: rgba(255,255,255,.88);
-      border: 1px solid rgba(255,255,255,.92);
-      box-shadow: 0 12px 24px rgba(0,0,0,.12);
-      display:grid;
-      place-items:center;
-      font-size: 18px;
-      opacity:0;
-      transform: scale(.9);
-      transition: opacity .2s ease, transform .2s ease;
-      pointer-events:none;
-    }
-    .tile.isFav .fav{ opacity:1; transform:scale(1); }
-
-    /* Lightbox */
-    .modal{
-      position:fixed; inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-      background: rgba(12,8,16,.72);
-      backdrop-filter: blur(10px);
-      z-index:60;
-    }
-    .modal.open{ display:flex; }
-
-    .modalBox{
-      width:min(980px, 96vw);
-      border-radius: 24px;
-      overflow:hidden;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(255,255,255,.70);
-      box-shadow: var(--shadow2);
-      position:relative;
-      touch-action: none;
-    }
-    .modalImgWrap{
-      position:relative;
-      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.75), rgba(247,240,255,.75));
-      overflow:hidden;
-    }
-    .modalImg{
-      width:100%;
-      height: min(74vh, 720px);
-      object-fit: contain;
-      display:block;
-      transform-origin:center center;
-      user-select:none;
-      -webkit-user-drag:none;
-      will-change: transform;
-    }
-    .modalTop{
-      position:absolute; top:12px; left:12px; right:12px;
-      display:flex; justify-content:space-between; gap:10px;
-      pointer-events:none;
-    }
-    .pillBtn{
-      pointer-events:auto;
-      padding:10px 12px;
+      padding: 10px 12px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
       border-radius: 999px;
-      background: rgba(255,255,255,.90);
-      border: 1px solid rgba(255,255,255,.94);
-      box-shadow: 0 12px 26px rgba(0,0,0,.14);
-      font-weight:900;
-      font-size: 12.5px;
-      color: rgba(35,24,44,.88);
-      cursor:pointer;
+      font-size: 13px;
+      color: var(--muted);
       user-select:none;
-      display:flex; align-items:center; gap:8px;
+      backdrop-filter: blur(10px);
     }
-    .pillBtn:active{ transform: scale(.98); }
-    .modalBottom{
-      position:absolute; bottom:12px; left:12px; right:12px;
-      display:flex; justify-content:space-between; gap:10px;
-      pointer-events:none;
+    .badge b{color:var(--text); font-weight:700}
+
+    h1{
+      margin: 8px 0 0;
+      font-size: clamp(26px, 4.6vw, 44px);
+      letter-spacing: .2px;
+      line-height: 1.08;
+      position:relative;
+      z-index:1;
+    }
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      position:relative;
+      z-index:1;
+      max-width: 62ch;
+    }
+
+    .ctaRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 10px;
+      position:relative;
+      z-index:1;
+    }
+
+    button, .pill{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-weight: 650;
+      letter-spacing:.2px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      -webkit-tap-highlight-color: transparent;
+    }
+    button:hover{transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.22)}
+    button:active{transform: translateY(1px) scale(.99)}
+
+    .primary{
+      background: linear-gradient(135deg, rgba(198,166,255,.35), rgba(255,179,217,.28));
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .grid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .cardTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 10px;
+    }
+
+    .cardTitle h2{
+      margin:0;
+      font-size: 16px;
+      color: var(--text);
+      letter-spacing:.2px;
     }
     .hint{
-      pointer-events:none;
-      align-self:center;
-      text-align:center;
-      flex:1;
-      font-size: 12px;
-      color: rgba(255,255,255,.78);
-      text-shadow: 0 10px 26px rgba(0,0,0,.35);
+      font-size: 12.5px;
+      color: var(--muted);
     }
 
-    /* Love letter */
-    .letterModal{
-      position:fixed; inset:0;
+    .soft{
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .list{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top: 10px;
+    }
+
+    .tile{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      border-radius: 18px;
+      padding: 12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      position:relative;
+      overflow:hidden;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, background .12s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tile:hover{transform: translateY(-1px); background: rgba(0,0,0,.22)}
+    .tile:active{transform: translateY(1px)}
+
+    .dot{
+      width: 12px; height: 12px;
+      border-radius:999px;
+      flex: 0 0 auto;
+      margin-top: 4px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.1));
+      box-shadow: 0 0 0 6px rgba(198,166,255,.12);
+    }
+
+    .tile strong{display:block; font-size: 14px; letter-spacing:.15px}
+    .tile span{display:block; color: var(--muted); font-size: 13px; line-height:1.55; margin-top: 2px}
+
+    .reveal{
+      max-height: 0;
+      overflow:hidden;
+      transition: max-height .35s ease;
+      margin-top: 8px;
+    }
+    .tile.open .reveal{max-height: 240px}
+    .reveal p{
+      margin: 0;
+      padding: 10px 10px 8px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
+      font-size: 13px;
+      line-height:1.65;
+    }
+
+    /* mini “hug” overlay */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
       display:none;
       align-items:center;
       justify-content:center;
-      padding: 18px;
-      background: rgba(12,8,16,.66);
-      backdrop-filter: blur(12px);
-      z-index:70;
+      z-index:50;
+      padding: 20px;
     }
-    .letterModal.open{ display:flex; }
-
-    .letterCard{
-      width:min(920px, 96vw);
+    .overlay.show{display:flex}
+    .modal{
+      width:min(560px, 92vw);
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
       border-radius: 26px;
-      background: rgba(255,255,255,.93);
-      border: 1px solid rgba(255,255,255,.72);
-      box-shadow: var(--shadow2);
+      box-shadow: 0 30px 90px rgba(0,0,0,.6);
+      padding: 16px;
+      position:relative;
       overflow:hidden;
-      position:relative;
+      backdrop-filter: blur(12px);
     }
-    .letterCard::before{
-      content:"";
-      position:absolute; inset:-40%;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(216,75,143,.18), transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(127,87,201,.14), transparent 60%);
-      filter: blur(16px);
-      opacity:.9;
-      pointer-events:none;
+    .modal h3{margin:6px 0 6px; font-size: 18px}
+    .modal p{margin:0; color: var(--muted); line-height:1.7; font-size: 14px}
+    .close{
+      position:absolute;
+      top: 10px; right: 10px;
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-weight: 800;
+      background: rgba(0,0,0,.2);
     }
-    .letterHead{
-      position:relative;
-      padding: 16px 16px 10px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      z-index:1;
-    }
-    .letterHead h2{
-      margin:0;
-      font-family:"Playfair Display", serif;
-      color: rgba(127,87,201,.95);
-      font-size: 1.50rem;
-    }
-    .letterBody{
-      position:relative;
-      padding: 0 16px 18px;
-      z-index:1;
-    }
-    .paper{
-      background: rgba(255,255,255,.70);
-      border:1px solid rgba(255,255,255,.85);
-      border-radius: 22px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.10);
-      padding: 16px 14px;
-      font-size: 15.9px;
-      line-height: 2.0;
-      color: rgba(35,24,44,.92);
-    }
-    .sig{
+
+    .bigNote{
       margin-top: 12px;
-      font-family:"Playfair Display", serif;
-      color: rgba(216,75,143,.95);
-      font-size: 1.15rem;
+      border: 1px dashed rgba(255,255,255,.20);
+      background: rgba(0,0,0,.16);
+      padding: 14px;
+      border-radius: 18px;
+      line-height:1.8;
+      color: rgba(255,255,255,.86);
+      font-size: 14px;
     }
 
-    /* Reveal on scroll */
-    .reveal{
-      opacity:0;
-      transform: translateY(12px);
-      transition: opacity .75s ease, transform .75s ease;
+    .moodBox{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding-top: 4px;
     }
-    .reveal.show{ opacity:1; transform: translateY(0); }
+    .moodLine{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .meter{
+      height: 10px;
+      width:100%;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      overflow:hidden;
+    }
+    .meter > b{
+      display:block;
+      height:100%;
+      width: 22%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(198,166,255,.55), rgba(255,179,217,.45), rgba(167,255,233,.35));
+      transition: width .45s ease;
+    }
 
-    footer{
+    .footer{
       margin-top: 14px;
       text-align:center;
-      color: rgba(60,44,70,.72);
-      font-size: 12px;
-      padding: 10px 6px 0;
+      color: rgba(255,255,255,.62);
+      font-size: 12.5px;
+      line-height:1.8;
+    }
+    .heartPop{
+      position:fixed;
+      left:0; top:0;
+      pointer-events:none;
+      z-index:99;
+      font-size: 18px;
+      opacity:0;
+      transform: translate(-50%,-50%);
+      animation: pop 900ms ease forwards;
+      text-shadow: 0 12px 30px rgba(0,0,0,.6);
+    }
+    @keyframes pop{
+      0%{opacity:0; transform: translate(-50%,-50%) scale(.6)}
+      15%{opacity:1}
+      100%{opacity:0; transform: translate(-50%,-110px) scale(1.2)}
+    }
+
+    .spark{
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(240px 90px at 10% 10%, rgba(255,231,167,.18), transparent 60%),
+        radial-gradient(260px 120px at 90% 20%, rgba(198,166,255,.18), transparent 60%),
+        radial-gradient(240px 110px at 50% 110%, rgba(255,179,217,.14), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
     }
   </style>
 </head>
+<body>
 
-<body class="locked">
-  <div class="ambient" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true" id="glow"></div>
 
-  <!-- INTRO -->
-  <div class="intro" id="intro">
-    <div class="introCard">
-      <div class="introKicker"><span class="dot"></span> for iris</div>
-      <div class="introTitle">A gentle page for you</div>
-      <div class="introText">
-        I made this to feel warm and safe<br>
-        nothing forced nothing rushed<br>
-        just love shown with patience and intention
-      </div>
-      <div class="introBtns">
-        <button class="btn primary" id="enterBtn">Tap to enter</button>
-        <button class="btn secondary" id="sprinkleIntroBtn">Add a little magic ✨</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Floating items -->
-  <div class="floatLayer" id="floatLayer" aria-hidden="true"></div>
-
-  <!-- TOPBAR -->
-  <div class="topbar" id="topbar" style="display:none;">
-    <div class="chip" id="letterBtn"><span class="dot"></span> Love Letter <small>open</small></div>
-    <div class="chip" id="toNotesBtn"><span class="dot"></span> Notes <small>scroll</small></div>
-    <div class="chip" id="toPhotosBtn"><span class="dot"></span> Photos <small>scroll</small></div>
-    <div class="chip" id="tipsBtn"><span class="dot"></span> Tips <small>tap</small></div>
-    <div class="progressWrap" aria-hidden="true"><div class="progress" id="progress"></div></div>
-  </div>
-
-  <main class="wrap" id="main" style="display:none;">
-
-    <!-- HERO -->
-    <section class="hero reveal" id="hero">
-      <div class="kicker"><span class="dot"></span> made gently</div>
-      <h1 id="titleTap">For Iris</h1>
-
-      <p class="typed" id="typedText"></p><span class="cursor">|</span>
-
-      <div class="heroRow">
-        <button class="btn primary" id="holdMagicBtn">Hold for magic ✨</button>
-        <button class="btn secondary" id="softScrollBtn">Show me the photos</button>
+  <div class="wrap">
+    <header>
+      <div class="topRow">
+        <div class="badge">🌷 For <b>My Loving Iris</b> — a little safe place</div>
+        <div class="badge" id="dateBadge">✨ today</div>
       </div>
 
-      <div class="meterWrap" id="meterWrap" title="Tap to fill my heart">
-        <div class="meterBar"><div class="meterFill" id="meterFill"></div></div>
-        <div class="meterText" id="meterText">tap me 🤍</div>
-      </div>
-
-      <div class="micro" id="microLine">
-        If you ever wonder what you mean to me<br>
-        it’s this — a steady kind of love that chooses you with respect
-      </div>
-    </section>
-
-    <!-- LOVE (mature) + reasons -->
-    <section class="card reveal">
-      <h2 class="title">How I Love You</h2>
-      <p class="text">
-        I love you in a way that protects your peace<br>
-        in a way that listens first and stays kind always<br>
-        not to pressure you — but to remind you<br>
-        you are cherished and appreciated deeply
+      <h1>Hey mahal ko…<br/>come here for a second 🫶</h1>
+      <p class="sub">
+        If today feels heavy, this page is just me holding your hand the best way I can.
+        No pressure, no fixing — just love, warmth, and reminders that you’re never alone.
       </p>
 
-      <div class="reasonsGrid" id="reasonsGrid"></div>
-
-      <div class="divider"></div>
-
-      <div class="tools">
-        <div class="toolBtn active" id="filterAll">All</div>
-        <div class="toolBtn" id="filterFav">Favorites</div>
+      <div class="ctaRow">
+        <button class="primary" id="cheerBtn">Tap for a tiny cheer up ✨</button>
+        <button id="hugBtn">Open a warm hug 🤍</button>
+        <button id="noteBtn">Read my note for you 💌</button>
+        <button id="sprinkleBtn">Sprinkle hearts 🥰</button>
       </div>
-    </section>
+    </header>
 
-    <!-- NOTES WALL -->
-    <section class="card reveal" id="notesSection">
-      <h2 class="title">Little Notes For You</h2>
-      <p class="text" style="font-size:14.5px; line-height:1.85; opacity:.9;">
-        tap each note to reveal it<br>
-        I kept them simple because you already feel like poetry
-      </p>
-      <div class="notesGrid" id="notesGrid"></div>
-    </section>
-
-    <!-- GALLERY -->
-    <section class="card reveal" id="photosSection">
-      <h2 class="title">Your Moments</h2>
-      <p class="galleryHeader">
-        tap a photo to open • double tap to favorite ❤️ • swipe in viewer • pinch to zoom
-      </p>
-      <div class="gallery" id="gallery"></div>
-    </section>
-
-    <footer class="reveal">made with a soft heart and sincere intention</footer>
-  </main>
-
-  <!-- LIGHTBOX -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalBox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-      <div class="modalTop">
-        <button class="pillBtn" id="prevBtn">◀</button>
-        <button class="pillBtn" id="favBtn">❤️ Favorite</button>
-        <button class="pillBtn" id="resetZoomBtn">Reset</button>
-        <button class="pillBtn" id="closeBtn">Close ✕</button>
-        <button class="pillBtn" id="nextBtn">▶</button>
-      </div>
-
-      <div class="modalImgWrap" id="modalImgWrap">
-        <img class="modalImg" id="modalImg" alt="Photo">
-      </div>
-
-      <div class="modalBottom">
-        <div class="hint">swipe • pinch zoom • drag to pan • tap outside to close</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- LOVE LETTER -->
-  <div class="letterModal" id="letterModal" aria-hidden="true">
-    <div class="letterCard">
-      <div class="letterHead">
-        <h2>My Love Letter</h2>
-        <button class="pillBtn" id="closeLetter">Close ✕</button>
-      </div>
-      <div class="letterBody">
-        <div class="paper">
-          <div id="letterText"></div>
-          <div class="sig">— Ali 🤍</div>
+    <div class="grid">
+      <section class="card">
+        <div class="spark" aria-hidden="true"></div>
+        <div class="cardTitle" style="position:relative; z-index:1;">
+          <h2>Reasons I love you (tap each one)</h2>
+          <div class="hint">little surprises inside</div>
         </div>
+
+        <p class="soft" style="position:relative; z-index:1;">
+          Some days you forget how loved you are. So I wrote it down — and hid extra sweetness in each one.
+        </p>
+
+        <div class="list" id="reasons" style="position:relative; z-index:1;"></div>
+
+        <div class="bigNote" style="position:relative; z-index:1;">
+          <b>Reminder:</b> you don’t need to be “okay” to be loved. You can be tired, quiet, messy, emotional —
+          and you’ll still be my favorite person to choose.
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="cardTitle">
+          <h2>Your mood, gently lifted</h2>
+          <div class="hint" id="moodHint">we’re getting there</div>
+        </div>
+
+        <div class="moodBox">
+          <div class="moodLine">
+            <span>Softness level</span>
+            <span id="softPct">22%</span>
+          </div>
+          <div class="meter" aria-label="Softness meter">
+            <b id="meterFill"></b>
+          </div>
+
+          <div class="bigNote" id="moodMessage">
+            If you can’t do everything today, it’s okay. Do one small thing. Then rest. I’m proud of you, always.
+          </div>
+
+          <button class="primary" id="boostBtn">Boost her mood gently 🌙</button>
+          <button id="promiseBtn">A promise I mean 🤝</button>
+
+          <div class="footer">
+            Tip: Tap anywhere on the page for little hearts (because you deserve the cute stuff).
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- overlay modal -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Modal">
+    <div class="modal">
+      <button class="close" id="closeOverlay">✕</button>
+      <h3 id="modalTitle">Warm hug</h3>
+      <p id="modalText">Come here, mahal ko. Breathe. I’m with you. You don’t have to carry it alone.</p>
+
+      <div class="bigNote" id="modalExtra">
+        If your mind is loud right now, borrow my calm. You are safe. You are loved. You are enough — even today.
+      </div>
+
+      <div class="ctaRow" style="margin-top:12px;">
+        <button class="primary" id="miniCheer">Another tiny cheer ✨</button>
+        <button id="sendKiss">Send her a soft kiss 😚</button>
       </div>
     </div>
   </div>
 
   <script>
-    /* ===== Photos (Capital P) ===== */
-    const photos = Array.from({length:15}, (_,i)=>({ src:`Photos/Photo${i+1}.jpg` }));
+    // ===== Helpers =====
+    const $ = (q) => document.querySelector(q);
+    const el = (tag, cls) => { const x = document.createElement(tag); if(cls) x.className = cls; return x; };
 
-    /* ===== Floating layer ===== */
-    const floatLayer = document.getElementById("floatLayer");
-    const floatChars = ["🤍","🩷","💗","💞","✨","✦","✧","🌙"];
-    for(let i=0;i<34;i++){
-      const el=document.createElement("div");
-      el.className="floatItem";
-      el.textContent=floatChars[Math.floor(Math.random()*floatChars.length)];
-      el.style.left=Math.random()*100+"vw";
-      el.style.animationDuration=(8+Math.random()*16)+"s";
-      el.style.animationDelay=(-Math.random()*16)+"s";
-      el.style.fontSize=(14+Math.random()*18)+"px";
-      floatLayer.appendChild(el);
-    }
-
-    /* ===== Intro enter ===== */
-    const intro=document.getElementById("intro");
-    const main=document.getElementById("main");
-    const topbar=document.getElementById("topbar");
-    document.body.classList.add("locked");
-
-    document.getElementById("enterBtn").addEventListener("click", enterSite);
-    document.getElementById("sprinkleIntroBtn").addEventListener("click", () => burst(innerWidth/2, innerHeight/2));
-
-    function enterSite(){
-      intro.style.display="none";
-      main.style.display="";
-      topbar.style.display="";
-      document.body.classList.remove("locked");
-      burst(innerWidth/2, innerHeight/2);
-    }
-
-    /* ===== Progress bar ===== */
-    const progressEl=document.getElementById("progress");
-    function updateProgress(){
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const p = height > 0 ? (scrollTop / height) * 100 : 0;
-      progressEl.style.width = p + "%";
-    }
-    window.addEventListener("scroll", updateProgress, {passive:true});
-    updateProgress();
-
-    /* ===== Typed text (mature) ===== */
-    const typedEl=document.getElementById("typedText");
-    const typedLines=[
-      "I made this page so you can feel how much you matter to me",
-      "I appreciate you in the quiet ways that last",
-      "I care about your peace as much as I care about your smile",
-      "and I will keep choosing you gently with respect and patience"
-    ];
-    let tLine=0, tChar=0;
-    (function typeTick(){
-      const line=typedLines[tLine];
-      typedEl.textContent=line.slice(0,tChar);
-      tChar++;
-      if(tChar<=line.length) setTimeout(typeTick, 26);
-      else setTimeout(()=>{ tLine=(tLine+1)%typedLines.length; tChar=0; setTimeout(typeTick, 320); }, 950);
+    // Date badge
+    (function(){
+      const d = new Date();
+      const opts = { weekday:'long', month:'short', day:'numeric' };
+      $("#dateBadge").textContent = "✨ " + d.toLocaleDateString(undefined, opts);
     })();
 
-    /* ===== Reveal on scroll ===== */
-    const obs=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("show"); });
-    }, {threshold:0.12});
-    document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-
-    /* ===== 3D parallax hero ===== */
-    const hero=document.getElementById("hero");
-    function clamp(n,min,max){ return Math.max(min,Math.min(max,n)); }
-    hero.addEventListener("pointermove",(e)=>{
-      const r=hero.getBoundingClientRect();
-      const cx=r.left+r.width/2, cy=r.top+r.height/2;
-      const dx=(e.clientX-cx)/(r.width/2);
-      const dy=(e.clientY-cy)/(r.height/2);
-      const rotY=clamp(dx*8,-8,8);
-      const rotX=clamp(-dy*8,-8,8);
-      hero.style.transform=`perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-    });
-    hero.addEventListener("pointerleave",()=>hero.style.transform="perspective(900px) rotateX(0deg) rotateY(0deg)");
-
-    /* ===== Particles ===== */
-    function burst(x,y){
-      const n=20;
-      const emojis=["🤍","🩷","💗","✨","✦","✧","💞","🌙"];
-      for(let i=0;i<n;i++){
-        const p=document.createElement("div");
-        p.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-        p.style.position="fixed";
-        p.style.left=x+"px";
-        p.style.top=y+"px";
-        p.style.zIndex=9999;
-        p.style.pointerEvents="none";
-        const size=12+Math.random()*16;
-        p.style.fontSize=size+"px";
-        const angle=Math.random()*Math.PI*2;
-        const dist=40+Math.random()*92;
-        const dx=Math.cos(angle)*dist;
-        const dy=Math.sin(angle)*dist-26;
-        const dur=650+Math.random()*550;
-        p.animate([
-          {transform:`translate(0,0) scale(1)`, opacity:1},
-          {transform:`translate(${dx}px, ${dy}px) scale(.85)`, opacity:0}
-        ], {duration:dur, easing:"cubic-bezier(.2,.8,.2,1)"});
-        document.body.appendChild(p);
-        setTimeout(()=>p.remove(), dur);
+    // Floating glow dots
+    (function(){
+      const g = $("#glow");
+      const dots = 18;
+      for(let i=0;i<dots;i++){
+        const dot = document.createElement("i");
+        const left = Math.random()*100;
+        const top = Math.random()*100;
+        const size = 6 + Math.random()*10;
+        dot.style.left = left + "vw";
+        dot.style.top = top + "vh";
+        dot.style.width = size + "px";
+        dot.style.height = size + "px";
+        dot.style.animationDuration = (7 + Math.random()*9) + "s";
+        dot.style.animationDelay = (-Math.random()*9) + "s";
+        dot.style.opacity = (0.35 + Math.random()*0.35).toFixed(2);
+        g.appendChild(dot);
       }
-    }
+    })();
 
-    /* Hold for magic */
-    const holdBtn=document.getElementById("holdMagicBtn");
-    let sprinkleTimer=null;
-    function startSprinkle(){
-      const r=holdBtn.getBoundingClientRect();
-      const x=r.left+r.width/2;
-      const y=r.top+r.height/2;
-      burst(x,y);
-      sprinkleTimer=setInterval(()=>burst(x,y), 260);
+    // Heart pop on tap
+    function popHeart(x,y){
+      const hearts = ["💜","💗","🤍","🌷","✨","🫶","🥰"];
+      const h = el("div","heartPop");
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left = x + "px";
+      h.style.top = y + "px";
+      h.style.fontSize = (16 + Math.random()*16) + "px";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 950);
     }
-    function stopSprinkle(){ clearInterval(sprinkleTimer); sprinkleTimer=null; }
-    holdBtn.addEventListener("pointerdown", startSprinkle);
-    holdBtn.addEventListener("pointerup", stopSprinkle);
-    holdBtn.addEventListener("pointerleave", stopSprinkle);
-    holdBtn.addEventListener("pointercancel", stopSprinkle);
-
-    /* Tap anywhere (outside controls) for small sparkles */
-    document.addEventListener("pointerdown",(e)=>{
-      const inControl = e.target.closest(".chip,.btn,.pillBtn,.tile,.note,.reason,.modalBox,.letterCard");
-      if(inControl) return;
-      if(e.pointerType==="mouse" && e.button!==0) return;
-      burst(e.clientX, e.clientY);
+    document.addEventListener("pointerdown", (e)=>{
+      // avoid popping when clicking modal close buttons etc
+      if(e.target.closest("button")) return;
+      popHeart(e.clientX, e.clientY);
     });
 
-    /* ===== Heart meter ===== */
-    const meterFill=document.getElementById("meterFill");
-    const meterText=document.getElementById("meterText");
-    const meterWrap=document.getElementById("meterWrap");
-    let meter=Number(localStorage.getItem("iris_meter_v3")||0);
-    updateMeter();
-    meterWrap.addEventListener("click",(e)=>{
-      addMeter(12);
-      burst(e.clientX, e.clientY);
+    // Sprinkle hearts button
+    $("#sprinkleBtn").addEventListener("click", ()=>{
+      const w = window.innerWidth, h = window.innerHeight;
+      for(let i=0;i<18;i++){
+        setTimeout(()=>{
+          popHeart(Math.random()*w, Math.random()*h);
+        }, i*40);
+      }
     });
-    function addMeter(v){
-      meter=Math.min(100, meter+v);
-      localStorage.setItem("iris_meter_v3", meter);
-      updateMeter();
-    }
-    function updateMeter(){
-      meterFill.style.width = meter + "%";
-      if(meter<35) meterText.textContent="tap me 🤍";
-      else if(meter<70) meterText.textContent="it’s getting full 💗";
-      else if(meter<100) meterText.textContent="almost overflowing 💞";
-      else meterText.textContent="all of it is for you ❤️";
-    }
 
-    /* ===== Reasons (tap to reveal) ===== */
-    const reasonsGrid=document.getElementById("reasonsGrid");
-    const reasons=[
-      {a:"tap me", b:"I love the way you carry both softness and strength without trying."},
-      {a:"tap me", b:"I love how you make simple moments feel calm and meaningful."},
-      {a:"tap me", b:"I love you with patience — the kind that doesn’t demand, it understands."},
-      {a:"tap me", b:"I love the way your presence feels like a safe place for my heart."},
-      {a:"tap me", b:"I love how you keep your peace — and I want to protect that, not disturb it."},
-      {a:"tap me", b:"I love you in ways that are steady… not just sweet, but real."}
+    // Reasons (tap to reveal)
+    const reasonsData = [
+      {
+        title:"Your softness is real",
+        sub:"You care even when you’re tired.",
+        reveal:"Even when you act strong, you still show love in the small ways. That’s rare. That’s you."
+      },
+      {
+        title:"You make life feel calmer",
+        sub:"You turn noise into peace for me.",
+        reveal:"Your presence feels like a safe place. Like I can breathe again and everything slows down."
+      },
+      {
+        title:"Your mind is beautiful",
+        sub:"The way you think inspires me.",
+        reveal:"You’re thoughtful, deep, and smart in a quiet way that stays with me long after the moment."
+      },
+      {
+        title:"You’re brave in your own way",
+        sub:"Even on hard days, you still show up.",
+        reveal:"It takes courage to keep going. I notice it. I’m proud of you more than you know."
+      },
+      {
+        title:"You’re my favorite person",
+        sub:"Not for what you do — just for being you.",
+        reveal:"If the world gets heavy, I still choose you. Over and over. Without hesitation."
+      }
     ];
-    reasons.forEach(item=>{
-      const c=document.createElement("div");
-      c.className="reason";
-      c.innerHTML=`
-        <strong>${item.a}</strong>
-        <div class="front">a quiet reason I keep in my heart</div>
-        <div class="back">${item.b}</div>
+
+    const reasons = $("#reasons");
+    reasonsData.forEach((r, idx)=>{
+      const tile = el("div","tile");
+      tile.innerHTML = `
+        <div class="dot"></div>
+        <div>
+          <strong>${r.title}</strong>
+          <span>${r.sub}</span>
+          <div class="reveal"><p>${r.reveal}</p></div>
+        </div>
       `;
-      c.addEventListener("click", ()=>{
-        c.classList.toggle("revealed");
-        addMeter(8);
-        burst(innerWidth/2, 240);
+      tile.addEventListener("click", ()=>{
+        tile.classList.toggle("open");
+        // tiny heart pop
+        const rect = tile.getBoundingClientRect();
+        popHeart(rect.left + rect.width*0.86, rect.top + rect.height*0.25);
       });
-      reasonsGrid.appendChild(c);
+      reasons.appendChild(tile);
     });
 
-    /* ===== Notes wall (tap to reveal) ===== */
-    const notesGrid=document.getElementById("notesGrid");
-    const notes=[
-      {tag:"soft", text:"You don’t have to be perfect for me to choose you. I already do."},
-      {tag:"care", text:"I notice the little things. I keep them. I cherish them."},
-      {tag:"peace", text:"If you need quiet, I’ll be gentle. If you need space, I’ll respect it."},
-      {tag:"steady", text:"I’m not here for a moment. I’m here with intention."},
-      {tag:"admire", text:"I admire you in the kind of way that never tries to change you."},
-      {tag:"home", text:"Somehow, you make my heart feel like it’s finally resting."},
-      {tag:"safe", text:"I want you to feel safe with me — always."},
-      {tag:"grateful", text:"Thank you for existing the way you do. It’s a gift to witness."}
-    ];
-    notes.forEach((n, idx)=>{
-      const d=document.createElement("div");
-      d.className="note locked";
-      d.innerHTML=`
-        <div class="tag"><i></i>${n.tag}</div>
-        <div class="content">${n.text}</div>
-      `;
-      d.addEventListener("click",(e)=>{
-        d.classList.remove("locked");
-        addMeter(6);
-        burst(e.clientX || innerWidth/2, e.clientY || innerHeight/2);
-      }, {once:true});
-      notesGrid.appendChild(d);
-    });
+    // Mood booster
+    let mood = 22;
+    const fill = $("#meterFill");
+    const pct = $("#softPct");
+    const hint = $("#moodHint");
+    const moodMsg = $("#moodMessage");
 
-    /* ===== Favorites ===== */
-    const FAV_KEY="iris_favs_v3";
-    const favs=new Set(JSON.parse(localStorage.getItem(FAV_KEY)||"[]"));
-    const saveFavs=()=>localStorage.setItem(FAV_KEY, JSON.stringify([...favs]));
-
-    /* Filters */
-    const filterAll=document.getElementById("filterAll");
-    const filterFav=document.getElementById("filterFav");
-    let activeFilter="all";
-    filterAll.addEventListener("click", ()=>setFilter("all"));
-    filterFav.addEventListener("click", ()=>setFilter("fav"));
-    function setFilter(f){
-      activeFilter=f;
-      filterAll.classList.toggle("active", f==="all");
-      filterFav.classList.toggle("active", f==="fav");
-      renderGallery();
-    }
-    function visible(i){
-      if(activeFilter==="all") return true;
-      return favs.has(String(i));
-    }
-
-    /* Double tap helper */
-    function attachDoubleTap(el, cb){
-      let last=0;
-      el.addEventListener("click",(e)=>{
-        const now=Date.now();
-        if(now-last<260){ cb(e); last=0; }
-        else last=now;
-      });
-    }
-
-    function toggleFav(i){
-      const k=String(i);
-      if(favs.has(k)) favs.delete(k); else favs.add(k);
-      saveFavs();
-      renderGallery();
-    }
-
-    /* ===== Gallery render ===== */
-    const gallery=document.getElementById("gallery");
-    function renderGallery(){
-      gallery.innerHTML="";
-      photos.forEach((p,i)=>{
-        if(!visible(i)) return;
-
-        const tile=document.createElement("div");
-        tile.className="tile";
-        if(favs.has(String(i))) tile.classList.add("isFav");
-        tile.innerHTML=`
-          <img src="${p.src}" alt="Photo ${i+1}" loading="lazy">
-          <div class="shine"></div>
-          <div class="fav">❤️</div>
-        `;
-
-        tile.addEventListener("click", ()=>openModal(i));
-        attachDoubleTap(tile,(e)=>{
-          e.stopPropagation();
-          toggleFav(i);
-          addMeter(6);
-          burst(e.clientX || innerWidth/2, e.clientY || innerHeight/2);
-        });
-
-        gallery.appendChild(tile);
-      });
-    }
-    renderGallery();
-
-    /* ===== Lightbox + swipe + pinch/zoom ===== */
-    const modal=document.getElementById("modal");
-    const modalImg=document.getElementById("modalImg");
-    const modalBox=document.querySelector(".modalBox");
-    const closeBtn=document.getElementById("closeBtn");
-    const prevBtn=document.getElementById("prevBtn");
-    const nextBtn=document.getElementById("nextBtn");
-    const resetZoomBtn=document.getElementById("resetZoomBtn");
-    const favBtn=document.getElementById("favBtn");
-
-    let currentIndex=0;
-
-    function openModal(i){
-      currentIndex=i;
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden","false");
-      updateModal();
-      document.body.style.overflow="hidden";
-      resetZoom();
-    }
-    function closeModal(){
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden","true");
-      modalImg.src="";
-      document.body.style.overflow="";
-      resetZoom();
-    }
-    function updateModal(){
-      modalImg.src=photos[currentIndex].src;
-      modalImg.alt=`Photo ${currentIndex+1}`;
-      favBtn.textContent = favs.has(String(currentIndex)) ? "💖 Favorited" : "❤️ Favorite";
-    }
-    function prev(){ currentIndex=(currentIndex-1+photos.length)%photos.length; updateModal(); resetZoom(); }
-    function next(){ currentIndex=(currentIndex+1)%photos.length; updateModal(); resetZoom(); }
-
-    closeBtn.addEventListener("click", closeModal);
-    prevBtn.addEventListener("click", prev);
-    nextBtn.addEventListener("click", next);
-
-    favBtn.addEventListener("click", ()=>{
-      toggleFav(currentIndex);
-      updateModal();
-      addMeter(6);
-      burst(innerWidth/2, innerHeight/2);
-    });
-
-    modal.addEventListener("click",(e)=>{ if(e.target===modal) closeModal(); });
-
-    window.addEventListener("keydown",(e)=>{
-      if(!modal.classList.contains("open")) return;
-      if(e.key==="Escape") closeModal();
-      if(e.key==="ArrowLeft") prev();
-      if(e.key==="ArrowRight") next();
-    });
-
-    // swipe
-    let startX=null, startY=null;
-    modalImg.addEventListener("touchstart",(e)=>{
-      const t=e.touches[0]; startX=t.clientX; startY=t.clientY;
-    }, {passive:true});
-    modalImg.addEventListener("touchend",(e)=>{
-      if(startX===null) return;
-      const t=e.changedTouches[0];
-      const dx=t.clientX-startX;
-      const dy=t.clientY-startY;
-      startX=null; startY=null;
-      if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){
-        if(dx<0) next(); else prev();
-      }
-    }, {passive:true});
-
-    // pinch zoom + pan
-    let scale=1, panX=0, panY=0;
-    let panning=false, panStart={x:0,y:0};
-    let pinchStartDist=0, pinchStartScale=1;
-
-    function applyTransform(){
-      modalImg.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
-    }
-    function resetZoom(){
-      scale=1; panX=0; panY=0;
-      applyTransform();
-    }
-    resetZoomBtn.addEventListener("click", resetZoom);
-
-    function dist(a,b){
-      const dx=a.clientX-b.clientX;
-      const dy=a.clientY-b.clientY;
-      return Math.hypot(dx,dy);
-    }
-
-    modalBox.addEventListener("touchstart",(e)=>{
-      if(e.touches.length===2){
-        pinchStartDist = dist(e.touches[0], e.touches[1]);
-        pinchStartScale = scale;
-      }else if(e.touches.length===1 && scale>1){
-        panning=true;
-        panStart.x = e.touches[0].clientX - panX;
-        panStart.y = e.touches[0].clientY - panY;
-      }
-    }, {passive:true});
-
-    modalBox.addEventListener("touchmove",(e)=>{
-      if(e.touches.length===2){
-        const d = dist(e.touches[0], e.touches[1]);
-        const ratio = d / pinchStartDist;
-        scale = Math.max(1, Math.min(3, pinchStartScale * ratio));
-        applyTransform();
-      }else if(e.touches.length===1 && panning){
-        panX = e.touches[0].clientX - panStart.x;
-        panY = e.touches[0].clientY - panStart.y;
-        applyTransform();
-      }
-    }, {passive:true});
-
-    modalBox.addEventListener("touchend",()=>{
-      panning=false;
-      if(scale<=1){ resetZoom(); }
-      else{
-        panX = Math.max(-220, Math.min(220, panX));
-        panY = Math.max(-220, Math.min(220, panY));
-        applyTransform();
-      }
-    }, {passive:true});
-
-    /* ===== Love letter ===== */
-    const letterModal=document.getElementById("letterModal");
-    const letterBtn=document.getElementById("letterBtn");
-    const closeLetter=document.getElementById("closeLetter");
-    const letterText=document.getElementById("letterText");
-
-    const letterLines=[
-      "Iris",
-      "",
-      "I want you to feel this clearly",
-      "I care about you deeply and intentionally",
-      "not the loud kind that pressures you",
-      "but the steady kind that stays respectful and gentle",
-      "",
-      "I appreciate the way you are",
-      "your softness your strength and the quiet parts of you too",
-      "",
-      "If you need time I will respect it",
-      "If you need space I will honor it",
-      "And if you need warmth I will be that",
-      "",
-      "You are cherished",
-      "You are valued",
-      "And you matter to me more than you realize"
+    const moodMessages = [
+      "If you can’t do everything today, it’s okay. Do one small thing. Then rest. I’m proud of you, always.",
+      "Take your time, mahal ko. You’re not behind. You’re human. And you’re loved in every version of you.",
+      "If your thoughts are loud, borrow my calm. I’ll be steady for you until you feel steady again.",
+      "You don’t have to explain your sadness perfectly. Just let me stay near you, okay?",
+      "Even if today is messy, you’re still my favorite. Tomorrow will feel lighter — and we’ll get there."
     ];
 
-    let letterTyped=false;
-    function openLetter(){
-      letterModal.classList.add("open");
-      letterModal.setAttribute("aria-hidden","false");
-      document.body.style.overflow="hidden";
-      if(!letterTyped){
-        letterTyped=true;
-        typeLetter();
+    function setMood(val){
+      mood = Math.max(10, Math.min(100, val));
+      fill.style.width = mood + "%";
+      pct.textContent = mood + "%";
+      if(mood < 35){ hint.textContent = "we’re warming up"; }
+      else if(mood < 60){ hint.textContent = "soft and steady"; }
+      else if(mood < 85){ hint.textContent = "you’re glowing"; }
+      else { hint.textContent = "full heart energy"; }
+    }
+    setMood(mood);
+
+    $("#boostBtn").addEventListener("click", ()=>{
+      const add = 8 + Math.floor(Math.random()*16);
+      setMood(mood + add);
+      moodMsg.textContent = moodMessages[Math.floor(Math.random()*moodMessages.length)];
+      // sprinkle a few hearts
+      const w = window.innerWidth, h = window.innerHeight;
+      for(let i=0;i<8;i++){
+        setTimeout(()=>popHeart(Math.random()*w, Math.random()*h), i*55);
       }
-      burst(innerWidth/2, 160);
-    }
-    function closeLetterFn(){
-      letterModal.classList.remove("open");
-      letterModal.setAttribute("aria-hidden","true");
-      document.body.style.overflow="";
-    }
-    letterBtn.addEventListener("click", openLetter);
-    closeLetter.addEventListener("click", closeLetterFn);
-    letterModal.addEventListener("click",(e)=>{ if(e.target===letterModal) closeLetterFn(); });
+    });
 
-    async function typeLetter(){
-      letterText.textContent="";
-      for(const line of letterLines){
-        await typeLine(line);
-        letterText.appendChild(document.createElement("br"));
-      }
-    }
-    function typeLine(line){
-      return new Promise((resolve)=>{
-        if(line===""){ setTimeout(resolve, 160); return; }
-        let i=0;
-        const it=setInterval(()=>{
-          letterText.textContent += line[i] || "";
-          i++;
-          if(i>line.length){
-            clearInterval(it);
-            setTimeout(resolve, 220);
-          }
-        }, 16);
-      });
-    }
+    // Cheer up button (quick sweet lines)
+    const cheerLines = [
+      "Hey mahal ko breathe muna I’m here with you 🤍",
+      "You’re doing better than your mind is telling you 🫶",
+      "If today is heavy I’ll carry some of it for you 🌙",
+      "You’re loved even when you feel quiet and tired 🥰",
+      "Come here let me love you gently and patiently 🌷"
+    ];
+    $("#cheerBtn").addEventListener("click", ()=>{
+      moodMsg.textContent = cheerLines[Math.floor(Math.random()*cheerLines.length)];
+      setMood(mood + 6);
+      popHeart(window.innerWidth*0.7, 120);
+    });
 
-    /* ===== Navigation buttons ===== */
-    const notesSection=document.getElementById("notesSection");
-    const photosSection=document.getElementById("photosSection");
-
-    document.getElementById("toNotesBtn").addEventListener("click", ()=>notesSection.scrollIntoView({behavior:"smooth", block:"start"}));
-    document.getElementById("toPhotosBtn").addEventListener("click", ()=>photosSection.scrollIntoView({behavior:"smooth", block:"start"}));
-    document.getElementById("softScrollBtn").addEventListener("click", ()=>photosSection.scrollIntoView({behavior:"smooth", block:"start"}));
-
-    document.getElementById("tipsBtn").addEventListener("click", ()=>{
-      alert(
-        "Tips:\n" +
-        "• Tap the heart meter to fill it ❤️\n" +
-        "• Tap the reasons to reveal them\n" +
-        "• Tap notes to reveal hidden messages\n" +
-        "• Double tap a photo to favorite\n" +
-        "• In viewer: swipe, pinch zoom, drag to pan"
+    // Promise button
+    $("#promiseBtn").addEventListener("click", ()=>{
+      openModal(
+        "A promise I mean 🤝",
+        "I won’t rush you. I won’t pressure you. I won’t make you feel like you need to be perfect to be loved. I’ll be patient, gentle, and steady — because you’re worth choosing every day.",
+        "If you feel overwhelmed, just tell me ‘stay’ — and I’ll stay. Quietly, softly, completely."
       );
+      setMood(mood + 10);
     });
 
-    /* ===== Easter egg: triple tap title opens letter ===== */
-    const titleTap=document.getElementById("titleTap");
-    let taps=0, tapTimer=null;
-    titleTap.addEventListener("click", ()=>{
-      taps++;
-      clearTimeout(tapTimer);
-      tapTimer=setTimeout(()=>taps=0, 500);
-      if(taps>=3){
-        taps=0;
-        openLetter();
-      }
-    });
-  </script>
-</body>
-</html>
+    // Hug / Note modal
+    $("#hugBtn").addEventListener("click", ()=>{
+      openModal(
+        "Warm hug 🤍",
+        "Come here, mah
