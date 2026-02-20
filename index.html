@@ -3,646 +3,360 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For My Loving Iris 🌷</title>
+  <title>For My Loving Iris 🤍</title>
   <style>
     :root{
-      --bg1:#0f1020;
+      --bg1:#0e0f1f;
       --bg2:#1b1230;
-      --card: rgba(255,255,255,.08);
-      --card2: rgba(255,255,255,.12);
-      --stroke: rgba(255,255,255,.16);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
+      --card:rgba(255,255,255,.10);
+      --stroke:rgba(255,255,255,.16);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
       --lav:#c6a6ff;
       --pink:#ffb3d9;
       --mint:#a7ffe9;
-      --gold:#ffe7a7;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 22px;
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --r: 24px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 20% 10%, rgba(198,166,255,.25), transparent 60%),
-        radial-gradient(1000px 600px at 80% 20%, rgba(255,179,217,.20), transparent 60%),
-        radial-gradient(1200px 700px at 50% 90%, rgba(167,255,233,.18), transparent 60%),
+        radial-gradient(900px 500px at 20% 15%, rgba(198,166,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 80% 25%, rgba(255,179,217,.22), transparent 60%),
+        radial-gradient(900px 500px at 50% 95%, rgba(167,255,233,.18), transparent 60%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
       overflow-x:hidden;
     }
-
-    /* floating glow dots */
-    .glow{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      opacity:.9;
-      filter: blur(0px);
-    }
-    .glow i{
-      position:absolute;
-      width:10px;height:10px;
-      border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.1));
-      box-shadow: 0 0 30px rgba(198,166,255,.35);
-      animation: drift 10s linear infinite;
-      opacity:.55;
-    }
-    @keyframes drift{
-      0%{transform: translate3d(0,0,0) scale(.9)}
-      50%{transform: translate3d(40px,-60px,0) scale(1.2)}
-      100%{transform: translate3d(0,0,0) scale(.9)}
-    }
-
     .wrap{
-      position:relative;
-      z-index:1;
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 22px 16px 80px;
+      width:min(820px, 100%);
+      display:grid;
+      gap:14px;
     }
-
-    header{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      padding: 26px 18px;
+    .card{
       border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border-radius: var(--r);
       box-shadow: var(--shadow);
-      overflow:hidden;
+      padding: 18px;
       position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
     }
-
-    header:before{
+    .card:before{
       content:"";
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(400px 180px at 20% 10%, rgba(255,179,217,.22), transparent 60%),
-        radial-gradient(420px 200px at 80% 20%, rgba(198,166,255,.25), transparent 60%),
-        radial-gradient(460px 220px at 50% 110%, rgba(167,255,233,.14), transparent 60%);
-      filter: blur(0px);
-      opacity: .9;
+        radial-gradient(420px 160px at 15% 0%, rgba(255,179,217,.22), transparent 60%),
+        radial-gradient(520px 190px at 85% 10%, rgba(198,166,255,.22), transparent 60%),
+        radial-gradient(520px 220px at 50% 120%, rgba(167,255,233,.14), transparent 60%);
+      opacity:.85;
       pointer-events:none;
     }
-
-    .topRow{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:space-between;
+    .top{
       position:relative;
       z-index:1;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      text-align:left;
     }
-
     .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding: 10px 12px;
+      width:fit-content;
+      padding:10px 12px;
+      border-radius:999px;
       border:1px solid var(--stroke);
       background: rgba(0,0,0,.18);
-      border-radius: 999px;
-      font-size: 13px;
-      color: var(--muted);
+      color:var(--muted);
+      font-size:13px;
       user-select:none;
-      backdrop-filter: blur(10px);
     }
-    .badge b{color:var(--text); font-weight:700}
-
     h1{
-      margin: 8px 0 0;
-      font-size: clamp(26px, 4.6vw, 44px);
-      letter-spacing: .2px;
+      margin:0;
+      font-size: clamp(26px, 4.8vw, 44px);
       line-height: 1.08;
-      position:relative;
-      z-index:1;
+      letter-spacing:.2px;
     }
     .sub{
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-      position:relative;
-      z-index:1;
-      max-width: 62ch;
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
+      max-width: 68ch;
     }
 
-    .ctaRow{
+    .btnRow{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top: 10px;
-      position:relative;
-      z-index:1;
+      margin-top: 6px;
     }
-
-    button, .pill{
+    button{
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.08);
-      color: var(--text);
+      color:var(--text);
       padding: 12px 14px;
-      border-radius: 14px;
+      border-radius: 16px;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      font-weight: 650;
+      font-weight: 750;
       letter-spacing:.2px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.25);
-      backdrop-filter: blur(10px);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 14px 32px rgba(0,0,0,.25);
     }
     button:hover{transform: translateY(-1px); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.22)}
     button:active{transform: translateY(1px) scale(.99)}
-
     .primary{
       background: linear-gradient(135deg, rgba(198,166,255,.35), rgba(255,179,217,.28));
-      border-color: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.24);
     }
 
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 14px;
-    }
-    @media (max-width: 860px){
-      .grid{grid-template-columns:1fr}
-    }
-
-    .card{
-      border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px;
-      overflow:hidden;
+    .note{
       position:relative;
-    }
-
-    .cardTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom: 10px;
-    }
-
-    .cardTitle h2{
-      margin:0;
-      font-size: 16px;
-      color: var(--text);
-      letter-spacing:.2px;
-    }
-    .hint{
-      font-size: 12.5px;
-      color: var(--muted);
-    }
-
-    .soft{
-      color: var(--muted);
-      line-height:1.7;
-      font-size: 14px;
-      margin: 0;
-    }
-
-    .list{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-      margin-top: 10px;
-    }
-
-    .tile{
-      border:1px solid rgba(255,255,255,.14);
+      z-index:1;
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
+      border-radius: 20px;
+      padding: 14px;
+      line-height:1.85;
+      font-size:14px;
+      color: rgba(255,255,255,.86);
+    }
+    .note b{color: rgba(255,255,255,.95)}
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.12);
+      margin: 12px 0;
+    }
+
+    .little{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:10px;
+    }
+    .pill{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
       border-radius: 18px;
       padding: 12px 12px;
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      position:relative;
-      overflow:hidden;
       cursor:pointer;
       user-select:none;
       transition: transform .12s ease, background .12s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .tile:hover{transform: translateY(-1px); background: rgba(0,0,0,.22)}
-    .tile:active{transform: translateY(1px)}
-
-    .dot{
-      width: 12px; height: 12px;
-      border-radius:999px;
-      flex: 0 0 auto;
-      margin-top: 4px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.1));
-      box-shadow: 0 0 0 6px rgba(198,166,255,.12);
-    }
-
-    .tile strong{display:block; font-size: 14px; letter-spacing:.15px}
-    .tile span{display:block; color: var(--muted); font-size: 13px; line-height:1.55; margin-top: 2px}
-
-    .reveal{
-      max-height: 0;
-      overflow:hidden;
-      transition: max-height .35s ease;
-      margin-top: 8px;
-    }
-    .tile.open .reveal{max-height: 240px}
-    .reveal p{
-      margin: 0;
-      padding: 10px 10px 8px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.85);
-      font-size: 13px;
-      line-height:1.65;
-    }
-
-    /* mini “hug” overlay */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,.55);
+    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.08)}
+    .pill:active{transform: translateY(1px)}
+    .pill strong{display:block; font-size:14px}
+    .pill span{display:block; margin-top:4px; color: var(--muted); font-size:13px; line-height:1.6}
+    .hidden{
       display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:50;
-      padding: 20px;
-    }
-    .overlay.show{display:flex}
-    .modal{
-      width:min(560px, 92vw);
-      border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
-      border-radius: 26px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.6);
-      padding: 16px;
-      position:relative;
-      overflow:hidden;
-      backdrop-filter: blur(12px);
-    }
-    .modal h3{margin:6px 0 6px; font-size: 18px}
-    .modal p{margin:0; color: var(--muted); line-height:1.7; font-size: 14px}
-    .close{
-      position:absolute;
-      top: 10px; right: 10px;
-      border-radius: 999px;
-      padding: 10px 12px;
-      font-weight: 800;
-      background: rgba(0,0,0,.2);
-    }
-
-    .bigNote{
-      margin-top: 12px;
-      border: 1px dashed rgba(255,255,255,.20);
-      background: rgba(0,0,0,.16);
-      padding: 14px;
-      border-radius: 18px;
-      line-height:1.8;
-      color: rgba(255,255,255,.86);
-      font-size: 14px;
-    }
-
-    .moodBox{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      padding-top: 4px;
-    }
-    .moodLine{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .meter{
-      height: 10px;
-      width:100%;
-      border-radius: 999px;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 16px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      overflow:hidden;
+      background: rgba(0,0,0,.16);
+      color: rgba(255,255,255,.86);
+      line-height:1.75;
+      font-size: 13.5px;
     }
-    .meter > b{
-      display:block;
-      height:100%;
-      width: 22%;
-      border-radius:999px;
-      background: linear-gradient(90deg, rgba(198,166,255,.55), rgba(255,179,217,.45), rgba(167,255,233,.35));
-      transition: width .45s ease;
-    }
+    .pill.open .hidden{display:block}
 
     .footer{
-      margin-top: 14px;
+      position:relative;
+      z-index:1;
       text-align:center;
       color: rgba(255,255,255,.62);
       font-size: 12.5px;
       line-height:1.8;
+      margin-top: 6px;
     }
-    .heartPop{
+
+    /* heart pop */
+    .pop{
       position:fixed;
       left:0; top:0;
       pointer-events:none;
       z-index:99;
-      font-size: 18px;
       opacity:0;
       transform: translate(-50%,-50%);
       animation: pop 900ms ease forwards;
-      text-shadow: 0 12px 30px rgba(0,0,0,.6);
+      text-shadow: 0 14px 40px rgba(0,0,0,.6);
     }
     @keyframes pop{
       0%{opacity:0; transform: translate(-50%,-50%) scale(.6)}
       15%{opacity:1}
-      100%{opacity:0; transform: translate(-50%,-110px) scale(1.2)}
-    }
-
-    .spark{
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(240px 90px at 10% 10%, rgba(255,231,167,.18), transparent 60%),
-        radial-gradient(260px 120px at 90% 20%, rgba(198,166,255,.18), transparent 60%),
-        radial-gradient(240px 110px at 50% 110%, rgba(255,179,217,.14), transparent 60%);
-      opacity:.9;
-      pointer-events:none;
+      100%{opacity:0; transform: translate(-50%,-120px) scale(1.2)}
     }
   </style>
 </head>
 <body>
+  <main class="wrap">
+    <section class="card">
+      <div class="top">
+        <div class="badge">🌷 For <b style="color:rgba(255,255,255,.95)">My Loving Iris</b> — from me, always</div>
 
-  <div class="glow" aria-hidden="true" id="glow"></div>
+        <h1>
+          Hey mahal ko…<br/>
+          come here, let me love you softly 🤍
+        </h1>
 
-  <div class="wrap">
-    <header>
-      <div class="topRow">
-        <div class="badge">🌷 For <b>My Loving Iris</b> — a little safe place</div>
-        <div class="badge" id="dateBadge">✨ today</div>
-      </div>
-
-      <h1>Hey mahal ko…<br/>come here for a second 🫶</h1>
-      <p class="sub">
-        If today feels heavy, this page is just me holding your hand the best way I can.
-        No pressure, no fixing — just love, warmth, and reminders that you’re never alone.
-      </p>
-
-      <div class="ctaRow">
-        <button class="primary" id="cheerBtn">Tap for a tiny cheer up ✨</button>
-        <button id="hugBtn">Open a warm hug 🤍</button>
-        <button id="noteBtn">Read my note for you 💌</button>
-        <button id="sprinkleBtn">Sprinkle hearts 🥰</button>
-      </div>
-    </header>
-
-    <div class="grid">
-      <section class="card">
-        <div class="spark" aria-hidden="true"></div>
-        <div class="cardTitle" style="position:relative; z-index:1;">
-          <h2>Reasons I love you (tap each one)</h2>
-          <div class="hint">little surprises inside</div>
-        </div>
-
-        <p class="soft" style="position:relative; z-index:1;">
-          Some days you forget how loved you are. So I wrote it down — and hid extra sweetness in each one.
+        <p class="sub">
+          I don’t want you to fight your heavy days alone.
+          So I made this tiny place where you can feel my love, my patience, and my “I’m not leaving”—
+          even when you’re tired, quiet, or not okay.
         </p>
 
-        <div class="list" id="reasons" style="position:relative; z-index:1;"></div>
-
-        <div class="bigNote" style="position:relative; z-index:1;">
-          <b>Reminder:</b> you don’t need to be “okay” to be loved. You can be tired, quiet, messy, emotional —
-          and you’ll still be my favorite person to choose.
-        </div>
-      </section>
-
-      <aside class="card">
-        <div class="cardTitle">
-          <h2>Your mood, gently lifted</h2>
-          <div class="hint" id="moodHint">we’re getting there</div>
+        <div class="btnRow">
+          <button class="primary" id="cheer">Tap for a cheer up ✨</button>
+          <button id="hug">Open my hug 🫶</button>
+          <button id="kiss">Steal a soft kiss 😚</button>
         </div>
 
-        <div class="moodBox">
-          <div class="moodLine">
-            <span>Softness level</span>
-            <span id="softPct">22%</span>
-          </div>
-          <div class="meter" aria-label="Softness meter">
-            <b id="meterFill"></b>
-          </div>
-
-          <div class="bigNote" id="moodMessage">
-            If you can’t do everything today, it’s okay. Do one small thing. Then rest. I’m proud of you, always.
-          </div>
-
-          <button class="primary" id="boostBtn">Boost her mood gently 🌙</button>
-          <button id="promiseBtn">A promise I mean 🤝</button>
-
-          <div class="footer">
-            Tip: Tap anywhere on the page for little hearts (because you deserve the cute stuff).
-          </div>
+        <div class="note" id="mainNote">
+          <b>My baby, listen…</b><br/>
+          You don’t need to be okay for me to love you.
+          You don’t need to be strong every day.
+          Even when your heart feels heavy, you’re still my favorite person,
+          and I will choose you gently—again and again—without making you beg for love.
+          <br/><br/>
+          If today is one of those days… let me carry you a little, okay?
         </div>
-      </aside>
-    </div>
-  </div>
-
-  <!-- overlay modal -->
-  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Modal">
-    <div class="modal">
-      <button class="close" id="closeOverlay">✕</button>
-      <h3 id="modalTitle">Warm hug</h3>
-      <p id="modalText">Come here, mahal ko. Breathe. I’m with you. You don’t have to carry it alone.</p>
-
-      <div class="bigNote" id="modalExtra">
-        If your mind is loud right now, borrow my calm. You are safe. You are loved. You are enough — even today.
       </div>
+    </section>
 
-      <div class="ctaRow" style="margin-top:12px;">
-        <button class="primary" id="miniCheer">Another tiny cheer ✨</button>
-        <button id="sendKiss">Send her a soft kiss 😚</button>
+    <section class="card">
+      <div class="little">
+        <div class="pill">
+          <strong>Tap this when you feel tired 🌙</strong>
+          <span>I want you to hear this clearly.</span>
+          <div class="hidden">
+            Mahal ko, rest. The world can wait.
+            I’m proud of you for making it through today.
+            I’m here—quietly, gently—holding your heart like it’s the most precious thing I’ve ever been trusted with.
+          </div>
+        </div>
+
+        <div class="pill">
+          <strong>Tap this when you feel sad 🥺</strong>
+          <span>No fixing. Just love.</span>
+          <div class="hidden">
+            Come here.
+            You don’t have to explain everything.
+            You don’t have to be “strong enough” first.
+            I’ll sit with you in the soft parts and I won’t rush you out of them.
+          </div>
+        </div>
+
+        <div class="pill">
+          <strong>Tap this when you feel unlovable 🤍</strong>
+          <span>This one is important.</span>
+          <div class="hidden">
+            You are not hard to love.
+            You are not too much.
+            You are not a burden.
+            You are my Iris—my peace, my favorite, my home.
+            And I’m not going anywhere.
+          </div>
+        </div>
+
+        <div class="pill">
+          <strong>Tap this when you need reassurance 🌷</strong>
+          <span>I mean every word.</span>
+          <div class="hidden">
+            I love you in your good mood and your quiet mood.
+            I love you when you’re okay and when you’re not.
+            I love you when you can give and when you can only rest.
+            My love doesn’t depend on your energy—it depends on you.
+          </div>
+        </div>
+
+        <div class="footer">
+          Tip: tap anywhere for little hearts 🥰
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
   <script>
-    // ===== Helpers =====
-    const $ = (q) => document.querySelector(q);
-    const el = (tag, cls) => { const x = document.createElement(tag); if(cls) x.className = cls; return x; };
+    const cheerLines = [
+      "Hey mahal ko breathe muna I’m here 🤍",
+      "You’re safe with me always 🫶",
+      "If today is heavy I’ll carry some of it for you 🌙",
+      "You’re loved even when you’re quiet and tired 🥰",
+      "Come here let me love you gently and patiently 🌷",
+      "I’m not leaving I’m choosing you again 🤍",
+      "I’ll stay soft with you no matter what ✨"
+    ];
 
-    // Date badge
-    (function(){
-      const d = new Date();
-      const opts = { weekday:'long', month:'short', day:'numeric' };
-      $("#dateBadge").textContent = "✨ " + d.toLocaleDateString(undefined, opts);
-    })();
+    const mainNote = document.getElementById("mainNote");
+    const cheerBtn = document.getElementById("cheer");
+    const hugBtn = document.getElementById("hug");
+    const kissBtn = document.getElementById("kiss");
 
-    // Floating glow dots
-    (function(){
-      const g = $("#glow");
-      const dots = 18;
-      for(let i=0;i<dots;i++){
-        const dot = document.createElement("i");
-        const left = Math.random()*100;
-        const top = Math.random()*100;
-        const size = 6 + Math.random()*10;
-        dot.style.left = left + "vw";
-        dot.style.top = top + "vh";
-        dot.style.width = size + "px";
-        dot.style.height = size + "px";
-        dot.style.animationDuration = (7 + Math.random()*9) + "s";
-        dot.style.animationDelay = (-Math.random()*9) + "s";
-        dot.style.opacity = (0.35 + Math.random()*0.35).toFixed(2);
-        g.appendChild(dot);
-      }
-    })();
+    // reveal pills
+    document.querySelectorAll(".pill").forEach(p=>{
+      p.addEventListener("click", ()=> p.classList.toggle("open"));
+    });
 
-    // Heart pop on tap
-    function popHeart(x,y){
+    function pop(x,y){
       const hearts = ["💜","💗","🤍","🌷","✨","🫶","🥰"];
-      const h = el("div","heartPop");
+      const h = document.createElement("div");
+      h.className = "pop";
       h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
       h.style.left = x + "px";
       h.style.top = y + "px";
-      h.style.fontSize = (16 + Math.random()*16) + "px";
+      h.style.fontSize = (16 + Math.random()*18) + "px";
       document.body.appendChild(h);
       setTimeout(()=>h.remove(), 950);
     }
+
     document.addEventListener("pointerdown", (e)=>{
-      // avoid popping when clicking modal close buttons etc
       if(e.target.closest("button")) return;
-      popHeart(e.clientX, e.clientY);
+      pop(e.clientX, e.clientY);
     });
 
-    // Sprinkle hearts button
-    $("#sprinkleBtn").addEventListener("click", ()=>{
-      const w = window.innerWidth, h = window.innerHeight;
-      for(let i=0;i<18;i++){
-        setTimeout(()=>{
-          popHeart(Math.random()*w, Math.random()*h);
-        }, i*40);
-      }
+    cheerBtn.addEventListener("click", ()=>{
+      mainNote.innerHTML =
+        "<b>For you, mahal ko…</b><br/>" +
+        cheerLines[Math.floor(Math.random()*cheerLines.length)] +
+        "<br/><br/>If you need me, I’m here. If you need space, I’ll still stay gentle. Either way—I choose you.";
+      pop(window.innerWidth*0.72, 120);
     });
 
-    // Reasons (tap to reveal)
-    const reasonsData = [
-      {
-        title:"Your softness is real",
-        sub:"You care even when you’re tired.",
-        reveal:"Even when you act strong, you still show love in the small ways. That’s rare. That’s you."
-      },
-      {
-        title:"You make life feel calmer",
-        sub:"You turn noise into peace for me.",
-        reveal:"Your presence feels like a safe place. Like I can breathe again and everything slows down."
-      },
-      {
-        title:"Your mind is beautiful",
-        sub:"The way you think inspires me.",
-        reveal:"You’re thoughtful, deep, and smart in a quiet way that stays with me long after the moment."
-      },
-      {
-        title:"You’re brave in your own way",
-        sub:"Even on hard days, you still show up.",
-        reveal:"It takes courage to keep going. I notice it. I’m proud of you more than you know."
-      },
-      {
-        title:"You’re my favorite person",
-        sub:"Not for what you do — just for being you.",
-        reveal:"If the world gets heavy, I still choose you. Over and over. Without hesitation."
-      }
-    ];
-
-    const reasons = $("#reasons");
-    reasonsData.forEach((r, idx)=>{
-      const tile = el("div","tile");
-      tile.innerHTML = `
-        <div class="dot"></div>
-        <div>
-          <strong>${r.title}</strong>
-          <span>${r.sub}</span>
-          <div class="reveal"><p>${r.reveal}</p></div>
-        </div>
-      `;
-      tile.addEventListener("click", ()=>{
-        tile.classList.toggle("open");
-        // tiny heart pop
-        const rect = tile.getBoundingClientRect();
-        popHeart(rect.left + rect.width*0.86, rect.top + rect.height*0.25);
-      });
-      reasons.appendChild(tile);
-    });
-
-    // Mood booster
-    let mood = 22;
-    const fill = $("#meterFill");
-    const pct = $("#softPct");
-    const hint = $("#moodHint");
-    const moodMsg = $("#moodMessage");
-
-    const moodMessages = [
-      "If you can’t do everything today, it’s okay. Do one small thing. Then rest. I’m proud of you, always.",
-      "Take your time, mahal ko. You’re not behind. You’re human. And you’re loved in every version of you.",
-      "If your thoughts are loud, borrow my calm. I’ll be steady for you until you feel steady again.",
-      "You don’t have to explain your sadness perfectly. Just let me stay near you, okay?",
-      "Even if today is messy, you’re still my favorite. Tomorrow will feel lighter — and we’ll get there."
-    ];
-
-    function setMood(val){
-      mood = Math.max(10, Math.min(100, val));
-      fill.style.width = mood + "%";
-      pct.textContent = mood + "%";
-      if(mood < 35){ hint.textContent = "we’re warming up"; }
-      else if(mood < 60){ hint.textContent = "soft and steady"; }
-      else if(mood < 85){ hint.textContent = "you’re glowing"; }
-      else { hint.textContent = "full heart energy"; }
-    }
-    setMood(mood);
-
-    $("#boostBtn").addEventListener("click", ()=>{
-      const add = 8 + Math.floor(Math.random()*16);
-      setMood(mood + add);
-      moodMsg.textContent = moodMessages[Math.floor(Math.random()*moodMessages.length)];
-      // sprinkle a few hearts
-      const w = window.innerWidth, h = window.innerHeight;
+    hugBtn.addEventListener("click", ()=>{
+      mainNote.innerHTML =
+        "<b>Come here 🤍</b><br/>" +
+        "Imagine my arms around you—slow, warm, safe.<br/>" +
+        "No questions, no pressure.<br/>" +
+        "Just me reminding you that you are loved… right now, exactly as you are.";
       for(let i=0;i<8;i++){
-        setTimeout(()=>popHeart(Math.random()*w, Math.random()*h), i*55);
+        setTimeout(()=>pop(Math.random()*innerWidth, Math.random()*innerHeight), i*60);
       }
     });
 
-    // Cheer up button (quick sweet lines)
-    const cheerLines = [
-      "Hey mahal ko breathe muna I’m here with you 🤍",
-      "You’re doing better than your mind is telling you 🫶",
-      "If today is heavy I’ll carry some of it for you 🌙",
-      "You’re loved even when you feel quiet and tired 🥰",
-      "Come here let me love you gently and patiently 🌷"
-    ];
-    $("#cheerBtn").addEventListener("click", ()=>{
-      moodMsg.textContent = cheerLines[Math.floor(Math.random()*cheerLines.length)];
-      setMood(mood + 6);
-      popHeart(window.innerWidth*0.7, 120);
+    kissBtn.addEventListener("click", ()=>{
+      mainNote.innerHTML =
+        "<b>mwah 😚</b><br/>" +
+        "A soft kiss for my Iris.<br/>" +
+        "For your forehead, for your cheeks, for your heart—because I love you that much.<br/><br/>" +
+        "Now breathe… and let me love you back to calm.";
+      for(let i=0;i<12;i++){
+        setTimeout(()=>pop(Math.random()*innerWidth, Math.random()*innerHeight), i*45);
+      }
     });
-
-    // Promise button
-    $("#promiseBtn").addEventListener("click", ()=>{
-      openModal(
-        "A promise I mean 🤝",
-        "I won’t rush you. I won’t pressure you. I won’t make you feel like you need to be perfect to be loved. I’ll be patient, gentle, and steady — because you’re worth choosing every day.",
-        "If you feel overwhelmed, just tell me ‘stay’ — and I’ll stay. Quietly, softly, completely."
-      );
-      setMood(mood + 10);
-    });
-
-    // Hug / Note modal
-    $("#hugBtn").addEventListener("click", ()=>{
-      openModal(
-        "Warm hug 🤍",
-        "Come here, mah
+  </script>
+</body>
+</html>
