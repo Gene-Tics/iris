@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For My Iris 🤍</title>
+  <title>For You, My Iris 🤍</title>
   <style>
     :root{
-      --bg1:#0b0b14;
-      --bg2:#121228;
+      --bg1:#070712;
+      --bg2:#12122a;
       --card:#ffffff10;
       --card2:#ffffff14;
+      --ring:#ffffff24;
       --text:#f7f7ff;
-      --muted:#cfd0ffcc;
+      --muted:#d6d7ffcc;
       --accent:#ff7ac8;
       --accent2:#7afcff;
-      --ring:#ffffff2a;
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --shadow: 0 18px 55px rgba(0,0,0,.48);
       --radius: 22px;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -26,53 +25,65 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 10% 10%, #ff7ac826, transparent 55%),
-        radial-gradient(900px 500px at 90% 20%, #7afcff1f, transparent 60%),
-        radial-gradient(900px 700px at 50% 90%, #b57aff1a, transparent 65%),
+        radial-gradient(1100px 700px at 12% 8%, #ff7ac826, transparent 58%),
+        radial-gradient(900px 650px at 92% 18%, #7afcff1d, transparent 60%),
+        radial-gradient(900px 800px at 50% 92%, #b57aff16, transparent 65%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
-
-    /* soft grain */
     body::before{
       content:"";
       position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
       mix-blend-mode:overlay;
       pointer-events:none;
-      opacity:.20;
+      opacity:.18;
     }
 
-    header{
+    /* Floating gentle hearts */
+    .floatLayer{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
+    .heart{
+      position:absolute;
+      opacity:0;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      will-change: transform, opacity;
+    }
+    @keyframes floatUp{
+      0%{opacity:0; transform: translateY(20px) scale(.9)}
+      10%{opacity:.9}
+      100%{opacity:0; transform: translateY(-120vh) scale(1.25)}
+    }
+
+    .wrap{
       position:relative;
-      padding: 62px 18px 18px;
-      max-width: 1100px;
+      z-index:1;
+      max-width: 980px;
       margin: 0 auto;
+      padding: 28px 18px 70px;
     }
 
-    .topbar{
+    .top{
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding: 10px 12px;
-      border: 1px solid var(--ring);
-      border-radius: 999px;
-      background: linear-gradient(180deg, #ffffff10, #ffffff07);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 35px rgba(0,0,0,.25);
-    }
-
-    .badge{
-      display:flex;
       align-items:center;
       gap:10px;
+      flex-wrap:wrap;
+      padding: 10px 12px;
+      border:1px solid var(--ring);
+      background: linear-gradient(180deg, #ffffff12, #ffffff07);
+      border-radius:999px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 35px rgba(0,0,0,.25);
+    }
+    .badge{
+      display:flex; align-items:center; gap:10px;
       padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid #ffffff1f;
-      background: #ffffff10;
+      border-radius:999px;
+      border:1px solid #ffffff1f;
+      background:#ffffff10;
+      color:var(--muted);
       font-size: 13px;
-      color: var(--muted);
       user-select:none;
       white-space:nowrap;
     }
@@ -81,39 +92,27 @@
       background: radial-gradient(circle at 30% 30%, #fff, var(--accent));
       box-shadow: 0 0 14px #ff7ac8aa;
     }
-
     .pillbtn{
       appearance:none;
-      border:1px solid #ffffff24;
+      border:1px solid #ffffff26;
       background: linear-gradient(180deg,#ffffff12,#ffffff08);
-      color: var(--text);
+      color:var(--text);
       padding: 10px 14px;
       border-radius: 999px;
       cursor:pointer;
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
-      font-weight:600;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      font-weight:700;
     }
-    .pillbtn:hover{transform: translateY(-1px); border-color:#ffffff35}
+    .pillbtn:hover{transform: translateY(-1px); border-color:#ffffff3a}
     .pillbtn:active{transform: translateY(0px) scale(.98)}
     .pillbtn.primary{
       border-color: transparent;
       background:
-        radial-gradient(140px 80px at 20% 20%, #ffffff55, transparent 60%),
+        radial-gradient(160px 90px at 20% 20%, #ffffff55, transparent 60%),
         linear-gradient(135deg, #ff7ac8, #7afcff);
       color:#0b0b14;
-      box-shadow: 0 18px 40px rgba(255,122,200,.22), 0 18px 40px rgba(122,252,255,.12);
-    }
-
-    .hero{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .hero{grid-template-columns:1fr}
+      box-shadow: 0 18px 40px rgba(255,122,200,.20), 0 18px 40px rgba(122,252,255,.12);
     }
 
     .card{
@@ -128,450 +127,223 @@
     .card::after{
       content:"";
       position:absolute;
-      inset:-120px -120px auto auto;
-      width:280px;height:280px;
-      background: radial-gradient(circle at 30% 30%, #ff7ac833, transparent 60%);
+      inset:-130px -130px auto auto;
+      width:290px;height:290px;
+      background: radial-gradient(circle at 30% 30%, #ff7ac82a, transparent 60%);
       transform: rotate(18deg);
       pointer-events:none;
-      filter: blur(1px);
     }
 
-    .heroMain{
-      padding: 22px;
+    .hero{
+      margin-top: 16px;
+      padding: 20px;
     }
-    .hTitle{
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1.05;
+    .title{
       margin: 8px 0 10px;
-      letter-spacing: -0.02em;
+      font-size: clamp(30px, 4.3vw, 52px);
+      line-height:1.05;
+      letter-spacing:-0.02em;
     }
-    .hTitle .shine{
+    .shine{
       background: linear-gradient(90deg, #fff, #ffe8f7, #d7feff, #fff);
       -webkit-background-clip:text;
       background-clip:text;
       color: transparent;
-      animation: shimmer 3.8s linear infinite;
       background-size: 200% 100%;
+      animation: shimmer 3.8s linear infinite;
     }
     @keyframes shimmer{
       0%{background-position:0% 50%}
       100%{background-position:200% 50%}
     }
-
-    .subtitle{
-      color: var(--muted);
-      font-size: 15.5px;
-      line-height: 1.65;
+    .sub{
       margin: 0 0 16px;
-      max-width: 62ch;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 15.5px;
+      max-width: 68ch;
     }
 
-    .ctaRow{
+    .softRow{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top: 14px;
-    }
-
-    .mini{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
       margin-top: 14px;
     }
     .chip{
+      display:flex; align-items:center; gap:8px;
       border:1px solid #ffffff1f;
-      background:#ffffff10;
-      color: var(--muted);
-      border-radius: 999px;
+      background:#ffffff0e;
+      border-radius:999px;
       padding: 8px 10px;
+      color: var(--muted);
       font-size: 13px;
-      display:flex;
-      align-items:center;
-      gap:8px;
       user-select:none;
     }
-    .chip strong{color:#fff; font-weight:700}
     .spark{
-      width:12px;height:12px;border-radius:3px;
+      width:12px;height:12px;border-radius:4px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 14px #ffffff33;
       transform: rotate(18deg);
+      box-shadow: 0 0 14px #ffffff33;
     }
-
-    /* right panel: envelope */
-    .heroSide{
-      padding: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-    }
-
-    .envelopeWrap{
-      padding: 16px;
-      border-radius: 18px;
-      border:1px solid #ffffff20;
-      background: linear-gradient(180deg, #ffffff10, #ffffff07);
-      position:relative;
-      overflow:hidden;
-    }
-    .envelopeTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 10px;
-    }
-    .envelopeTitle h3{
-      margin:0;
-      font-size: 16px;
-      letter-spacing: .01em;
-    }
-    .envelopeTitle span{
-      font-size: 12.5px;
-      color: var(--muted);
-    }
-
-    .envelope{
-      width:100%;
-      aspect-ratio: 16/11;
-      border-radius: 18px;
-      border:1px solid #ffffff1f;
-      background:
-        radial-gradient(240px 140px at 20% 20%, #ffffff24, transparent 60%),
-        linear-gradient(135deg, #1a1a33, #12122a);
-      position:relative;
-      overflow:hidden;
-      box-shadow: 0 18px 45px rgba(0,0,0,.35);
-      cursor:pointer;
-      user-select:none;
-      transition: transform .2s ease;
-    }
-    .envelope:hover{ transform: translateY(-2px); }
-
-    .envGlow{
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 40% 35%, #ff7ac827, transparent 60%),
-                  radial-gradient(circle at 60% 65%, #7afcff22, transparent 55%);
-      filter: blur(2px);
-      pointer-events:none;
-    }
-
-    .envBack{
-      position:absolute; inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#ffffffc9;
-      font-weight:700;
-      letter-spacing:.03em;
-      text-transform:uppercase;
-      font-size: 12px;
-      opacity:.85;
-    }
-
-    .flap{
-      position:absolute; left:0; right:0; top:0;
-      height:55%;
-      background: linear-gradient(180deg, #ffffff10, #ffffff06);
-      border-bottom:1px solid #ffffff1a;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top;
-      transform: rotateX(0deg);
-      transition: transform .6s cubic-bezier(.2,.9,.2,1);
-      backdrop-filter: blur(6px);
-    }
-    .letter{
-      position:absolute;
-      left:8%;
-      width:84%;
-      bottom: 8%;
-      height: 72%;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #ffffff14, #ffffff08);
-      border:1px solid #ffffff22;
-      box-shadow: 0 18px 40px rgba(0,0,0,.28);
-      transform: translateY(35%);
-      transition: transform .6s cubic-bezier(.2,.9,.2,1);
-      padding: 14px 14px 12px;
-      overflow:hidden;
-    }
-    .letter h4{
-      margin:0 0 8px;
-      font-size: 14px;
-      letter-spacing:.01em;
-    }
-    .letter p{
-      margin:0;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height:1.55;
-    }
-    .signature{
-      margin-top: 10px;
-      font-weight: 800;
-      color:#fff;
-      letter-spacing:.02em;
-    }
-
-    .open .flap{ transform: rotateX(180deg); }
-    .open .letter{ transform: translateY(0%); }
-
-    .hint{
-      font-size: 12.5px;
-      color: var(--muted);
-      margin-top: 8px;
-      display:flex;
-      gap:8px;
-      align-items:center;
-    }
-    .hint i{
-      width:8px;height:8px;border-radius:50%;
-      background: var(--accent);
-      box-shadow: 0 0 12px #ff7ac8aa;
-      display:inline-block;
-    }
-
-    main{
-      max-width:1100px;
-      margin: 0 auto;
-      padding: 16px 18px 90px;
-      display:grid;
-      gap: 18px;
+    .ctaRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 14px;
     }
 
     .grid{
+      margin-top: 16px;
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
     }
     @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
     }
 
-    .section{
-      padding: 18px;
-    }
+    .section{padding: 18px}
     .section h2{
       margin: 0 0 8px;
-      font-size: 18px;
-      letter-spacing: .01em;
+      font-size: 17px;
+      letter-spacing:.01em;
     }
     .section p{
-      margin: 0 0 14px;
+      margin:0 0 14px;
       color: var(--muted);
-      line-height: 1.65;
+      line-height:1.7;
       font-size: 14.5px;
     }
 
-    /* Reasons generator */
-    .reasonBox{
+    /* Letter */
+    .letter{
       border:1px solid #ffffff1f;
       background:#ffffff0c;
       border-radius: 18px;
-      padding: 14px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      overflow:hidden;
+      padding: 16px;
       position:relative;
+      overflow:hidden;
     }
-    .reasonText{
-      font-size: 15px;
-      line-height: 1.6;
-      color:#fff;
-      min-height: 64px;
+    .letter::before{
+      content:"";
+      position:absolute;
+      inset:auto -60px -60px auto;
+      width:200px;height:200px;
+      background: radial-gradient(circle at 30% 30%, #7afcff18, transparent 60%);
+      transform: rotate(10deg);
+      pointer-events:none;
     }
-    .reasonMeta{
+    .dear{
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       gap:10px;
       flex-wrap:wrap;
-      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .dear b{font-size: 14px}
+    .tiny{
       font-size: 12.5px;
+      color: var(--muted);
+    }
+    .letterText{
+      font-size: 15px;
+      line-height:1.85;
+      color:#fff;
+      margin: 0;
+      white-space: pre-line;
+    }
+    .sign{
+      margin-top: 14px;
+      font-weight: 900;
+      letter-spacing:.02em;
     }
 
-    .btnRow{
-      display:flex;
-      flex-wrap:wrap;
+    /* Comfort buttons */
+    .comfortRow{
+      display:grid;
       gap:10px;
-      margin-top: 6px;
+      margin-top: 12px;
+    }
+    .comfortBtn{
+      width:100%;
+      text-align:left;
+      border:1px solid #ffffff1f;
+      background: linear-gradient(180deg, #ffffff12, #ffffff08);
+      color:#fff;
+      padding: 12px 14px;
+      border-radius: 16px;
+      cursor:pointer;
+      transition: transform .15s ease, border-color .15s ease;
+      font-weight:800;
+    }
+    .comfortBtn:hover{transform: translateY(-1px); border-color:#ffffff35}
+    .comfortBtn span{
+      display:block;
+      margin-top: 4px;
+      font-weight:500;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height:1.55;
     }
 
-    /* Promise card with checkbox effects */
-    .promise{
+    /* Promise tiles */
+    .promises{
       display:grid;
       gap:10px;
     }
-    .promiseItem{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
+    .promise{
       border:1px solid #ffffff1f;
       background:#ffffff0c;
       border-radius: 16px;
       padding: 12px;
       transition: transform .15s ease, border-color .15s ease;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
     }
-    .promiseItem:hover{
-      transform: translateY(-1px);
-      border-color:#ffffff34;
-    }
-    .check{
-      width:22px;height:22px;
-      border-radius:8px;
+    .promise:hover{transform: translateY(-1px); border-color:#ffffff35}
+    .tick{
+      width:22px;height:22px;border-radius:8px;
       border:1px solid #ffffff2b;
       background:#ffffff0a;
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       flex:0 0 auto;
-      margin-top: 2px;
-      cursor:pointer;
-      user-select:none;
+      margin-top:2px;
     }
-    .check svg{opacity:.0; transform: scale(.7); transition: .18s ease;}
-    .promiseItem.done{
+    .tick svg{opacity:0; transform: scale(.7); transition:.18s ease;}
+    .promise.done{
       border-color:#7afcff55;
       background: linear-gradient(180deg, #7afcff12, #ffffff08);
     }
-    .promiseItem.done .check{
-      border-color:#7afcff88;
-      background:#7afcff18;
-    }
-    .promiseItem.done .check svg{opacity:1; transform: scale(1);}
-    .promiseItem b{display:block; margin-bottom: 3px;}
-    .promiseItem span{color:var(--muted); font-size: 13.5px; line-height:1.55;}
+    .promise.done .tick{border-color:#7afcff88; background:#7afcff18}
+    .promise.done .tick svg{opacity:1; transform: scale(1)}
+    .promise b{display:block; margin-bottom: 3px;}
+    .promise em{display:block; color:var(--muted); font-style:normal; font-size: 13.5px; line-height:1.55;}
 
-    /* Timeline */
-    .timeline{
-      display:grid;
-      gap:10px;
-    }
-    .step{
-      display:grid;
-      grid-template-columns: 34px 1fr;
-      gap:10px;
-      align-items:start;
-      padding: 12px;
-      border-radius: 16px;
-      border:1px solid #ffffff1f;
-      background:#ffffff0c;
-      position:relative;
-      overflow:hidden;
-    }
-    .step::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -40px auto;
-      width:160px;height:160px;
-      background: radial-gradient(circle at 30% 30%, #ff7ac82a, transparent 60%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    .num{
-      width:34px;height:34px;border-radius:12px;
-      display:grid;place-items:center;
-      background: linear-gradient(135deg, #ff7ac820, #7afcff18);
-      border:1px solid #ffffff24;
-      font-weight:800;
-      color:#fff;
-    }
-    .step h4{margin:0 0 4px; font-size: 14.5px;}
-    .step p{margin:0; color:var(--muted); font-size: 13.5px; line-height:1.55;}
-
-    /* Secret reveal */
-    .secretWrap{
-      display:grid;
-      gap: 12px;
-    }
+    /* Secret */
     .secret{
       border:1px dashed #ffffff30;
       border-radius: 18px;
       padding: 14px;
       background:#ffffff08;
-      position:relative;
-      overflow:hidden;
     }
-    .secret .blur{
-      filter: blur(7px);
-      opacity:.65;
-      transition: filter .25s ease, opacity .25s ease;
-    }
-    .secret.revealed .blur{
-      filter: blur(0px);
-      opacity:1;
-    }
-    .secretTag{
+    .secretTop{
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:10px;
+      color: var(--muted);
+      font-size: 12.5px;
       margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 12.5px;
     }
+    .blur{
+      filter: blur(7px);
+      opacity:.62;
+      transition: filter .25s ease, opacity .25s ease;
+    }
+    .secret.revealed .blur{filter: blur(0); opacity:1}
 
-    /* Footer note */
-    footer{
-      max-width:1100px;
-      margin: 0 auto;
-      padding: 0 18px 40px;
-      color: var(--muted);
-      text-align:center;
-      font-size: 12.5px;
-      line-height:1.6;
-    }
-    footer strong{color:#fff}
-
-    /* Floating hearts layer */
-    .floatLayer{
-      position:fixed; inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index: 0;
-    }
-    .heart{
-      position:absolute;
-      font-size: 18px;
-      opacity: 0;
-      transform: translateY(0) scale(1);
-      animation: floatUp linear forwards;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
-    }
-    @keyframes floatUp{
-      0%{opacity:0; transform: translateY(20px) scale(.85)}
-      10%{opacity:.95}
-      100%{opacity:0; transform: translateY(-120vh) scale(1.25)}
-    }
-
-    /* Confetti hearts burst */
-    .burst{
-      position:fixed;
-      left:var(--x);
-      top:var(--y);
-      width:1px;height:1px;
-      pointer-events:none;
-      z-index: 99;
-    }
-    .bit{
-      position:absolute;
-      left:0; top:0;
-      font-size: 16px;
-      transform: translate(0,0) rotate(0deg) scale(1);
-      opacity:1;
-      animation: pop .9s ease forwards;
-      will-change: transform, opacity;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.28));
-    }
-    @keyframes pop{
-      to{
-        transform: translate(var(--dx), var(--dy)) rotate(var(--dr)) scale(.9);
-        opacity:0;
-      }
-    }
-
-    /* Small toast */
+    /* Toast */
     .toast{
       position:fixed;
       left:50%;
@@ -588,20 +360,33 @@
       display:flex;
       align-items:center;
       gap:10px;
-      z-index: 100;
+      z-index: 50;
       transition: opacity .2s ease, transform .2s ease;
-      max-width: min(92vw, 520px);
+      max-width: min(92vw, 560px);
       text-align:center;
       justify-content:center;
     }
-    .toast.show{
-      opacity:1;
-      transform: translateX(-50%) translateY(0);
-    }
-    .toast .tDot{
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(0);}
+    .tDot{
       width:10px;height:10px;border-radius:50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 0 14px #ffffff33;
+    }
+
+    footer{
+      text-align:center;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height:1.6;
+      padding: 0 8px;
+    }
+    footer strong{color:#fff}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important;}
+      .blur{filter:none !important; opacity:1 !important;}
     }
   </style>
 </head>
@@ -609,570 +394,531 @@
   <div class="floatLayer" id="floatLayer"></div>
   <div class="toast" id="toast"><span class="tDot"></span><span id="toastText">🤍</span></div>
 
-  <header>
-    <div class="topbar">
-      <div class="badge"><span class="dot"></span> A little page made with love</div>
+  <div class="wrap">
+    <div class="top">
+      <div class="badge"><span class="dot"></span> a dedicated page — just for you</div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <button class="pillbtn" id="btnBurst">Send Hearts</button>
-        <button class="pillbtn primary" id="btnConfess">Open My Heart</button>
+        <button class="pillbtn" id="btnHold">Hold You</button>
+        <button class="pillbtn primary" id="btnHearts">Send Love</button>
       </div>
     </div>
 
-    <div class="hero">
-      <div class="card heroMain">
-        <div style="position:relative; z-index:1;">
-          <div class="badge" style="display:inline-flex;">
-            <span class="spark"></span>
-            <span>For <strong id="herName">Iris</strong> — from <strong id="yourName">Ali</strong></span>
+    <div class="card hero">
+      <div class="badge" style="display:inline-flex;">
+        <span class="spark"></span>
+        <span>For <strong id="herName">Iris</strong> — from <strong id="yourName">Ali</strong></span>
+      </div>
+
+      <h1 class="title">
+        If my love could be a place, <br/>
+        it would be <span class="shine">safe</span>.
+      </h1>
+
+      <p class="sub" id="subText">
+        This page isn’t here to impress you. It’s here to remind you—on the soft days and the heavy days—that you are cared for, protected, and chosen.
+        No pressure. No rushing. Just love that stays.
+      </p>
+
+      <div class="chip" style="width:fit-content;">
+        <span class="spark"></span>
+        <span id="dateLine">Today I’m choosing you again.</span>
+      </div>
+
+      <div class="ctaRow">
+        <button class="pillbtn primary" id="btnRead">Read my letter</button>
+        <button class="pillbtn" id="btnAssure">Give me reassurance</button>
+        <button class="pillbtn" id="btnReveal">Reveal the secret</button>
+      </div>
+
+      <div class="softRow">
+        <div class="chip"><span class="spark"></span> gentle love</div>
+        <div class="chip"><span class="spark"></span> steady love</div>
+        <div class="chip"><span class="spark"></span> love that listens</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card section" id="letterCard">
+        <h2>My letter to you</h2>
+        <p>
+          I wrote this the way I would say it—soft, honest, and sure.
+        </p>
+
+        <div class="letter">
+          <div class="dear">
+            <b>My love, <span id="dearName">Iris</span> 🤍</b>
+            <span class="tiny">tap “Copy” if you want to save this</span>
           </div>
 
-          <h1 class="hTitle">
-            I didn’t make this to be fancy. <br/>
-            I made this to be <span class="shine">honest</span>.
-          </h1>
+          <p class="letterText" id="letterText">
+I want you to feel safe with me.
 
-          <p class="subtitle">
-            If you ever forget how loved you are, I want you to open this and feel it.
-            Not loud love. Not rushed love. Just the kind that stays.
+Not the kind of safe that’s loud and dramatic—
+the kind of safe that’s quiet and consistent.
+The kind of safe that listens to you,
+understands you,
+and never makes you feel like you have to fight for love.
+
+If I’ve ever been too much…
+if I’ve ever pushed when I should’ve been patient…
+I’m sorry.
+I’m learning you the right way—
+with gentleness, with respect, and with time.
+
+I’m not here to rush your heart.
+I’m here to protect it.
+
+So on the days you feel heavy,
+I won’t add pressure.
+On the days you feel distant,
+I won’t punish you.
+On the days you feel unsure,
+I will stay steady and reassure you.
+
+You don’t have to be perfect for me to choose you.
+You don’t have to prove anything to be loved.
+You just have to be you.
+
+And I’m here—
+not to take from your peace,
+but to add to it.
+
+Always.
           </p>
 
-          <div class="ctaRow">
-            <button class="pillbtn primary" id="btnScrollLetter">Read the Love Letter</button>
-            <button class="pillbtn" id="btnReason">Give Me One Reason</button>
-            <button class="pillbtn" id="btnSecret">Reveal the Secret</button>
-          </div>
+          <div class="sign">— <span id="sigName">Ali</span></div>
 
-          <div class="mini">
-            <div class="chip"><span class="spark"></span> <strong>Soft</strong> love</div>
-            <div class="chip"><span class="spark"></span> <strong>Patient</strong> love</div>
-            <div class="chip"><span class="spark"></span> <strong>Intentional</strong> love</div>
+          <div class="ctaRow" style="margin-top:12px;">
+            <button class="pillbtn primary" id="btnCopyLetter">Copy</button>
+            <button class="pillbtn" id="btnSoftHug">Soft hug</button>
           </div>
         </div>
       </div>
 
-      <div class="card heroSide">
-        <div class="envelopeWrap" id="letterSection">
-          <div class="envelopeTitle">
-            <h3>Tap the envelope</h3>
-            <span>(it opens)</span>
-          </div>
+      <div class="card section">
+        <h2>Comfort & security</h2>
+        <p>
+          If you ever feel overwhelmed, tap any of these. I made them like little “I’m here” buttons.
+        </p>
 
-          <div class="envelope" id="envelope">
-            <div class="envGlow"></div>
-            <div class="envBack">A letter meant for you</div>
-            <div class="flap"></div>
-            <div class="letter" aria-label="Love letter">
-              <h4>My love,</h4>
-              <p id="letterText">
-                I don’t want to love you only when it’s easy. I want to love you in a way that feels safe—
-                the kind that listens, the kind that learns, the kind that stays gentle even when life isn’t.
-                If I’ve ever been too much, I’m not proud of that… but I am proud that I’m choosing you with intention.
-                You don’t have to be perfect for me to be certain.
-              </p>
-              <div class="signature">— always, <span id="sigName">Ali</span> 🤍</div>
-            </div>
-          </div>
+        <div class="comfortRow">
+          <button class="comfortBtn" data-msg="Breathe, my love. You’re safe with me. I’m not leaving.">
+            You’re safe
+            <span>“I’m here. I’m steady. I’m not leaving.”</span>
+          </button>
 
-          <div class="hint"><i></i> Tip: click “Send Hearts” anytime.</div>
+          <button class="comfortBtn" data-msg="You don’t have to explain everything perfectly. I’ll listen gently.">
+            You can be honest
+            <span>“No judgment. Just understanding.”</span>
+          </button>
+
+          <button class="comfortBtn" data-msg="I won’t rush you. I won’t pressure you. I’ll love you at your pace.">
+            No pressure
+            <span>“I’ll love you slowly and properly.”</span>
+          </button>
+
+          <button class="comfortBtn" data-msg="If your heart needs space, I’ll respect it—and I’ll still be here.">
+            I’ll respect you
+            <span>“Space isn’t distance to me. It’s care.”</span>
+          </button>
         </div>
 
-        <div class="envelopeWrap">
-          <div class="envelopeTitle">
-            <h3>Quick personalize</h3>
-            <span>(optional)</span>
+        <div style="margin-top:14px;">
+          <div class="badge" style="justify-content:space-between;">
+            Personalize (optional)
+            <span style="display:flex; gap:10px; align-items:center;">
+              <input id="inputHer" placeholder="Iris" style="background:transparent;border:none;color:#fff;outline:none;text-align:right;max-width:120px;">
+              <input id="inputYou" placeholder="Ali" style="background:transparent;border:none;color:#fff;outline:none;text-align:right;max-width:120px;">
+            </span>
           </div>
-          <div style="display:grid; gap:10px;">
-            <label class="chip" style="justify-content:space-between;">
-              Her name
-              <input id="inputHer" placeholder="Iris" style="background:transparent;border:none;color:#fff;outline:none;text-align:right;max-width:140px;">
-            </label>
-            <label class="chip" style="justify-content:space-between;">
-              Your name
-              <input id="inputYou" placeholder="Ali" style="background:transparent;border:none;color:#fff;outline:none;text-align:right;max-width:140px;">
-            </label>
-            <button class="pillbtn" id="btnApply">Apply</button>
+          <div class="ctaRow" style="margin-top:10px;">
+            <button class="pillbtn" id="btnApply">Apply names</button>
+            <button class="pillbtn" id="btnReset">Reset</button>
           </div>
         </div>
       </div>
     </div>
-  </header>
-
-  <main>
-    <div class="grid">
-      <section class="card section">
-        <h2>One reason at a time</h2>
-        <p>
-          Because love isn’t only one big speech. Sometimes it’s a small sentence at the perfect time.
-        </p>
-
-        <div class="reasonBox">
-          <div class="reasonText" id="reasonText">
-            Click “Give me one reason” — I’ll say it softly, the way I mean it.
-          </div>
-
-          <div class="reasonMeta">
-            <span>Saved: <strong id="savedCount">0</strong></span>
-            <span id="reasonHint">You can “Save” the ones she’ll reread.</span>
-          </div>
-
-          <div class="btnRow">
-            <button class="pillbtn primary" id="btnReason2">Give me one reason</button>
-            <button class="pillbtn" id="btnSaveReason">Save this</button>
-            <button class="pillbtn" id="btnCopyReason">Copy</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="card section">
-        <h2>Promises I want to keep</h2>
-        <p>
-          Not dramatic promises. Real ones. The kind that shows up in the little moments.
-        </p>
-
-        <div class="promise" id="promiseList">
-          <div class="promiseItem">
-            <div class="check" role="button" aria-label="toggle promise">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>To listen before I explain.</b>
-              <span>Because your feelings deserve a calm place to land.</span>
-            </div>
-          </div>
-
-          <div class="promiseItem">
-            <div class="check" role="button" aria-label="toggle promise">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>To choose gentleness, even when I’m stressed.</b>
-              <span>I want you to feel safe around me, always.</span>
-            </div>
-          </div>
-
-          <div class="promiseItem">
-            <div class="check" role="button" aria-label="toggle promise">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>To love you with patience, not pressure.</b>
-              <span>I don’t want to rush your heart. I want to earn it.</span>
-            </div>
-          </div>
-
-          <div class="promiseItem">
-            <div class="check" role="button" aria-label="toggle promise">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>To stay consistent.</b>
-              <span>Not only in words. In effort. In reassurance. In showing up.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
 
     <div class="grid">
-      <section class="card section">
-        <h2>Our little timeline</h2>
+      <div class="card section">
+        <h2>Promises I want you to feel</h2>
         <p>
-          You can edit these lines to match your story. Keep it simple. Keep it true.
+          Not big talk. Just the kind of love you can trust.
         </p>
 
-        <div class="timeline" id="timeline">
-          <div class="step">
-            <div class="num">1</div>
+        <div class="promises" id="promiseList">
+          <div class="promise">
+            <div class="tick" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div>
-              <h4>The day I realized you’re different.</h4>
-              <p>Not perfect — real. The kind of person I want to protect, not impress.</p>
+              <b>I’ll choose gentleness.</b>
+              <em>Even when I’m stressed, I won’t take it out on you.</em>
             </div>
           </div>
-          <div class="step">
-            <div class="num">2</div>
+
+          <div class="promise">
+            <div class="tick" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div>
-              <h4>The moments you stayed patient with me.</h4>
-              <p>You didn’t have to. But you did. And I never forget that.</p>
+              <b>I won’t punish your feelings.</b>
+              <em>Your emotions are not “too much” for me.</em>
             </div>
           </div>
-          <div class="step">
-            <div class="num">3</div>
+
+          <div class="promise">
+            <div class="tick" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div>
-              <h4>The promise I keep choosing.</h4>
-              <p>To love you softly. To love you steadily. To love you in a way that feels safe.</p>
+              <b>I’ll be consistent.</b>
+              <em>Not only in words—also in effort, time, and reassurance.</em>
+            </div>
+          </div>
+
+          <div class="promise">
+            <div class="tick" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <b>I’ll love you at your pace.</b>
+              <em>No rushing. No pressure. Just steady love.</em>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="btnRow" style="margin-top:12px;">
-          <button class="pillbtn" id="btnEditTimeline">Edit timeline text</button>
-          <button class="pillbtn primary" id="btnLockTimeline">Lock it</button>
-        </div>
-      </section>
-
-      <section class="card section">
-        <h2>A secret message</h2>
+      <div class="card section">
+        <h2>A secret (for the quiet moments)</h2>
         <p>
-          This part is for the moment she’s quiet, rereading, and you want her to feel held.
+          This is for the days you need extra security—when you want to feel held.
         </p>
 
-        <div class="secretWrap">
-          <div class="secret" id="secretBox">
-            <div class="secretTag">
-              <span>Protected message</span>
-              <span id="secretState">Hidden</span>
-            </div>
-            <div class="blur" id="secretText">
-              If you’re reading this on a day you feel heavy… I just want you to know I’m not here to add weight.
-              I’m here to carry love into your life the way you carried patience into mine.
-              I’m proud of you. I’m gentle with you. And I’m still choosing you — quietly, faithfully, every day.
-            </div>
+        <div class="secret" id="secretBox">
+          <div class="secretTop">
+            <span>Protected message</span>
+            <span id="secretState">Hidden</span>
           </div>
 
-          <div class="btnRow">
-            <button class="pillbtn primary" id="btnReveal">Reveal</button>
-            <button class="pillbtn" id="btnCopySecret">Copy</button>
+          <div class="blur" id="secretText">
+            If you ever feel like you’re hard to love… you’re not.
+            You’re worth understanding.
+            You’re worth patience.
+            And you’re worth a love that doesn’t disappear when things get quiet.
+
+            I’m not here to chase feelings.
+            I’m here to build something safe with you.
+
+            When you’re tired, I’ll be gentle.
+            When you’re unsure, I’ll be steady.
+            When your heart needs space, I’ll respect it and still choose you.
+
+            You’re safe with me, my love.
           </div>
         </div>
-      </section>
+
+        <div class="ctaRow" style="margin-top:12px;">
+          <button class="pillbtn primary" id="btnRevealSecret">Reveal</button>
+          <button class="pillbtn" id="btnCopySecret">Copy</button>
+        </div>
+      </div>
     </div>
-  </main>
 
-  <footer>
-    Made by <strong id="footName">Ali</strong> for <strong id="footHer">Iris</strong>. <br/>
-    Tip: You can host this for free on GitHub Pages or Netlify by uploading this single file.
-  </footer>
+    <footer>
+      Made with real intention by <strong id="footYou">Ali</strong> for <strong id="footHer">Iris</strong> 🤍<br/>
+      Tip: open this anytime you miss each other.
+    </footer>
+  </div>
 
   <script>
-    // ====== Personalization ======
+    // ===== Names (saved locally) =====
+    const $ = (id) => document.getElementById(id);
+
     const els = {
-      herName: document.getElementById("herName"),
-      yourName: document.getElementById("yourName"),
-      sigName: document.getElementById("sigName"),
-      footName: document.getElementById("footName"),
-      footHer: document.getElementById("footHer"),
-      inputHer: document.getElementById("inputHer"),
-      inputYou: document.getElementById("inputYou"),
-      btnApply: document.getElementById("btnApply"),
-      envelope: document.getElementById("envelope"),
-      letterSection: document.getElementById("letterSection"),
-      btnScrollLetter: document.getElementById("btnScrollLetter"),
-      btnBurst: document.getElementById("btnBurst"),
-      btnConfess: document.getElementById("btnConfess"),
-      floatLayer: document.getElementById("floatLayer"),
-      toast: document.getElementById("toast"),
-      toastText: document.getElementById("toastText"),
-      btnReason: document.getElementById("btnReason"),
-      btnReason2: document.getElementById("btnReason2"),
-      btnSaveReason: document.getElementById("btnSaveReason"),
-      btnCopyReason: document.getElementById("btnCopyReason"),
-      reasonText: document.getElementById("reasonText"),
-      savedCount: document.getElementById("savedCount"),
-      btnSecret: document.getElementById("btnSecret"),
-      secretBox: document.getElementById("secretBox"),
-      secretText: document.getElementById("secretText"),
-      secretState: document.getElementById("secretState"),
-      btnReveal: document.getElementById("btnReveal"),
-      btnCopySecret: document.getElementById("btnCopySecret"),
-      promiseList: document.getElementById("promiseList"),
-      btnEditTimeline: document.getElementById("btnEditTimeline"),
-      btnLockTimeline: document.getElementById("btnLockTimeline"),
-      timeline: document.getElementById("timeline"),
+      floatLayer: $("floatLayer"),
+      toast: $("toast"),
+      toastText: $("toastText"),
+      herName: $("herName"),
+      yourName: $("yourName"),
+      dearName: $("dearName"),
+      sigName: $("sigName"),
+      footYou: $("footYou"),
+      footHer: $("footHer"),
+      inputHer: $("inputHer"),
+      inputYou: $("inputYou"),
+      btnApply: $("btnApply"),
+      btnReset: $("btnReset"),
+      btnRead: $("btnRead"),
+      letterCard: $("letterCard"),
+      btnCopyLetter: $("btnCopyLetter"),
+      btnSoftHug: $("btnSoftHug"),
+      btnReveal: $("btnReveal"),
+      btnRevealSecret: $("btnRevealSecret"),
+      secretBox: $("secretBox"),
+      secretText: $("secretText"),
+      secretState: $("secretState"),
+      btnCopySecret: $("btnCopySecret"),
+      btnHearts: $("btnHearts"),
+      btnHold: $("btnHold"),
+      btnAssure: $("btnAssure"),
+      dateLine: $("dateLine"),
     };
 
     const state = {
       her: "Iris",
       you: "Ali",
-      envelopeOpen: false,
-      lastReason: "",
-      savedReasons: JSON.parse(localStorage.getItem("savedReasons") || "[]"),
-      timelineLocked: JSON.parse(localStorage.getItem("timelineLocked") || "false"),
-      timelineData: JSON.parse(localStorage.getItem("timelineData") || "null"),
-      secretRevealed: false,
+      secret: false,
+      saved: JSON.parse(localStorage.getItem("love_names") || "null"),
     };
 
-    function applyNames() {
-      els.herName.textContent = state.her;
-      els.footHer.textContent = state.her;
-      els.yourName.textContent = state.you;
-      els.sigName.textContent = state.you;
-      els.footName.textContent = state.you;
+    if (state.saved?.her) state.her = state.saved.her;
+    if (state.saved?.you) state.you = state.saved.you;
 
-      document.title = `For ${state.her} 🤍`;
-    }
-
-    // load saved names
-    const savedNames = JSON.parse(localStorage.getItem("names") || "null");
-    if (savedNames?.her) state.her = savedNames.her;
-    if (savedNames?.you) state.you = savedNames.you;
     els.inputHer.value = state.her;
     els.inputYou.value = state.you;
-    applyNames();
 
-    els.btnApply.addEventListener("click", () => {
-      const her = (els.inputHer.value || "").trim() || "Iris";
-      const you = (els.inputYou.value || "").trim() || "Ali";
-      state.her = her;
-      state.you = you;
-      localStorage.setItem("names", JSON.stringify({her, you}));
-      applyNames();
-      toast(`Updated: ${you} → ${her} 🤍`);
-      burstHearts(window.innerWidth * 0.52, 120);
-    });
+    function apply(){
+      els.herName.textContent = state.her;
+      els.dearName.textContent = state.her;
+      els.footHer.textContent = state.her;
 
-    // ====== Envelope interaction ======
-    els.envelope.addEventListener("click", () => {
-      state.envelopeOpen = !state.envelopeOpen;
-      els.envelope.classList.toggle("open", state.envelopeOpen);
-      toast(state.envelopeOpen ? "Letter opened 🤍" : "Letter closed");
-      burstHearts(window.innerWidth * 0.78, 230);
-    });
+      els.yourName.textContent = state.you;
+      els.sigName.textContent = state.you;
+      els.footYou.textContent = state.you;
 
-    els.btnScrollLetter.addEventListener("click", () => {
-      els.letterSection.scrollIntoView({behavior:"smooth", block:"start"});
-      if (!state.envelopeOpen) {
-        state.envelopeOpen = true;
-        els.envelope.classList.add("open");
-      }
-      toast("Read it slowly. It’s real.");
-      setTimeout(() => burstHearts(window.innerWidth * 0.75, 260), 250);
-    });
-
-    els.btnConfess.addEventListener("click", () => {
-      if (!state.envelopeOpen) {
-        state.envelopeOpen = true;
-        els.envelope.classList.add("open");
-      }
-      toast(`I choose you, ${state.her}.`);
-      burstHearts(window.innerWidth * 0.52, window.innerHeight * 0.35);
-    });
-
-    // ====== Floating hearts ambience ======
-    const heartChars = ["❤","💗","💖","💘","💝","🤍"];
-    function spawnFloatingHeart() {
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
-      const left = Math.random() * 100;
-      const size = 14 + Math.random() * 18;
-      const duration = 6 + Math.random() * 7;
-      h.style.left = left + "vw";
-      h.style.bottom = (-10 - Math.random()*20) + "px";
-      h.style.fontSize = size + "px";
-      h.style.animationDuration = duration + "s";
-      h.style.animationDelay = (Math.random() * 1.2) + "s";
-      els.floatLayer.appendChild(h);
-      setTimeout(()=> h.remove(), (duration + 1.5) * 1000);
+      document.title = `For You, My ${state.her} 🤍`;
     }
-    setInterval(spawnFloatingHeart, 900);
+    apply();
 
-    // ====== Burst hearts on demand ======
-    function burstHearts(x, y){
-      const burst = document.createElement("div");
-      burst.className = "burst";
-      burst.style.setProperty("--x", x + "px");
-      burst.style.setProperty("--y", y + "px");
+    // ===== Date line =====
+    const now = new Date();
+    const options = { year:"numeric", month:"long", day:"numeric" };
+    els.dateLine.textContent = `Today (${now.toLocaleDateString(undefined, options)}) I’m choosing you again.`;
 
-      const n = 16;
-      for(let i=0;i<n;i++){
-        const b = document.createElement("div");
-        b.className = "bit";
-        b.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
-        const angle = (Math.PI * 2) * (i / n) + (Math.random()*0.35);
-        const dist = 30 + Math.random()*80;
-        const dx = Math.cos(angle) * dist;
-        const dy = Math.sin(angle) * dist;
-        const dr = (Math.random()*220 - 110) + "deg";
-        b.style.setProperty("--dx", dx + "px");
-        b.style.setProperty("--dy", dy + "px");
-        b.style.setProperty("--dr", dr);
-        b.style.fontSize = (14 + Math.random()*10) + "px";
-        burst.appendChild(b);
-      }
-      document.body.appendChild(burst);
-      setTimeout(()=> burst.remove(), 1000);
-    }
-
-    els.btnBurst.addEventListener("click", (e) => {
-      const rect = e.target.getBoundingClientRect();
-      burstHearts(rect.left + rect.width/2, rect.top + rect.height/2);
-      toast("Hearts delivered.");
-    });
-
-    // click anywhere for subtle heart burst (nice touch)
-    document.addEventListener("click", (e) => {
-      const tag = (e.target.tagName || "").toLowerCase();
-      if (tag === "button" || tag === "input") return;
-      if (Math.random() < 0.18) burstHearts(e.clientX, e.clientY);
-    });
-
-    // ====== Toast helper ======
+    // ===== Toast =====
     let toastTimer = null;
     function toast(msg){
       els.toastText.textContent = msg;
       els.toast.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> els.toast.classList.remove("show"), 2200);
+      toastTimer = setTimeout(()=> els.toast.classList.remove("show"), 2400);
     }
 
-    // ====== Reasons generator ======
-    const reasons = [
-      "Because you make calm feel real — like I can breathe properly when you’re around.",
-      "Because your heart is soft, but your strength is loud in the quiet ways.",
-      "Because when you smile, the whole day changes its mind and becomes kinder.",
-      "Because you deserve a love that doesn’t confuse you — a love that’s clear and gentle.",
-      "Because I don’t want to impress you. I want to protect your peace and add to it.",
-      "Because you make me want to be better — not for clout, but for you.",
-      "Because you’re not just beautiful… you’re comforting. And that’s rare.",
-      "Because I love the way you feel like home without ever trying to.",
-      "Because your patience is a gift, and I don’t take gifts like that for granted.",
-      "Because loving you isn’t a performance — it’s a decision I enjoy making every day.",
-      "Because I’m proud of who you are, even on the days you don’t feel proud of yourself.",
-      "Because your presence is a prayer answered in human form.",
-      `Because if I get to choose a person to grow with… I keep choosing you, ${state.her}.`
-    ];
+    // ===== Floating hearts ambience =====
+    const heartChars = ["🤍","💗","💖","💘","💝","❤"];
+    function spawnFloatingHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
+      const left = Math.random() * 100;
+      const size = 14 + Math.random()*16;
+      const duration = 6 + Math.random()*7;
+      h.style.left = left + "vw";
+      h.style.bottom = (-10 - Math.random()*30) + "px";
+      h.style.fontSize = size + "px";
+      h.style.animationDuration = duration + "s";
+      h.style.animationDelay = (Math.random()*1.2) + "s";
+      els.floatLayer.appendChild(h);
+      setTimeout(()=> h.remove(), (duration+1.5)*1000);
+    }
+    setInterval(spawnFloatingHeart, 950);
 
-    function nextReason(){
-      // ensure variety: pick one not same as last
-      let r = reasons[Math.floor(Math.random()*reasons.length)];
-      if (r === state.lastReason) {
-        r = reasons[(reasons.indexOf(r) + 1) % reasons.length];
+    // ===== Tiny heart burst (subtle) =====
+    function burst(x,y){
+      const n = 14;
+      const wrap = document.createElement("div");
+      wrap.style.position = "fixed";
+      wrap.style.left = x + "px";
+      wrap.style.top = y + "px";
+      wrap.style.width = "1px";
+      wrap.style.height = "1px";
+      wrap.style.pointerEvents = "none";
+      wrap.style.zIndex = "60";
+      document.body.appendChild(wrap);
+
+      for(let i=0;i<n;i++){
+        const b = document.createElement("div");
+        b.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
+        b.style.position = "absolute";
+        b.style.left = "0";
+        b.style.top = "0";
+        b.style.fontSize = (14 + Math.random()*10) + "px";
+        b.style.opacity = "1";
+        b.style.filter = "drop-shadow(0 10px 18px rgba(0,0,0,.28))";
+
+        const angle = (Math.PI*2) * (i/n) + (Math.random()*0.35);
+        const dist = 28 + Math.random()*78;
+        const dx = Math.cos(angle)*dist;
+        const dy = Math.sin(angle)*dist;
+        const rot = (Math.random()*220 - 110);
+
+        b.animate([
+          { transform:`translate(0px,0px) rotate(0deg) scale(1)`, opacity: 1 },
+          { transform:`translate(${dx}px,${dy}px) rotate(${rot}deg) scale(.9)`, opacity: 0 }
+        ], { duration: 900, easing: "cubic-bezier(.2,.9,.2,1)" });
+
+        wrap.appendChild(b);
       }
-      state.lastReason = r.replaceAll("${state.her}", state.her);
-      els.reasonText.textContent = state.lastReason;
-      burstHearts(window.innerWidth * 0.28, window.innerHeight * 0.62);
-      toast("Say it to her. Softly.");
+      setTimeout(()=> wrap.remove(), 980);
     }
 
-    els.btnReason.addEventListener("click", nextReason);
-    els.btnReason2.addEventListener("click", nextReason);
-
-    function updateSavedCount(){
-      els.savedCount.textContent = state.savedReasons.length;
-    }
-    updateSavedCount();
-
-    els.btnSaveReason.addEventListener("click", () => {
-      if (!state.lastReason) return toast("Generate a reason first.");
-      if (!state.savedReasons.includes(state.lastReason)){
-        state.savedReasons.push(state.lastReason);
-        localStorage.setItem("savedReasons", JSON.stringify(state.savedReasons));
-        updateSavedCount();
-        toast("Saved 🤍");
-      } else {
-        toast("Already saved.");
-      }
+    // ===== Apply names =====
+    els.btnApply.addEventListener("click", () => {
+      const her = (els.inputHer.value || "").trim() || "Iris";
+      const you = (els.inputYou.value || "").trim() || "Ali";
+      state.her = her;
+      state.you = you;
+      localStorage.setItem("love_names", JSON.stringify({her, you}));
+      apply();
+      toast(`Okay, ${you} → ${her} 🤍`);
+      burst(window.innerWidth*0.55, 120);
     });
 
+    els.btnReset.addEventListener("click", () => {
+      localStorage.removeItem("love_names");
+      state.her = "Iris";
+      state.you = "Ali";
+      els.inputHer.value = state.her;
+      els.inputYou.value = state.you;
+      apply();
+      toast("Reset done.");
+    });
+
+    // ===== Scroll to letter =====
+    els.btnRead.addEventListener("click", () => {
+      els.letterCard.scrollIntoView({behavior:"smooth", block:"start"});
+      toast("Read it slowly, my love.");
+      burst(window.innerWidth*0.35, window.innerHeight*0.25);
+    });
+
+    // ===== Copy helpers =====
     async function copyToClipboard(text){
       try{
         await navigator.clipboard.writeText(text);
-        toast("Copied.");
+        toast("Copied 🤍");
       }catch{
-        // fallback
         const ta = document.createElement("textarea");
         ta.value = text;
         document.body.appendChild(ta);
         ta.select();
         document.execCommand("copy");
         ta.remove();
-        toast("Copied.");
+        toast("Copied 🤍");
       }
     }
 
-    els.btnCopyReason.addEventListener("click", () => {
-      if (!state.lastReason) return toast("Generate a reason first.");
-      copyToClipboard(state.lastReason);
+    els.btnCopyLetter.addEventListener("click", () => {
+      const text = $("letterText").textContent.trim();
+      copyToClipboard(text);
+      burst(window.innerWidth*0.35, window.innerHeight*0.65);
     });
 
-    // ====== Promises toggle ======
-    els.promiseList.addEventListener("click", (e) => {
-      const item = e.target.closest(".promiseItem");
-      if (!item) return;
-      item.classList.toggle("done");
-      toast(item.classList.contains("done") ? "Promise chosen." : "Promise still chosen (just quiet).");
-      burstHearts(window.innerWidth * 0.5, window.innerHeight * 0.7);
+    els.btnCopySecret.addEventListener("click", () => {
+      copyToClipboard(els.secretText.textContent.trim());
+      burst(window.innerWidth*0.78, window.innerHeight*0.68);
     });
 
-    // ====== Secret reveal ======
+    // ===== Soft hug + hold you =====
+    function holdMessage(){
+      const lines = [
+        `Come here, my love.`,
+        `No explaining. No fixing. Just breathe.`,
+        `I’m here. I’m steady. I’m not leaving.`,
+        `You are safe with me, ${state.her}.`
+      ];
+      toast(lines[Math.floor(Math.random()*lines.length)]);
+    }
+
+    els.btnSoftHug.addEventListener("click", (e) => {
+      holdMessage();
+      const r = e.target.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+    });
+
+    els.btnHold.addEventListener("click", (e) => {
+      toast(`I’ll hold you gently. You don’t have to carry everything alone.`);
+      const r = e.target.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+    });
+
+    // ===== Assure button =====
+    const assurances = [
+      "I’m not here to pressure you. I’m here to understand you.",
+      "You don’t have to earn my kindness. You already deserve it.",
+      "If you need space, I’ll respect it—and I’ll still be here.",
+      "I won’t make you chase reassurance. I’ll give it freely.",
+      "I’m choosing you gently, not loudly. But I’m choosing you for real.",
+      "You are safe with me. I’ll protect your peace, not disturb it."
+    ];
+
+    els.btnAssure.addEventListener("click", (e) => {
+      const msg = assurances[Math.floor(Math.random()*assurances.length)];
+      toast(msg);
+      const r = e.target.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+    });
+
+    // ===== Comfort buttons =====
+    document.querySelectorAll(".comfortBtn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const msg = btn.getAttribute("data-msg");
+        toast(msg);
+        const r = e.currentTarget.getBoundingClientRect();
+        burst(r.left + r.width/2, r.top + r.height/2);
+      });
+    });
+
+    // ===== Promises toggle =====
+    document.getElementById("promiseList").addEventListener("click", (e) => {
+      const p = e.target.closest(".promise");
+      if(!p) return;
+      p.classList.toggle("done");
+      toast(p.classList.contains("done") ? "Promise chosen." : "Still chosen (quietly).");
+      burst(window.innerWidth*0.5, window.innerHeight*0.78);
+    });
+
+    // ===== Secret reveal =====
     function revealSecret(){
-      state.secretRevealed = true;
+      if(state.secret) return;
+      state.secret = true;
       els.secretBox.classList.add("revealed");
       els.secretState.textContent = "Revealed";
-      toast(`Held, okay? Always.`);
-      burstHearts(window.innerWidth * 0.73, window.innerHeight * 0.72);
+      toast(`You’re safe with me, ${state.her}.`);
+      burst(window.innerWidth*0.78, window.innerHeight*0.62);
     }
-    els.btnReveal.addEventListener("click", revealSecret);
-    els.btnSecret.addEventListener("click", () => {
-      els.secretBox.scrollIntoView({behavior:"smooth", block:"center"});
+    els.btnReveal.addEventListener("click", () => {
+      document.getElementById("secretBox").scrollIntoView({behavior:"smooth", block:"center"});
       setTimeout(revealSecret, 250);
     });
-    els.btnCopySecret.addEventListener("click", () => copyToClipboard(els.secretText.textContent.trim()));
+    els.btnRevealSecret.addEventListener("click", revealSecret);
 
-    // ====== Timeline editable ======
-    function loadTimeline(){
-      if (state.timelineData) {
-        // replace contents of steps
-        const steps = els.timeline.querySelectorAll(".step");
-        state.timelineData.forEach((s, i) => {
-          if (!steps[i]) return;
-          steps[i].querySelector("h4").textContent = s.title;
-          steps[i].querySelector("p").textContent = s.body;
-        });
-      }
-      setTimelineLocked(state.timelineLocked);
-    }
-
-    function setTimelineLocked(locked){
-      state.timelineLocked = locked;
-      localStorage.setItem("timelineLocked", JSON.stringify(locked));
-      // Make content editable if not locked
-      els.timeline.querySelectorAll(".step h4, .step p").forEach(el => {
-        el.contentEditable = locked ? "false" : "true";
-        el.style.outline = locked ? "none" : "1px dashed #ffffff2b";
-        el.style.borderRadius = "10px";
-        el.style.padding = locked ? "0" : "6px 8px";
-      });
-      toast(locked ? "Timeline locked." : "Edit mode on.");
-    }
-
-    function saveTimeline(){
-      const steps = [...els.timeline.querySelectorAll(".step")];
-      const data = steps.map(st => ({
-        title: st.querySelector("h4").textContent.trim(),
-        body: st.querySelector("p").textContent.trim()
-      }));
-      state.timelineData = data;
-      localStorage.setItem("timelineData", JSON.stringify(data));
-      toast("Timeline saved.");
-    }
-
-    els.btnEditTimeline.addEventListener("click", () => {
-      setTimelineLocked(false);
-      els.timeline.scrollIntoView({behavior:"smooth", block:"center"});
-      burstHearts(window.innerWidth * 0.33, window.innerHeight * 0.78);
+    // ===== Hearts button =====
+    els.btnHearts.addEventListener("click", (e) => {
+      toast(`I love you in a way that feels safe, ${state.her}.`);
+      const r = e.target.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
     });
 
-    els.btnLockTimeline.addEventListener("click", () => {
-      saveTimeline();
-      setTimelineLocked(true);
-      burstHearts(window.innerWidth * 0.33, window.innerHeight * 0.78);
+    // Small surprise: occasional tiny burst on background tap
+    document.addEventListener("click", (e) => {
+      const tag = (e.target.tagName || "").toLowerCase();
+      if(tag === "button" || tag === "input") return;
+      if(Math.random() < 0.14) burst(e.clientX, e.clientY);
     });
 
-    loadTimeline();
-
-    // ====== Sweet intro moment ======
+    // Intro
     window.addEventListener("load", () => {
-      toast(`Hi ${state.her} 🤍`);
-      setTimeout(() => burstHearts(window.innerWidth*0.5, 120), 250);
+      toast(`Hi ${state.her} 🤍 I made this for you.`);
+      setTimeout(()=> burst(window.innerWidth*0.5, 120), 260);
     });
   </script>
 </body>
