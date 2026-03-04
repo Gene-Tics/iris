@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0b18" />
-  <meta name="description" content="A private, dedicated page — made only for Iris." />
+  <meta name="theme-color" content="#0b0a18" />
+  <meta name="description" content="A private, dark lavender reassurance page — made only for Iris." />
   <title>For Iris 🤍</title>
 
   <!-- JSON-LD (structured data) -->
@@ -21,18 +21,33 @@
 
   <style>
     :root{
-      --bg1:#070712;
-      --bg2:#12122a;
-      --card:#ffffff10;
-      --ring:#ffffff24;
-      --text:#f7f7ff;
-      --muted:#d6d7ffcc;
-      --accent:#ff7ac8;
-      --accent2:#7afcff;
-      --violet:#b57aff;
-      --shadow: 0 18px 55px rgba(0,0,0,.52);
+      /* Deep dark lavender night */
+      --bg1:#05040b;
+      --bg2:#0b0a18;
+      --bg3:#141135;
+
+      /* Text */
+      --text:#f4f2ff;
+      --muted:#cfc9ffb8;
+
+      /* Surfaces */
+      --card: rgba(255,255,255,.06);
+      --ring: rgba(255,255,255,.14);
+
+      /* Lavender accents (soft) */
+      --accent:#cbb7ff;
+      --accent2:#a78bfa;
+      --violet:#8b5cf6;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.62);
       --radius: 22px;
+
+      /* Eye comfort */
+      --sat: .78;
+      --glowOpacity: .20;
+      --starsOpacity: .42;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -40,19 +55,21 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       background:
-        radial-gradient(1100px 700px at 12% 8%, #ff7ac826, transparent 58%),
-        radial-gradient(900px 650px at 92% 18%, #7afcff1d, transparent 60%),
-        radial-gradient(900px 800px at 50% 92%, #b57aff16, transparent 65%),
+        radial-gradient(900px 650px at 14% 10%, rgba(203,183,255,.12), transparent 62%),
+        radial-gradient(850px 650px at 86% 18%, rgba(167,139,250,.10), transparent 66%),
+        radial-gradient(900px 800px at 50% 92%, rgba(139,92,246,.09), transparent 70%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
+
+    /* subtle grain */
     body::before{
       content:"";
       position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
       mix-blend-mode:overlay;
       pointer-events:none;
-      opacity:.16;
+      opacity:.12;
       z-index:1;
     }
 
@@ -62,14 +79,16 @@
       width:100%; height:100%;
       z-index:0;
       pointer-events:none;
-      opacity:.92;
+      opacity: var(--glowOpacity);
+      filter: saturate(.70) blur(.2px);
     }
     #stars2d{
       position:fixed; inset:0;
       width:100%; height:100%;
       z-index:0;
       pointer-events:none;
-      opacity:.86;
+      opacity: var(--starsOpacity);
+      filter: saturate(.70);
     }
     #floatLayer{
       position:fixed; inset:0;
@@ -78,16 +97,23 @@
       overflow:hidden;
     }
 
-    /* Goodnight mode overlay */
+    /* Goodnight (even darker) */
     body.goodnight::after{
       content:"";
       position:fixed; inset:0;
       background:
-        radial-gradient(700px 500px at 50% 18%, rgba(255,255,255,.07), transparent 62%),
-        radial-gradient(900px 700px at 50% 92%, rgba(122,252,255,.09), transparent 66%),
-        linear-gradient(180deg, rgba(7,7,18,.28), rgba(7,7,18,.82));
+        radial-gradient(700px 500px at 50% 18%, rgba(255,255,255,.05), transparent 62%),
+        radial-gradient(900px 700px at 50% 92%, rgba(167,139,250,.06), transparent 68%),
+        linear-gradient(180deg, rgba(5,4,11,.30), rgba(5,4,11,.85));
       pointer-events:none;
       z-index:2;
+    }
+
+    /* Soft Eyes (extra comfort) */
+    body.softEyes{
+      --sat: .66;
+      --glowOpacity: .14;
+      --starsOpacity: .34;
     }
 
     .wrap{
@@ -96,6 +122,7 @@
       max-width: 1060px;
       margin: 0 auto;
       padding: 22px 18px 70px;
+      filter: saturate(var(--sat));
     }
 
     .topbar{
@@ -106,17 +133,18 @@
       flex-wrap:wrap;
       padding: 10px 12px;
       border:1px solid var(--ring);
-      background: linear-gradient(180deg, #ffffff12, #ffffff07);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border-radius:999px;
       backdrop-filter: blur(12px);
-      box-shadow: 0 12px 35px rgba(0,0,0,.25);
+      box-shadow: 0 12px 35px rgba(0,0,0,.28);
     }
+
     .badge{
       display:flex; align-items:center; gap:10px;
       padding: 7px 10px;
       border-radius:999px;
-      border:1px solid #ffffff1f;
-      background:#ffffff10;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
       color:var(--muted);
       font-size: 13px;
       user-select:none;
@@ -124,42 +152,42 @@
     }
     .dot{
       width:10px;height:10px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--accent));
-      box-shadow: 0 0 14px #ff7ac8aa;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--accent2));
+      box-shadow: 0 0 12px rgba(167,139,250,.45);
     }
     .spark{
       width:12px;height:12px;border-radius:4px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       transform: rotate(18deg);
-      box-shadow: 0 0 14px #ffffff33;
+      box-shadow: 0 0 12px rgba(203,183,255,.35);
     }
 
     .pill{
       appearance:none;
-      border:1px solid #ffffff26;
-      background: linear-gradient(180deg,#ffffff12,#ffffff08);
+      border:1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
       color:var(--text);
       padding: 10px 14px;
       border-radius: 999px;
       cursor:pointer;
-      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease, border-color .15s ease;
       box-shadow: 0 10px 22px rgba(0,0,0,.22);
       font-weight:900;
     }
-    .pill:hover{transform: translateY(-1px); border-color:#ffffff3a}
+    .pill:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.26);}
     .pill:active{transform: translateY(0px) scale(.98)}
     .pill.primary{
       border-color: transparent;
       background:
-        radial-gradient(160px 90px at 20% 20%, #ffffff55, transparent 60%),
-        linear-gradient(135deg, #ff7ac8, #7afcff);
-      color:#0b0b14;
-      box-shadow: 0 18px 40px rgba(255,122,200,.20), 0 18px 40px rgba(122,252,255,.12);
+        radial-gradient(160px 90px at 20% 20%, rgba(255,255,255,.22), transparent 60%),
+        linear-gradient(135deg, var(--accent2), var(--violet));
+      color:#0b0a18;
+      box-shadow: 0 18px 40px rgba(167,139,250,.12);
     }
 
     .card{
       border:1px solid var(--ring);
-      background: linear-gradient(180deg, #ffffff10, #ffffff06);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
@@ -171,9 +199,11 @@
       position:absolute;
       inset:-140px -140px auto auto;
       width:320px;height:320px;
-      background: radial-gradient(circle at 30% 30%, #ff7ac82a, transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(203,183,255,.14), transparent 60%);
       transform: rotate(18deg);
       pointer-events:none;
+      opacity:.45;
+      filter: blur(1px) saturate(.75);
     }
 
     .hero{ margin-top: 14px; padding: 20px; }
@@ -188,12 +218,12 @@
       letter-spacing:-0.02em;
     }
     .shine{
-      background: linear-gradient(90deg, #fff, #ffe8f7, #d7feff, #fff);
+      background: linear-gradient(90deg, #fff, rgba(203,183,255,.95), rgba(167,139,250,.95), #fff);
       -webkit-background-clip:text;
       background-clip:text;
       color: transparent;
       background-size: 200% 100%;
-      animation: shimmer 3.8s linear infinite;
+      animation: shimmer 4.6s linear infinite;
     }
     @keyframes shimmer{
       0%{background-position:0% 50%}
@@ -210,8 +240,8 @@
     .chipRow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px;}
     .chip{
       display:flex; align-items:center; gap:8px;
-      border:1px solid #ffffff1f;
-      background:#ffffff0e;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
       border-radius:999px;
       padding: 8px 10px;
       color: var(--muted);
@@ -232,8 +262,8 @@
     .section p{margin:0 0 14px; color:var(--muted); font-size:14.5px; line-height:1.75;}
 
     .letter{
-      border:1px solid #ffffff1f;
-      background:#ffffff0c;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
       border-radius: 18px;
       padding: 16px;
       position:relative;
@@ -244,7 +274,7 @@
       position:absolute;
       inset:auto -60px -60px auto;
       width:220px;height:220px;
-      background: radial-gradient(circle at 30% 30%, #7afcff18, transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(167,139,250,.12), transparent 60%);
       transform: rotate(10deg);
       pointer-events:none;
     }
@@ -268,12 +298,13 @@
       margin-top: 14px;
       font-weight: 950;
       letter-spacing:.02em;
+      color: rgba(244,242,255,.95);
     }
     .row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px;}
 
     .panel{
-      border:1px solid #ffffff1f;
-      background:#ffffff0c;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
       border-radius: 18px;
       padding: 14px;
       overflow:hidden;
@@ -287,15 +318,15 @@
 
     .meter{
       height:10px;
-      background:#ffffff10;
-      border:1px solid #ffffff1f;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
       border-radius: 999px;
       overflow:hidden;
     }
     .meter > i{
       display:block; height:100%; width:55%;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px #ffffff22;
+      background: linear-gradient(90deg, rgba(203,183,255,.95), rgba(167,139,250,.95));
+      box-shadow: 0 0 18px rgba(167,139,250,.12);
     }
     input[type="range"]{ width:100%; accent-color: var(--accent2); }
 
@@ -313,8 +344,8 @@
       resize: vertical;
       padding: 10px 12px;
       border-radius: 14px;
-      border:1px solid #ffffff24;
-      background:#0b0b18aa;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(5,4,11,.65);
       color:#fff;
       outline:none;
       font-size: 14px;
@@ -322,10 +353,10 @@
     }
 
     .secret{
-      border:1px dashed #ffffff30;
+      border:1px dashed rgba(255,255,255,.20);
       border-radius: 18px;
       padding: 14px;
-      background:#ffffff08;
+      background: rgba(255,255,255,.04);
     }
     .secretTop{
       display:flex;
@@ -341,8 +372,8 @@
 
     .seal{
       display:flex; gap:14px; align-items:center;
-      border:1px solid #ffffff1f;
-      background:#ffffff0c;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
       border-radius: 18px;
       padding: 12px 14px;
     }
@@ -355,8 +386,8 @@
       bottom: 18px;
       transform: translateX(-50%) translateY(20px);
       opacity:0;
-      background: linear-gradient(180deg, #ffffff16, #ffffff0b);
-      border:1px solid #ffffff2b;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.14);
       color:#fff;
       padding: 10px 12px;
       border-radius: 999px;
@@ -375,8 +406,8 @@
     .toast.show{opacity:1; transform: translateX(-50%) translateY(0);}
     .tDot{
       width:10px;height:10px;border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 14px #ffffff33;
+      background: linear-gradient(135deg, rgba(203,183,255,.95), rgba(167,139,250,.95));
+      box-shadow: 0 0 14px rgba(167,139,250,.18);
     }
 
     footer{
@@ -403,8 +434,8 @@
     }
 
     .locked{
-      border-color: rgba(122,252,255,.55) !important;
-      background: linear-gradient(180deg, rgba(122,252,255,.12), rgba(255,255,255,.07)) !important;
+      border-color: rgba(203,183,255,.40) !important;
+      background: linear-gradient(180deg, rgba(203,183,255,.08), rgba(255,255,255,.04)) !important;
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -422,7 +453,6 @@
 
   <div class="toast" id="toast"><span class="tDot"></span><span id="toastText">🤍</span></div>
 
-  <!-- JSON message library (web-suitable “language”) -->
   <script type="application/json" id="bank">
   {
     "assurance":[
@@ -478,7 +508,7 @@
       "You’re my favorite person.",
       "I’ll be gentle with your heart."
     ],
-    "perfectMessage":"Hi mahal 🤍 I just want you to know even if you’re distant busy or drained I still love you so so much no pressure no demands just me choosing you gently take your time I’m still here"
+    "perfectMessage":"Hi mahal 🤍 even if you’re distant busy or drained I still love you so so much no pressure no demands just me choosing you gently take your time I’m still here"
   }
   </script>
 
@@ -486,6 +516,7 @@
     <div class="topbar">
       <div class="badge"><span class="dot"></span> this page belongs to you, <b>Iris</b></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+        <button class="pill" id="btnSoftEyes">Soft Eyes</button>
         <button class="pill" id="btnGoodnight">Goodnight</button>
         <button class="pill" id="btnSpill">Spill Love</button>
         <button class="pill primary" id="btnLove">Send Love</button>
@@ -580,7 +611,6 @@ I love you so, so much… and I’m still here.
           </div>
         </div>
 
-        <!-- MathML easter egg -->
         <div class="panel" style="margin-top:14px;">
           <div class="panelTop">
             <b>tiny formula (just for you)</b>
@@ -656,9 +686,9 @@ I love you so, so much… and I’m still here.
           <svg width="86" height="86" viewBox="0 0 120 120" role="img" aria-label="seal">
             <defs>
               <radialGradient id="rg" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity=".55"/>
-                <stop offset="35%" stop-color="#ff7ac8" stop-opacity=".35"/>
-                <stop offset="100%" stop-color="#7afcff" stop-opacity=".08"/>
+                <stop offset="0%" stop-color="#ffffff" stop-opacity=".40"/>
+                <stop offset="35%" stop-color="#cbb7ff" stop-opacity=".26"/>
+                <stop offset="100%" stop-color="#a78bfa" stop-opacity=".08"/>
               </radialGradient>
               <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="3" result="b"/>
@@ -668,17 +698,17 @@ I love you so, so much… and I’m still here.
                 </feMerge>
               </filter>
             </defs>
-            <circle cx="60" cy="60" r="54" fill="url(#rg)" filter="url(#glow)" opacity=".92"/>
+            <circle cx="60" cy="60" r="54" fill="url(#rg)" filter="url(#glow)" opacity=".90"/>
             <path
               d="M60 28 C43 30 36 45 45 56 C30 58 32 80 50 82
                  C54 92 67 92 71 82 C89 80 90 58 75 56 C84 45 77 30 60 28Z"
-              fill="rgba(255,255,255,.20)" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+              fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
             <animateTransform attributeName="transform" attributeType="XML"
-              type="rotate" from="0 60 60" to="360 60 60" dur="14s" repeatCount="indefinite"/>
+              type="rotate" from="0 60 60" to="360 60 60" dur="18s" repeatCount="indefinite"/>
             <path
               d="M60 36 C49 38 44 48 50 55 C42 58 44 70 54 72
                  C56 78 64 78 66 72 C76 70 78 58 70 55 C76 48 71 38 60 36Z"
-              fill="rgba(255,122,200,.22)" stroke="rgba(255,255,255,.20)" stroke-width="2"/>
+              fill="rgba(167,139,250,.18)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
           </svg>
           <div class="sealText">
             <b>Seal of steady love</b><br/>
@@ -738,7 +768,6 @@ You are safe with me.
   </div>
 
   <script>
-    // ===== Utilities =====
     const $ = (id) => document.getElementById(id);
     const bank = JSON.parse($("bank").textContent);
 
@@ -772,18 +801,17 @@ You are safe with me.
       if (navigator.vibrate) navigator.vibrate(ms);
     }
 
-    // ===== Date line =====
+    // Date line
     const now = new Date();
     $("dateLine").innerHTML = `
       <div class="chip"><span class="spark"></span> Today (${now.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}) I’m choosing you again</div>
       <div class="chip"><span class="spark"></span> even on dull weeks</div>
     `;
 
-    // ===== Canvas 2D starfield =====
+    // Canvas 2D stars
     const starsCanvas = $("stars2d");
     const sctx = starsCanvas.getContext("2d", { alpha: true });
     let SW=0, SH=0, stars=[];
-
     function resize2d(){
       const dpr = Math.min(devicePixelRatio || 1, 2);
       SW = Math.floor(innerWidth * dpr);
@@ -791,14 +819,13 @@ You are safe with me.
       starsCanvas.width = SW; starsCanvas.height = SH;
       starsCanvas.style.width = innerWidth+"px";
       starsCanvas.style.height = innerHeight+"px";
-
       const count = Math.max(80, Math.min(240, Math.floor((innerWidth*innerHeight)/14000)));
       stars = new Array(count).fill(0).map(()=>({
         x: Math.random()*SW,
         y: Math.random()*SH,
         r: (0.6 + Math.random()*1.7) * dpr,
-        a: 0.14 + Math.random()*0.55,
-        s: (0.06 + Math.random()*0.28) * dpr
+        a: 0.12 + Math.random()*0.50,
+        s: (0.05 + Math.random()*0.26) * dpr
       }));
     }
     addEventListener("resize", resize2d);
@@ -820,9 +847,9 @@ You are safe with me.
     }
     tick2d();
 
-    // ===== Floating hearts ambience =====
+    // Floating hearts
     const floatLayer = $("floatLayer");
-    const heartChars = ["🤍","💗","💖","💘","💝","❤"];
+    const heartChars = ["🤍","💜","🪻","💗","💖"];
     function spawnHeart(){
       const h = document.createElement("div");
       h.className = "heart";
@@ -830,16 +857,16 @@ You are safe with me.
       h.style.left = (Math.random()*100)+"vw";
       h.style.bottom = (-10 - Math.random()*30)+"px";
       h.style.fontSize = (14 + Math.random()*18)+"px";
-      h.style.animationDuration = (6 + Math.random()*7)+"s";
+      h.style.animationDuration = (7 + Math.random()*8)+"s";
       h.style.animationDelay = (Math.random()*1.2)+"s";
       floatLayer.appendChild(h);
-      setTimeout(()=>h.remove(), 16000);
+      setTimeout(()=>h.remove(), 17000);
     }
-    setInterval(spawnHeart, 900);
+    setInterval(spawnHeart, 1100);
 
-    // ===== Burst hearts (Web Animations API) =====
+    // Burst hearts
     function burst(x,y){
-      const n=18;
+      const n=16;
       const wrap=document.createElement("div");
       wrap.style.position="fixed";
       wrap.style.left=x+"px";
@@ -858,13 +885,13 @@ You are safe with me.
         b.style.top="0";
         b.style.fontSize=(14+Math.random()*12)+"px";
         b.style.opacity="1";
-        b.style.filter="drop-shadow(0 10px 18px rgba(0,0,0,.28))";
+        b.style.filter="drop-shadow(0 10px 18px rgba(0,0,0,.35))";
 
         const angle=(Math.PI*2)*(i/n)+(Math.random()*0.35);
-        const dist=30+Math.random()*95;
+        const dist=28+Math.random()*88;
         const dx=Math.cos(angle)*dist;
         const dy=Math.sin(angle)*dist;
-        const rot=(Math.random()*240-120);
+        const rot=(Math.random()*220-110);
 
         b.animate([
           {transform:`translate(0px,0px) rotate(0deg) scale(1)`, opacity:1},
@@ -876,7 +903,7 @@ You are safe with me.
       setTimeout(()=>wrap.remove(), 980);
     }
 
-    // ===== WebGL Aurora glow =====
+    // WebGL aurora (lavender)
     const glCanvas = $("glow3d");
     const gl = glCanvas.getContext("webgl", { alpha:true, antialias:true });
 
@@ -928,17 +955,18 @@ You are safe with me.
 
           float n = noise(uv*1.7 + vec2(t*0.05, -t*0.03));
           float n2 = noise(uv*3.2 + vec2(-t*0.02, t*0.04));
-          float glow = smoothstep(0.15, 0.85, n*0.65 + n2*0.35);
+          float glow = smoothstep(0.18, 0.86, n*0.65 + n2*0.35);
 
-          vec3 c1 = vec3(1.0, 0.48, 0.78);
-          vec3 c2 = vec3(0.48, 0.99, 1.0);
-          vec3 c3 = vec3(0.71, 0.48, 1.0);
+          /* Lavender palette */
+          vec3 c1 = vec3(0.80, 0.72, 1.00); /* lavender */
+          vec3 c2 = vec3(0.66, 0.55, 0.98); /* purple */
+          vec3 c3 = vec3(0.55, 0.36, 0.96); /* violet */
 
-          float band = sin(uv.y*2.2 + t*0.35) * 0.5 + 0.5;
+          float band = sin(uv.y*2.15 + t*0.32) * 0.5 + 0.5;
           vec3 col = mix(c1, c2, band);
-          col = mix(col, c3, smoothstep(0.2, 0.9, n2));
+          col = mix(col, c3, smoothstep(0.25, 0.90, n2));
 
-          float vign = smoothstep(1.35, 0.2, length(uv));
+          float vign = smoothstep(1.35, 0.25, length(uv));
           float a = glow * 0.18 * vign;
 
           gl_FragColor = vec4(col, a);
@@ -973,7 +1001,7 @@ You are safe with me.
       draw();
     }
 
-    // ===== Slider =====
+    // Slider
     const dist = $("distance");
     const fill = $("meterFill");
     const sliderMsg = $("sliderMsg");
@@ -986,7 +1014,7 @@ You are safe with me.
     setDistance(parseInt(dist.value,10));
     dist.addEventListener("input", () => setDistance(parseInt(dist.value,10)));
 
-    // ===== Saved vows =====
+    // Saved vows
     const savedList = $("savedList");
     const savedCount = $("savedCount");
     const state = {
@@ -1030,7 +1058,7 @@ You are safe with me.
     }
     renderSaved();
 
-    // ===== Secret reveal =====
+    // Secret reveal
     function revealSecret(){
       if(state.secret) return;
       state.secret = true;
@@ -1041,67 +1069,57 @@ You are safe with me.
       vibe(25);
     }
 
-    // ===== Spill Love mode =====
+    // Spill Love mode
     let spillMode = false;
-
     function whisper(){
       const line = bank.whispers[Math.floor(Math.random()*bank.whispers.length)];
       toast(line);
       return line;
     }
 
-    // ===== Special panel actions =====
+    // Special panel
     const specialMsg = $("specialMsg");
-    function setSpecial(text){ specialMsg.textContent = text; }
+    function setSpecial(t){ specialMsg.textContent = t; }
 
     $("btnLoveMeter").addEventListener("click", ()=>{
       const v = Math.floor(92 + Math.random()*9);
       const line = `Love meter: ${v}% → I love you so so much, Iris.`;
-      setSpecial(line);
-      toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35);
-      vibe(20);
+      setSpecial(line); toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35); vibe(20);
     });
 
     $("btnMissYou").addEventListener("click", ()=>{
       const line = "I miss you, Iris. No pressure. Just truth.";
-      setSpecial(line);
-      toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35);
-      vibe(20);
+      setSpecial(line); toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35); vibe(20);
     });
 
     $("btnWarm").addEventListener("click", ()=>{
       const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
-      setSpecial(msg);
-      toast(msg);
-      burst(innerWidth*0.72, innerHeight*0.35);
-      vibe(18);
+      setSpecial(msg); toast(msg);
+      burst(innerWidth*0.72, innerHeight*0.35); vibe(18);
     });
 
     $("btnBreathe").addEventListener("click", ()=>{
       const line = "Breathe, my love. In… out… You’re safe. I’m still here.";
-      setSpecial(line);
-      toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35);
-      vibe([20,40,20]);
+      setSpecial(line); toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35); vibe([20,40,20]);
     });
 
-    // ===== “When you feel…” =====
+    // “When you feel…”
     document.querySelectorAll("[data-state]").forEach(btn=>{
       btn.addEventListener("click",(e)=>{
         const k = btn.getAttribute("data-state");
         const arr = bank.states[k] || bank.assurance;
         const msg = arr[Math.floor(Math.random()*arr.length)];
-        setSpecial(msg);
-        toast(msg);
+        setSpecial(msg); toast(msg);
         const r = e.currentTarget.getBoundingClientRect();
         burst(r.left + r.width/2, r.top + r.height/2);
         vibe(25);
       });
     });
 
-    // ===== Main buttons =====
+    // Main buttons
     $("btnRead").addEventListener("click", ()=>{
       $("letterCard").scrollIntoView({behavior:"smooth", block:"start"});
       toast("Read it slowly, Iris.");
@@ -1111,8 +1129,7 @@ You are safe with me.
 
     $("btnAssure").addEventListener("click",(e)=>{
       const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
-      toast(msg);
-      setSpecial(msg);
+      toast(msg); setSpecial(msg);
       const r = e.currentTarget.getBoundingClientRect();
       burst(r.left + r.width/2, r.top + r.height/2);
       vibe(18);
@@ -1155,8 +1172,7 @@ You are safe with me.
       panel.classList.toggle("locked");
       const on = panel.classList.contains("locked");
       const line = on ? "Heart lock engaged 🤍 You are safe with me, Iris." : "Heart lock off — still safe, still loved.";
-      setSpecial(line);
-      toast(line);
+      setSpecial(line); toast(line);
       burst(innerWidth*0.72, innerHeight*0.35);
       vibe([20,40,20]);
     });
@@ -1171,8 +1187,7 @@ You are safe with me.
 
     $("btnNudge").addEventListener("click", ()=>{
       const line = "Little nudge: I’m here. I love you so so much. Take your time.";
-      toast(line);
-      setSpecial(line);
+      toast(line); setSpecial(line);
       burst(innerWidth*0.62, innerHeight*0.68);
       vibe(18);
     });
@@ -1235,13 +1250,19 @@ You are safe with me.
       vibe(15);
     });
 
+    $("btnSoftEyes").addEventListener("click", ()=>{
+      document.body.classList.toggle("softEyes");
+      const on = document.body.classList.contains("softEyes");
+      toast(on ? "Soft Eyes ON 🤍" : "Soft Eyes OFF 🤍");
+      vibe(10);
+    });
+
     $("btnSpill").addEventListener("click", ()=>{
       spillMode = !spillMode;
       toast(spillMode ? "Spill Love ON 🤍 Tap anywhere." : "Spill Love OFF 🤍");
       vibe([20,40,20]);
     });
 
-    // Spill Love: tap background whispers love
     addEventListener("click",(e)=>{
       const tag = (e.target.tagName||"").toLowerCase();
       if(["button","input","textarea"].includes(tag)) return;
@@ -1254,8 +1275,7 @@ You are safe with me.
         return;
       }
 
-      // small surprise bursts sometimes
-      if(Math.random() < 0.10){
+      if(Math.random() < 0.09){
         burst(e.clientX, e.clientY);
         vibe(8);
       }
@@ -1280,7 +1300,7 @@ I love you so so much—no matter how distant or busy the week is.
       }
     });
 
-    // ===== Web Component (Shadow DOM) =====
+    // Web Component
     class SteadyNote extends HTMLElement{
       connectedCallback(){
         const root = this.attachShadow({mode:"open"});
@@ -1289,21 +1309,21 @@ I love you so so much—no matter how distant or busy the week is.
             .box{
               margin-top:14px;
               border:1px solid rgba(255,255,255,.14);
-              background: rgba(255,255,255,.06);
+              background: rgba(255,255,255,.05);
               border-radius: 18px;
               padding: 14px;
             }
             .top{
               display:flex; align-items:center; justify-content:space-between;
               gap:10px; flex-wrap:wrap; margin-bottom:10px;
-              color: rgba(214,215,255,.88);
+              color: rgba(207,201,255,.92);
               font-weight:900;
             }
             .btns{display:flex; gap:10px; flex-wrap:wrap;}
             button{
               appearance:none;
-              border:1px solid rgba(255,255,255,.18);
-              background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
+              border:1px solid rgba(255,255,255,.16);
+              background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
               color:#fff;
               padding: 10px 12px;
               border-radius: 999px;
@@ -1312,13 +1332,10 @@ I love you so so much—no matter how distant or busy the week is.
             }
             button.primary{
               border:none;
-              color:#0b0b14;
-              background: linear-gradient(135deg, #ff7ac8, #7afcff);
+              color:#0b0a18;
+              background: linear-gradient(135deg, rgba(203,183,255,.95), rgba(139,92,246,.95));
             }
-            .msg{
-              color:#fff;
-              line-height:1.75;
-            }
+            .msg{ color:#fff; line-height:1.75; }
           </style>
           <div class="box">
             <div class="top">
