@@ -4,19 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b0b18" />
-  <meta name="description" content="A dedicated page of steady love and reassurance — no matter the distance." />
-  <title>For You, My Iris 🤍</title>
+  <meta name="description" content="A private, dedicated page — made only for Iris." />
+  <title>For Iris 🤍</title>
 
-  <!-- JSON-LD (Structured Data) -->
+  <!-- JSON-LD (structured data) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"CreativeWork",
-    "name":"Steady Love Page",
+    "name":"A Private Reassurance Page",
     "author":{"@type":"Person","name":"Ali"},
-    "about":"A reassurance and comfort page for a loved one during a distant, busy, or drained week.",
-    "inLanguage":"en",
-    "dateCreated":"2026-03-04"
+    "about":"A dedicated comfort and reassurance page made for Iris.",
+    "inLanguage":"en"
   }
   </script>
 
@@ -25,14 +24,13 @@
       --bg1:#070712;
       --bg2:#12122a;
       --card:#ffffff10;
-      --card2:#ffffff14;
       --ring:#ffffff24;
       --text:#f7f7ff;
       --muted:#d6d7ffcc;
       --accent:#ff7ac8;
       --accent2:#7afcff;
       --violet:#b57aff;
-      --shadow: 0 18px 55px rgba(0,0,0,.50);
+      --shadow: 0 18px 55px rgba(0,0,0,.52);
       --radius: 22px;
     }
     *{box-sizing:border-box}
@@ -48,8 +46,6 @@
         linear-gradient(160deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
-
-    /* Soft grain overlay */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -57,7 +53,7 @@
       mix-blend-mode:overlay;
       pointer-events:none;
       opacity:.16;
-      z-index: 1;
+      z-index:1;
     }
 
     /* Layers */
@@ -66,14 +62,14 @@
       width:100%; height:100%;
       z-index:0;
       pointer-events:none;
-      opacity:.9;
+      opacity:.92;
     }
     #stars2d{
       position:fixed; inset:0;
       width:100%; height:100%;
       z-index:0;
       pointer-events:none;
-      opacity:.85;
+      opacity:.86;
     }
     #floatLayer{
       position:fixed; inset:0;
@@ -82,10 +78,22 @@
       overflow:hidden;
     }
 
+    /* Goodnight mode overlay */
+    body.goodnight::after{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(700px 500px at 50% 18%, rgba(255,255,255,.07), transparent 62%),
+        radial-gradient(900px 700px at 50% 92%, rgba(122,252,255,.09), transparent 66%),
+        linear-gradient(180deg, rgba(7,7,18,.28), rgba(7,7,18,.82));
+      pointer-events:none;
+      z-index:2;
+    }
+
     .wrap{
       position:relative;
       z-index:3;
-      max-width: 1050px;
+      max-width: 1060px;
       margin: 0 auto;
       padding: 22px 18px 70px;
     }
@@ -118,6 +126,12 @@
       width:10px;height:10px;border-radius:50%;
       background: radial-gradient(circle at 30% 30%, #fff, var(--accent));
       box-shadow: 0 0 14px #ff7ac8aa;
+    }
+    .spark{
+      width:12px;height:12px;border-radius:4px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      transform: rotate(18deg);
+      box-shadow: 0 0 14px #ffffff33;
     }
 
     .pill{
@@ -167,12 +181,6 @@
       display:flex; justify-content:space-between; align-items:center;
       gap:12px; flex-wrap:wrap;
     }
-    .spark{
-      width:12px;height:12px;border-radius:4px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      transform: rotate(18deg);
-      box-shadow: 0 0 14px #ffffff33;
-    }
     .title{
       margin: 10px 0 10px;
       font-size: clamp(30px, 4.6vw, 56px);
@@ -196,7 +204,7 @@
       color: var(--muted);
       line-height:1.75;
       font-size: 15.5px;
-      max-width: 78ch;
+      max-width: 82ch;
     }
 
     .chipRow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px;}
@@ -214,7 +222,7 @@
     .grid{
       margin-top: 14px;
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.2fr .8fr;
       gap: 14px;
     }
     @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
@@ -223,7 +231,6 @@
     .section h2{margin:0 0 8px; font-size:17px; letter-spacing:.01em;}
     .section p{margin:0 0 14px; color:var(--muted); font-size:14.5px; line-height:1.75;}
 
-    /* Letter */
     .letter{
       border:1px solid #ffffff1f;
       background:#ffffff0c;
@@ -264,7 +271,6 @@
     }
     .row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px;}
 
-    /* Big interaction panel */
     .panel{
       border:1px solid #ffffff1f;
       background:#ffffff0c;
@@ -278,6 +284,7 @@
       gap:10px; flex-wrap:wrap;
       margin-bottom: 10px;
     }
+
     .meter{
       height:10px;
       background:#ffffff10;
@@ -286,23 +293,23 @@
       overflow:hidden;
     }
     .meter > i{
-      display:block; height:100%; width:60%;
+      display:block; height:100%; width:55%;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       box-shadow: 0 0 18px #ffffff22;
     }
     input[type="range"]{ width:100%; accent-color: var(--accent2); }
+
     .bigMsg{
       margin-top: 10px;
       color:#fff;
       line-height:1.7;
       font-size: 14.8px;
-      min-height: 56px;
+      min-height: 60px;
     }
 
-    /* “Send her this” */
     textarea{
       width:100%;
-      min-height: 104px;
+      min-height: 108px;
       resize: vertical;
       padding: 10px 12px;
       border-radius: 14px;
@@ -314,7 +321,6 @@
       line-height:1.65;
     }
 
-    /* Secret */
     .secret{
       border:1px dashed #ffffff30;
       border-radius: 18px;
@@ -333,7 +339,6 @@
     .blur{filter: blur(7px); opacity:.62; transition: filter .25s ease, opacity .25s ease;}
     .secret.revealed .blur{filter: blur(0); opacity:1}
 
-    /* SVG seal */
     .seal{
       display:flex; gap:14px; align-items:center;
       border:1px solid #ffffff1f;
@@ -344,7 +349,6 @@
     .sealText{color:var(--muted); font-size:13.5px; line-height:1.6;}
     .sealText b{color:#fff}
 
-    /* Toast */
     .toast{
       position:fixed;
       left:50%;
@@ -363,10 +367,10 @@
       gap:10px;
       z-index: 99;
       transition: opacity .2s ease, transform .2s ease;
-      max-width: min(92vw, 760px);
+      max-width: min(92vw, 820px);
       text-align:center;
       justify-content:center;
-      font-weight:800;
+      font-weight:900;
     }
     .toast.show{opacity:1; transform: translateX(-50%) translateY(0);}
     .tDot{
@@ -385,7 +389,6 @@
     }
     footer strong{color:#fff}
 
-    /* floating heart */
     .heart{
       position:absolute;
       opacity:0;
@@ -399,7 +402,11 @@
       100%{opacity:0; transform: translateY(-120vh) scale(1.25)}
     }
 
-    /* Reduced motion */
+    .locked{
+      border-color: rgba(122,252,255,.55) !important;
+      background: linear-gradient(180deg, rgba(122,252,255,.12), rgba(255,255,255,.07)) !important;
+    }
+
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important; transition:none !important;}
       #glow3d, #stars2d{display:none;}
@@ -409,92 +416,86 @@
 </head>
 
 <body>
-  <!-- WebGL “Aurora Glow” -->
   <canvas id="glow3d" aria-hidden="true"></canvas>
-  <!-- Canvas 2D stars -->
   <canvas id="stars2d" aria-hidden="true"></canvas>
-  <!-- Floating hearts -->
   <div id="floatLayer" aria-hidden="true"></div>
 
   <div class="toast" id="toast"><span class="tDot"></span><span id="toastText">🤍</span></div>
 
-  <!-- JSON message library -->
+  <!-- JSON message library (web-suitable “language”) -->
   <script type="application/json" id="bank">
   {
-    "assurance": [
-      "Even when you’re distant, I’m still here—steady, calm, and choosing you.",
-      "If you’re drained, you don’t owe me energy. You only get gentleness from me.",
-      "Busy doesn’t scare me. Quiet doesn’t scare me. I don’t disappear when it’s not easy.",
-      "I love you in a way that doesn’t demand—only protects.",
-      "No matter what your week looks like, my love stays consistent."
+    "assurance":[
+      "I love you so so much, Iris — even when the week is quiet.",
+      "Busy doesn’t scare me. Distance doesn’t scare me. I’m still here.",
+      "You don’t owe me energy. You only get gentleness from me.",
+      "My love for you doesn’t demand. It protects.",
+      "Even on dull weeks, I’m choosing you — softly, consistently."
     ],
-    "states": {
-      "distant": [
-        "Distance doesn’t mean you’re losing me. It just means you need softness—so I’ll be soft.",
-        "Even if your heart is quiet right now, mine is still holding your name gently.",
-        "I won’t chase you loudly. I’ll stay close quietly—where you feel safe."
+    "states":{
+      "distant":[
+        "If you’re distant, I won’t pressure you. I’ll stay gentle and steady.",
+        "Quiet days don’t change what I feel. I love you so so much, Iris.",
+        "I’ll stay close in a way that feels safe, not heavy."
       ],
-      "avoidant": [
-        "If you need space, I respect it. I won’t punish you for it. I’ll still love you.",
-        "I don’t need you to be available 24/7 to be loved. I just need you to feel safe.",
-        "I’ll love you in a way that doesn’t corner you—only comforts you."
+      "avoidant":[
+        "If you need space, I respect it — and I still love you deeply.",
+        "I won’t corner your heart. I’ll comfort it.",
+        "You are safe with me, Iris. Always."
       ],
-      "busy": [
-        "Do what you need to do today. I’m not competing with your life. I’m supporting it.",
-        "I’m proud of you. Even when you’re busy, I’m still your safe place.",
-        "I’ll be the calm you come back to—not another thing to handle."
+      "busy":[
+        "Do what you need to do today. I’m not competing — I’m supporting you.",
+        "I’m proud of you. I’m still your soft place to land.",
+        "Even if we’re quiet, I’m still choosing you."
       ],
-      "drained": [
-        "Rest, my love. You don’t have to be bright for me to love you deeply.",
-        "You can be tired and still be loved—fully, gently, safely.",
-        "If you can’t talk much, it’s okay. I’ll still be here with steady love."
+      "drained":[
+        "Rest, my love. You don’t have to be bright to be loved.",
+        "Tired Iris is still my favorite Iris.",
+        "If you can’t talk much, it’s okay. I’m still here."
       ]
     },
-    "vows": [
-      "I will be consistent, not confusing.",
+    "vows":[
       "I will love you gently, not loudly.",
+      "I will be consistent, not confusing.",
       "I will protect your peace, not disturb it.",
-      "I will be a safe place, not a pressure."
+      "I will be your safe place, not your pressure.",
+      "I will choose you in the quiet days too."
     ],
     "sliderSteps":[
       {"at":0,"text":"If today is heavy… I’m here. No demands. Just love."},
-      {"at":25,"text":"Quiet days don’t scare me. I’m still choosing you."},
-      {"at":50,"text":"Even when we’re distant, my love stays steady and patient."},
-      {"at":75,"text":"One soft step. One gentle message. We don’t have to rush."},
+      {"at":25,"text":"Even if we’re quiet, I’m still choosing you, Iris."},
+      {"at":50,"text":"Distance doesn’t change my love. I’m steady and soft."},
+      {"at":75,"text":"One gentle step. One warm message. No pressure."},
       {"at":100,"text":"Come closer when you can. I’ll be here—safe, calm, and yours."}
-    ]
+    ],
+    "whispers":[
+      "I love you so so much, Iris.",
+      "You’re safe with me.",
+      "Even if you’re quiet, I’m still here.",
+      "No pressure. Just love.",
+      "I choose you on the dull days too.",
+      "I’m not going anywhere.",
+      "You’re my favorite person.",
+      "I’ll be gentle with your heart."
+    ],
+    "perfectMessage":"Hi mahal 🤍 I just want you to know even if you’re distant busy or drained I still love you so so much no pressure no demands just me choosing you gently take your time I’m still here"
   }
   </script>
 
   <div class="wrap">
     <div class="topbar">
-      <div class="badge"><span class="dot"></span> dedicated page — steady love (no matter the week)</div>
+      <div class="badge"><span class="dot"></span> this page belongs to you, <b>Iris</b></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <button class="pill" id="btnPulse">Heartbeat</button>
+        <button class="pill" id="btnGoodnight">Goodnight</button>
+        <button class="pill" id="btnSpill">Spill Love</button>
         <button class="pill primary" id="btnLove">Send Love</button>
       </div>
     </div>
 
     <div class="card hero">
       <div class="heroTop">
-        <div class="badge">
-          <span class="spark"></span>
-          <span>For <strong id="herName">Iris</strong> — from <strong id="yourName">Ali</strong></span>
-        </div>
-
-        <div class="badge" style="gap:12px;">
-          <span class="spark"></span>
-          <span>
-            <input id="inHer" placeholder="Iris" style="background:transparent;border:none;color:#fff;outline:none;text-align:right;max-width:120px;">
-            <span style="opacity:.6;">← her</span>
-          </span>
-          <span style="opacity:.25;">|</span>
-          <span>
-            <input id="inYou" placeholder="Ali" style="background:transparent;border:none;color:#fff;outline:none;text-align:right;max-width:120px;">
-            <span style="opacity:.6;">← you</span>
-          </span>
-          <button class="pill" id="btnApply" style="padding:8px 12px;">Apply</button>
-        </div>
+        <div class="badge"><span class="spark"></span> made only for <b>Iris</b> — from <b>Ali</b></div>
+        <div class="badge"><span class="spark"></span> no matter the distance, I’m still here</div>
       </div>
 
       <h1 class="title">
@@ -503,9 +504,8 @@
       </h1>
 
       <p class="sub">
-        This isn’t a “make-up” page. This is a <b>reassurance</b> page.
-        A place you can open when you’re busy, drained, avoidant, or quiet—
-        so you can feel one thing clearly: <b>you are loved very, very much</b>, and you are safe with me.
+        This is a reassurance page. A place you can open when you’re busy, drained, avoidant, or quiet—
+        so you can feel one thing clearly: <b>I love you so so much</b>, Iris, and you are safe with me.
       </p>
 
       <div class="chipRow" id="dateLine"></div>
@@ -514,13 +514,13 @@
         <div class="chip"><span class="spark"></span> no pressure</div>
         <div class="chip"><span class="spark"></span> consistent love</div>
         <div class="chip"><span class="spark"></span> comfort & security</div>
-        <div class="chip"><span class="spark"></span> “I’m still here” energy</div>
+        <div class="chip"><span class="spark"></span> love that stays</div>
       </div>
 
       <div class="row">
         <button class="pill primary" id="btnRead">Read my letter</button>
         <button class="pill" id="btnAssure">Give reassurance</button>
-        <button class="pill" id="btnReveal">Reveal the secret</button>
+        <button class="pill" id="btnHeartRain">Heart rain</button>
         <button class="pill" id="btnShare">Share</button>
       </div>
     </div>
@@ -532,84 +532,96 @@
 
         <div class="letter">
           <div class="dear">
-            <b>My love, <span id="dearName">Iris</span> 🤍</b>
+            <b>My love, Iris 🤍</b>
             <span class="tiny">tap “Copy” to save / send</span>
           </div>
 
           <p class="letterText" id="letterText">
-I love you—very, very much.
+I love you so, so much.
 
-And I want you to know this clearly:
-even when you’re distant,
-even when you’re avoidant,
-even when you’re busy,
-even when you’re drained…
+Not in a loud way that pressures you—
+in a steady way that protects you.
 
-my love doesn’t change into pressure.
+Even if you’re distant…
+even if you’re avoidant…
+even if you’re busy…
+even if you’re drained…
 
-I’m not here to demand your energy.
-I’m not here to compete with your life.
-I’m here to be your safe place—
-quietly, gently, consistently.
+my love doesn’t turn into demands.
+It stays soft.
+It stays patient.
+It stays sure.
 
-You can be quiet and still be loved.
-You can need space and still be loved.
-You can be tired and still be loved.
+I don’t need you to be “okay” for me to love you.
+I don’t need constant replies to feel secure.
+I just want you to feel one thing clearly:
 
-I’ll stay steady.
-I’ll stay kind.
-I’ll stay soft with your heart.
+You are safe with me.
+
+I’m choosing you on the quiet days.
+I’m choosing you when the week feels dull.
+I’m choosing you when your heart needs space.
+Because my love for you is not a mood—
+it’s a decision I keep making gently.
 
 When you come closer, I’ll be warm.
 When you need space, I’ll be respectful.
-But either way, you are still mine to care for—
-and I will love you properly.
+But either way, I will love you properly.
+
+I love you so, so much… and I’m still here.
           </p>
 
-          <div class="sign">— <span id="sigName">Ali</span> 🤍</div>
+          <div class="sign">— Ali 🤍</div>
 
           <div class="row">
             <button class="pill primary" id="btnCopyLetter">Copy letter</button>
             <button class="pill" id="btnSaveVow">Save a vow</button>
-            <button class="pill" id="btnBurst">Make it rain hearts</button>
+            <button class="pill" id="btnSeal">Heart lock</button>
           </div>
         </div>
 
-        <!-- MathML “love formula” easter egg -->
+        <!-- MathML easter egg -->
         <div class="panel" style="margin-top:14px;">
           <div class="panelTop">
-            <b>little formula (just for fun)</b>
-            <span class="tiny">MathML easter egg</span>
+            <b>tiny formula (just for you)</b>
+            <span class="tiny">MathML</span>
           </div>
           <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
             <mrow>
-              <mi>love</mi>
-              <mo>(</mo><mi>you</mi><mo>)</mo>
+              <mi>love</mi><mo>(</mo><mi>Iris</mi><mo>)</mo>
               <mo>=</mo>
-              <munder>
-                <mo>lim</mo>
-                <mrow><mi>week</mi><mo>→</mo><mi>any</mi></mrow>
-              </munder>
-              <mrow>
-                <mi>steady</mi><mo>+</mo><mi>gentle</mi><mo>+</mo><mi>choose</mi>
-              </mrow>
+              <munder><mo>lim</mo><mrow><mi>week</mi><mo>→</mo><mi>any</mi></mrow></munder>
+              <mrow><mi>steady</mi><mo>+</mo><mi>gentle</mi><mo>+</mo><mi>stay</mi></mrow>
             </mrow>
           </math>
         </div>
 
-        <!-- Web Component -->
         <steady-note></steady-note>
       </div>
 
       <div class="card section">
-        <h2>When she feels…</h2>
-        <p>Tap the state. It will respond with the right kind of love — not pressure.</p>
+        <h2>When you feel…</h2>
+        <p>Tap what you’re feeling. It answers softly—no pressure.</p>
 
         <div class="row">
           <button class="pill" data-state="distant">Distant</button>
           <button class="pill" data-state="avoidant">Avoidant</button>
           <button class="pill" data-state="busy">Busy</button>
           <button class="pill" data-state="drained">Drained</button>
+        </div>
+
+        <div class="panel" style="margin-top:12px;" id="specialPanel">
+          <div class="panelTop">
+            <b>Just for you, Iris</b>
+            <span class="tiny">tap any — it responds</span>
+          </div>
+          <div class="row">
+            <button class="pill primary" id="btnLoveMeter">Love meter</button>
+            <button class="pill" id="btnMissYou">I miss you</button>
+            <button class="pill" id="btnWarm">Warm reminder</button>
+            <button class="pill" id="btnBreathe">Breathe</button>
+          </div>
+          <div class="bigMsg" id="specialMsg" style="margin-top:12px;">Tap one above 🤍</div>
         </div>
 
         <div class="panel" style="margin-top:12px;">
@@ -622,26 +634,26 @@ and I will love you properly.
           <div class="bigMsg" id="sliderMsg"></div>
           <div class="row" style="margin-top:12px;">
             <button class="pill" id="btnReset">Soft reset</button>
-            <button class="pill primary" id="btnWarm">Warm message</button>
+            <button class="pill primary" id="btnNudge">Little nudge</button>
           </div>
         </div>
 
         <div class="panel" style="margin-top:12px;">
           <div class="panelTop">
-            <b>Send her this</b>
-            <span class="tiny">copy/share ready</span>
+            <b>Message for you (if you want it)</b>
+            <span class="tiny">copy / share ready</span>
           </div>
-          <textarea id="sendText">Hi mahal 🤍 even if you’re distant or drained or busy I still love you very very much and I’m not here to pressure you I just want you to feel safe with me I’ll stay steady gentle and consistent and you can take your time I’m still here</textarea>
+          <textarea id="sendText">Hi mahal 🤍 even if you’re distant busy or drained I still love you so so much no pressure no demands just me choosing you gently take your time I’m still here</textarea>
           <div class="row">
             <button class="pill primary" id="btnCopySend">Copy</button>
-            <button class="pill" id="btnShort">Shorter</button>
-            <button class="pill" id="btnLong">More intense</button>
+            <button class="pill" id="btnPerfect">Perfect</button>
+            <button class="pill" id="btnShort">Short</button>
+            <button class="pill" id="btnLong">More</button>
           </div>
         </div>
 
         <div class="seal" style="margin-top:12px;">
-          <!-- SVG rose seal -->
-          <svg width="86" height="86" viewBox="0 0 120 120" role="img" aria-label="rose seal">
+          <svg width="86" height="86" viewBox="0 0 120 120" role="img" aria-label="seal">
             <defs>
               <radialGradient id="rg" cx="35%" cy="30%" r="70%">
                 <stop offset="0%" stop-color="#ffffff" stop-opacity=".55"/>
@@ -657,7 +669,7 @@ and I will love you properly.
               </filter>
             </defs>
             <circle cx="60" cy="60" r="54" fill="url(#rg)" filter="url(#glow)" opacity=".92"/>
-            <path id="petal"
+            <path
               d="M60 28 C43 30 36 45 45 56 C30 58 32 80 50 82
                  C54 92 67 92 71 82 C89 80 90 58 75 56 C84 45 77 30 60 28Z"
               fill="rgba(255,255,255,.20)" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
@@ -668,10 +680,9 @@ and I will love you properly.
                  C56 78 64 78 66 72 C76 70 78 58 70 55 C76 48 71 38 60 36Z"
               fill="rgba(255,122,200,.22)" stroke="rgba(255,255,255,.20)" stroke-width="2"/>
           </svg>
-
           <div class="sealText">
             <b>Seal of steady love</b><br/>
-            It means: even if you go quiet, I don’t change into pressure.
+            Even if you go quiet, my love doesn’t turn into pressure.
           </div>
         </div>
       </div>
@@ -680,7 +691,7 @@ and I will love you properly.
     <div class="grid">
       <div class="card section">
         <h2>Secret (quiet moments)</h2>
-        <p>For the nights where she needs security more than conversation.</p>
+        <p>For the nights where you need security more than conversation.</p>
 
         <div class="secret" id="secretBox">
           <div class="secretTop">
@@ -688,11 +699,11 @@ and I will love you properly.
             <span id="secretState">Hidden</span>
           </div>
           <div class="blur" id="secretText">
-Even if you’re distant, I’m not angry.
-Even if you’re quiet, I’m not leaving.
+Even if you’re distant, I’m not leaving.
 Even if you’re drained, you don’t owe me anything.
+Even if the week is dull, my love is still bright for you.
 
-I love you very very much—softly, steadily, consistently.
+I love you so so much, Iris—softly, steadily, consistently.
 You are safe with me.
           </div>
         </div>
@@ -705,7 +716,7 @@ You are safe with me.
 
       <div class="card section">
         <h2>Saved vows</h2>
-        <p>Tap “Save a vow” in the letter. It will store them here (localStorage).</p>
+        <p>Tap “Save a vow” in the letter. It stores them here.</p>
 
         <div class="panel">
           <div class="panelTop">
@@ -714,7 +725,7 @@ You are safe with me.
           </div>
           <div id="savedList" style="display:grid; gap:10px;"></div>
           <div class="row" style="margin-top:12px;">
-            <button class="pill" id="btnClearSaved">Clear saved</button>
+            <button class="pill" id="btnClearSaved">Clear</button>
             <button class="pill primary" id="btnCopySaved">Copy all</button>
           </div>
         </div>
@@ -722,17 +733,19 @@ You are safe with me.
     </div>
 
     <footer>
-      Made with steady love by <strong id="footYou">Ali</strong> for <strong id="footHer">Iris</strong> 🤍
+      Made with steady love by <strong>Ali</strong> for <strong>Iris</strong> 🤍
     </footer>
   </div>
 
   <script>
-    // ========= Utilities =========
+    // ===== Utilities =====
     const $ = (id) => document.getElementById(id);
+    const bank = JSON.parse($("bank").textContent);
 
     const toastEl = $("toast");
     const toastText = $("toastText");
     let toastTimer = null;
+
     function toast(msg){
       toastText.textContent = msg;
       toastEl.classList.add("show");
@@ -755,59 +768,22 @@ You are safe with me.
       }
     }
 
-    function vibe(ms=30){
+    function vibe(ms=25){
       if (navigator.vibrate) navigator.vibrate(ms);
     }
 
-    // ========= Data =========
-    const bank = JSON.parse($("bank").textContent);
-
-    // ========= State (saved names) =========
-    const savedNames = JSON.parse(localStorage.getItem("steady_names") || "null");
-    const state = {
-      her: savedNames?.her || "Iris",
-      you: savedNames?.you || "Ali",
-      secret: false,
-      savedVows: JSON.parse(localStorage.getItem("steady_saved") || "[]")
-    };
-
-    function applyNames(){
-      $("herName").textContent = state.her;
-      $("dearName").textContent = state.her;
-      $("footHer").textContent = state.her;
-
-      $("yourName").textContent = state.you;
-      $("sigName").textContent = state.you;
-      $("footYou").textContent = state.you;
-
-      document.title = `For You, My ${state.her} 🤍`;
-    }
-
-    $("inHer").value = state.her;
-    $("inYou").value = state.you;
-    applyNames();
-
-    $("btnApply").addEventListener("click", () => {
-      state.her = ($("inHer").value || "").trim() || "Iris";
-      state.you = ($("inYou").value || "").trim() || "Ali";
-      localStorage.setItem("steady_names", JSON.stringify({her: state.her, you: state.you}));
-      applyNames();
-      toast(`Okay. ${state.you} → ${state.her} 🤍`);
-      burst(window.innerWidth*0.62, 120);
-      vibe(25);
-    });
-
-    // ========= Date line =========
+    // ===== Date line =====
     const now = new Date();
     $("dateLine").innerHTML = `
       <div class="chip"><span class="spark"></span> Today (${now.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}) I’m choosing you again</div>
-      <div class="chip"><span class="spark"></span> no matter the distance</div>
+      <div class="chip"><span class="spark"></span> even on dull weeks</div>
     `;
 
-    // ========= Canvas 2D starfield + soft hearts =========
+    // ===== Canvas 2D starfield =====
     const starsCanvas = $("stars2d");
     const sctx = starsCanvas.getContext("2d", { alpha: true });
     let SW=0, SH=0, stars=[];
+
     function resize2d(){
       const dpr = Math.min(devicePixelRatio || 1, 2);
       SW = Math.floor(innerWidth * dpr);
@@ -816,12 +792,12 @@ You are safe with me.
       starsCanvas.style.width = innerWidth+"px";
       starsCanvas.style.height = innerHeight+"px";
 
-      const count = Math.max(70, Math.min(220, Math.floor((innerWidth*innerHeight)/14000)));
+      const count = Math.max(80, Math.min(240, Math.floor((innerWidth*innerHeight)/14000)));
       stars = new Array(count).fill(0).map(()=>({
         x: Math.random()*SW,
         y: Math.random()*SH,
         r: (0.6 + Math.random()*1.7) * dpr,
-        a: 0.15 + Math.random()*0.55,
+        a: 0.14 + Math.random()*0.55,
         s: (0.06 + Math.random()*0.28) * dpr
       }));
     }
@@ -844,7 +820,7 @@ You are safe with me.
     }
     tick2d();
 
-    // Floating hearts ambience
+    // ===== Floating hearts ambience =====
     const floatLayer = $("floatLayer");
     const heartChars = ["🤍","💗","💖","💘","💝","❤"];
     function spawnHeart(){
@@ -859,9 +835,9 @@ You are safe with me.
       floatLayer.appendChild(h);
       setTimeout(()=>h.remove(), 16000);
     }
-    setInterval(spawnHeart, 920);
+    setInterval(spawnHeart, 900);
 
-    // Burst hearts (Web Animations API)
+    // ===== Burst hearts (Web Animations API) =====
     function burst(x,y){
       const n=18;
       const wrap=document.createElement("div");
@@ -900,8 +876,7 @@ You are safe with me.
       setTimeout(()=>wrap.remove(), 980);
     }
 
-    // ========= WebGL “Aurora Glow” =========
-    // Simple fragment shader using WebGL (no external libs)
+    // ===== WebGL Aurora glow =====
     const glCanvas = $("glow3d");
     const gl = glCanvas.getContext("webgl", { alpha:true, antialias:true });
 
@@ -920,9 +895,6 @@ You are safe with me.
       const s = gl.createShader(type);
       gl.shaderSource(s, src);
       gl.compileShader(s);
-      if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
-        console.warn(gl.getShaderInfoLog(s));
-      }
       return s;
     }
 
@@ -958,9 +930,9 @@ You are safe with me.
           float n2 = noise(uv*3.2 + vec2(-t*0.02, t*0.04));
           float glow = smoothstep(0.15, 0.85, n*0.65 + n2*0.35);
 
-          vec3 c1 = vec3(1.0, 0.48, 0.78); // pink
-          vec3 c2 = vec3(0.48, 0.99, 1.0); // cyan
-          vec3 c3 = vec3(0.71, 0.48, 1.0); // violet
+          vec3 c1 = vec3(1.0, 0.48, 0.78);
+          vec3 c2 = vec3(0.48, 0.99, 1.0);
+          vec3 c3 = vec3(0.71, 0.48, 1.0);
 
           float band = sin(uv.y*2.2 + t*0.35) * 0.5 + 0.5;
           vec3 col = mix(c1, c2, band);
@@ -1001,7 +973,7 @@ You are safe with me.
       draw();
     }
 
-    // ========= Slider message =========
+    // ===== Slider =====
     const dist = $("distance");
     const fill = $("meterFill");
     const sliderMsg = $("sliderMsg");
@@ -1009,140 +981,18 @@ You are safe with me.
       fill.style.width = val + "%";
       let msg = bank.sliderSteps[0].text;
       for (const s of bank.sliderSteps) if (val >= s.at) msg = s.text;
-      sliderMsg.textContent = msg.replaceAll("${her}", state.her);
+      sliderMsg.textContent = msg;
     }
     setDistance(parseInt(dist.value,10));
     dist.addEventListener("input", () => setDistance(parseInt(dist.value,10)));
 
-    $("btnReset").addEventListener("click", () => {
-      dist.value = 55;
-      setDistance(55);
-      toast("Soft reset. One gentle step at a time.");
-      burst(innerWidth*0.62, innerHeight*0.68);
-      vibe(20);
-    });
-
-    $("btnWarm").addEventListener("click", () => {
-      const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
-      toast(msg.replaceAll("${her}", state.her));
-      burst(innerWidth*0.62, innerHeight*0.68);
-      vibe(20);
-    });
-
-    // ========= “When she feels…” buttons =========
-    document.querySelectorAll("[data-state]").forEach(btn=>{
-      btn.addEventListener("click",(e)=>{
-        const k = btn.getAttribute("data-state");
-        const arr = bank.states[k] || bank.assurance;
-        const msg = arr[Math.floor(Math.random()*arr.length)];
-        toast(msg.replaceAll("${her}", state.her));
-        const r = e.currentTarget.getBoundingClientRect();
-        burst(r.left + r.width/2, r.top + r.height/2);
-        vibe(25);
-      });
-    });
-
-    // ========= Main buttons =========
-    $("btnRead").addEventListener("click", ()=>{
-      $("letterCard").scrollIntoView({behavior:"smooth", block:"start"});
-      toast("Read it slowly, my love.");
-      burst(innerWidth*0.35, innerHeight*0.25);
-      vibe(20);
-    });
-
-    $("btnAssure").addEventListener("click",(e)=>{
-      const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
-      toast(msg.replaceAll("${her}", state.her));
-      const r = e.currentTarget.getBoundingClientRect();
-      burst(r.left + r.width/2, r.top + r.height/2);
-      vibe(20);
-    });
-
-    $("btnLove").addEventListener("click",(e)=>{
-      toast(`I love you very very much, ${state.her}. No matter the week.`);
-      const r = e.currentTarget.getBoundingClientRect();
-      burst(r.left + r.width/2, r.top + r.height/2);
-      vibe(30);
-    });
-
-    $("btnBurst").addEventListener("click",(e)=>{
-      toast("Okay. Hearts incoming.");
-      burst(innerWidth*0.52, innerHeight*0.36);
-      burst(innerWidth*0.42, innerHeight*0.56);
-      burst(innerWidth*0.62, innerHeight*0.56);
-      vibe([20,40,20]);
-    });
-
-    $("btnPulse").addEventListener("click",(e)=>{
-      toast("Heartbeat mode: tap anywhere for a soft pulse.");
-      vibe([20,40,20]);
-      const r = e.currentTarget.getBoundingClientRect();
-      burst(r.left + r.width/2, r.top + r.height/2);
-    });
-
-    // Background tap: tiny burst sometimes
-    addEventListener("click",(e)=>{
-      const tag = (e.target.tagName||"").toLowerCase();
-      if(["button","input","textarea"].includes(tag)) return;
-      if(Math.random() < 0.12){
-        burst(e.clientX, e.clientY);
-        vibe(10);
-      }
-    });
-
-    // ========= Copy letter / send / secret =========
-    $("btnCopyLetter").addEventListener("click", ()=>{
-      copyToClipboard($("letterText").textContent.trim());
-      burst(innerWidth*0.35, innerHeight*0.65);
-      vibe(20);
-    });
-
-    $("btnCopySend").addEventListener("click", ()=>{
-      copyToClipboard($("sendText").value.trim());
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(20);
-    });
-
-    $("btnShort").addEventListener("click", ()=>{
-      $("sendText").value =
-        `Hi mahal 🤍 even if you’re distant or drained I still love you very very much I’m here gently and consistently and you can take your time I’m still here`;
-      toast("Short version ready.");
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(15);
-    });
-
-    $("btnLong").addEventListener("click", ()=>{
-      $("sendText").value =
-        `Hi mahal 🤍 I just want you to know even if you’re distant avoidant busy or drained I still love you very very much and I’m not here to pressure you I’m here to be your safe place quietly consistently and gently you can take your time and when you come closer I’ll be warm and when you need space I’ll be respectful but either way I’m still here`;
-      toast("More intense version ready.");
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(15);
-    });
-
-    function revealSecret(){
-      if(state.secret) return;
-      state.secret = true;
-      $("secretBox").classList.add("revealed");
-      $("secretState").textContent = "Revealed";
-      toast(`You are safe with me, ${state.her}.`);
-      burst(innerWidth*0.78, innerHeight*0.62);
-      vibe(25);
-    }
-    $("btnReveal").addEventListener("click", ()=>{
-      $("secretBox").scrollIntoView({behavior:"smooth", block:"center"});
-      setTimeout(revealSecret, 240);
-    });
-    $("btnRevealSecret").addEventListener("click", revealSecret);
-
-    $("btnCopySecret").addEventListener("click", ()=>{
-      copyToClipboard($("secretText").textContent.trim());
-      burst(innerWidth*0.78, innerHeight*0.68);
-      vibe(15);
-    });
-
-    // ========= Saved vows =========
+    // ===== Saved vows =====
     const savedList = $("savedList");
     const savedCount = $("savedCount");
+    const state = {
+      secret:false,
+      savedVows: JSON.parse(localStorage.getItem("iris_saved_vows") || "[]")
+    };
 
     function renderSaved(){
       savedList.innerHTML = "";
@@ -1171,7 +1021,7 @@ You are safe with me.
         btn.addEventListener("click", ()=>{
           const i = parseInt(btn.getAttribute("data-del"),10);
           state.savedVows.splice(i,1);
-          localStorage.setItem("steady_saved", JSON.stringify(state.savedVows));
+          localStorage.setItem("iris_saved_vows", JSON.stringify(state.savedVows));
           renderSaved();
           toast("Removed.");
           vibe(10);
@@ -1180,20 +1030,191 @@ You are safe with me.
     }
     renderSaved();
 
+    // ===== Secret reveal =====
+    function revealSecret(){
+      if(state.secret) return;
+      state.secret = true;
+      $("secretBox").classList.add("revealed");
+      $("secretState").textContent = "Revealed";
+      toast("You are safe with me, Iris.");
+      burst(innerWidth*0.78, innerHeight*0.62);
+      vibe(25);
+    }
+
+    // ===== Spill Love mode =====
+    let spillMode = false;
+
+    function whisper(){
+      const line = bank.whispers[Math.floor(Math.random()*bank.whispers.length)];
+      toast(line);
+      return line;
+    }
+
+    // ===== Special panel actions =====
+    const specialMsg = $("specialMsg");
+    function setSpecial(text){ specialMsg.textContent = text; }
+
+    $("btnLoveMeter").addEventListener("click", ()=>{
+      const v = Math.floor(92 + Math.random()*9);
+      const line = `Love meter: ${v}% → I love you so so much, Iris.`;
+      setSpecial(line);
+      toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35);
+      vibe(20);
+    });
+
+    $("btnMissYou").addEventListener("click", ()=>{
+      const line = "I miss you, Iris. No pressure. Just truth.";
+      setSpecial(line);
+      toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35);
+      vibe(20);
+    });
+
+    $("btnWarm").addEventListener("click", ()=>{
+      const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
+      setSpecial(msg);
+      toast(msg);
+      burst(innerWidth*0.72, innerHeight*0.35);
+      vibe(18);
+    });
+
+    $("btnBreathe").addEventListener("click", ()=>{
+      const line = "Breathe, my love. In… out… You’re safe. I’m still here.";
+      setSpecial(line);
+      toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35);
+      vibe([20,40,20]);
+    });
+
+    // ===== “When you feel…” =====
+    document.querySelectorAll("[data-state]").forEach(btn=>{
+      btn.addEventListener("click",(e)=>{
+        const k = btn.getAttribute("data-state");
+        const arr = bank.states[k] || bank.assurance;
+        const msg = arr[Math.floor(Math.random()*arr.length)];
+        setSpecial(msg);
+        toast(msg);
+        const r = e.currentTarget.getBoundingClientRect();
+        burst(r.left + r.width/2, r.top + r.height/2);
+        vibe(25);
+      });
+    });
+
+    // ===== Main buttons =====
+    $("btnRead").addEventListener("click", ()=>{
+      $("letterCard").scrollIntoView({behavior:"smooth", block:"start"});
+      toast("Read it slowly, Iris.");
+      burst(innerWidth*0.35, innerHeight*0.25);
+      vibe(20);
+    });
+
+    $("btnAssure").addEventListener("click",(e)=>{
+      const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
+      toast(msg);
+      setSpecial(msg);
+      const r = e.currentTarget.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+      vibe(18);
+    });
+
+    $("btnLove").addEventListener("click",(e)=>{
+      toast("I love you so so much, Iris. No matter the week.");
+      const r = e.currentTarget.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+      vibe(30);
+    });
+
+    $("btnHeartRain").addEventListener("click", ()=>{
+      toast("Hearts for you 🤍");
+      burst(innerWidth*0.52, innerHeight*0.34);
+      burst(innerWidth*0.42, innerHeight*0.56);
+      burst(innerWidth*0.62, innerHeight*0.56);
+      vibe([20,40,20]);
+    });
+
+    $("btnCopyLetter").addEventListener("click", ()=>{
+      copyToClipboard($("letterText").textContent.trim());
+      burst(innerWidth*0.35, innerHeight*0.65);
+      vibe(20);
+    });
+
     $("btnSaveVow").addEventListener("click", ()=>{
       const vow = bank.vows[Math.floor(Math.random()*bank.vows.length)];
       state.savedVows.unshift(vow);
       state.savedVows = state.savedVows.slice(0, 12);
-      localStorage.setItem("steady_saved", JSON.stringify(state.savedVows));
+      localStorage.setItem("iris_saved_vows", JSON.stringify(state.savedVows));
       renderSaved();
       toast("Saved a vow 🤍");
       burst(innerWidth*0.38, innerHeight*0.82);
       vibe(20);
     });
 
+    $("btnSeal").addEventListener("click", ()=>{
+      const panel = $("specialPanel");
+      panel.classList.toggle("locked");
+      const on = panel.classList.contains("locked");
+      const line = on ? "Heart lock engaged 🤍 You are safe with me, Iris." : "Heart lock off — still safe, still loved.";
+      setSpecial(line);
+      toast(line);
+      burst(innerWidth*0.72, innerHeight*0.35);
+      vibe([20,40,20]);
+    });
+
+    $("btnReset").addEventListener("click", ()=>{
+      dist.value = 55;
+      setDistance(55);
+      toast("Soft reset. One gentle step at a time.");
+      burst(innerWidth*0.62, innerHeight*0.68);
+      vibe(18);
+    });
+
+    $("btnNudge").addEventListener("click", ()=>{
+      const line = "Little nudge: I’m here. I love you so so much. Take your time.";
+      toast(line);
+      setSpecial(line);
+      burst(innerWidth*0.62, innerHeight*0.68);
+      vibe(18);
+    });
+
+    $("btnRevealSecret").addEventListener("click", revealSecret);
+    $("btnCopySecret").addEventListener("click", ()=>{
+      copyToClipboard($("secretText").textContent.trim());
+      burst(innerWidth*0.78, innerHeight*0.68);
+      vibe(15);
+    });
+
+    $("btnCopySend").addEventListener("click", ()=>{
+      copyToClipboard($("sendText").value.trim());
+      burst(innerWidth*0.62, innerHeight*0.78);
+      vibe(20);
+    });
+
+    $("btnPerfect").addEventListener("click", ()=>{
+      $("sendText").value = bank.perfectMessage;
+      toast("Perfect message ready 🤍");
+      burst(innerWidth*0.62, innerHeight*0.78);
+      vibe(15);
+    });
+
+    $("btnShort").addEventListener("click", ()=>{
+      $("sendText").value = "Hi mahal 🤍 I love you so so much take your time no pressure I’m still here";
+      toast("Short version ready.");
+      burst(innerWidth*0.62, innerHeight*0.78);
+      vibe(12);
+    });
+
+    $("btnLong").addEventListener("click", ()=>{
+      $("sendText").value =
+        "Hi mahal 🤍 even if you’re distant avoidant busy or drained I still love you so so much and I’m not here to pressure you I’m here to be your safe place quietly consistently and gently take your time and when you come closer I’ll be warm and when you need space I’ll be respectful but either way I’m still here";
+      toast("More version ready.");
+      burst(innerWidth*0.62, innerHeight*0.78);
+      vibe(12);
+    });
+
     $("btnClearSaved").addEventListener("click", ()=>{
       state.savedVows = [];
-      localStorage.setItem("steady_saved", JSON.stringify(state.savedVows));
+      localStorage.setItem("iris_saved_vows", JSON.stringify(state.savedVows));
       renderSaved();
       toast("Cleared.");
       vibe(10);
@@ -1207,10 +1228,45 @@ You are safe with me.
       vibe(15);
     });
 
-    // ========= Share API =========
+    $("btnGoodnight").addEventListener("click", ()=>{
+      document.body.classList.toggle("goodnight");
+      const on = document.body.classList.contains("goodnight");
+      toast(on ? "Goodnight mode 🌙 Rest, Iris. I’m still here." : "Goodnight mode off 🤍");
+      vibe(15);
+    });
+
+    $("btnSpill").addEventListener("click", ()=>{
+      spillMode = !spillMode;
+      toast(spillMode ? "Spill Love ON 🤍 Tap anywhere." : "Spill Love OFF 🤍");
+      vibe([20,40,20]);
+    });
+
+    // Spill Love: tap background whispers love
+    addEventListener("click",(e)=>{
+      const tag = (e.target.tagName||"").toLowerCase();
+      if(["button","input","textarea"].includes(tag)) return;
+
+      if(spillMode){
+        const line = whisper();
+        setSpecial(line);
+        burst(e.clientX, e.clientY);
+        vibe(10);
+        return;
+      }
+
+      // small surprise bursts sometimes
+      if(Math.random() < 0.10){
+        burst(e.clientX, e.clientY);
+        vibe(8);
+      }
+    });
+
+    // Share API
     $("btnShare").addEventListener("click", async ()=>{
       const shareText =
-        `For you, ${state.her} 🤍\nI love you very very much—no matter how distant or busy the week is.\n\n(If you’re viewing this page, it was made for you.)`;
+`For you, Iris 🤍
+I love you so so much—no matter how distant or busy the week is.
+(If you’re viewing this page, it was made only for you.)`;
       try{
         if (navigator.share){
           await navigator.share({ title: document.title, text: shareText });
@@ -1224,7 +1280,7 @@ You are safe with me.
       }
     });
 
-    // ========= Web Component (Shadow DOM) =========
+    // ===== Web Component (Shadow DOM) =====
     class SteadyNote extends HTMLElement{
       connectedCallback(){
         const root = this.attachShadow({mode:"open"});
@@ -1240,8 +1296,8 @@ You are safe with me.
             .top{
               display:flex; align-items:center; justify-content:space-between;
               gap:10px; flex-wrap:wrap; margin-bottom:10px;
-              color: rgba(214,215,255,.85);
-              font-weight:800;
+              color: rgba(214,215,255,.88);
+              font-weight:900;
             }
             .btns{display:flex; gap:10px; flex-wrap:wrap;}
             button{
@@ -1266,90 +1322,41 @@ You are safe with me.
           </style>
           <div class="box">
             <div class="top">
-              <div>Little steady note (custom element)</div>
+              <div>Little note (just for you)</div>
               <div class="btns">
-                <button id="nudge">Warm nudge</button>
+                <button id="whisper">Whisper</button>
                 <button class="primary" id="copy">Copy</button>
               </div>
             </div>
             <div class="msg" id="msg">
-              Even if you go quiet, I don’t change into pressure.
-              I stay soft. I stay steady.
-              I love you very very much, and you are safe with me.
+              Even if you go quiet, my love doesn’t turn into pressure.
+              I love you so so much, Iris—softly, steadily, consistently.
+              You are safe with me.
             </div>
           </div>
         `;
-
-        root.getElementById("nudge").addEventListener("click", ()=>{
-          this.dispatchEvent(new CustomEvent("steady:nudge",{bubbles:true}));
+        root.getElementById("whisper").addEventListener("click", ()=>{
+          const line = bank.whispers[Math.floor(Math.random()*bank.whispers.length)];
+          toast(line);
+          $("specialMsg").textContent = line;
+          burst(innerWidth*0.44, innerHeight*0.78);
+          vibe(12);
         });
-        root.getElementById("copy").addEventListener("click", ()=>{
+        root.getElementById("copy").addEventListener("click", async ()=>{
           const t = root.getElementById("msg").textContent.trim();
-          navigator.clipboard?.writeText(t);
-          this.dispatchEvent(new CustomEvent("steady:copy",{bubbles:true, detail:t}));
+          await copyToClipboard(t);
+          burst(innerWidth*0.44, innerHeight*0.78);
+          vibe(12);
         });
       }
     }
     customElements.define("steady-note", SteadyNote);
 
-    addEventListener("steady:nudge", ()=>{
-      toast(`Even in a dull week, I’m still here, ${state.her}.`);
-      burst(innerWidth*0.45, innerHeight*0.78);
-      vibe(15);
-    });
-
-    addEventListener("steady:copy", (e)=>{
-      toast("Copied 🤍");
-      burst(innerWidth*0.45, innerHeight*0.78);
-      vibe(12);
-    });
-
-    // ========= Offline mode via Service Worker (Blob URL) =========
-    // Works on local servers / hosted pages; may be limited for file://
-    (function registerSW(){
-      if (!("serviceWorker" in navigator)) return;
-      try{
-        const swCode = `
-          self.addEventListener('install', (e) => {
-            e.waitUntil((async () => {
-              const cache = await caches.open('steady-love-v1');
-              // Cache the root request if possible
-              try { await cache.add(self.registration.scope); } catch(e){}
-              self.skipWaiting();
-            })());
-          });
-          self.addEventListener('activate', (e) => {
-            e.waitUntil(self.clients.claim());
-          });
-          self.addEventListener('fetch', (e) => {
-            e.respondWith((async () => {
-              const cache = await caches.open('steady-love-v1');
-              const cached = await cache.match(e.request);
-              if (cached) return cached;
-              try{
-                const res = await fetch(e.request);
-                if (res && res.ok && e.request.method === 'GET'){
-                  cache.put(e.request, res.clone());
-                }
-                return res;
-              }catch(err){
-                // last resort
-                return cached || new Response('Offline 🤍', {status:200});
-              }
-            })());
-          });
-        `;
-        const blob = new Blob([swCode], {type:"text/javascript"});
-        const url = URL.createObjectURL(blob);
-        navigator.serviceWorker.register(url).catch(()=>{});
-      }catch{}
-    })();
-
-    // ========= Intro =========
+    // Intro
     addEventListener("load", ()=>{
-      toast(`Hi ${state.her} 🤍 I made this so you feel safe, even on distant weeks.`);
+      toast("Hi Iris 🤍 I made this so you feel safe, even on distant weeks.");
       setTimeout(()=>burst(innerWidth*0.52, 120), 260);
-      setTimeout(()=>toast("Tap ‘Distant / Avoidant / Busy / Drained’ — it answers gently."), 2800);
+      setTimeout(()=>toast("Tap Distant/Avoidant/Busy/Drained — it answers gently."), 2800);
     });
   </script>
 </body>
