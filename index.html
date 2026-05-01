@@ -1,1380 +1,222 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0a18" />
-  <meta name="description" content="A private, dark lavender reassurance page — made only for Iris." />
-  <title>For Iris 🤍</title>
+<meta charset="UTF-8">
+<title>8 Months of Choosing You</title>
 
-  <!-- JSON-LD (structured data) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"CreativeWork",
-    "name":"A Private Reassurance Page",
-    "author":{"@type":"Person","name":"Ali"},
-    "about":"A dedicated comfort and reassurance page made for Iris.",
-    "inLanguage":"en"
-  }
-  </script>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #d8b4f8, #f3e8ff, #e9d5ff);
+  color: #3a2d4f;
+  overflow-x: hidden;
+}
 
-  <style>
-    :root{
-      /* Deep dark lavender night */
-      --bg1:#05040b;
-      --bg2:#0b0a18;
-      --bg3:#141135;
+/* petals */
+.petal {
+  position: fixed;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  background: white;
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(100vh) translateX(40px); }
+}
 
-      /* Text */
-      --text:#f4f2ff;
-      --muted:#cfc9ffb8;
+.container {
+  text-align: center;
+  padding: 80px 20px;
+  max-width: 750px;
+  margin: auto;
+}
 
-      /* Surfaces */
-      --card: rgba(255,255,255,.06);
-      --ring: rgba(255,255,255,.14);
+/* name */
+.name {
+  font-size: 2.8em;
+  color: #6a4c93;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
 
-      /* Lavender accents (soft) */
-      --accent:#cbb7ff;
-      --accent2:#a78bfa;
-      --violet:#8b5cf6;
+/* fade animation */
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
 
-      --shadow: 0 18px 55px rgba(0,0,0,.62);
-      --radius: 22px;
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-      /* Eye comfort */
-      --sat: .78;
-      --glowOpacity: .20;
-      --starsOpacity: .42;
-    }
+/* cards */
+.card {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 40px 0;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(900px 650px at 14% 10%, rgba(203,183,255,.12), transparent 62%),
-        radial-gradient(850px 650px at 86% 18%, rgba(167,139,250,.10), transparent 66%),
-        radial-gradient(900px 800px at 50% 92%, rgba(139,92,246,.09), transparent 70%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
-    }
+/* typing */
+#typing {
+  border-right: 2px solid #6a4c93;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  margin: 30px 0;
+}
 
-    /* subtle grain */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
-      mix-blend-mode:overlay;
-      pointer-events:none;
-      opacity:.12;
-      z-index:1;
-    }
+/* heart */
+.heart {
+  font-size: 2em;
+  margin-top: 20px;
+  animation: beat 1.2s infinite;
+  color: #a64ac9;
+}
+@keyframes beat {
+  50% { transform: scale(1.15); }
+}
 
-    /* Layers */
-    #glow3d{
-      position:fixed; inset:0;
-      width:100%; height:100%;
-      z-index:0;
-      pointer-events:none;
-      opacity: var(--glowOpacity);
-      filter: saturate(.70) blur(.2px);
-    }
-    #stars2d{
-      position:fixed; inset:0;
-      width:100%; height:100%;
-      z-index:0;
-      pointer-events:none;
-      opacity: var(--starsOpacity);
-      filter: saturate(.70);
-    }
-    #floatLayer{
-      position:fixed; inset:0;
-      z-index:2;
-      pointer-events:none;
-      overflow:hidden;
-    }
+/* button */
+button {
+  background: #b57edc;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
-    /* Goodnight (even darker) */
-    body.goodnight::after{
-      content:"";
-      position:fixed; inset:0;
-      background:
-        radial-gradient(700px 500px at 50% 18%, rgba(255,255,255,.05), transparent 62%),
-        radial-gradient(900px 700px at 50% 92%, rgba(167,139,250,.06), transparent 68%),
-        linear-gradient(180deg, rgba(5,4,11,.30), rgba(5,4,11,.85));
-      pointer-events:none;
-      z-index:2;
-    }
+.hidden {
+  display: none;
+  margin-top: 20px;
+  font-style: italic;
+}
 
-    /* Soft Eyes (extra comfort) */
-    body.softEyes{
-      --sat: .66;
-      --glowOpacity: .14;
-      --starsOpacity: .34;
-    }
+/* final letter */
+.letter {
+  margin-top: 80px;
+  font-style: italic;
+  line-height: 1.8;
+  opacity: 0;
+  transition: 2s;
+}
 
-    .wrap{
-      position:relative;
-      z-index:3;
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 22px 18px 70px;
-      filter: saturate(var(--sat));
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      padding: 10px 12px;
-      border:1px solid var(--ring);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border-radius:999px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 35px rgba(0,0,0,.28);
-    }
-
-    .badge{
-      display:flex; align-items:center; gap:10px;
-      padding: 7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color:var(--muted);
-      font-size: 13px;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--accent2));
-      box-shadow: 0 0 12px rgba(167,139,250,.45);
-    }
-    .spark{
-      width:12px;height:12px;border-radius:4px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      transform: rotate(18deg);
-      box-shadow: 0 0 12px rgba(203,183,255,.35);
-    }
-
-    .pill{
-      appearance:none;
-      border:1px solid rgba(255,255,255,.16);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
-      color:var(--text);
-      padding: 10px 14px;
-      border-radius: 999px;
-      cursor:pointer;
-      transition: transform .15s ease, border-color .15s ease;
-      box-shadow: 0 10px 22px rgba(0,0,0,.22);
-      font-weight:900;
-    }
-    .pill:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.26);}
-    .pill:active{transform: translateY(0px) scale(.98)}
-    .pill.primary{
-      border-color: transparent;
-      background:
-        radial-gradient(160px 90px at 20% 20%, rgba(255,255,255,.22), transparent 60%),
-        linear-gradient(135deg, var(--accent2), var(--violet));
-      color:#0b0a18;
-      box-shadow: 0 18px 40px rgba(167,139,250,.12);
-    }
-
-    .card{
-      border:1px solid var(--ring);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      overflow:hidden;
-      position:relative;
-    }
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:-140px -140px auto auto;
-      width:320px;height:320px;
-      background: radial-gradient(circle at 30% 30%, rgba(203,183,255,.14), transparent 60%);
-      transform: rotate(18deg);
-      pointer-events:none;
-      opacity:.45;
-      filter: blur(1px) saturate(.75);
-    }
-
-    .hero{ margin-top: 14px; padding: 20px; }
-    .heroTop{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:12px; flex-wrap:wrap;
-    }
-    .title{
-      margin: 10px 0 10px;
-      font-size: clamp(30px, 4.6vw, 56px);
-      line-height:1.05;
-      letter-spacing:-0.02em;
-    }
-    .shine{
-      background: linear-gradient(90deg, #fff, rgba(203,183,255,.95), rgba(167,139,250,.95), #fff);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
-      background-size: 200% 100%;
-      animation: shimmer 4.6s linear infinite;
-    }
-    @keyframes shimmer{
-      0%{background-position:0% 50%}
-      100%{background-position:200% 50%}
-    }
-    .sub{
-      margin: 0 0 16px;
-      color: var(--muted);
-      line-height:1.75;
-      font-size: 15.5px;
-      max-width: 82ch;
-    }
-
-    .chipRow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px;}
-    .chip{
-      display:flex; align-items:center; gap:8px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      border-radius:999px;
-      padding: 8px 10px;
-      color: var(--muted);
-      font-size: 13px;
-      user-select:none;
-    }
-
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
-    }
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
-
-    .section{padding: 18px}
-    .section h2{margin:0 0 8px; font-size:17px; letter-spacing:.01em;}
-    .section p{margin:0 0 14px; color:var(--muted); font-size:14.5px; line-height:1.75;}
-
-    .letter{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      border-radius: 18px;
-      padding: 16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .letter::before{
-      content:"";
-      position:absolute;
-      inset:auto -60px -60px auto;
-      width:220px;height:220px;
-      background: radial-gradient(circle at 30% 30%, rgba(167,139,250,.12), transparent 60%);
-      transform: rotate(10deg);
-      pointer-events:none;
-    }
-    .dear{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .tiny{font-size:12.5px;color:var(--muted)}
-    .letterText{
-      margin:0;
-      white-space:pre-line;
-      font-size: 15px;
-      line-height:1.9;
-      color:#fff;
-    }
-    .sign{
-      margin-top: 14px;
-      font-weight: 950;
-      letter-spacing:.02em;
-      color: rgba(244,242,255,.95);
-    }
-    .row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px;}
-
-    .panel{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      border-radius: 18px;
-      padding: 14px;
-      overflow:hidden;
-      position:relative;
-    }
-    .panelTop{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:10px; flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-
-    .meter{
-      height:10px;
-      background: rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      overflow:hidden;
-    }
-    .meter > i{
-      display:block; height:100%; width:55%;
-      background: linear-gradient(90deg, rgba(203,183,255,.95), rgba(167,139,250,.95));
-      box-shadow: 0 0 18px rgba(167,139,250,.12);
-    }
-    input[type="range"]{ width:100%; accent-color: var(--accent2); }
-
-    .bigMsg{
-      margin-top: 10px;
-      color:#fff;
-      line-height:1.7;
-      font-size: 14.8px;
-      min-height: 60px;
-    }
-
-    textarea{
-      width:100%;
-      min-height: 108px;
-      resize: vertical;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(5,4,11,.65);
-      color:#fff;
-      outline:none;
-      font-size: 14px;
-      line-height:1.65;
-    }
-
-    .secret{
-      border:1px dashed rgba(255,255,255,.20);
-      border-radius: 18px;
-      padding: 14px;
-      background: rgba(255,255,255,.04);
-    }
-    .secretTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      color: var(--muted);
-      font-size: 12.5px;
-      margin-bottom: 8px;
-    }
-    .blur{filter: blur(7px); opacity:.62; transition: filter .25s ease, opacity .25s ease;}
-    .secret.revealed .blur{filter: blur(0); opacity:1}
-
-    .seal{
-      display:flex; gap:14px; align-items:center;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      border-radius: 18px;
-      padding: 12px 14px;
-    }
-    .sealText{color:var(--muted); font-size:13.5px; line-height:1.6;}
-    .sealText b{color:#fff}
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom: 18px;
-      transform: translateX(-50%) translateY(20px);
-      opacity:0;
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.14);
-      color:#fff;
-      padding: 10px 12px;
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      display:flex;
-      align-items:center;
-      gap:10px;
-      z-index: 99;
-      transition: opacity .2s ease, transform .2s ease;
-      max-width: min(92vw, 820px);
-      text-align:center;
-      justify-content:center;
-      font-weight:900;
-    }
-    .toast.show{opacity:1; transform: translateX(-50%) translateY(0);}
-    .tDot{
-      width:10px;height:10px;border-radius:50%;
-      background: linear-gradient(135deg, rgba(203,183,255,.95), rgba(167,139,250,.95));
-      box-shadow: 0 0 14px rgba(167,139,250,.18);
-    }
-
-    footer{
-      text-align:center;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height:1.6;
-      padding: 0 8px;
-    }
-    footer strong{color:#fff}
-
-    .heart{
-      position:absolute;
-      opacity:0;
-      animation: floatUp linear forwards;
-      will-change: transform, opacity;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
-    @keyframes floatUp{
-      0%{opacity:0; transform: translateY(20px) scale(.9)}
-      10%{opacity:.95}
-      100%{opacity:0; transform: translateY(-120vh) scale(1.25)}
-    }
-
-    .locked{
-      border-color: rgba(203,183,255,.40) !important;
-      background: linear-gradient(180deg, rgba(203,183,255,.08), rgba(255,255,255,.04)) !important;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important; transition:none !important;}
-      #glow3d, #stars2d{display:none;}
-      .blur{filter:none !important; opacity:1 !important;}
-    }
-  </style>
+.letter.show {
+  opacity: 1;
+}
+</style>
 </head>
 
 <body>
-  <canvas id="glow3d" aria-hidden="true"></canvas>
-  <canvas id="stars2d" aria-hidden="true"></canvas>
-  <div id="floatLayer" aria-hidden="true"></div>
 
-  <div class="toast" id="toast"><span class="tDot"></span><span id="toastText">🤍</span></div>
+<script>
+/* petals */
+for(let i=0;i<25;i++){
+  let p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(6+Math.random()*5)+"s";
+  document.body.appendChild(p);
+}
+</script>
 
-  <script type="application/json" id="bank">
-  {
-    "assurance":[
-      "I love you so so much, Iris — even when the week is quiet.",
-      "Busy doesn’t scare me. Distance doesn’t scare me. I’m still here.",
-      "You don’t owe me energy. You only get gentleness from me.",
-      "My love for you doesn’t demand. It protects.",
-      "Even on dull weeks, I’m choosing you — softly, consistently."
-    ],
-    "states":{
-      "distant":[
-        "If you’re distant, I won’t pressure you. I’ll stay gentle and steady.",
-        "Quiet days don’t change what I feel. I love you so so much, Iris.",
-        "I’ll stay close in a way that feels safe, not heavy."
-      ],
-      "avoidant":[
-        "If you need space, I respect it — and I still love you deeply.",
-        "I won’t corner your heart. I’ll comfort it.",
-        "You are safe with me, Iris. Always."
-      ],
-      "busy":[
-        "Do what you need to do today. I’m not competing — I’m supporting you.",
-        "I’m proud of you. I’m still your soft place to land.",
-        "Even if we’re quiet, I’m still choosing you."
-      ],
-      "drained":[
-        "Rest, my love. You don’t have to be bright to be loved.",
-        "Tired Iris is still my favorite Iris.",
-        "If you can’t talk much, it’s okay. I’m still here."
-      ]
-    },
-    "vows":[
-      "I will love you gently, not loudly.",
-      "I will be consistent, not confusing.",
-      "I will protect your peace, not disturb it.",
-      "I will be your safe place, not your pressure.",
-      "I will choose you in the quiet days too."
-    ],
-    "sliderSteps":[
-      {"at":0,"text":"If today is heavy… I’m here. No demands. Just love."},
-      {"at":25,"text":"Even if we’re quiet, I’m still choosing you, Iris."},
-      {"at":50,"text":"Distance doesn’t change my love. I’m steady and soft."},
-      {"at":75,"text":"One gentle step. One warm message. No pressure."},
-      {"at":100,"text":"Come closer when you can. I’ll be here—safe, calm, and yours."}
-    ],
-    "whispers":[
-      "I love you so so much, Iris.",
-      "You’re safe with me.",
-      "Even if you’re quiet, I’m still here.",
-      "No pressure. Just love.",
-      "I choose you on the dull days too.",
-      "I’m not going anywhere.",
-      "You’re my favorite person.",
-      "I’ll be gentle with your heart."
-    ],
-    "perfectMessage":"Hi mahal 🤍 even if you’re distant busy or drained I still love you so so much no pressure no demands just me choosing you gently take your time I’m still here"
+<div class="container">
+
+<div class="name">Iris</div>
+<p>8 months of choosing you</p>
+
+<p id="typing"></p>
+
+<div class="card fade">
+  it’s been 8 months…  
+  not perfect… not always easy…  
+  but always real.
+</div>
+
+<div class="card fade">
+  i didn’t stay because things were simple…  
+  i stayed because you mattered to me.
+</div>
+
+<div class="card fade">
+  i learned your quiet…  
+  your distance…  
+  and instead of leaving, i stayed softer.
+</div>
+
+<div class="card fade">
+  i don’t love you loudly…  
+  i love you in ways that stay… even in silence.
+</div>
+
+<div class="card fade">
+  <strong>why i choose you</strong><br><br>
+  i choose you in the moments you pull away…  
+  i choose you when things feel uncertain…  
+  i choose you even when it would be easier not to.
+</div>
+
+<div class="heart">♥</div>
+
+<button onclick="showMessage()">tap me</button>
+<p id="secret" class="hidden">
+  i’m still here… and i’m still choosing you.
+</p>
+
+<div class="letter" id="letter">
+  8 months later…  
+  and i never once felt like leaving.  
+  <br><br>
+  not because everything was perfect…  
+  but because you were worth staying for.  
+  <br><br>
+  and if you ever wonder if i’ll get tired…  
+  just know…  
+  i already chose you on the days it wasn’t easy.
+</div>
+
+</div>
+
+<script>
+/* typing */
+const text="8 months… and my feelings never changed, they only became more certain.";
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,40);
   }
-  </script>
+}
+type();
 
-  <div class="wrap">
-    <div class="topbar">
-      <div class="badge"><span class="dot"></span> this page belongs to you, <b>Iris</b></div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-        <button class="pill" id="btnSoftEyes">Soft Eyes</button>
-        <button class="pill" id="btnGoodnight">Goodnight</button>
-        <button class="pill" id="btnSpill">Spill Love</button>
-        <button class="pill primary" id="btnLove">Send Love</button>
-      </div>
-    </div>
+/* button */
+function showMessage(){
+  document.getElementById("secret").style.display="block";
+  document.getElementById("letter").classList.add("show");
+}
 
-    <div class="card hero">
-      <div class="heroTop">
-        <div class="badge"><span class="spark"></span> made only for <b>Iris</b> — from <b>Ali</b></div>
-        <div class="badge"><span class="spark"></span> no matter the distance, I’m still here</div>
-      </div>
-
-      <h1 class="title">
-        Even when you’re distant, <br/>
-        my love is still <span class="shine">steady</span>.
-      </h1>
-
-      <p class="sub">
-        This is a reassurance page. A place you can open when you’re busy, drained, avoidant, or quiet—
-        so you can feel one thing clearly: <b>I love you so so much</b>, Iris, and you are safe with me.
-      </p>
-
-      <div class="chipRow" id="dateLine"></div>
-
-      <div class="chipRow">
-        <div class="chip"><span class="spark"></span> no pressure</div>
-        <div class="chip"><span class="spark"></span> consistent love</div>
-        <div class="chip"><span class="spark"></span> comfort & security</div>
-        <div class="chip"><span class="spark"></span> love that stays</div>
-      </div>
-
-      <div class="row">
-        <button class="pill primary" id="btnRead">Read my letter</button>
-        <button class="pill" id="btnAssure">Give reassurance</button>
-        <button class="pill" id="btnHeartRain">Heart rain</button>
-        <button class="pill" id="btnShare">Share</button>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card section" id="letterCard">
-        <h2>My letter to you</h2>
-        <p>Just love. Just security. Just me choosing you—quietly, consistently.</p>
-
-        <div class="letter">
-          <div class="dear">
-            <b>My love, Iris 🤍</b>
-            <span class="tiny">tap “Copy” to save / send</span>
-          </div>
-
-          <p class="letterText" id="letterText">
-I love you so, so much.
-
-Not in a loud way that pressures you—
-in a steady way that protects you.
-
-Even if you’re distant…
-even if you’re avoidant…
-even if you’re busy…
-even if you’re drained…
-
-my love doesn’t turn into demands.
-It stays soft.
-It stays patient.
-It stays sure.
-
-I don’t need you to be “okay” for me to love you.
-I don’t need constant replies to feel secure.
-I just want you to feel one thing clearly:
-
-You are safe with me.
-
-I’m choosing you on the quiet days.
-I’m choosing you when the week feels dull.
-I’m choosing you when your heart needs space.
-Because my love for you is not a mood—
-it’s a decision I keep making gently.
-
-When you come closer, I’ll be warm.
-When you need space, I’ll be respectful.
-But either way, I will love you properly.
-
-I love you so, so much… and I’m still here.
-          </p>
-
-          <div class="sign">— Ali 🤍</div>
-
-          <div class="row">
-            <button class="pill primary" id="btnCopyLetter">Copy letter</button>
-            <button class="pill" id="btnSaveVow">Save a vow</button>
-            <button class="pill" id="btnSeal">Heart lock</button>
-          </div>
-        </div>
-
-        <div class="panel" style="margin-top:14px;">
-          <div class="panelTop">
-            <b>tiny formula (just for you)</b>
-            <span class="tiny">MathML</span>
-          </div>
-          <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
-            <mrow>
-              <mi>love</mi><mo>(</mo><mi>Iris</mi><mo>)</mo>
-              <mo>=</mo>
-              <munder><mo>lim</mo><mrow><mi>week</mi><mo>→</mo><mi>any</mi></mrow></munder>
-              <mrow><mi>steady</mi><mo>+</mo><mi>gentle</mi><mo>+</mo><mi>stay</mi></mrow>
-            </mrow>
-          </math>
-        </div>
-
-        <steady-note></steady-note>
-      </div>
-
-      <div class="card section">
-        <h2>When you feel…</h2>
-        <p>Tap what you’re feeling. It answers softly—no pressure.</p>
-
-        <div class="row">
-          <button class="pill" data-state="distant">Distant</button>
-          <button class="pill" data-state="avoidant">Avoidant</button>
-          <button class="pill" data-state="busy">Busy</button>
-          <button class="pill" data-state="drained">Drained</button>
-        </div>
-
-        <div class="panel" style="margin-top:12px;" id="specialPanel">
-          <div class="panelTop">
-            <b>Just for you, Iris</b>
-            <span class="tiny">tap any — it responds</span>
-          </div>
-          <div class="row">
-            <button class="pill primary" id="btnLoveMeter">Love meter</button>
-            <button class="pill" id="btnMissYou">I miss you</button>
-            <button class="pill" id="btnWarm">Warm reminder</button>
-            <button class="pill" id="btnBreathe">Breathe</button>
-          </div>
-          <div class="bigMsg" id="specialMsg" style="margin-top:12px;">Tap one above 🤍</div>
-        </div>
-
-        <div class="panel" style="margin-top:12px;">
-          <div class="panelTop">
-            <b>Distance → Closeness</b>
-            <span class="tiny">move gently</span>
-          </div>
-          <div class="meter" aria-hidden="true"><i id="meterFill"></i></div>
-          <input id="distance" type="range" min="0" max="100" value="55" />
-          <div class="bigMsg" id="sliderMsg"></div>
-          <div class="row" style="margin-top:12px;">
-            <button class="pill" id="btnReset">Soft reset</button>
-            <button class="pill primary" id="btnNudge">Little nudge</button>
-          </div>
-        </div>
-
-        <div class="panel" style="margin-top:12px;">
-          <div class="panelTop">
-            <b>Message for you (if you want it)</b>
-            <span class="tiny">copy / share ready</span>
-          </div>
-          <textarea id="sendText">Hi mahal 🤍 even if you’re distant busy or drained I still love you so so much no pressure no demands just me choosing you gently take your time I’m still here</textarea>
-          <div class="row">
-            <button class="pill primary" id="btnCopySend">Copy</button>
-            <button class="pill" id="btnPerfect">Perfect</button>
-            <button class="pill" id="btnShort">Short</button>
-            <button class="pill" id="btnLong">More</button>
-          </div>
-        </div>
-
-        <div class="seal" style="margin-top:12px;">
-          <svg width="86" height="86" viewBox="0 0 120 120" role="img" aria-label="seal">
-            <defs>
-              <radialGradient id="rg" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity=".40"/>
-                <stop offset="35%" stop-color="#cbb7ff" stop-opacity=".26"/>
-                <stop offset="100%" stop-color="#a78bfa" stop-opacity=".08"/>
-              </radialGradient>
-              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="3" result="b"/>
-                <feMerge>
-                  <feMergeNode in="b"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <circle cx="60" cy="60" r="54" fill="url(#rg)" filter="url(#glow)" opacity=".90"/>
-            <path
-              d="M60 28 C43 30 36 45 45 56 C30 58 32 80 50 82
-                 C54 92 67 92 71 82 C89 80 90 58 75 56 C84 45 77 30 60 28Z"
-              fill="rgba(255,255,255,.14)" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
-            <animateTransform attributeName="transform" attributeType="XML"
-              type="rotate" from="0 60 60" to="360 60 60" dur="18s" repeatCount="indefinite"/>
-            <path
-              d="M60 36 C49 38 44 48 50 55 C42 58 44 70 54 72
-                 C56 78 64 78 66 72 C76 70 78 58 70 55 C76 48 71 38 60 36Z"
-              fill="rgba(167,139,250,.18)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
-          </svg>
-          <div class="sealText">
-            <b>Seal of steady love</b><br/>
-            Even if you go quiet, my love doesn’t turn into pressure.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card section">
-        <h2>Secret (quiet moments)</h2>
-        <p>For the nights where you need security more than conversation.</p>
-
-        <div class="secret" id="secretBox">
-          <div class="secretTop">
-            <span>Protected message</span>
-            <span id="secretState">Hidden</span>
-          </div>
-          <div class="blur" id="secretText">
-Even if you’re distant, I’m not leaving.
-Even if you’re drained, you don’t owe me anything.
-Even if the week is dull, my love is still bright for you.
-
-I love you so so much, Iris—softly, steadily, consistently.
-You are safe with me.
-          </div>
-        </div>
-
-        <div class="row">
-          <button class="pill primary" id="btnRevealSecret">Reveal</button>
-          <button class="pill" id="btnCopySecret">Copy</button>
-        </div>
-      </div>
-
-      <div class="card section">
-        <h2>Saved vows</h2>
-        <p>Tap “Save a vow” in the letter. It stores them here.</p>
-
-        <div class="panel">
-          <div class="panelTop">
-            <b>Your saved lines</b>
-            <span class="tiny" id="savedCount">0 saved</span>
-          </div>
-          <div id="savedList" style="display:grid; gap:10px;"></div>
-          <div class="row" style="margin-top:12px;">
-            <button class="pill" id="btnClearSaved">Clear</button>
-            <button class="pill primary" id="btnCopySaved">Copy all</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      Made with steady love by <strong>Ali</strong> for <strong>Iris</strong> 🤍
-    </footer>
-  </div>
-
-  <script>
-    const $ = (id) => document.getElementById(id);
-    const bank = JSON.parse($("bank").textContent);
-
-    const toastEl = $("toast");
-    const toastText = $("toastText");
-    let toastTimer = null;
-
-    function toast(msg){
-      toastText.textContent = msg;
-      toastEl.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=>toastEl.classList.remove("show"), 2400);
+/* scroll reveal */
+const fades=document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{
+  fades.forEach(el=>{
+    const rect=el.getBoundingClientRect();
+    if(rect.top<window.innerHeight-50){
+      el.classList.add("show");
     }
+  });
+});
+</script>
 
-    async function copyToClipboard(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        toast("Copied 🤍");
-      }catch{
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-        toast("Copied 🤍");
-      }
-    }
-
-    function vibe(ms=25){
-      if (navigator.vibrate) navigator.vibrate(ms);
-    }
-
-    // Date line
-    const now = new Date();
-    $("dateLine").innerHTML = `
-      <div class="chip"><span class="spark"></span> Today (${now.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}) I’m choosing you again</div>
-      <div class="chip"><span class="spark"></span> even on dull weeks</div>
-    `;
-
-    // Canvas 2D stars
-    const starsCanvas = $("stars2d");
-    const sctx = starsCanvas.getContext("2d", { alpha: true });
-    let SW=0, SH=0, stars=[];
-    function resize2d(){
-      const dpr = Math.min(devicePixelRatio || 1, 2);
-      SW = Math.floor(innerWidth * dpr);
-      SH = Math.floor(innerHeight * dpr);
-      starsCanvas.width = SW; starsCanvas.height = SH;
-      starsCanvas.style.width = innerWidth+"px";
-      starsCanvas.style.height = innerHeight+"px";
-      const count = Math.max(80, Math.min(240, Math.floor((innerWidth*innerHeight)/14000)));
-      stars = new Array(count).fill(0).map(()=>({
-        x: Math.random()*SW,
-        y: Math.random()*SH,
-        r: (0.6 + Math.random()*1.7) * dpr,
-        a: 0.12 + Math.random()*0.50,
-        s: (0.05 + Math.random()*0.26) * dpr
-      }));
-    }
-    addEventListener("resize", resize2d);
-    resize2d();
-
-    function tick2d(){
-      sctx.clearRect(0,0,SW,SH);
-      for(const st of stars){
-        st.y += st.s;
-        if(st.y > SH+12){ st.y = -12; st.x = Math.random()*SW; }
-        sctx.globalAlpha = st.a;
-        sctx.beginPath();
-        sctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
-        sctx.fillStyle = "#ffffff";
-        sctx.fill();
-      }
-      sctx.globalAlpha = 1;
-      requestAnimationFrame(tick2d);
-    }
-    tick2d();
-
-    // Floating hearts
-    const floatLayer = $("floatLayer");
-    const heartChars = ["🤍","💜","🪻","💗","💖"];
-    function spawnHeart(){
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
-      h.style.left = (Math.random()*100)+"vw";
-      h.style.bottom = (-10 - Math.random()*30)+"px";
-      h.style.fontSize = (14 + Math.random()*18)+"px";
-      h.style.animationDuration = (7 + Math.random()*8)+"s";
-      h.style.animationDelay = (Math.random()*1.2)+"s";
-      floatLayer.appendChild(h);
-      setTimeout(()=>h.remove(), 17000);
-    }
-    setInterval(spawnHeart, 1100);
-
-    // Burst hearts
-    function burst(x,y){
-      const n=16;
-      const wrap=document.createElement("div");
-      wrap.style.position="fixed";
-      wrap.style.left=x+"px";
-      wrap.style.top=y+"px";
-      wrap.style.width="1px";
-      wrap.style.height="1px";
-      wrap.style.pointerEvents="none";
-      wrap.style.zIndex="80";
-      document.body.appendChild(wrap);
-
-      for(let i=0;i<n;i++){
-        const b=document.createElement("div");
-        b.textContent=heartChars[Math.floor(Math.random()*heartChars.length)];
-        b.style.position="absolute";
-        b.style.left="0";
-        b.style.top="0";
-        b.style.fontSize=(14+Math.random()*12)+"px";
-        b.style.opacity="1";
-        b.style.filter="drop-shadow(0 10px 18px rgba(0,0,0,.35))";
-
-        const angle=(Math.PI*2)*(i/n)+(Math.random()*0.35);
-        const dist=28+Math.random()*88;
-        const dx=Math.cos(angle)*dist;
-        const dy=Math.sin(angle)*dist;
-        const rot=(Math.random()*220-110);
-
-        b.animate([
-          {transform:`translate(0px,0px) rotate(0deg) scale(1)`, opacity:1},
-          {transform:`translate(${dx}px,${dy}px) rotate(${rot}deg) scale(.9)`, opacity:0}
-        ], {duration: 920, easing:"cubic-bezier(.2,.9,.2,1)"});
-
-        wrap.appendChild(b);
-      }
-      setTimeout(()=>wrap.remove(), 980);
-    }
-
-    // WebGL aurora (lavender)
-    const glCanvas = $("glow3d");
-    const gl = glCanvas.getContext("webgl", { alpha:true, antialias:true });
-
-    function resizeGL(){
-      const dpr = Math.min(devicePixelRatio || 1, 2);
-      glCanvas.width = Math.floor(innerWidth * dpr);
-      glCanvas.height = Math.floor(innerHeight * dpr);
-      glCanvas.style.width = innerWidth+"px";
-      glCanvas.style.height = innerHeight+"px";
-      if (gl) gl.viewport(0,0,glCanvas.width, glCanvas.height);
-    }
-    addEventListener("resize", resizeGL);
-    resizeGL();
-
-    function compile(type, src){
-      const s = gl.createShader(type);
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    }
-
-    if (gl){
-      const vs = compile(gl.VERTEX_SHADER, `
-        attribute vec2 p;
-        varying vec2 v;
-        void main(){ v = (p+1.0)*0.5; gl_Position = vec4(p,0.0,1.0); }
-      `);
-
-      const fs = compile(gl.FRAGMENT_SHADER, `
-        precision mediump float;
-        varying vec2 v;
-        uniform vec2 r;
-        uniform float t;
-
-        float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
-        float noise(vec2 p){
-          vec2 i=floor(p), f=fract(p);
-          float a=hash(i);
-          float b=hash(i+vec2(1.0,0.0));
-          float c=hash(i+vec2(0.0,1.0));
-          float d=hash(i+vec2(1.0,1.0));
-          vec2 u=f*f*(3.0-2.0*f);
-          return mix(a,b,u.x) + (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y;
-        }
-
-        void main(){
-          vec2 uv = (v*2.0-1.0);
-          uv.x *= r.x/r.y;
-
-          float n = noise(uv*1.7 + vec2(t*0.05, -t*0.03));
-          float n2 = noise(uv*3.2 + vec2(-t*0.02, t*0.04));
-          float glow = smoothstep(0.18, 0.86, n*0.65 + n2*0.35);
-
-          /* Lavender palette */
-          vec3 c1 = vec3(0.80, 0.72, 1.00); /* lavender */
-          vec3 c2 = vec3(0.66, 0.55, 0.98); /* purple */
-          vec3 c3 = vec3(0.55, 0.36, 0.96); /* violet */
-
-          float band = sin(uv.y*2.15 + t*0.32) * 0.5 + 0.5;
-          vec3 col = mix(c1, c2, band);
-          col = mix(col, c3, smoothstep(0.25, 0.90, n2));
-
-          float vign = smoothstep(1.35, 0.25, length(uv));
-          float a = glow * 0.18 * vign;
-
-          gl_FragColor = vec4(col, a);
-        }
-      `);
-
-      const prog = gl.createProgram();
-      gl.attachShader(prog, vs);
-      gl.attachShader(prog, fs);
-      gl.linkProgram(prog);
-      gl.useProgram(prog);
-
-      const buf = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-
-      const loc = gl.getAttribLocation(prog, "p");
-      gl.enableVertexAttribArray(loc);
-      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-      const uR = gl.getUniformLocation(prog, "r");
-      const uT = gl.getUniformLocation(prog, "t");
-
-      let t0 = performance.now();
-      function draw(){
-        const tt = (performance.now()-t0)/1000;
-        gl.uniform2f(uR, glCanvas.width, glCanvas.height);
-        gl.uniform1f(uT, tt);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-        requestAnimationFrame(draw);
-      }
-      draw();
-    }
-
-    // Slider
-    const dist = $("distance");
-    const fill = $("meterFill");
-    const sliderMsg = $("sliderMsg");
-    function setDistance(val){
-      fill.style.width = val + "%";
-      let msg = bank.sliderSteps[0].text;
-      for (const s of bank.sliderSteps) if (val >= s.at) msg = s.text;
-      sliderMsg.textContent = msg;
-    }
-    setDistance(parseInt(dist.value,10));
-    dist.addEventListener("input", () => setDistance(parseInt(dist.value,10)));
-
-    // Saved vows
-    const savedList = $("savedList");
-    const savedCount = $("savedCount");
-    const state = {
-      secret:false,
-      savedVows: JSON.parse(localStorage.getItem("iris_saved_vows") || "[]")
-    };
-
-    function renderSaved(){
-      savedList.innerHTML = "";
-      savedCount.textContent = `${state.savedVows.length} saved`;
-      if(state.savedVows.length === 0){
-        const d = document.createElement("div");
-        d.className = "chip";
-        d.innerHTML = `<span class="spark"></span> nothing saved yet — tap “Save a vow”`;
-        savedList.appendChild(d);
-        return;
-      }
-      state.savedVows.forEach((v, idx)=>{
-        const box = document.createElement("div");
-        box.className = "panel";
-        box.innerHTML = `
-          <div class="panelTop">
-            <b>Vow ${idx+1}</b>
-            <button class="pill" style="padding:8px 12px;" data-del="${idx}">Remove</button>
-          </div>
-          <div class="bigMsg" style="min-height:auto;">${v}</div>
-        `;
-        savedList.appendChild(box);
-      });
-
-      savedList.querySelectorAll("[data-del]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const i = parseInt(btn.getAttribute("data-del"),10);
-          state.savedVows.splice(i,1);
-          localStorage.setItem("iris_saved_vows", JSON.stringify(state.savedVows));
-          renderSaved();
-          toast("Removed.");
-          vibe(10);
-        });
-      });
-    }
-    renderSaved();
-
-    // Secret reveal
-    function revealSecret(){
-      if(state.secret) return;
-      state.secret = true;
-      $("secretBox").classList.add("revealed");
-      $("secretState").textContent = "Revealed";
-      toast("You are safe with me, Iris.");
-      burst(innerWidth*0.78, innerHeight*0.62);
-      vibe(25);
-    }
-
-    // Spill Love mode
-    let spillMode = false;
-    function whisper(){
-      const line = bank.whispers[Math.floor(Math.random()*bank.whispers.length)];
-      toast(line);
-      return line;
-    }
-
-    // Special panel
-    const specialMsg = $("specialMsg");
-    function setSpecial(t){ specialMsg.textContent = t; }
-
-    $("btnLoveMeter").addEventListener("click", ()=>{
-      const v = Math.floor(92 + Math.random()*9);
-      const line = `Love meter: ${v}% → I love you so so much, Iris.`;
-      setSpecial(line); toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35); vibe(20);
-    });
-
-    $("btnMissYou").addEventListener("click", ()=>{
-      const line = "I miss you, Iris. No pressure. Just truth.";
-      setSpecial(line); toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35); vibe(20);
-    });
-
-    $("btnWarm").addEventListener("click", ()=>{
-      const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
-      setSpecial(msg); toast(msg);
-      burst(innerWidth*0.72, innerHeight*0.35); vibe(18);
-    });
-
-    $("btnBreathe").addEventListener("click", ()=>{
-      const line = "Breathe, my love. In… out… You’re safe. I’m still here.";
-      setSpecial(line); toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35); vibe([20,40,20]);
-    });
-
-    // “When you feel…”
-    document.querySelectorAll("[data-state]").forEach(btn=>{
-      btn.addEventListener("click",(e)=>{
-        const k = btn.getAttribute("data-state");
-        const arr = bank.states[k] || bank.assurance;
-        const msg = arr[Math.floor(Math.random()*arr.length)];
-        setSpecial(msg); toast(msg);
-        const r = e.currentTarget.getBoundingClientRect();
-        burst(r.left + r.width/2, r.top + r.height/2);
-        vibe(25);
-      });
-    });
-
-    // Main buttons
-    $("btnRead").addEventListener("click", ()=>{
-      $("letterCard").scrollIntoView({behavior:"smooth", block:"start"});
-      toast("Read it slowly, Iris.");
-      burst(innerWidth*0.35, innerHeight*0.25);
-      vibe(20);
-    });
-
-    $("btnAssure").addEventListener("click",(e)=>{
-      const msg = bank.assurance[Math.floor(Math.random()*bank.assurance.length)];
-      toast(msg); setSpecial(msg);
-      const r = e.currentTarget.getBoundingClientRect();
-      burst(r.left + r.width/2, r.top + r.height/2);
-      vibe(18);
-    });
-
-    $("btnLove").addEventListener("click",(e)=>{
-      toast("I love you so so much, Iris. No matter the week.");
-      const r = e.currentTarget.getBoundingClientRect();
-      burst(r.left + r.width/2, r.top + r.height/2);
-      vibe(30);
-    });
-
-    $("btnHeartRain").addEventListener("click", ()=>{
-      toast("Hearts for you 🤍");
-      burst(innerWidth*0.52, innerHeight*0.34);
-      burst(innerWidth*0.42, innerHeight*0.56);
-      burst(innerWidth*0.62, innerHeight*0.56);
-      vibe([20,40,20]);
-    });
-
-    $("btnCopyLetter").addEventListener("click", ()=>{
-      copyToClipboard($("letterText").textContent.trim());
-      burst(innerWidth*0.35, innerHeight*0.65);
-      vibe(20);
-    });
-
-    $("btnSaveVow").addEventListener("click", ()=>{
-      const vow = bank.vows[Math.floor(Math.random()*bank.vows.length)];
-      state.savedVows.unshift(vow);
-      state.savedVows = state.savedVows.slice(0, 12);
-      localStorage.setItem("iris_saved_vows", JSON.stringify(state.savedVows));
-      renderSaved();
-      toast("Saved a vow 🤍");
-      burst(innerWidth*0.38, innerHeight*0.82);
-      vibe(20);
-    });
-
-    $("btnSeal").addEventListener("click", ()=>{
-      const panel = $("specialPanel");
-      panel.classList.toggle("locked");
-      const on = panel.classList.contains("locked");
-      const line = on ? "Heart lock engaged 🤍 You are safe with me, Iris." : "Heart lock off — still safe, still loved.";
-      setSpecial(line); toast(line);
-      burst(innerWidth*0.72, innerHeight*0.35);
-      vibe([20,40,20]);
-    });
-
-    $("btnReset").addEventListener("click", ()=>{
-      dist.value = 55;
-      setDistance(55);
-      toast("Soft reset. One gentle step at a time.");
-      burst(innerWidth*0.62, innerHeight*0.68);
-      vibe(18);
-    });
-
-    $("btnNudge").addEventListener("click", ()=>{
-      const line = "Little nudge: I’m here. I love you so so much. Take your time.";
-      toast(line); setSpecial(line);
-      burst(innerWidth*0.62, innerHeight*0.68);
-      vibe(18);
-    });
-
-    $("btnRevealSecret").addEventListener("click", revealSecret);
-    $("btnCopySecret").addEventListener("click", ()=>{
-      copyToClipboard($("secretText").textContent.trim());
-      burst(innerWidth*0.78, innerHeight*0.68);
-      vibe(15);
-    });
-
-    $("btnCopySend").addEventListener("click", ()=>{
-      copyToClipboard($("sendText").value.trim());
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(20);
-    });
-
-    $("btnPerfect").addEventListener("click", ()=>{
-      $("sendText").value = bank.perfectMessage;
-      toast("Perfect message ready 🤍");
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(15);
-    });
-
-    $("btnShort").addEventListener("click", ()=>{
-      $("sendText").value = "Hi mahal 🤍 I love you so so much take your time no pressure I’m still here";
-      toast("Short version ready.");
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(12);
-    });
-
-    $("btnLong").addEventListener("click", ()=>{
-      $("sendText").value =
-        "Hi mahal 🤍 even if you’re distant avoidant busy or drained I still love you so so much and I’m not here to pressure you I’m here to be your safe place quietly consistently and gently take your time and when you come closer I’ll be warm and when you need space I’ll be respectful but either way I’m still here";
-      toast("More version ready.");
-      burst(innerWidth*0.62, innerHeight*0.78);
-      vibe(12);
-    });
-
-    $("btnClearSaved").addEventListener("click", ()=>{
-      state.savedVows = [];
-      localStorage.setItem("iris_saved_vows", JSON.stringify(state.savedVows));
-      renderSaved();
-      toast("Cleared.");
-      vibe(10);
-    });
-
-    $("btnCopySaved").addEventListener("click", ()=>{
-      const text = state.savedVows.map((v,i)=>`${i+1}. ${v}`).join("\n");
-      if(!text) return toast("Nothing to copy yet.");
-      copyToClipboard(text);
-      burst(innerWidth*0.68, innerHeight*0.82);
-      vibe(15);
-    });
-
-    $("btnGoodnight").addEventListener("click", ()=>{
-      document.body.classList.toggle("goodnight");
-      const on = document.body.classList.contains("goodnight");
-      toast(on ? "Goodnight mode 🌙 Rest, Iris. I’m still here." : "Goodnight mode off 🤍");
-      vibe(15);
-    });
-
-    $("btnSoftEyes").addEventListener("click", ()=>{
-      document.body.classList.toggle("softEyes");
-      const on = document.body.classList.contains("softEyes");
-      toast(on ? "Soft Eyes ON 🤍" : "Soft Eyes OFF 🤍");
-      vibe(10);
-    });
-
-    $("btnSpill").addEventListener("click", ()=>{
-      spillMode = !spillMode;
-      toast(spillMode ? "Spill Love ON 🤍 Tap anywhere." : "Spill Love OFF 🤍");
-      vibe([20,40,20]);
-    });
-
-    addEventListener("click",(e)=>{
-      const tag = (e.target.tagName||"").toLowerCase();
-      if(["button","input","textarea"].includes(tag)) return;
-
-      if(spillMode){
-        const line = whisper();
-        setSpecial(line);
-        burst(e.clientX, e.clientY);
-        vibe(10);
-        return;
-      }
-
-      if(Math.random() < 0.09){
-        burst(e.clientX, e.clientY);
-        vibe(8);
-      }
-    });
-
-    // Share API
-    $("btnShare").addEventListener("click", async ()=>{
-      const shareText =
-`For you, Iris 🤍
-I love you so so much—no matter how distant or busy the week is.
-(If you’re viewing this page, it was made only for you.)`;
-      try{
-        if (navigator.share){
-          await navigator.share({ title: document.title, text: shareText });
-          toast("Shared 🤍");
-        } else {
-          await copyToClipboard(shareText);
-          toast("Share not supported — copied instead 🤍");
-        }
-      }catch{
-        toast("Share cancelled.");
-      }
-    });
-
-    // Web Component
-    class SteadyNote extends HTMLElement{
-      connectedCallback(){
-        const root = this.attachShadow({mode:"open"});
-        root.innerHTML = `
-          <style>
-            .box{
-              margin-top:14px;
-              border:1px solid rgba(255,255,255,.14);
-              background: rgba(255,255,255,.05);
-              border-radius: 18px;
-              padding: 14px;
-            }
-            .top{
-              display:flex; align-items:center; justify-content:space-between;
-              gap:10px; flex-wrap:wrap; margin-bottom:10px;
-              color: rgba(207,201,255,.92);
-              font-weight:900;
-            }
-            .btns{display:flex; gap:10px; flex-wrap:wrap;}
-            button{
-              appearance:none;
-              border:1px solid rgba(255,255,255,.16);
-              background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
-              color:#fff;
-              padding: 10px 12px;
-              border-radius: 999px;
-              cursor:pointer;
-              font-weight:900;
-            }
-            button.primary{
-              border:none;
-              color:#0b0a18;
-              background: linear-gradient(135deg, rgba(203,183,255,.95), rgba(139,92,246,.95));
-            }
-            .msg{ color:#fff; line-height:1.75; }
-          </style>
-          <div class="box">
-            <div class="top">
-              <div>Little note (just for you)</div>
-              <div class="btns">
-                <button id="whisper">Whisper</button>
-                <button class="primary" id="copy">Copy</button>
-              </div>
-            </div>
-            <div class="msg" id="msg">
-              Even if you go quiet, my love doesn’t turn into pressure.
-              I love you so so much, Iris—softly, steadily, consistently.
-              You are safe with me.
-            </div>
-          </div>
-        `;
-        root.getElementById("whisper").addEventListener("click", ()=>{
-          const line = bank.whispers[Math.floor(Math.random()*bank.whispers.length)];
-          toast(line);
-          $("specialMsg").textContent = line;
-          burst(innerWidth*0.44, innerHeight*0.78);
-          vibe(12);
-        });
-        root.getElementById("copy").addEventListener("click", async ()=>{
-          const t = root.getElementById("msg").textContent.trim();
-          await copyToClipboard(t);
-          burst(innerWidth*0.44, innerHeight*0.78);
-          vibe(12);
-        });
-      }
-    }
-    customElements.define("steady-note", SteadyNote);
-
-    // Intro
-    addEventListener("load", ()=>{
-      toast("Hi Iris 🤍 I made this so you feel safe, even on distant weeks.");
-      setTimeout(()=>burst(innerWidth*0.52, 120), 260);
-      setTimeout(()=>toast("Tap Distant/Avoidant/Busy/Drained — it answers gently."), 2800);
-    });
-  </script>
 </body>
 </html>
