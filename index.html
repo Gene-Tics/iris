@@ -2,286 +2,768 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>8 Months</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Iris 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #e9d5ff, #f5e9ff, #d8b4f8);
-  color: #3a2d4f;
-  overflow-x: hidden;
-}
+  :root {
+    --rose: #c9626e;
+    --rose-light: #f5dde0;
+    --rose-pale: #fdf0f1;
+    --blush: #e8a0aa;
+    --mauve: #8b5e6b;
+    --cream: #fdf8f5;
+    --warm-white: #fff9f7;
+    --text-dark: #3a2228;
+    --text-mid: #7a4f59;
+    --text-soft: #b08a93;
+    --gold: #c9a96e;
+  }
 
-/* petals */
-.petal {
-  position: fixed;
-  top: -10px;
-  width: 6px;
-  height: 6px;
-  background: white;
-  opacity: 0.5;
-  border-radius: 50%;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  to { transform: translateY(100vh) translateX(30px); }
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.container {
-  text-align: center;
-  padding: 80px 20px;
-  max-width: 700px;
-  margin: auto;
-}
+  html { scroll-behavior: smooth; }
 
-/* name */
-.name {
-  font-size: 3em;
-  color: #6a4c93;
-  opacity: 0;
-  animation: fadeIn 2s ease forwards;
-}
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* typing */
-#typing {
-  border-right: 2px solid #6a4c93;
-  white-space: nowrap;
-  overflow: hidden;
-  display: inline-block;
-  margin: 30px 0;
-}
+  /* ── Petals background ── */
+  .petal-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    width: 10px; height: 14px;
+    background: var(--rose-light);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(105vh) rotate(360deg) translateX(40px); opacity: 0; }
+  }
 
-/* fade */
-.fade {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 1s;
-}
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+  /* ── Hero ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(160deg, var(--warm-white) 0%, var(--rose-pale) 60%, #fce8eb 100%);
+  }
 
-/* card */
-.card {
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 35px 0;
-}
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,98,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
 
-/* heart */
-.heart {
-  font-size: 2em;
-  animation: beat 1.2s infinite;
-  color: #a64ac9;
-}
-@keyframes beat {
-  50% { transform: scale(1.15); }
-}
+  .crown {
+    font-size: 2.8rem; margin-bottom: 1rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
 
-/* buttons */
-button {
-  background: #b57edc;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 25px;
-  color: white;
-  cursor: pointer;
-  margin-top: 15px;
-}
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 300;
+    color: var(--rose);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.4rem;
+  }
 
-/* hidden */
-.hidden {
-  display: none;
-  margin-top: 10px;
-  font-style: italic;
-}
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mauve);
+  }
 
-/* hold */
-.progress {
-  width: 0%;
-  height: 5px;
-  background: #a64ac9;
-  margin-top: 10px;
-  border-radius: 5px;
-}
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-mid);
+    margin-bottom: 2rem;
+    letter-spacing: 0.03em;
+  }
 
-/* final */
-.final {
-  opacity: 0;
-  transition: 2s;
-  margin-top: 20px;
-}
-.final.show {
-  opacity: 1;
-}
+  .hero-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 2rem; color: var(--blush);
+    font-size: 1.2rem;
+  }
+  .hero-divider span { width: 60px; height: 1px; background: var(--blush); display: block; }
 
-/* letter */
-.letter {
-  margin-top: 60px;
-  line-height: 1.8;
-  font-style: italic;
-}
+  .scroll-cue {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-soft); margin-top: 2.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: bob 2s ease-in-out infinite;
+  }
+  .scroll-cue::after {
+    content: '↓'; font-size: 1.1rem; color: var(--blush);
+  }
+  @keyframes bob {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(6px); }
+  }
+
+  /* ── Sections ── */
+  section {
+    position: relative; z-index: 1;
+    padding: 5rem 2rem;
+    max-width: 860px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--blush); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rose-light); }
+
+  section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  section h2 em { font-style: italic; color: var(--rose); }
+
+  section p {
+    font-size: 1rem; line-height: 1.85; color: var(--text-mid);
+    max-width: 580px;
+  }
+
+  /* ── Message cards ── */
+  .messages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px; margin-top: 2.5rem;
+  }
+
+  .msg-card {
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 20px;
+    padding: 1.6rem 1.4rem;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .msg-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(201,98,110,0.12);
+  }
+  .msg-card::before {
+    content: attr(data-num);
+    position: absolute; top: -10px; right: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 600;
+    color: var(--rose-light);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .msg-card .msg-icon {
+    font-size: 1.5rem; margin-bottom: 10px;
+  }
+  .msg-card .msg-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--rose); margin-bottom: 8px;
+  }
+  .msg-card .msg-body {
+    font-size: 0.875rem; line-height: 1.75; color: var(--text-mid);
+  }
+
+  /* ── Quote rotator ── */
+  .quote-box {
+    background: var(--rose);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-box::before {
+    content: '"';
+    position: absolute; top: -20px; left: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem; font-weight: 600;
+    color: rgba(255,255,255,0.1);
+    line-height: 1; pointer-events: none;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 4vw, 1.9rem);
+    font-style: italic;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.55;
+    min-height: 80px;
+    transition: opacity 0.5s ease;
+    margin-bottom: 1.5rem;
+  }
+  .quote-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .quote-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* ── Reasons list ── */
+  .reasons-list {
+    display: flex; flex-direction: column; gap: 12px;
+    margin-top: 2rem;
+  }
+  .reason-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 14px;
+    padding: 1.1rem 1.3rem;
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reason-item.visible { opacity: 1; transform: translateX(0); }
+  .reason-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--blush); flex-shrink: 0; line-height: 1.2;
+  }
+  .reason-text {
+    font-size: 0.9rem; line-height: 1.7; color: var(--text-mid);
+  }
+
+  /* ── Mood check-in ── */
+  .mood-section { text-align: center; }
+  .mood-grid {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin: 2rem 0;
+  }
+  .mood-pill {
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 0.9rem; color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .mood-pill:hover, .mood-pill.selected {
+    background: var(--rose); border-color: var(--rose);
+    color: #fff; transform: scale(1.04);
+  }
+  .mood-response {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic; font-weight: 300;
+    color: var(--rose);
+    min-height: 48px;
+    transition: opacity 0.4s;
+    padding: 0 1rem;
+    line-height: 1.5;
+  }
+
+  /* ── Journal ── */
+  .journal-wrap {
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 24px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .journal-wrap textarea {
+    width: 100%; min-height: 130px;
+    background: transparent; border: none;
+    border-bottom: 1px solid var(--rose-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-style: italic;
+    color: var(--text-dark); resize: none;
+    line-height: 1.8; outline: none;
+    padding-bottom: 12px;
+  }
+  .journal-wrap textarea::placeholder { color: var(--blush); }
+  .journal-actions {
+    display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;
+  }
+  .btn-rose {
+    background: var(--rose); color: #fff;
+    border: none; border-radius: 999px;
+    padding: 10px 22px; font-size: 0.8rem;
+    letter-spacing: 0.06em; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .btn-rose:hover { opacity: 0.88; }
+  .btn-ghost {
+    background: transparent; color: var(--text-soft);
+    border: 1px solid var(--rose-light); border-radius: 999px;
+    padding: 10px 22px; font-size: 0.8rem;
+    letter-spacing: 0.06em; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--blush); color: var(--rose); }
+  .saved-notes { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 8px; }
+  .note-chip {
+    background: var(--rose-pale);
+    border-radius: 10px; padding: 10px 14px;
+    font-size: 0.85rem; color: var(--text-mid);
+    display: flex; justify-content: space-between; align-items: center;
+    line-height: 1.5;
+  }
+  .note-chip button {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-soft); font-size: 1rem; padding: 0 4px;
+    transition: color 0.15s;
+  }
+  .note-chip button:hover { color: var(--rose); }
+
+  /* ── Countdown ── */
+  .countdown-box {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;
+    margin-top: 2rem; text-align: center;
+  }
+  .cd-cell {
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 16px; padding: 1.2rem 0.8rem;
+  }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 600;
+    color: var(--rose); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cd-label {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* ── Playlist ── */
+  .playlist {
+    display: flex; flex-direction: column; gap: 10px; margin-top: 1.5rem;
+  }
+  .track {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 14px; padding: 1rem 1.2rem;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .track:hover { transform: translateX(4px); box-shadow: -4px 0 0 var(--rose); }
+  .track-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .track-info { flex: 1; }
+  .track-title { font-size: 0.9rem; font-weight: 500; color: var(--text-dark); }
+  .track-artist { font-size: 0.78rem; color: var(--text-soft); margin-top: 2px; }
+  .track-mood { font-size: 0.72rem; color: var(--blush); background: var(--rose-pale); padding: 3px 10px; border-radius: 999px; }
+
+  /* ── Love letter ── */
+  .letter-paper {
+    background: var(--warm-white);
+    border: 1px solid var(--rose-light);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    margin-top: 2rem;
+    position: relative;
+    box-shadow: 0 4px 24px rgba(201,98,110,0.06);
+  }
+  .letter-paper::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 4px;
+    background: var(--rose); border-radius: 0 0 4px 4px;
+  }
+  .letter-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 300;
+    line-height: 2; color: var(--text-dark);
+  }
+  .letter-body .salutation {
+    font-size: 1.4rem; font-style: italic; color: var(--rose);
+    display: block; margin-bottom: 1rem;
+  }
+  .letter-sig {
+    margin-top: 2rem;
+    font-style: italic; color: var(--rose);
+    font-size: 1.3rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--rose-pale) 100%);
+  }
+  footer .heart-big {
+    font-size: 2.5rem; display: block; margin-bottom: 1rem;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.15); }
+  }
+  footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic; font-weight: 300;
+    color: var(--text-mid);
+  }
+
+  /* ── Scroll reveal ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--rose); color: #fff;
+    padding: 12px 24px; border-radius: 999px;
+    font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0; pointer-events: none; z-index: 999;
+    white-space: nowrap;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  @media (max-width: 600px) {
+    section { padding: 3.5rem 1.2rem; }
+    .countdown-box { grid-template-columns: repeat(2,1fr); }
+    .letter-paper { padding: 2rem 1.4rem; }
+  }
 </style>
 </head>
-
 <body>
 
+<!-- Falling petals -->
+<div class="petal-bg" id="petalBg"></div>
+<div id="toast"></div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="crown">🌸</div>
+  <h1>For <em>Iris</em></h1>
+  <p class="hero-sub">a little corner of the internet, made just for you</p>
+  <div class="hero-divider"><span></span>♡<span></span></div>
+  <p style="font-size:1rem;line-height:1.8;color:var(--text-mid);max-width:440px;font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;font-weight:300;">
+    I know this past week felt a little dull and grey — so I made this for you. A place full of love, warmth, and all the little things I want you to remember.
+  </p>
+  <div class="scroll-cue">scroll for you</div>
+</div>
+
+<!-- Reassuring messages -->
+<section class="reveal">
+  <div class="section-label">for my love</div>
+  <h2>Things I need you <em>to know</em></h2>
+  <p>Even on the quietest, most forgettable weeks — you are the brightest part of every single day.</p>
+  <div class="messages-grid">
+    <div class="msg-card" data-num="01">
+      <div class="msg-icon">🌷</div>
+      <div class="msg-title">Dull weeks happen</div>
+      <div class="msg-body">They don't define you, they don't last, and they have nothing to say about how wonderful you are. Nothing at all.</div>
+    </div>
+    <div class="msg-card" data-num="02">
+      <div class="msg-icon">✨</div>
+      <div class="msg-title">You are so enough</div>
+      <div class="msg-body">Not because of what you do or achieve — but because of who you are. Your laugh, your heart, your whole self. More than enough.</div>
+    </div>
+    <div class="msg-card" data-num="03">
+      <div class="msg-icon">🫂</div>
+      <div class="msg-title">I'm here, always</div>
+      <div class="msg-body">On the exciting days AND the dull ones. Especially the dull ones. I'd choose any boring Tuesday with you over anything else.</div>
+    </div>
+    <div class="msg-card" data-num="04">
+      <div class="msg-icon">🌿</div>
+      <div class="msg-title">Rest is beautiful</div>
+      <div class="msg-body">A slow week is your body and soul asking for a breath. You deserve that rest. There's nothing to push through or apologize for.</div>
+    </div>
+    <div class="msg-card" data-num="05">
+      <div class="msg-icon">🌙</div>
+      <div class="msg-title">Better days are coming</div>
+      <div class="msg-body">Every dull patch ends. And when the good days return — and they will — I'll be right there celebrating with you.</div>
+    </div>
+    <div class="msg-card" data-num="06">
+      <div class="msg-icon">💌</div>
+      <div class="msg-title">You are loved deeply</div>
+      <div class="msg-body">On the days you feel like nothing special, please know — you are the most special thing in my world. That never changes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote rotator -->
+<section class="reveal" style="padding-top:0">
+  <div class="section-label">a little reminder</div>
+  <div class="quote-box">
+    <p class="quote-text" id="quoteText">"You are loved not for who you could be, but exactly for who you are — right now, in this moment."</p>
+    <button class="quote-btn" onclick="nextQuote()">✦ Another reminder</button>
+  </div>
+</section>
+
+<!-- Reasons I love you -->
+<section class="reveal">
+  <div class="section-label">from the heart</div>
+  <h2>Reasons I love <em>you</em></h2>
+  <p>A very incomplete list — because there are far too many to fit on one page.</p>
+  <div class="reasons-list" id="reasonsList"></div>
+</section>
+
+<!-- Mood check-in -->
+<section class="reveal mood-section">
+  <div class="section-label">just for you</div>
+  <h2>How are you feeling <em>right now?</em></h2>
+  <div class="mood-grid" id="moodGrid">
+    <div class="mood-pill" onclick="setMood(this,'tired')">😮‍💨 Tired</div>
+    <div class="mood-pill" onclick="setMood(this,'sad')">🌧 A bit sad</div>
+    <div class="mood-pill" onclick="setMood(this,'meh')">😑 Meh</div>
+    <div class="mood-pill" onclick="setMood(this,'okay')">🌱 Okay-ish</div>
+    <div class="mood-pill" onclick="setMood(this,'loved')">🥰 Loved</div>
+    <div class="mood-pill" onclick="setMood(this,'happy')">✨ Happy</div>
+  </div>
+  <p class="mood-response" id="moodResponse"></p>
+</section>
+
+<!-- Countdown -->
+<section class="reveal" style="text-align:center">
+  <div class="section-label">time together</div>
+  <h2>Days we've been <em>us</em></h2>
+  <p style="margin: 0 auto">Every single one of them a gift.</p>
+  <div class="countdown-box" id="countdownBox">
+    <div class="cd-cell"><div class="cd-num" id="cdDays">—</div><div class="cd-label">days</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cdHours">—</div><div class="cd-label">hours</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cdMins">—</div><div class="cd-label">minutes</div></div>
+    <div class="cd-cell"><div class="cd-num" id="cdSecs">—</div><div class="cd-label">seconds</div></div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--text-soft);margin-top:14px">
+    ✏️ <span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px" onclick="changeDate()">Set our start date</span>
+  </p>
+</section>
+
+<!-- Songs for you -->
+<section class="reveal">
+  <div class="section-label">a little soundtrack</div>
+  <h2>Songs that remind me <em>of you</em></h2>
+  <p>For the slow mornings, the quiet evenings, and every moment in between.</p>
+  <div class="playlist">
+    <div class="track"><div class="track-icon">🎵</div><div class="track-info"><div class="track-title">I Will Follow You Into the Dark</div><div class="track-artist">Death Cab for Cutie</div></div><div class="track-mood">forever</div></div>
+    <div class="track"><div class="track-icon">🎶</div><div class="track-info"><div class="track-title">Bloom</div><div class="track-artist">The Paper Kites</div></div><div class="track-mood">soft love</div></div>
+    <div class="track"><div class="track-icon">🎵</div><div class="track-info"><div class="track-title">You Are The Best Thing</div><div class="track-artist">Ray LaMontagne</div></div><div class="track-mood">joy</div></div>
+    <div class="track"><div class="track-icon">🎶</div><div class="track-info"><div class="track-title">From Eden</div><div class="track-artist">Hozier</div></div><div class="track-mood">warmth</div></div>
+    <div class="track"><div class="track-icon">🎵</div><div class="track-info"><div class="track-title">Better Together</div><div class="track-artist">Jack Johnson</div></div><div class="track-mood">us</div></div>
+  </div>
+</section>
+
+<!-- Mini journal -->
+<section class="reveal">
+  <div class="section-label">your space</div>
+  <h2>Write whatever's <em>on your heart</em></h2>
+  <p>No rules. No judgment. Just you, and this little page that loves you.</p>
+  <div class="journal-wrap">
+    <textarea id="journalInput" placeholder="I feel…"></textarea>
+    <div class="journal-actions">
+      <button class="btn-ghost" onclick="clearJournal()">Clear</button>
+      <button class="btn-rose" onclick="saveNote()">Save note 🌸</button>
+    </div>
+    <div class="saved-notes" id="savedNotes"></div>
+  </div>
+</section>
+
+<!-- Love letter -->
+<section class="reveal">
+  <div class="section-label">with all my love</div>
+  <h2>A letter, <em>just for you</em></h2>
+  <div class="letter-paper">
+    <div class="letter-body">
+      <span class="salutation">My dearest Iris,</span>
+      I know this past week didn't feel like much. Maybe it felt like the days blurred together, like you were just going through the motions, like nothing exciting happened and nothing particularly good came your way. I know that feeling, and I want you to know — it's okay. Not every week needs to sparkle.
+      <br><br>
+      But here's what I also know: even in your quietest, most unremarkable weeks, you are still the most remarkable person I've ever met. The way you carry yourself. The little things you care about. The sound of your voice. None of that dimmed this week. Not even a little.
+      <br><br>
+      I built this page because I wanted you to have somewhere to come when the world feels grey — a small, warm corner that belongs entirely to you. A place that says: you are seen, you are loved, you are enough.
+      <br><br>
+      Next week might be better. It might be just as quiet. Either way, I'll be here — your biggest fan, your softest place to land.
+      <br><br>
+      Always,
+      <div class="letter-sig">💌 yours</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="heart-big">🌸</span>
+  <p>This page was made with love,<br>just for you, Iris — always.</p>
+</footer>
+
 <script>
-for(let i=0;i<25;i++){
-  let p=document.createElement("div");
-  p.className="petal";
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(6+Math.random()*5)+"s";
-  document.body.appendChild(p);
-}
-</script>
-
-<div class="container">
-
-<div class="name">iris</div>
-<p>8 months of choosing you</p>
-
-<p id="typing"></p>
-
-<div class="card fade">
-  it’s been 8 months…  
-  and i’m still here.
-</div>
-
-<div class="card fade">
-  not because it was always easy…  
-  but because it was always you.
-</div>
-
-<div class="card fade">
-  i know you can be distant sometimes…  
-  quiet… hard to read…  
-  but i never saw that as a reason to leave.
-</div>
-
-<div class="card fade">
-  i saw it as something worth understanding.
-</div>
-
-<div class="card fade">
-  i didn’t choose you once…  
-  i chose you on random days…  
-  on confusing days…  
-  on quiet days.
-</div>
-
-<div class="card fade">
-  and somehow… i never got tired of it.
-</div>
-
-<div class="heart">♥</div>
-
-<!-- TAP INTERACTION -->
-<button onclick="reveal1()">tap me</button>
-<p id="msg1" class="hidden">you mean more to me than i usually say.</p>
-
-<button onclick="reveal2()">tap again</button>
-<p id="msg2" class="hidden">and i notice more about you than you think.</p>
-
-<!-- HOLD -->
-<button 
-onmousedown="startHold()" 
-onmouseup="endHold()" 
-ontouchstart="startHold()" 
-ontouchend="endHold()">
-hold this
-</button>
-
-<div class="progress" id="progress"></div>
-
-<div class="final" id="finalMsg">
-  i’m still choosing you… quietly… but sincerely.
-</div>
-
-<!-- LETTER -->
-<div class="letter fade">
-  these past 8 months…  
-  weren’t just time passing for me.  
-  <br><br>
-  they were me learning you…  
-  understanding you…  
-  staying even when things felt uncertain.  
-  <br><br>
-  i won’t say everything was perfect…  
-  because it wasn’t…  
-  but what i felt for you stayed real the whole time.  
-  <br><br>
-  you became someone i think about in small moments…  
-  in random thoughts…  
-  in quiet times.  
-  <br><br>
-  and i don’t need everything to be rushed…  
-  i just need it to be genuine.  
-  <br><br>
-  and with you… it always has been.
-</div>
-
-</div>
-
-<script>
-/* typing */
-const text="8 months… and somehow, my feelings stayed the same… just deeper.";
-let i=0;
-function type(){
-  if(i<text.length){
-    document.getElementById("typing").innerHTML+=text.charAt(i);
-    i++;
-    setTimeout(type,40);
+// ── Petals ──
+(function(){
+  const bg = document.getElementById('petalBg');
+  for(let i=0;i<22;i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random()*100+'%';
+    p.style.width = (8+Math.random()*8)+'px';
+    p.style.height = (10+Math.random()*10)+'px';
+    p.style.animationDuration = (8+Math.random()*14)+'s';
+    p.style.animationDelay = (Math.random()*12)+'s';
+    p.style.opacity = 0;
+    bg.appendChild(p);
   }
-}
-type();
+})();
 
-/* fade scroll */
-const fades=document.querySelectorAll(".fade");
-window.addEventListener("scroll",()=>{
-  fades.forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight-50){
-      el.classList.add("show");
-    }
-  });
+// ── Quotes ──
+const quotes = [
+  "You are loved not for who you could be, but exactly for who you are — right now, in this moment.",
+  "A quiet week doesn't make you any less extraordinary. You are always, always enough.",
+  "Even the slowest weeks can't touch how bright you are to me.",
+  "The world might feel dull sometimes — but you never are. Not for a single second.",
+  "On the days you can't find your spark, I'll hold onto it for you.",
+  "Everything is softer and better because you exist in it.",
+  "You don't have to do anything to deserve love. You already deserve all of it.",
+  "My favorite days are not the exciting ones. They're the ordinary ones — with you."
+];
+let qi = 0;
+function nextQuote(){
+  const el = document.getElementById('quoteText');
+  el.style.opacity = 0;
+  setTimeout(()=>{
+    qi = (qi+1)%quotes.length;
+    el.textContent = '"'+quotes[qi]+'"';
+    el.style.opacity = 1;
+  },400);
+}
+
+// ── Reasons ──
+const reasons = [
+  "The way your eyes light up when you talk about something you love.",
+  "How kind you are — even when no one is watching.",
+  "The warmth you bring into every room you walk into.",
+  "The way you laugh. Genuinely, fully, beautifully.",
+  "How deeply you feel things — it's one of your greatest gifts.",
+  "The little habits of yours I've memorized without trying.",
+  "How you make even the most ordinary moments feel like something.",
+  "Simply because you are you — and that has always been more than enough."
+];
+const list = document.getElementById('reasonsList');
+reasons.forEach((r,i)=>{
+  const el = document.createElement('div');
+  el.className='reason-item';
+  el.innerHTML=`<span class="reason-num">${String(i+1).padStart(2,'0')}</span><span class="reason-text">${r}</span>`;
+  list.appendChild(el);
 });
 
-/* tap reveals */
-function reveal1(){
-  document.getElementById("msg1").style.display="block";
-}
-function reveal2(){
-  document.getElementById("msg2").style.display="block";
+// ── Mood ──
+const moodMap = {
+  tired: "Then rest, my love. You've earned every moment of stillness. I'll be here when you wake up. 🌙",
+  sad: "Come here. I wish I could hold you right now. Whatever it is — it's okay to feel it. You're not alone in it. 🫂",
+  meh: "Meh days are allowed. You don't have to be 'on' all the time. I love you in every mood, including this one. 🌿",
+  okay: "Okay is a perfectly beautiful place to be. I'm glad you're here. 🌱",
+  loved: "Good. Because you are — so much more than you know. 💌",
+  happy: "That smile of yours is my favorite thing in the world. Stay in it. ✨"
+};
+function setMood(el, key){
+  document.querySelectorAll('.mood-pill').forEach(p=>p.classList.remove('selected'));
+  el.classList.add('selected');
+  const r = document.getElementById('moodResponse');
+  r.style.opacity=0;
+  setTimeout(()=>{ r.textContent=moodMap[key]; r.style.opacity=1; },300);
 }
 
-/* hold */
-let timer;
-let width=0;
+// ── Countdown ──
+let startDate = new Date(localStorage.getItem('irisStart')||'2023-01-01');
+function updateCountdown(){
+  const now = new Date();
+  const diff = now - startDate;
+  if(diff<0){ document.getElementById('cdDays').textContent='soon'; return; }
+  const s=Math.floor(diff/1000),m=Math.floor(s/60),h=Math.floor(m/60),d=Math.floor(h/24);
+  document.getElementById('cdDays').textContent=d;
+  document.getElementById('cdHours').textContent=h%24;
+  document.getElementById('cdMins').textContent=m%60;
+  document.getElementById('cdSecs').textContent=s%60;
+}
+setInterval(updateCountdown,1000); updateCountdown();
+function changeDate(){
+  const v = prompt('Enter your start date (YYYY-MM-DD):');
+  if(v && !isNaN(new Date(v))){
+    localStorage.setItem('irisStart',v);
+    startDate=new Date(v);
+    updateCountdown();
+    toast('Date saved 🌸');
+  }
+}
 
-function startHold(){
-  width=0;
-  timer=setInterval(()=>{
-    width+=2;
-    document.getElementById("progress").style.width=width+"%";
-    if(width>=100){
-      clearInterval(timer);
-      document.getElementById("finalMsg").classList.add("show");
+// ── Journal ──
+let notes = JSON.parse(localStorage.getItem('irisNotes')||'[]');
+function renderNotes(){
+  const el=document.getElementById('savedNotes'); el.innerHTML='';
+  notes.forEach((n,i)=>{
+    const d=document.createElement('div');
+    d.className='note-chip';
+    d.innerHTML=`<span>${n}</span><button onclick="deleteNote(${i})">×</button>`;
+    el.appendChild(d);
+  });
+}
+function saveNote(){
+  const v=document.getElementById('journalInput').value.trim();
+  if(!v)return;
+  notes.unshift(v.length>80?v.slice(0,80)+'…':v);
+  localStorage.setItem('irisNotes',JSON.stringify(notes));
+  renderNotes();
+  document.getElementById('journalInput').value='';
+  toast('Saved with love 🌸');
+}
+function deleteNote(i){ notes.splice(i,1); localStorage.setItem('irisNotes',JSON.stringify(notes)); renderNotes(); }
+function clearJournal(){ document.getElementById('journalInput').value=''; }
+renderNotes();
+
+// ── Toast ──
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+// ── Scroll reveal ──
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.reason-item').forEach((r,i)=>{
+        setTimeout(()=>r.classList.add('visible'),i*80);
+      });
     }
-  },30);
-}
-
-function endHold(){
-  clearInterval(timer);
-  document.getElementById("progress").style.width="0%";
-}
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
-
 </body>
 </html>
