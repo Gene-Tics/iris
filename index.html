@@ -2,910 +2,1083 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Happy Birthday, Iris</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>To My Wifey Iris — 10 Months</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --lavender-deep: #2a2140;
-    --lavender-night: #1a1530;
-    --lavender: #b9a3e3;
-    --lavender-light: #e6d9f7;
-    --blush: #f3c6d8;
-    --rose-gold: #e3b8a6;
-    --gold: #f0d9a8;
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.18);
-    --text-soft: #f3edfb;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background: radial-gradient(ellipse at top, #2e2350 0%, var(--lavender-night) 55%, #100c1f 100%);
-    color: var(--text-soft);
-    font-family:'Quicksand', sans-serif;
-    overflow-x:hidden;
-    min-height:100vh;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .serif{font-family:'Cormorant Garamond', serif;}
+:root{
+  --lavender-pale:#f3edfb;
+  --lavender:#c9b6e8;
+  --lavender-deep:#9c7cc4;
+  --lavender-ink:#4b3b63;
+  --blush:#f6c9d3;
+  --gold:#d8b877;
+  --gold-bright:#f0d59a;
+  --white:#fffdfa;
+  --glass-bg:rgba(255,255,255,0.35);
+  --glass-border:rgba(255,255,255,0.55);
+  --shadow-soft:0 8px 32px rgba(120,90,160,0.18);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;width:100%;overflow-x:hidden;background:var(--lavender-pale);}
+body{
+  font-family:'Quicksand',sans-serif;
+  color:var(--lavender-ink);
+  background:linear-gradient(180deg,#f6f0fc 0%,#f1e6fb 30%,#f8ecf3 65%,#f3ecfa 100%);
+  min-height:100vh;
+  position:relative;
+}
+h1,h2,h3,.display{font-family:'Cormorant Garamond',serif; font-weight:600;}
+.script{font-family:'Dancing Script',cursive;}
+::selection{background:var(--lavender); color:#fff;}
 
-  /* ===== Ambient background layers ===== */
-  #stars-canvas, #petals-canvas{
-    position:fixed; top:0; left:0; width:100%; height:100%;
-    pointer-events:none; z-index:0;
-  }
-  .firefly{
-    position:fixed; width:5px; height:5px; border-radius:50%;
-    background: radial-gradient(circle, #fff6d8, #f0d9a8 60%, transparent);
-    box-shadow:0 0 8px 3px rgba(240,217,168,0.7);
-    z-index:1; pointer-events:none;
-    animation: fireflyFloat 14s ease-in-out infinite;
-  }
-  @keyframes fireflyFloat{
-    0%,100%{ transform: translate(0,0); opacity:.3;}
-    25%{ transform: translate(20px,-30px); opacity:1;}
-    50%{ transform: translate(-15px,-60px); opacity:.5;}
-    75%{ transform: translate(25px,-20px); opacity:.9;}
-  }
+/* ---------- shared ---------- */
+.section{
+  min-height:100svh;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:64px 20px 80px;
+  position:relative;
+  text-align:center;
+}
+.eyebrow{
+  font-family:'Quicksand',sans-serif;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  font-size:11px;
+  color:var(--lavender-deep);
+  opacity:.8;
+  margin-bottom:14px;
+}
+.section h2{
+  font-size:clamp(28px,7vw,44px);
+  margin:0 0 8px;
+  color:var(--lavender-ink);
+}
+.section .sub{
+  font-size:15px;
+  max-width:320px;
+  color:#7a678f;
+  margin:0 0 36px;
+  line-height:1.6;
+}
+.glass{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-radius:22px;
+  box-shadow:var(--shadow-soft);
+}
+.hidden{display:none !important;}
+.reveal{opacity:0; transform:translateY(28px); transition:opacity 1s ease, transform 1s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
 
-  section{
-    position:relative; z-index:2;
-    min-height:100vh;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding: 60px 20px;
-    text-align:center;
-  }
+/* ---------- canvases ---------- */
+#petal-canvas, #sparkle-canvas{
+  position:fixed; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:5;
+}
+#sparkle-canvas{z-index:6;}
 
-  /* ===== Opening ===== */
-  #opening{
-    background:#000;
-    transition: background 2.5s ease;
-  }
-  #opening.bloomed{
-    background: radial-gradient(ellipse at center, #2e2350 0%, var(--lavender-night) 70%);
-  }
-  .heartbeat-line{
-    font-family:'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 4vw, 1.6rem);
-    letter-spacing:2px;
-    color: var(--lavender-light);
-    opacity:0;
-    min-height: 2.4em;
-  }
-  .fade-line{ animation: fadeInOut 3.2s ease forwards; }
-  @keyframes fadeInOut{
-    0%{opacity:0; transform:translateY(8px);}
-    20%{opacity:1; transform:translateY(0);}
-    80%{opacity:1;}
-    100%{opacity:0;}
-  }
-  .flower-bloom{
-    font-size: 2.6rem;
-    opacity:0;
-    animation: bloomIn 2s ease forwards;
-    animation-delay: .3s;
-  }
-  @keyframes bloomIn{
-    0%{ opacity:0; transform: scale(0.2) rotate(-20deg);}
-    100%{ opacity:1; transform: scale(1) rotate(0deg);}
-  }
-  .shooting-star{
-    position:absolute; top:18%; left:-10%;
-    width:2px; height:2px; background:#fff;
-    box-shadow: 0 0 6px 2px #fff, -60px 6px 20px 4px rgba(255,255,255,.5);
-    border-radius:50%;
-    animation: shoot 2.4s ease-in forwards;
-    animation-delay: 2s;
-    opacity:0;
-  }
-  @keyframes shoot{
-    0%{ opacity:0; transform: translate(0,0);}
-    10%{ opacity:1;}
-    90%{ opacity:1;}
-    100%{ opacity:0; transform: translate(130vw, 50vh);}
-  }
-  .title-reveal{
-    opacity:0; transform: translateY(20px);
-    animation: revealUp 1.6s ease forwards;
-    animation-delay: 6.5s;
-  }
-  @keyframes revealUp{
-    to{ opacity:1; transform:translateY(0); }
-  }
-  h1.main-title{
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-weight:600;
-    font-size: clamp(1.8rem, 6vw, 3.4rem);
-    background: linear-gradient(120deg, var(--lavender-light), var(--gold), var(--blush));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    text-shadow: 0 0 30px rgba(185,163,227,.4);
-    margin-bottom: 14px;
-  }
-  .subtitle{
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-size: clamp(1rem, 2.6vw, 1.3rem);
-    color: var(--lavender-light);
-    opacity:.85;
-    margin-bottom: 40px;
-  }
-  .glow-btn{
-    font-family:'Quicksand', sans-serif;
-    font-weight:600;
-    font-size: 1rem;
-    padding: 16px 36px;
-    border-radius: 50px;
-    border: 1px solid var(--glass-border);
-    background: linear-gradient(135deg, rgba(185,163,227,.35), rgba(243,198,216,.25));
-    backdrop-filter: blur(10px);
-    color: #fff;
-    cursor:pointer;
-    box-shadow: 0 0 25px rgba(185,163,227,.4);
-    transition: transform .3s ease, box-shadow .3s ease;
-    letter-spacing:.5px;
-  }
-  .glow-btn:hover{ transform: translateY(-3px) scale(1.03); box-shadow: 0 0 40px rgba(185,163,227,.6);}
-  .glow-btn:active{ transform: scale(.97);}
+/* ---------- controls ---------- */
+#mute-btn{
+  position:fixed; top:18px; right:18px; z-index:60;
+  width:46px; height:46px; border-radius:50%;
+  border:1px solid var(--glass-border);
+  background:var(--glass-bg);
+  backdrop-filter:blur(10px);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; box-shadow:var(--shadow-soft);
+  font-size:18px;
+}
+.progress-dots{
+  position:fixed; right:10px; top:50%; transform:translateY(-50%);
+  z-index:55; display:flex; flex-direction:column; gap:7px;
+}
+.progress-dots span{
+  width:6px; height:6px; border-radius:50%;
+  background:rgba(156,124,196,.3);
+  transition:.3s;
+}
+.progress-dots span.active{background:var(--lavender-deep); height:18px; border-radius:4px;}
 
-  /* ===== Glass card base ===== */
-  .glass{
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(20,10,40,.35);
-  }
+/* ---------- INTRO ---------- */
+#intro{
+  position:fixed; inset:0; z-index:100;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:radial-gradient(circle at 50% 30%, #f3e8fb 0%, #e7d5f5 45%, #d9c2ee 100%);
+  text-align:center; padding:20px; transition:opacity 1.4s ease, visibility 1.4s;
+}
+#intro.fade-out{opacity:0; visibility:hidden; pointer-events:none;}
+.intro-line1{
+  font-size:clamp(26px,8vw,42px);
+  opacity:0; animation:introFade 1.6s ease forwards;
+  color:var(--lavender-ink);
+}
+.intro-line2{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(18px,5vw,24px);
+  color:var(--lavender-deep);
+  margin-top:14px;
+  opacity:0; animation:introFade 1.6s ease forwards 1.8s;
+}
+@keyframes introFade{
+  0%{opacity:0; transform:translateY(14px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+.open-heart-btn{
+  margin-top:44px;
+  opacity:0;
+  animation:introFade 1.6s ease forwards 3.4s;
+  padding:16px 38px;
+  border-radius:40px;
+  border:1px solid rgba(255,255,255,.7);
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  color:#5b4324;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700; font-size:15px; letter-spacing:.03em;
+  box-shadow:0 0 0 0 rgba(216,184,119,.6), 0 10px 30px rgba(180,140,80,.35);
+  animation:introFade 1.6s ease forwards 3.4s, glow 2.4s ease-in-out infinite 5s;
+  cursor:pointer;
+}
+@keyframes glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(216,184,119,.45), 0 10px 30px rgba(180,140,80,.3);}
+  50%{box-shadow:0 0 0 14px rgba(216,184,119,0), 0 10px 40px rgba(180,140,80,.45);}
+}
 
-  .section-title{
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-weight:600;
-    font-size: clamp(1.6rem, 5vw, 2.6rem);
-    color: var(--lavender-light);
-    margin-bottom: 8px;
-    text-shadow: 0 0 20px rgba(185,163,227,.35);
-  }
-  .section-sub{
-    font-size:.95rem; opacity:.75; margin-bottom:36px; max-width:520px;
-  }
+/* ---------- HOME / HEART ---------- */
+#home{padding-top:90px;}
+.heart-wrap{
+  position:relative; width:180px; height:180px;
+  margin-bottom:34px;
+  display:flex; align-items:center; justify-content:center;
+}
+.heart-glow{
+  position:absolute; inset:0; border-radius:50%;
+  background:radial-gradient(circle, rgba(201,182,232,.55), rgba(246,201,211,0) 70%);
+  animation:heartbeat 1.6s ease-in-out infinite;
+}
+.heart-shape{
+  width:86px; height:86px; position:relative; z-index:2;
+  animation:heartbeat 1.6s ease-in-out infinite;
+}
+.heart-shape svg{width:100%; height:100%; filter:drop-shadow(0 6px 18px rgba(156,124,196,.5));}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  15%{transform:scale(1.12);}
+  30%{transform:scale(0.98);}
+  45%{transform:scale(1.08);}
+  60%{transform:scale(1);}
+}
+.home-quote{
+  max-width:340px; font-size:clamp(17px,4.6vw,20px);
+  line-height:1.85; color:var(--lavender-ink); font-style:italic;
+  font-family:'Cormorant Garamond',serif;
+}
+.scroll-hint{margin-top:50px; font-size:12px; letter-spacing:.2em; color:var(--lavender-deep); opacity:.7;}
+.scroll-hint::after{content:"↓"; display:block; margin-top:6px; animation:bounce 1.8s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
 
-  /* ===== Letter ===== */
-  #letter-envelope{
-    width: min(320px, 80vw);
-    aspect-ratio: 4/3;
-    position:relative;
-    cursor:pointer;
-  }
-  .envelope-body{
-    position:absolute; inset:0;
-    background: linear-gradient(135deg, #ded0f0, #c9b3e8);
-    border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.4);
-  }
-  .envelope-flap{
-    position:absolute; top:0; left:0; width:100%; height:55%;
-    background: linear-gradient(135deg, #c9b3e8, #b59ad9);
-    clip-path: polygon(0 0, 100% 0, 50% 85%);
-    transform-origin: top;
-    transition: transform 1s ease;
-    border-radius: 10px 10px 0 0;
-    z-index:2;
-  }
-  #letter-envelope.open .envelope-flap{ transform: rotateX(180deg); }
-  .wax-seal{
-    position:absolute; top:42%; left:50%; transform:translate(-50%,-50%);
-    width:54px; height:54px; border-radius:50%;
-    background: radial-gradient(circle at 35% 30%, #8a4f6b, #5e2c45);
-    display:flex; align-items:center; justify-content:center;
-    font-size:1.4rem; box-shadow: 0 4px 10px rgba(0,0,0,.4);
-    z-index:3; transition: opacity .4s ease, transform .4s ease;
-  }
-  #letter-envelope.open .wax-seal{ opacity:0; transform: translate(-50%,-50%) scale(0); }
-  .envelope-hint{
-    margin-top:18px; font-size:.85rem; opacity:.7; font-style:italic;
-  }
-  #letter-paper{
-    max-width: 600px;
-    width: 92vw;
-    margin-top: 30px;
-    padding: 40px 32px;
-    display:none;
-    text-align:left;
-    font-family:'Cormorant Garamond', serif;
-    font-size: clamp(1.02rem, 2.3vw, 1.18rem);
-    line-height:1.85;
-    color: #fbf6ff;
-  }
-  #letter-paper.show{ display:block; animation: paperIn .9s ease; }
-  @keyframes paperIn{ from{opacity:0; transform: translateY(20px);} to{opacity:1; transform:translateY(0);} }
-  #letter-paper p{ margin-bottom: 14px; opacity:0; }
-  .signature{ text-align:right; margin-top:20px; font-style:italic; font-size:1.2rem; color: var(--gold); }
+/* ---------- 10 REASONS ---------- */
+.cards-grid{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+  width:100%; max-width:420px;
+}
+.flip-card{
+  perspective:1200px; height:150px; cursor:pointer;
+}
+.flip-inner{
+  position:relative; width:100%; height:100%;
+  transition:transform .7s cubic-bezier(.4,.2,.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{
+  position:absolute; inset:0; backface-visibility:hidden;
+  border-radius:18px; display:flex; align-items:center; justify-content:center;
+  padding:14px; text-align:center;
+}
+.flip-front{
+  background:var(--glass-bg); border:1px solid var(--glass-border);
+  backdrop-filter:blur(10px);
+}
+.flip-front .num{font-family:'Cormorant Garamond',serif; font-size:34px; color:var(--lavender-deep);}
+.flip-back{
+  background:linear-gradient(150deg, var(--lavender), var(--lavender-deep));
+  color:#fff; transform:rotateY(180deg);
+  font-size:13px; line-height:1.5; font-weight:500;
+}
 
-  /* ===== It's Here banner ===== */
-  .confetti-emoji{ font-size: clamp(2.4rem, 8vw, 4rem); margin-bottom:10px; animation: pop 1.8s ease infinite; }
-  @keyframes pop{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.12) rotate(-3deg);} }
-  .today-date{
-    font-family:'Cormorant Garamond', serif; font-style:italic;
-    font-size: 1.1rem; opacity:.8; margin-top:14px;
-  }
+/* ---------- JOURNEY ---------- */
+.timeline{position:relative; max-width:380px; width:100%; margin-top:10px;}
+.timeline::before{
+  content:""; position:absolute; left:19px; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg, var(--lavender), var(--gold));
+}
+.tl-item{
+  position:relative; padding-left:52px; margin-bottom:34px; text-align:left;
+}
+.tl-dot{
+  position:absolute; left:10px; top:2px; width:20px; height:20px; border-radius:50%;
+  background:var(--white); border:3px solid var(--lavender-deep);
+  box-shadow:0 0 0 4px rgba(201,182,232,.25);
+}
+.tl-item h3{margin:0 0 4px; font-size:19px; color:var(--lavender-ink);}
+.tl-item .tl-when{font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:700;}
+.tl-item p{margin:6px 0 0; font-size:14px; color:#6c5b81; line-height:1.6;}
 
-  /* ===== Petal cards grid (wishes/reasons) ===== */
-  .filter-bar{
-    display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom: 26px;
-  }
-  .filter-bar button{
-    font-family:'Quicksand'; font-size:.8rem; padding:8px 16px; border-radius:30px;
-    border:1px solid var(--glass-border); background: rgba(255,255,255,.06);
-    color: var(--text-soft); cursor:pointer; transition: all .25s ease;
-  }
-  .filter-bar button.active{ background: linear-gradient(135deg, var(--lavender), var(--blush)); color:#2a2140; font-weight:700;}
-  .card-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 14px;
-    max-width: 1000px;
-    width:100%;
-  }
-  .petal-card, .heart-card{
-    padding: 16px 12px;
-    font-size:.82rem;
-    line-height:1.4;
-    cursor:default;
-    transition: transform .25s ease;
-    color: var(--text-soft);
-  }
-  .petal-card{ border-radius: 50% 50% 50% 4%; }
-  .heart-card{ border-radius: 16px 16px 16px 4px; }
-  .petal-card:hover, .heart-card:hover{ transform: translateY(-4px) scale(1.04); background: rgba(255,255,255,.14); }
-  .counter-note{ font-size:.78rem; opacity:.6; margin-top:18px; }
-  .load-more-btn{
-    margin-top: 28px;
-  }
+/* ---------- LETTER ---------- */
+.desk{
+  width:100%; max-width:380px; border-radius:20px; padding:26px 22px 34px;
+  background:
+    radial-gradient(ellipse at top, rgba(255,255,255,.15), transparent 60%),
+    repeating-linear-gradient(90deg,#8a5a34,#8a5a34 3px,#7c4f2c 3px,#7c4f2c 6px);
+  box-shadow:0 20px 50px rgba(90,60,30,.35);
+  position:relative;
+}
+.paper{
+  background:#fffdf6;
+  background-image:linear-gradient(#f1ecdd 1px, transparent 1px);
+  background-size:100% 28px;
+  border-radius:4px;
+  padding:26px 20px 30px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25), inset 0 0 40px rgba(180,150,100,.06);
+  text-align:left;
+  transform:rotate(-0.6deg);
+}
+.paper p{
+  font-family:'Dancing Script',cursive;
+  font-size:19px; line-height:28px; color:#4a3d2c; margin:0 0 4px;
+}
+.paper .sign{margin-top:14px; font-size:24px; text-align:right; color:#5c4a30;}
 
-  /* ===== Gift room ===== */
-  .gift-grid{
-    display:grid; grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
-    gap: 18px; max-width: 760px; width:100%;
-  }
-  .gift-box{
-    aspect-ratio: 1/1;
-    border-radius: 18px;
-    display:flex; align-items:center; justify-content:center;
-    font-size: 2.2rem;
-    cursor:pointer;
-    background: linear-gradient(145deg, var(--lavender), var(--rose-gold));
-    box-shadow: 0 10px 24px rgba(0,0,0,.3);
-    transition: transform .35s ease;
-    position:relative;
-  }
-  .gift-box:hover{ transform: scale(1.08) rotate(-2deg); }
-  .gift-box.opened{ animation: unwrap .5s ease; }
-  @keyframes unwrap{ 0%{transform:scale(1);} 50%{transform:scale(1.25) rotate(8deg);} 100%{transform:scale(1);} }
-  .gift-modal-overlay{
-    position:fixed; inset:0; background: rgba(10,5,20,.75);
-    display:none; align-items:center; justify-content:center; z-index:50;
-    padding:20px;
-  }
-  .gift-modal-overlay.show{ display:flex; animation: fadeQuick .3s ease; }
-  @keyframes fadeQuick{ from{opacity:0;} to{opacity:1;} }
-  .gift-modal{
-    max-width: 380px; padding: 36px 28px; text-align:center;
-    font-family:'Cormorant Garamond', serif; font-size:1.15rem; line-height:1.7;
-  }
-  .gift-modal .gift-icon{ font-size:2.6rem; margin-bottom:12px; display:block; }
-  .gift-modal button{ margin-top:18px; }
+/* ---------- JAR ---------- */
+.jar-wrap{position:relative; width:190px; height:230px; cursor:pointer; margin-bottom:8px;}
+.jar-svg{width:100%; height:100%;}
+.jar-hint{font-size:12px; color:var(--lavender-deep); margin-top:14px; opacity:.85;}
+.tap-count{font-size:11px; color:#9c86b0; margin-top:4px;}
 
-  /* ===== Stars section ===== */
-  #star-field{
-    position:relative; width:100%; max-width: 900px; height: 60vh; min-height:380px;
-    border-radius: 24px; overflow:hidden;
-    background: radial-gradient(ellipse at top, rgba(60,40,100,.25), rgba(10,6,20,.4));
-  }
-  .twinkle-star{
-    position:absolute; border-radius:50%;
-    background: #fff;
-    cursor:pointer;
-    box-shadow: 0 0 6px 2px rgba(255,255,255,.6);
-    animation: twinkle 2.5s ease-in-out infinite;
-  }
-  @keyframes twinkle{ 0%,100%{opacity:.4;} 50%{opacity:1;} }
-  .star-note-popup{
-    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
-    background: rgba(10,5,20,.7); z-index:60; padding:20px;
-  }
-  .star-note-popup.show{ display:flex; animation: fadeQuick .25s ease; }
-  .star-note-card{
-    max-width: 340px; padding: 32px 26px; text-align:center;
-    font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.25rem;
-  }
-  .star-counter{ margin-top: 18px; font-size:.85rem; opacity:.65;}
+/* ---------- SKY ---------- */
+.sky-box{
+  width:100%; max-width:420px; height:420px; border-radius:24px;
+  background:radial-gradient(ellipse at 50% 0%, #2d2350 0%, #1a1333 55%, #100b22 100%);
+  position:relative; overflow:hidden; box-shadow:0 20px 50px rgba(20,10,40,.4);
+}
+.sky-moon{
+  position:absolute; top:22px; right:26px; width:46px; height:46px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #fff7e0, #f0d59a 70%);
+  box-shadow:0 0 30px rgba(240,213,154,.6);
+}
+.star{
+  position:absolute; width:10px; height:10px; border-radius:50%;
+  background:#fff; cursor:pointer;
+  box-shadow:0 0 6px 1px rgba(255,255,255,.6);
+  transform:translate(-50%,-50%);
+  animation:twinkle 2.6s ease-in-out infinite;
+}
+.star.opened{background:var(--gold-bright); box-shadow:0 0 16px 5px rgba(240,213,154,.85);}
+@keyframes twinkle{0%,100%{opacity:.55;}50%{opacity:1;}}
 
-  /* ===== Forever path ===== */
-  #forever{
-    background: linear-gradient(180deg, var(--lavender-night), #221a3a);
-  }
-  .path-wrap{ position:relative; width:100%; max-width:300px; height: 50vh; min-height:340px; }
-  .path-svg{ width:100%; height:100%; }
-  .heart-end{
-    position:absolute; bottom:6%; left:50%; transform:translateX(-50%);
-    font-size:2.6rem; cursor:pointer;
-    animation: glowPulse 2s ease-in-out infinite;
-  }
-  @keyframes glowPulse{ 0%,100%{ filter:drop-shadow(0 0 6px rgba(243,198,216,.6)); transform:translateX(-50%) scale(1);} 50%{ filter:drop-shadow(0 0 18px rgba(243,198,216,.9)); transform:translateX(-50%) scale(1.1);} }
-  .promise-text{
-    display:none; max-width:560px; width:90vw; padding: 40px 30px;
-    font-family:'Cormorant Garamond', serif; font-size: clamp(1rem,2.3vw,1.2rem); line-height:1.85;
-    text-align:left; margin-top:24px;
-  }
-  .promise-text.show{ display:block; animation: paperIn 1s ease; }
-  .promise-text p{ margin-bottom:12px; }
-  .promise-sig{ text-align:right; font-style:italic; color:var(--gold); margin-top:16px; font-size:1.25rem; }
+/* ---------- BOOKSHELF ---------- */
+.shelf{
+  width:100%; max-width:420px; display:grid; grid-template-columns:repeat(5,1fr); gap:8px;
+  padding:16px 12px; border-radius:14px;
+  background:linear-gradient(#8a5a34,#6f4526);
+  box-shadow:0 14px 30px rgba(80,50,20,.3);
+}
+.book{
+  height:120px; border-radius:4px 8px 8px 4px; cursor:pointer;
+  display:flex; align-items:flex-end; justify-content:center; padding:8px 4px;
+  writing-mode:vertical-rl; text-orientation:mixed;
+  font-family:'Cormorant Garamond',serif; font-size:11px; font-weight:600; color:#fff;
+  box-shadow:inset -4px 0 8px rgba(0,0,0,.15), 0 4px 8px rgba(0,0,0,.25);
+  transition:transform .25s;
+}
+.book:active{transform:translateY(4px);}
 
-  /* ===== Final surprise ===== */
-  #finale{
-    background: radial-gradient(ellipse at center, #2e2350, #0e0a1c);
-  }
-  .finale-heart{
-    font-size: clamp(3rem, 12vw, 6rem);
-    opacity:0;
-    animation: heartForm 2s ease forwards;
-  }
-  @keyframes heartForm{ from{opacity:0; transform: scale(.4) rotate(-15deg);} to{opacity:1; transform: scale(1) rotate(0deg);} }
-  .finale-title{
-    margin-top: 20px;
-    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
-    font-size: clamp(1.8rem, 6vw, 3rem);
-    background: linear-gradient(120deg, var(--lavender-light), var(--gold), var(--blush));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    opacity:0; animation: revealUp 1.5s ease forwards; animation-delay:.8s;
-  }
-  .finale-line{
-    margin-top:14px; opacity:0; font-family:'Cormorant Garamond', serif; font-style:italic;
-    font-size: clamp(.95rem, 2.4vw, 1.15rem); color: var(--lavender-light);
-    animation: revealUp 1.5s ease forwards; animation-delay: 1.6s;
-  }
-  .signoff{
-    margin-top:40px; opacity:0; font-family:'Cormorant Garamond', serif; font-style:italic;
-    font-size:1rem; color: var(--gold);
-    animation: revealUp 1.5s ease forwards; animation-delay: 2.4s;
-  }
+/* ---------- GARDEN ---------- */
+.garden-field{
+  width:100%; max-width:420px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+  padding:10px;
+}
+.flower{cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:6px;}
+.flower svg{width:56px; height:56px; transition:transform .4s;}
+.flower.bloomed svg{transform:scale(1.15);}
+.flower span{font-size:10px; color:var(--lavender-deep); opacity:.8;}
 
-  ::selection{ background: var(--lavender); color:#2a2140; }
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-  }
+/* ---------- COUNTDOWN ---------- */
+.timer-grid{display:flex; gap:10px; margin-top:10px;}
+.timer-box{
+  min-width:64px; padding:14px 8px; border-radius:14px;
+  background:var(--glass-bg); border:1px solid var(--glass-border); backdrop-filter:blur(10px);
+}
+.timer-box .num{font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--lavender-ink); font-weight:700;}
+.timer-box .lbl{font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:2px;}
+
+/* ---------- FINALE ---------- */
+#finale{background:radial-gradient(ellipse at 50% 20%, #2d2350 0%, #170f2e 60%, #0d0820 100%); color:#fff; min-height:100svh;}
+#finale .eyebrow{color:var(--gold-bright);}
+.finale-moon{
+  width:70px; height:70px; border-radius:50%; margin-bottom:24px;
+  background:radial-gradient(circle at 35% 35%, #fff7e0, #f0d59a 70%);
+  box-shadow:0 0 50px rgba(240,213,154,.7);
+}
+.finale-text{font-size:16px; line-height:1.8; max-width:320px; color:#e7ddf5; margin-bottom:10px; opacity:0; transition:opacity 1.2s;}
+.finale-text.show{opacity:1;}
+.last-thing-btn{
+  margin-top:28px; padding:15px 34px; border-radius:40px; border:1px solid rgba(255,255,255,.3);
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold)); color:#4a3418;
+  font-weight:700; font-size:14px; cursor:pointer; letter-spacing:.03em;
+  animation:glow 2.4s ease-in-out infinite;
+}
+.big-line{font-family:'Dancing Script',cursive; font-size:clamp(26px,8vw,38px); color:var(--gold-bright); margin:14px 0; opacity:0; transition:opacity 1.4s;}
+.big-line.show{opacity:1;}
+.final-quote{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; line-height:1.9; color:#e7ddf5; max-width:320px; margin-top:26px; opacity:0; transition:opacity 1.6s;}
+.final-quote.show{opacity:1;}
+.loop-note{margin-top:40px; font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.08em;}
+
+/* ---------- MODAL ---------- */
+.modal-overlay{
+  position:fixed; inset:0; z-index:200; background:rgba(60,40,80,.45);
+  backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; pointer-events:none; transition:opacity .35s;
+}
+.modal-overlay.open{opacity:1; pointer-events:auto;}
+.modal-card{
+  max-width:340px; width:100%; padding:34px 26px; border-radius:24px; text-align:center;
+  background:linear-gradient(160deg, rgba(255,255,255,.92), rgba(250,244,255,.92));
+  box-shadow:0 24px 60px rgba(80,50,120,.35);
+  transform:scale(.85) translateY(20px); transition:transform .4s cubic-bezier(.2,.8,.3,1.2);
+  position:relative;
+}
+.modal-overlay.open .modal-card{transform:scale(1) translateY(0);}
+.modal-card .modal-title{font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--lavender-deep); margin-bottom:12px;}
+.modal-card p{font-size:15px; line-height:1.75; color:var(--lavender-ink); font-family:'Cormorant Garamond',serif; font-style:italic;}
+.modal-close{
+  margin-top:18px; padding:9px 24px; border-radius:30px; border:none;
+  background:var(--lavender-deep); color:#fff; font-family:'Quicksand'; font-weight:600; font-size:13px; cursor:pointer;
+}
+.modal-book-page{font-family:'Dancing Script',cursive; font-size:17px; line-height:1.7; color:#4a3d2c; text-align:left;}
+.modal-book{background:#fffdf6; background-image:linear-gradient(#f1ecdd 1px, transparent 1px); background-size:100% 26px;}
+
+footer.credit{padding:30px 20px 60px; text-align:center; font-size:11px; color:#9c86b0; letter-spacing:.05em;}
 </style>
 </head>
 <body>
 
-<canvas id="stars-canvas"></canvas>
-<canvas id="petals-canvas"></canvas>
+<canvas id="petal-canvas"></canvas>
+<canvas id="sparkle-canvas"></canvas>
 
-<!-- ============ OPENING ============ -->
-<section id="opening">
-  <div id="opening-sequence">
-    <div class="heartbeat-line serif" id="hb1" style="animation: fadeInOut 2s ease forwards;">Lub... Dub...</div>
-  </div>
-</section>
+<button id="mute-btn" aria-label="Toggle music">🔊</button>
 
-<!-- ============ LETTER ============ -->
-<section id="letter-section">
-  <h2 class="section-title">A Letter From Ali</h2>
-  <p class="section-sub">A little something I wrote, just for you.</p>
-
-  <div id="letter-envelope">
-    <div class="envelope-flap"></div>
-    <div class="wax-seal">💜</div>
-    <div class="envelope-body"></div>
-  </div>
-  <div class="envelope-hint">tap to open</div>
-
-  <div class="glass" id="letter-paper">
-    <p>My Dearest Iris,</p>
-    <p>Happy Birthday, my love.</p>
-    <p>Today isn't just another date on the calendar. Today is the day someone incredibly beautiful came into this world — someone who would one day completely change mine.</p>
-    <p>You became my safest place, my biggest blessing, my favorite hello, and the person I never want to live without.</p>
-    <p>Sometimes I wonder how I became lucky enough to love someone like you.</p>
-    <p>Your smile makes my worst days disappear. Your laugh is my favorite sound. Your voice brings peace to my heart. Even your quiet moments make me feel at home.</p>
-    <p>Thank you for simply existing. Thank you for choosing me. Thank you for letting me love you.</p>
-    <p>I know life isn't always easy. Some days are exhausting. Some days are overwhelming. But I hope today, even just for a little while, you forget every worry and simply feel how incredibly loved you are.</p>
-    <p>Because you deserve that. You deserve happiness. You deserve peace. You deserve endless love.</p>
-    <p>And if I could, I'd spend every single day reminding you just how amazing you are.</p>
-    <p>Happy Birthday, my beautiful girl. I love you more than yesterday. Less than tomorrow.</p>
-    <p class="signature">Forever yours, Ali ❤️</p>
-  </div>
-</section>
-
-<!-- ============ IT'S HERE ============ -->
-<section id="its-here">
-  <div class="confetti-emoji">🎉</div>
-  <h1 class="main-title">IT'S FINALLY HERE!</h1>
-  <p class="subtitle">Happy Birthday, Iris. Today belongs to you.</p>
-  <div class="today-date">June 28th — your day, all year in the making.</div>
-</section>
-
-<!-- ============ WISHES ============ -->
-<section id="wishes">
-  <h2 class="section-title">🌸 Birthday Wishes</h2>
-  <p class="section-sub" id="wishes-sub">A hundred little wishes, one for each glowing petal.</p>
-  <div class="card-grid" id="wishes-grid"></div>
-  <button class="glow-btn load-more-btn" id="wishes-more" style="display:none;">Show more wishes</button>
-</section>
-
-<!-- ============ REASONS ============ -->
-<section id="reasons">
-  <h2 class="section-title">💕 365 Reasons I Love You</h2>
-  <p class="section-sub">One reason for every day of the year.</p>
-  <div class="filter-bar" id="reasons-filter"></div>
-  <div class="card-grid" id="reasons-grid"></div>
-  <div class="counter-note" id="reasons-counter"></div>
-</section>
-
-<!-- ============ GIFT ROOM ============ -->
-<section id="gifts">
-  <h2 class="section-title">🎁 Surprise Gift Room</h2>
-  <p class="section-sub">Tap each present. They're all yours.</p>
-  <div class="gift-grid" id="gift-grid"></div>
-</section>
-<div class="gift-modal-overlay" id="gift-modal-overlay">
-  <div class="glass gift-modal">
-    <span class="gift-icon" id="gift-icon">💌</span>
-    <p id="gift-text"></p>
-    <button class="glow-btn" id="gift-close">close</button>
-  </div>
+<!-- ================= INTRO ================= -->
+<div id="intro">
+  <div class="intro-line1 script">To My Wifey Iris</div>
+  <div class="intro-line2">10 Months of Choosing You Every Single Day</div>
+  <button class="open-heart-btn" id="open-heart">Open My Heart</button>
 </div>
 
-<!-- ============ STARS ============ -->
-<section id="stars-section">
-  <h2 class="section-title">🌌 If The Stars Could Talk</h2>
-  <p class="section-sub">Touch a star — it's been holding a message just for you.</p>
-  <div id="star-field"></div>
-  <div class="star-counter" id="star-counter">0 of 200 stars discovered</div>
-</section>
-<div class="star-note-popup" id="star-popup">
-  <div class="glass star-note-card">
-    <p id="star-note-text"></p>
-    <button class="glow-btn" id="star-close" style="margin-top:18px;">close</button>
-  </div>
+<div id="app" class="hidden">
+
+  <!-- ================= HOME ================= -->
+  <section id="home" class="section">
+    <div class="eyebrow">Welcome, my love</div>
+    <div class="heart-wrap">
+      <div class="heart-glow"></div>
+      <div class="heart-shape">
+        <svg viewBox="0 0 100 90"><path d="M50 88 C 20 65, 2 42, 2 24 C 2 6, 18 -2, 32 6 C 42 12, 48 22, 50 28 C 52 22, 58 12, 68 6 C 82 -2, 98 6, 98 24 C 98 42, 80 65, 50 88 Z" fill="url(#hg)"/><defs><radialGradient id="hg" cx="40%" cy="30%"><stop offset="0%" stop-color="#f6c9d3"/><stop offset="100%" stop-color="#b98fdc"/></radialGradient></defs></svg>
+      </div>
+    </div>
+    <p class="home-quote">"Ten months may not sound like forever, but every day with you has made my heart more certain. If I had to choose again, I would still choose you. Again and again."</p>
+    <div class="scroll-hint">KEEP SCROLLING</div>
+  </section>
+
+  <!-- ================= 10 REASONS ================= -->
+  <section id="reasons" class="section">
+    <div class="eyebrow">Ten Reasons</div>
+    <h2>Why I Love You</h2>
+    <p class="sub">Tap each card to open it.</p>
+    <div class="cards-grid" id="reasons-grid"></div>
+  </section>
+
+  <!-- ================= JOURNEY ================= -->
+  <section id="journey" class="section">
+    <div class="eyebrow">Our Story</div>
+    <h2>Our Journey</h2>
+    <p class="sub">From the moment I decided you were worth pursuing.</p>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- ================= LETTER ================= -->
+  <section id="letter" class="section">
+    <div class="eyebrow">From My Heart</div>
+    <h2>A Love Letter</h2>
+    <div class="desk">
+      <div class="paper" id="letter-paper"></div>
+    </div>
+  </section>
+
+  <!-- ================= JAR ================= -->
+  <section id="jar" class="section">
+    <div class="eyebrow">Open Whenever You Need One</div>
+    <h2>Jar of Love</h2>
+    <p class="sub">Over a hundred little notes are folded in here. Tap the jar for one.</p>
+    <div class="jar-wrap" id="jar-tap">
+      <svg class="jar-svg" viewBox="0 0 160 200">
+        <path d="M40 40 L36 190 Q36 198 46 198 L114 198 Q124 198 124 190 L120 40 Z" fill="rgba(255,255,255,0.28)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+        <rect x="55" y="18" width="50" height="26" rx="6" fill="#c9b6e8" stroke="#9c7cc4" stroke-width="2"/>
+        <rect x="50" y="10" width="60" height="12" rx="6" fill="#d8b877"/>
+        <g id="jar-hearts"></g>
+      </svg>
+    </div>
+    <div class="jar-hint">tap the jar</div>
+    <div class="tap-count" id="jar-count"></div>
+  </section>
+
+  <!-- ================= SKY ================= -->
+  <section id="sky" class="section">
+    <div class="eyebrow">Whispered Every Night</div>
+    <h2>A Sky Full of Prayers</h2>
+    <p class="sub">Every star is a prayer I've prayed for you. Tap one.</p>
+    <div class="sky-box" id="sky-box">
+      <div class="sky-moon"></div>
+    </div>
+  </section>
+
+  <!-- ================= BOOKSHELF ================= -->
+  <section id="bookshelf" class="section">
+    <div class="eyebrow">Letters I Never Get Tired of Writing ❤️</div>
+    <h2>Our Little Library</h2>
+    <p class="sub">Each book is a letter, just for you. Tap to read.</p>
+    <div class="shelf" id="shelf"></div>
+  </section>
+
+  <!-- ================= GARDEN ================= -->
+  <section id="garden" class="section">
+    <div class="eyebrow">Promises, Not Candles</div>
+    <h2>Promise Garden</h2>
+    <p class="sub">Tap a flower and watch it bloom.</p>
+    <div class="garden-field" id="garden-field"></div>
+  </section>
+
+  <!-- ================= COUNTDOWN ================= -->
+  <section id="countdown" class="section">
+    <div class="eyebrow">Still Counting</div>
+    <h2>Forever Countdown</h2>
+    <p class="sub">Every second brings me closer to loving you for the rest of my life.</p>
+    <div class="timer-grid">
+      <div class="timer-box"><div class="num" id="t-days">0</div><div class="lbl">Days</div></div>
+      <div class="timer-box"><div class="num" id="t-hours">0</div><div class="lbl">Hours</div></div>
+      <div class="timer-box"><div class="num" id="t-mins">0</div><div class="lbl">Mins</div></div>
+      <div class="timer-box"><div class="num" id="t-secs">0</div><div class="lbl">Secs</div></div>
+    </div>
+  </section>
+
+  <!-- ================= FINALE ================= -->
+  <section id="finale" class="section">
+    <div class="eyebrow">One Last Thing Before You Go</div>
+    <div class="finale-moon"></div>
+    <p class="finale-text" id="fin1">Thank you for letting me love you for these beautiful ten months.</p>
+    <p class="finale-text" id="fin2">I still have forever left to love you.</p>
+    <button class="last-thing-btn" id="last-thing-btn">One Last Thing</button>
+    <div class="big-line" id="fin-love">I Love You So Much Wifey Iris</div>
+    <div class="big-line" id="fin-happy">Happy 10 Months My Love</div>
+    <p class="final-quote" id="fin-quote">"Forever doesn't begin on our wedding day. It began the moment I chose you, and I'll keep choosing you every single day."</p>
+    <div class="loop-note">— and I'm not done loving you yet —</div>
+  </section>
+
+  <footer class="credit">made with my whole heart, for you — Eugene</footer>
 </div>
 
-<!-- ============ FOREVER / PROMISE ============ -->
-<section id="forever">
-  <h2 class="section-title">🌺 Our Forever</h2>
-  <p class="section-sub">Follow the path through the lavender field.</p>
-  <div class="path-wrap">
-    <svg class="path-svg" viewBox="0 0 200 400" preserveAspectRatio="none">
-      <path d="M100,400 C40,330 160,260 100,190 C40,120 160,60 100,10" stroke="rgba(230,217,247,0.35)" stroke-width="3" fill="none" stroke-dasharray="6 10"/>
-    </svg>
-    <div class="heart-end" id="forever-heart">💜</div>
+<!-- ================= MODAL ================= -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-card" id="modal-card">
+    <div class="modal-title" id="modal-title"></div>
+    <div id="modal-body"></div>
+    <button class="modal-close" id="modal-close">close</button>
   </div>
-  <div class="glass promise-text" id="promise-text">
-    <p><strong>My Birthday Promise</strong></p>
-    <p>My beautiful Iris,</p>
-    <p>Today is your birthday. But somehow, I feel like I'm the one receiving the greatest gift — because I get to love someone as incredible as you.</p>
-    <p>No matter what tomorrow brings. No matter how busy life becomes. No matter how many birthdays pass.</p>
-    <p>I'll still be here. Still loving you. Still supporting you. Still believing in you. Still choosing you. Again. And again. And again.</p>
-    <p>If one lifetime isn't enough to love you, then I'd gladly choose you in every lifetime after this one.</p>
-    <p>Happy Birthday, my love. May today remind you how precious you are. How beautiful you are. How irreplaceable you are. How deeply you are loved.</p>
-    <p class="promise-sig">Forever and always, Your Ali ❤️</p>
-  </div>
-</section>
-
-<!-- ============ FINALE ============ -->
-<section id="finale">
-  <div class="finale-heart">💜</div>
-  <div class="finale-title">Happy Birthday, Iris</div>
-  <div class="finale-line">"If love could be seen, every star in the sky would spell your name."</div>
-  <div class="signoff">— Ali</div>
-</section>
+</div>
 
 <script>
-/* ============================================================
-   AMBIENT BACKGROUND: twinkling stars + drifting petals canvas
-   ============================================================ */
-(function(){
-  const starCanvas = document.getElementById('stars-canvas');
-  const sctx = starCanvas.getContext('2d');
-  const petalCanvas = document.getElementById('petals-canvas');
-  const pctx = petalCanvas.getContext('2d');
-  let w,h;
-  function resize(){
-    w = window.innerWidth; h = document.documentElement.scrollHeight;
-    starCanvas.width = w; starCanvas.height = window.innerHeight;
-    petalCanvas.width = w; petalCanvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
+/* =========================================================
+   DATA
+========================================================= */
+const ANNIVERSARY = new Date(2025, 8, 2, 0, 0, 0); // Sept 2, 2025
 
-  const stars = Array.from({length: 90}, () => ({
-    x: Math.random()*w, y: Math.random()*window.innerHeight,
-    r: Math.random()*1.6+0.4, phase: Math.random()*Math.PI*2, speed: 0.02+Math.random()*0.02
-  }));
-  const petals = Array.from({length: 22}, () => ({
-    x: Math.random()*w, y: Math.random()*window.innerHeight,
-    s: 6+Math.random()*8, sp: 0.3+Math.random()*0.6, drift: Math.random()*1-0.5, rot: Math.random()*360
-  }));
+const reasons = [
+  "The way you make ordinary days feel like something worth remembering.",
+  "How safe I feel just being myself when I'm with you.",
+  "Your laugh — I could listen to it forever and never once get tired of it.",
+  "The way you love people gently, without ever needing credit for it.",
+  "How you make me want to be a better man, every single day.",
+  "The way you actually listen, like what I'm saying truly matters to you.",
+  "Your strength, even on the days you don't feel strong at all.",
+  "The peace that settles in me the moment you're near.",
+  "How you turned 'home' from a place into a person.",
+  "The way you love — patiently, faithfully, without holding anything back."
+];
 
-  function drawStars(t){
-    sctx.clearRect(0,0,w,window.innerHeight);
-    stars.forEach(st=>{
-      const op = 0.3 + 0.7*Math.abs(Math.sin(t*st.speed + st.phase));
-      sctx.beginPath();
-      sctx.fillStyle = `rgba(255,255,255,${op})`;
-      sctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
-      sctx.fill();
-    });
-  }
-  function drawPetals(t){
-    pctx.clearRect(0,0,w,window.innerHeight);
-    petals.forEach(p=>{
-      p.y += p.sp; p.x += Math.sin(t*0.001+p.y*0.01)*0.4;
-      if(p.y > window.innerHeight+20){ p.y = -20; p.x = Math.random()*w; }
-      pctx.save();
-      pctx.translate(p.x,p.y);
-      pctx.rotate((p.rot+t*0.02)*Math.PI/180);
-      pctx.fillStyle = 'rgba(185,163,227,0.55)';
-      pctx.beginPath();
-      pctx.ellipse(0,0,p.s,p.s*0.6,0,0,Math.PI*2);
-      pctx.fill();
-      pctx.restore();
-    });
-  }
-  function loop(t){
-    drawStars(t*0.05);
-    drawPetals(t);
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+const timeline = [
+  {when:"Month 1", title:"The Beginning", text:"The day I decided you were worth pursuing, no matter how long it took."},
+  {when:"Month 2", title:"Learning You", text:"Slowly discovering the little things that make you, you — and falling harder with each one."},
+  {when:"Month 3", title:"The First Yes", text:"The moment you let me in. I still remember exactly how that felt."},
+  {when:"Month 4", title:"Comfortable Silence", text:"Realizing I didn't need to fill every quiet moment with words when I was with you."},
+  {when:"Month 5", title:"Through the Hard Days", text:"Choosing to stay soft with each other even when things weren't easy."},
+  {when:"Month 6", title:"Halfway", text:"Looking back at how far we'd come, and forward at how far I wanted to go with you."},
+  {when:"Month 7", title:"Building Trust", text:"Learning that I could hand you my heart and it would be safe there."},
+  {when:"Month 8", title:"Becoming Home", text:"Noticing that wherever you are had quietly become my favorite place."},
+  {when:"Month 9", title:"Choosing Again", text:"Realizing love isn't one decision, it's a hundred small ones — and I kept making them, for you."},
+  {when:"Month 10", title:"Today", text:"Ten months in, and I would still choose you. Again, and again, and again."}
+];
 
-  // a few floating fireflies via DOM
-  for(let i=0;i<10;i++){
-    const f = document.createElement('div');
-    f.className='firefly';
-    f.style.left = Math.random()*100+'vw';
-    f.style.top = Math.random()*100+'vh';
-    f.style.animationDelay = (Math.random()*10)+'s';
-    f.style.animationDuration = (10+Math.random()*8)+'s';
-    document.body.appendChild(f);
-  }
-})();
+const letterText = [
+  "My Iris,",
+  "Ten months ago I made a decision that I have never once regretted — to love you on purpose, every day, even the ordinary ones.",
+  "Thank you for letting me in. Thank you for your patience on the days I got it wrong, and your grace on the days I didn't know how to say what I felt.",
+  "I am so proud of who you are — not who I want you to be, just exactly who you already are. Your heart, your strength, the quiet way you carry so much without complaint. I see it. I see you.",
+  "I pray for you more than you probably know. For your peace, your dreams, your heart, your rest. I want to be the kind of man who prays for you before he ever asks anything of you.",
+  "And I am so excited for what's next. Not just the big moments, but the small Tuesdays too — the ones where it's just us, doing nothing extraordinary, and it still feels like everything.",
+  "Ten months down. I still have forever left to love you.",
+];
+const letterSign = "Yours, always — Eugene";
 
-/* ============================================================
-   OPENING SEQUENCE
-   ============================================================ */
-(function(){
-  const opening = document.getElementById('opening');
-  const seq = document.getElementById('opening-sequence');
-  const lines = ["June 28...", "A day the world became a little brighter...", "Because today...", "The love of my life was born."];
-  let i = 0;
-  function showNext(){
-    seq.innerHTML = '';
-    if(i < lines.length){
-      const div = document.createElement('div');
-      div.className = 'heartbeat-line serif fade-line';
-      div.textContent = lines[i];
-      seq.appendChild(div);
-      i++;
-      setTimeout(showNext, 3300);
-    } else {
-      finishOpening();
+const jarNotes = [
+"You are my favorite good morning and my favorite goodnight.",
+"I fall for you a little more every single day, on purpose.",
+"You make waiting worth it, every time.",
+"I still get nervous butterflies when I think about you.",
+"Thank you for being soft in a world that made you tough.",
+"You are proof that good things come to those who pursue them.",
+"I love the way you say my name.",
+"You are safe with me. Always.",
+"Your smile is my favorite notification.",
+"I choose you today, tomorrow, and every day after that.",
+"You didn't just capture my attention, you captured my whole heart.",
+"I love you more than words on a page could ever hold.",
+"You are the answer to prayers I didn't know how to pray yet.",
+"Being yours is my favorite title.",
+"I love how you make simple moments feel sacred.",
+"You are worth every single mile between us.",
+"I'm not just falling for you, I'm building a life around you.",
+"You make my chaotic days feel calm.",
+"I love you in the loud moments and the quiet ones too.",
+"You're the peace I didn't know I was praying for.",
+"I love the way your heart works — gently, and completely.",
+"You are my favorite person to tell good news to first.",
+"Ten months in, and you still make my heart skip.",
+"I love you on your best days and your hardest ones.",
+"You make ordinary Tuesdays feel like something special.",
+"I'm endlessly grateful God let our paths cross.",
+"You are the softest place I know.",
+"I love watching you become more you every day.",
+"You are so easy to love. Thank you for that.",
+"I'll never get tired of choosing you.",
+"You are the reason I believe in showing up, every day.",
+"I love your laugh more than I could ever explain.",
+"You make me want to build something real and lasting.",
+"I am endlessly proud to call you mine.",
+"You are patient with me in ways I don't deserve.",
+"I love the way you care for the people around you.",
+"You make home feel less like a place and more like you.",
+"I think about our future more than you know.",
+"You are worth every prayer I've prayed for you.",
+"I love you in ways I'm still learning to put into words.",
+"You are my calm in every storm.",
+"I love the way you try, even on your tired days.",
+"You've taught me what patient love actually looks like.",
+"I love you loudly, even in the quiet moments.",
+"You are the best decision I keep making, again and again.",
+"I am so thankful I get to love you like this.",
+"You make me want to slow down and stay present.",
+"I love how your heart is so much bigger than you know.",
+"You are gentle with my heart, and I notice it every day.",
+"I love you more today than the day this started.",
+"You are the kind of love people write songs about.",
+"I love the way you believe in me, even when I doubt myself.",
+"You are so deeply worth pursuing.",
+"I love your heart most of all.",
+"You make me want to keep showing up, even on hard days.",
+"I love you — simply, fully, and on purpose.",
+"You are proof that good things are worth the wait.",
+"I choose your heart over anything easier.",
+"You are the softest yes I've ever said.",
+"I love the way you make me feel completely known.",
+"You are my favorite hello and my hardest goodbye.",
+"I love you in a way that keeps growing, not fading.",
+"You make my faith stronger just by being you.",
+"I am beyond grateful for these ten months with you.",
+"You are worth every single effort.",
+"I love the quiet trust that's grown between us.",
+"You are the reason my heart feels settled.",
+"I love watching you chase your dreams.",
+"You deserve every good thing coming your way.",
+"I love you enough to keep choosing patience.",
+"You are my person, fully and completely.",
+"I love the way we've learned each other slowly and gently.",
+"You make me want forever, not just today.",
+"I love your heart's quiet strength.",
+"You are safe here, always.",
+"I love you more than these notes could ever say.",
+"You are the best kind of surprise life gave me.",
+"I love how effortlessly you make me smile.",
+"You are worth choosing, over and over.",
+"I love this version of us, and I love where we're going.",
+"You are my favorite kind of soft.",
+"I love the way you show up for the people you love.",
+"You are the calm after every hard day.",
+"I love that loving you keeps getting easier and deeper.",
+"You are worth all the prayers and all the patience.",
+"I love your heart, your mind, and everything in between.",
+"You are so deeply cherished, even when I forget to say it.",
+"I love you today just as fiercely as month one.",
+"You are the reason my future looks brighter.",
+"I love our slow mornings and our long conversations.",
+"You are my favorite place to come home to.",
+"I love you enough to keep growing for you.",
+"You make loving you feel completely natural.",
+"I love the little things about you most of all.",
+"You are worth every quiet prayer I whisper for you.",
+"I love that you let me in, slowly and safely.",
+"You are the softest kind of brave.",
+"I love how our story keeps unfolding, gently.",
+"You are chosen. Today, and always.",
+"I love you — ten months in, and still certain.",
+"You are my forever kind of person.",
+"I love you more than these hundred notes could ever hold, and I'll keep writing more."
+];
+
+const prayers = [
+"That your heart would always know how deeply loved it is.",
+"That your dreams would grow roots and come true, in their own perfect time.",
+"That you'd feel safe enough to rest, even in seasons of waiting.",
+"That your faith would grow steadier with every passing month.",
+"That your family would always feel your quiet strength.",
+"That your worries would grow smaller and your peace would grow bigger.",
+"That every door meant for you would open right on time.",
+"That you'd wake up every day feeling completely enough.",
+"That I would always be gentle with your heart.",
+"That your kindness would always come back to you multiplied.",
+"That you'd never forget how proud I am of you.",
+"That healing would come easily where you still carry old wounds.",
+"That your laughter would always outweigh your worries.",
+"That God would guard your heart the way I try to.",
+"That you'd feel chosen, not just today but every single day.",
+"That your patience with me would be met with my growth.",
+"That the future would be even kinder to you than the past.",
+"That your gifts and talents would be seen and celebrated.",
+"That you'd trust how deeply and completely you are loved.",
+"That every hard season would end in something beautiful.",
+"That your rest would be as deep as your effort.",
+"That your circle would always protect your peace.",
+"That you'd never doubt your worth, not even for a moment.",
+"That we would grow old still choosing each other, gently, every day."
+];
+
+const books = [
+  {title:"The Day I Fell Even Harder", text:"There wasn't one single moment — it was a hundred small ones stacked on top of each other, until one day I realized I wasn't just falling for you anymore, I already had. It happened somewhere between your laugh and the way you cared for people who couldn't repay you. I fell, and I haven't gotten back up since, and I don't plan to."},
+  {title:"Thank You for Choosing Me", text:"Out of everyone, you chose me — and I don't take that lightly. Thank you for trusting me with your time, your heart, your ordinary days. I know love is a choice, not just a feeling, and I want you to know I see every time you've chosen me, even quietly, even when it wasn't easy."},
+  {title:"Why You Make Me Feel at Home", text:"Home was never a place for me, it was always a feeling — and somehow you became that feeling. It's in the way you listen, the way you remember small things, the way I can just exhale around you. Wherever you are, that's where I want to be."},
+  {title:"What I Pray for Every Night", text:"Before I close my eyes, I bring you before God — your heart, your dreams, your peace, your protection. I pray you feel loved even on days I'm not there to say it out loud. I pray your future is even brighter than the story we're already writing."},
+  {title:"My Favorite Things About You", text:"Your laugh that comes out before you mean it to. The way you care for people without needing anything back. Your strength on days you don't feel strong. The way you say my name. Honestly, I could fill a hundred pages and still leave things out."},
+  {title:"The Future I Dream With You", text:"I think about quiet mornings with you, about building something steady and real, about a life where we keep choosing each other on purpose. I dream about growing older beside you, about our someday home, our someday family, our someday everything. I want all of it with you."},
+  {title:"If I Could Hug You Right Now", text:"I'd hold you a little longer than usual, the kind of hug that says everything words can't. I'd let you feel how safe you are with me, how proud I am of you, how much I mean it every time I say I love you. Until I can, let this letter be that hug."},
+  {title:"Ten Months Later I Still Choose You", text:"People say the beginning is the easiest part to love someone — I disagree. Ten months in, I know you more, and I choose you more. Not because it's easy, but because you are worth every ounce of effort. Still you. Always you."},
+  {title:"To My Future Wife", text:"One day I'll get to call you that officially, but truthfully, I already treat these ten months like practice for forever. To my future wife — thank you for letting me love you well now, so that one day, saying 'I do' will just be confirming what my heart already knows."},
+  {title:"Until Forever", text:"This isn't a letter with an ending, because my love for you doesn't have one either. Until forever, I'll keep writing you letters, keep choosing you, keep praying for you, keep showing up. Ten months down. Forever still ahead of us."}
+];
+
+const promises = [
+  {text:"I'll always choose you.", color:"#c9b6e8"},
+  {text:"I'll always pray for you.", color:"#f6c9d3"},
+  {text:"I'll protect your heart.", color:"#d8b877"},
+  {text:"I'll grow beside you.", color:"#b98fdc"},
+  {text:"I'll keep pursuing you.", color:"#e8b6c9"},
+  {text:"I'll love you faithfully.", color:"#c9b6e8"},
+  {text:"I'll never stop making you smile.", color:"#f0d59a"},
+  {text:"I'll be patient with your heart.", color:"#d3b6e8"},
+  {text:"I'll keep showing up for you.", color:"#f6c9d3"}
+];
+
+/* =========================================================
+   INTRO
+========================================================= */
+document.getElementById('open-heart').addEventListener('click', ()=>{
+  document.getElementById('intro').classList.add('fade-out');
+  document.getElementById('app').classList.remove('hidden');
+  burstPetals(60);
+  startAudio();
+  setTimeout(initScrollReveal, 500);
+});
+
+/* =========================================================
+   AUDIO — synthesized ambient piano (no external files)
+========================================================= */
+let audioCtx, masterGain, musicRunning=false, musicTimer;
+const scale = [261.63,293.66,329.63,349.23,392.00,440.00,493.88,523.25,587.33,659.25]; // C major-ish, gentle
+
+function startAudio(){
+  if(musicRunning) return;
+  audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.16;
+  masterGain.connect(audioCtx.destination);
+  musicRunning = true;
+  scheduleNote();
+}
+function scheduleNote(){
+  if(!musicRunning) return;
+  const freq = scale[Math.floor(Math.random()*scale.length)];
+  playPianoNote(freq);
+  const delay = 1400 + Math.random()*1600;
+  musicTimer = setTimeout(scheduleNote, delay);
+}
+function playPianoNote(freq){
+  if(!audioCtx) return;
+  const now = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type='sine'; osc2.type='triangle';
+  osc.frequency.value = freq;
+  osc2.frequency.value = freq*2;
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.linearRampToValueAtTime(0.5, now+0.05);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now+3.2);
+  osc.connect(gain); osc2.connect(gain);
+  gain.connect(masterGain);
+  osc.start(now); osc2.start(now);
+  osc.stop(now+3.3); osc2.stop(now+3.3);
+}
+let muted=false;
+document.getElementById('mute-btn').addEventListener('click', function(){
+  muted = !muted;
+  this.textContent = muted ? '🔇' : '🔊';
+  if(masterGain) masterGain.gain.value = muted ? 0 : 0.16;
+});
+
+/* =========================================================
+   PETALS + SPARKLES + BUTTERFLIES (canvas)
+========================================================= */
+const petalCanvas = document.getElementById('petal-canvas');
+const pctx = petalCanvas.getContext('2d');
+const sparkleCanvas = document.getElementById('sparkle-canvas');
+const sctx = sparkleCanvas.getContext('2d');
+function resizeCanvases(){
+  [petalCanvas, sparkleCanvas].forEach(c=>{ c.width = window.innerWidth; c.height = window.innerHeight; });
+}
+resizeCanvases();
+window.addEventListener('resize', resizeCanvases);
+
+let petals = [];
+let sparkles = [];
+let butterflies = [];
+
+function makePetal(burstX,burstY){
+  return {
+    x: burstX!==undefined? burstX : Math.random()*petalCanvas.width,
+    y: burstY!==undefined? burstY : -20 - Math.random()*200,
+    r: 5+Math.random()*6,
+    vy: 0.5+Math.random()*0.9,
+    vx: (Math.random()-0.5)*0.6,
+    rot: Math.random()*360,
+    vr: (Math.random()-0.5)*2,
+    hue: Math.random()>0.5 ? '#c9b6e8' : '#f6c9d3',
+    sway: Math.random()*Math.PI*2
+  };
+}
+function makeButterfly(){
+  return {
+    x: Math.random()*petalCanvas.width,
+    y: Math.random()*petalCanvas.height*0.6+40,
+    t: Math.random()*Math.PI*2,
+    speed: 0.4+Math.random()*0.3,
+    size: 8+Math.random()*5,
+    hue: Math.random()>0.5 ? '#d8b877' : '#c9b6e8'
+  };
+}
+for(let i=0;i<14;i++) petals.push(makePetal());
+for(let i=0;i<3;i++) butterflies.push(makeButterfly());
+
+function burstPetals(n){
+  for(let i=0;i<n;i++){
+    petals.push(makePetal(petalCanvas.width/2 + (Math.random()-0.5)*80, petalCanvas.height/2));
+  }
+}
+function burstEverything(n){
+  for(let i=0;i<n;i++){
+    petals.push(makePetal(Math.random()*petalCanvas.width, -10));
+    sparkles.push({x:Math.random()*petalCanvas.width, y:Math.random()*petalCanvas.height, r:Math.random()*2+1, life:1, vy:-0.4-Math.random()*0.6});
+  }
+  for(let i=0;i<6;i++) butterflies.push(makeButterfly());
+}
+function drawPetal(p){
+  pctx.save();
+  pctx.translate(p.x,p.y);
+  pctx.rotate(p.rot*Math.PI/180);
+  pctx.fillStyle = p.hue;
+  pctx.globalAlpha = 0.85;
+  pctx.beginPath();
+  pctx.ellipse(0,0,p.r,p.r*0.6,0,0,Math.PI*2);
+  pctx.fill();
+  pctx.restore();
+}
+function drawButterfly(b){
+  pctx.save();
+  pctx.translate(b.x,b.y);
+  const wing = Math.sin(b.t*6)*0.5+0.5;
+  pctx.fillStyle = b.hue;
+  pctx.globalAlpha = 0.8;
+  pctx.beginPath();
+  pctx.ellipse(-b.size*0.5,0,b.size*0.5*wing+2,b.size*0.35,0,0,Math.PI*2);
+  pctx.ellipse(b.size*0.5,0,b.size*0.5*wing+2,b.size*0.35,0,0,Math.PI*2);
+  pctx.fill();
+  pctx.restore();
+}
+function animatePetals(){
+  pctx.clearRect(0,0,petalCanvas.width,petalCanvas.height);
+  petals.forEach(p=>{
+    p.sway += 0.02;
+    p.x += p.vx + Math.sin(p.sway)*0.3;
+    p.y += p.vy;
+    p.rot += p.vr;
+    drawPetal(p);
+  });
+  petals = petals.filter(p=>p.y < petalCanvas.height+30);
+  while(petals.length < 16) petals.push(makePetal());
+
+  butterflies.forEach(b=>{
+    b.t += 0.02*b.speed;
+    b.x += Math.cos(b.t)*1.1;
+    b.y += Math.sin(b.t*1.6)*0.6;
+    if(b.x<-20) b.x=petalCanvas.width+20;
+    if(b.x>petalCanvas.width+20) b.x=-20;
+    drawButterfly(b);
+  });
+
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+function animateSparkles(){
+  sctx.clearRect(0,0,sparkleCanvas.width,sparkleCanvas.height);
+  // ambient sparkles
+  if(Math.random()<0.06){
+    sparkles.push({x:Math.random()*sparkleCanvas.width, y:Math.random()*sparkleCanvas.height, r:Math.random()*1.6+0.6, life:1, vy:-0.2-Math.random()*0.3});
+  }
+  sparkles.forEach(s=>{
+    s.life -= 0.006;
+    s.y += s.vy;
+    sctx.globalAlpha = Math.max(s.life,0);
+    sctx.fillStyle = '#fff5d6';
+    sctx.beginPath();
+    sctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    sctx.fill();
+  });
+  sparkles = sparkles.filter(s=>s.life>0);
+  requestAnimationFrame(animateSparkles);
+}
+animateSparkles();
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+function initScrollReveal(){
+  document.querySelectorAll('.section').forEach(s=>s.classList.add('reveal'));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:0.15});
+  document.querySelectorAll('.section').forEach(s=>io.observe(s));
+
+  const tio = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{ if(e.isIntersecting){ e.target.style.transitionDelay=(i*0.05)+'s'; e.target.classList.add('in'); } });
+  },{threshold:0.3});
+  document.querySelectorAll('.tl-item').forEach(el=>{ el.classList.add('reveal'); tio.observe(el); });
+}
+
+/* =========================================================
+   MODAL HELPERS
+========================================================= */
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalBody = document.getElementById('modal-body');
+document.getElementById('modal-close').addEventListener('click', ()=> modal.classList.remove('open'));
+modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open'); });
+
+function openModal(title, html, extraClass){
+  modalTitle.textContent = title;
+  modalBody.innerHTML = html;
+  document.getElementById('modal-card').className = 'modal-card glass' + (extraClass? ' '+extraClass:'');
+  modal.classList.add('open');
+}
+
+/* =========================================================
+   BUILD: 10 REASONS
+========================================================= */
+const reasonsGrid = document.getElementById('reasons-grid');
+reasons.forEach((r,i)=>{
+  const card = document.createElement('div');
+  card.className='flip-card';
+  card.innerHTML = `<div class="flip-inner">
+      <div class="flip-front"><div class="num">${String(i+1).padStart(2,'0')}</div></div>
+      <div class="flip-back">${r}</div>
+    </div>`;
+  card.addEventListener('click', ()=> card.classList.toggle('flipped'));
+  reasonsGrid.appendChild(card);
+});
+
+/* =========================================================
+   BUILD: TIMELINE
+========================================================= */
+const tl = document.getElementById('timeline');
+timeline.forEach(item=>{
+  const div = document.createElement('div');
+  div.className='tl-item';
+  div.innerHTML = `<div class="tl-dot"></div><div class="tl-when">${item.when}</div><h3>${item.title}</h3><p>${item.text}</p>`;
+  tl.appendChild(div);
+});
+
+/* =========================================================
+   BUILD: LETTER
+========================================================= */
+const paper = document.getElementById('letter-paper');
+letterText.forEach(p=>{
+  const el = document.createElement('p');
+  el.textContent = p;
+  paper.appendChild(el);
+});
+const signEl = document.createElement('p');
+signEl.className='sign';
+signEl.textContent = letterSign;
+paper.appendChild(signEl);
+
+/* =========================================================
+   BUILD: JAR
+========================================================= */
+let jarTaps = 0;
+const usedNotes = new Set();
+document.getElementById('jar-tap').addEventListener('click', ()=>{
+  jarTaps++;
+  document.getElementById('jar-count').textContent = `opened ${jarTaps} note${jarTaps>1?'s':''} so far`;
+  let idx;
+  if(usedNotes.size >= jarNotes.length) usedNotes.clear();
+  do{ idx = Math.floor(Math.random()*jarNotes.length); } while(usedNotes.has(idx));
+  usedNotes.add(idx);
+  openModal('a little note for you', `<p>${jarNotes[idx]}</p>`);
+  burstPetals(10);
+});
+
+/* =========================================================
+   BUILD: SKY
+========================================================= */
+const skyBox = document.getElementById('sky-box');
+prayers.forEach((p,i)=>{
+  const star = document.createElement('div');
+  star.className='star';
+  const x = 8 + Math.random()*84;
+  const y = 14 + Math.random()*78;
+  star.style.left = x+'%';
+  star.style.top = y+'%';
+  star.style.animationDelay = (Math.random()*2)+'s';
+  star.addEventListener('click', ()=>{
+    star.classList.add('opened');
+    openModal('a prayer for you', `<p>${p}</p>`);
+  });
+  skyBox.appendChild(star);
+});
+
+/* =========================================================
+   BUILD: BOOKSHELF
+========================================================= */
+const shelf = document.getElementById('shelf');
+const bookHues = ['#c9b6e8','#b98fdc','#f6c9d3','#d8b877','#9c7cc4'];
+books.forEach((b,i)=>{
+  const book = document.createElement('div');
+  book.className='book';
+  book.style.background = bookHues[i%bookHues.length];
+  book.textContent = b.title;
+  book.addEventListener('click', ()=>{
+    openModal(b.title, `<div class="modal-book-page">${b.text}</div>`, 'modal-book');
+  });
+  shelf.appendChild(book);
+});
+
+/* =========================================================
+   BUILD: GARDEN
+========================================================= */
+const gardenField = document.getElementById('garden-field');
+function flowerSVG(color, bloomed){
+  return `<svg viewBox="0 0 60 60">
+    <circle cx="30" cy="30" r="7" fill="${bloomed? '#f0d59a':'#e9dff5'}"/>
+    ${[0,60,120,180,240,300].map(ang=>{
+      const rad = ang*Math.PI/180;
+      const cx = 30+Math.cos(rad)*13;
+      const cy = 30+Math.sin(rad)*13;
+      return `<ellipse cx="${cx}" cy="${cy}" rx="9" ry="6" transform="rotate(${ang} ${cx} ${cy})" fill="${bloomed? color:'#ded1ef'}" opacity="${bloomed?0.95:0.55}"/>`;
+    }).join('')}
+    <rect x="27" y="36" width="6" height="20" rx="3" fill="#8fae7a"/>
+  </svg>`;
+}
+promises.forEach(pr=>{
+  const f = document.createElement('div');
+  f.className='flower';
+  f.innerHTML = flowerSVG(pr.color,false) + `<span>tap to bloom</span>`;
+  f.addEventListener('click', ()=>{
+    if(!f.classList.contains('bloomed')){
+      f.classList.add('bloomed');
+      f.querySelector('svg').outerHTML = flowerSVG(pr.color, true);
+      f.querySelector('span').textContent = 'bloomed';
     }
-  }
-  setTimeout(showNext, 2200);
-
-  function finishOpening(){
-    opening.classList.add('bloomed');
-    seq.innerHTML = `
-      <div class="flower-bloom">🌸</div>
-      <div class="shooting-star"></div>
-      <div class="title-reveal">
-        <h1 class="main-title">✨ Happy Birthday, My Beautiful Iris ✨</h1>
-        <p class="subtitle serif">"Every beautiful thing reminds me of you."</p>
-        <button class="glow-btn" onclick="document.getElementById('letter-section').scrollIntoView({behavior:'smooth'})">💜 Open My Heart</button>
-      </div>
-    `;
-  }
-})();
-
-/* ============================================================
-   LETTER ENVELOPE
-   ============================================================ */
-(function(){
-  const env = document.getElementById('letter-envelope');
-  const paper = document.getElementById('letter-paper');
-  env.addEventListener('click', () => {
-    if(env.classList.contains('open')) return;
-    env.classList.add('open');
-    setTimeout(()=>{
-      paper.classList.add('show');
-      const ps = paper.querySelectorAll('p');
-      ps.forEach((p,idx)=>{
-        p.style.transition = 'opacity .6s ease';
-        setTimeout(()=>{ p.style.opacity = 1; }, idx*350);
-      });
-    }, 700);
+    openModal('a promise', `<p>${pr.text}</p>`);
   });
-})();
+  gardenField.appendChild(f);
+});
 
-/* ============================================================
-   CONTENT GENERATION: 100+ wishes, 365 reasons, 200+ star notes
-   ============================================================ */
-const wishOpeners = ["I wish you","May you have","I hope you find","Sending you","Wishing you"];
-const wishCores = [
-  "endless happiness","every dream in your heart come true","peace in every season of life",
-  "a heart that's always light","laughter that never runs out","a year softer than the last",
-  "love that finds you everywhere you look","the courage to chase what you want",
-  "rest whenever you need it","sunlight on your hardest days","friends who feel like home",
-  "a future as beautiful as your heart","more reasons to smile","strength on the heavy days",
-  "joy in the smallest things","a birthday as sweet as you are","every tear to become a smile",
-  "to always know how deeply you're loved","every birthday spent surrounded by love",
-  "every tomorrow kinder than today","a smile that never fades","many more birthdays with me beside you",
-  "comfort when the world feels loud","abundance in everything you do","a life full of soft mornings",
-  "the patience to be gentle with yourself","people who cherish you the way I do",
-  "a heart that heals a little more each day","moments that take your breath away",
-  "more reasons to be proud of yourself","a year that gives back all the love you give",
-  "calm where there was chaos","beauty in ordinary days","the safety to be exactly who you are",
-  "more dreams than you know what to do with","a year that surprises you in good ways",
-  "wonder in everyday things","the warmth of being truly seen","grace on days that feel too heavy",
-  "a heart that stays soft despite everything","celebrations as big as your spirit",
-  "every door you need to open","quiet joy that needs no occasion","a year written kindly for you",
-  "the freedom to rest without guilt","more laughter than worry","a life that loves you back",
-  "softness in a world that can be hard","the deepest kind of contentment","every good thing you deserve",
-  "stars that always know your name"
-];
-function buildWishes(n){
-  const out = [];
-  let idx = 0;
-  while(out.length < n){
-    const opener = wishOpeners[idx % wishOpeners.length];
-    const core = wishCores[idx % wishCores.length];
-    out.push(`💜 ${opener} ${core}.`);
-    idx++;
-  }
-  return out;
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+function updateCountdown(){
+  const now = new Date();
+  let diff = Math.max(0, now - ANNIVERSARY);
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff/(1000*60*60))%24);
+  const mins = Math.floor((diff/(1000*60))%60);
+  const secs = Math.floor((diff/1000)%60);
+  document.getElementById('t-days').textContent = days;
+  document.getElementById('t-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('t-mins').textContent = String(mins).padStart(2,'0');
+  document.getElementById('t-secs').textContent = String(secs).padStart(2,'0');
 }
-const WISHES = buildWishes(120);
+setInterval(updateCountdown,1000);
+updateCountdown();
 
-const reasonStarts = [
-  "I love how your eyes light up","I love your laugh","I love your kindness","I love how caring you are",
-  "I love your hugs","I love your sleepy voice","I love your strength","I love how you make me feel safe",
-  "I love your beautiful heart","I love every little thing that makes you, you","I love how you remember small details",
-  "I love the way you say my name","I love how patient you are with me","I love your handwriting",
-  "I love how you light up a room","I love your honesty","I love how you stand up for what's right",
-  "I love your curiosity","I love how you ask about my day","I love your gentle teasing",
-  "I love how you take care of the people you love","I love how you forgive easily","I love your quiet confidence",
-  "I love how you dance when no one's watching","I love your messy mornings","I love your bedhead",
-  "I love how you hum without noticing","I love how you get excited over little things",
-  "I love your stubbornness when you're right","I love how you apologize when you're wrong",
-  "I love how soft your hands feel","I love the way you fall asleep mid-sentence",
-  "I love how you always find the bright side","I love your loyalty","I love how you protect your peace",
-  "I love your sense of humor","I love how you laugh at your own jokes","I love your determination",
-  "I love how thoughtful your gifts are","I love how you remember our little traditions",
-  "I love how you say 'I love you' first sometimes","I love the way you trust me",
-  "I love how you make plans for our future","I love your ambition","I love how hard you work",
-  "I love how you never give up","I love the way you comfort me","I love your softness with strangers",
-  "I love how you treat animals","I love your taste in music","I love how you sing in the car",
-  "I love your playlists","I love how excited you get about food","I love your appetite for adventure",
-  "I love how you plan little surprises","I love your handwriting on sticky notes",
-  "I love your voice notes","I love how you check in on me","I love how you remember my moods",
-  "I love how you read me without words","I love how you make ordinary days feel special",
-  "I love your bravery","I love your softness","I love your fire when you're passionate",
-  "I love how you believe in me","I love how you push me to grow","I love how you celebrate my wins",
-  "I love how you sit with me in my lows","I love your patience with my flaws",
-  "I love how you've never once made me feel small","I love your warmth toward my family",
-  "I love how easily you make friends","I love how loyal you are to the people you love",
-  "I love how you never let an apology go unsaid","I love how safe your arms feel",
-  "I love how you smell like home","I love the way you fit against me",
-  "I love how your hand finds mine without thinking","I love your forehead kisses",
-  "I love how you say good morning","I love how you say goodnight",
-  "I love how you remember the little promises","I love how you keep your word",
-  "I love your faith in better days","I love how you turn bad days around",
-  "I love your resilience","I love how you never stop learning","I love your curiosity about the world",
-  "I love how you ask deep questions","I love how you listen without judging",
-  "I love your softness toward children","I love your tenderness","I love your wit",
-  "I love how quick you are with a comeback","I love how competitive you get over small games",
-  "I love your victory dance","I love how sore losers make you laugh",
-  "I love how you remember our first conversation","I love how far we've come together",
-  "I love how you've grown","I love how you let me see you grow","I love how honest you are about your feelings",
-  "I love how you never hide your tears from me","I love how safe I feel telling you mine",
-  "I love how you hold space for both of us","I love how steady you are",
-  "I love how unpredictable you can be","I love your spontaneity","I love your planning side too",
-  "I love how organized your chaos is","I love your handwriting in your notes app",
-  "I love how you screenshot things for me","I love how you send me random memes",
-  "I love how you remember my coffee order","I love how you know my comfort food",
-  "I love how you notice when I'm quiet","I love how you give me space when I need it",
-  "I love how you never let space turn into distance","I love how you always come back gently",
-  "I love how our silences are comfortable","I love how our arguments end in understanding",
-  "I love how you choose us, every time","I love how easy loving you has always been",
-  "I love every version of you I've gotten to know","I love who you're becoming",
-  "I love who you've always been","I love that you're mine","I love that I'm yours",
-  "I love that you exist","I love that today is the day you were born",
-  "I love you more with every year that passes"
-];
-function buildReasons(n){
-  const out = [];
-  let idx=0;
-  while(out.length < n){
-    out.push(reasonStarts[idx % reasonStarts.length] + ".");
-    idx++;
-  }
-  return out;
-}
-const REASONS = buildReasons(365);
-
-const starOpeners = [
-  "You are my favorite miracle.","You make my world brighter.","I'll always choose you.",
-  "I'm proud of you.","You'll never face life alone.","My heart found its home in you.",
-  "You are enough, exactly as you are.","Your softness is your superpower.",
-  "I see how hard you try, and it matters.","You are worth every bit of love you receive.",
-  "Your laugh is my favorite sound in any room.","You make ordinary days feel like something special.",
-  "I think about you more than you know.","You are the calm in my storms.",
-  "Loving you is the easiest thing I do.","You deserve every good thing coming your way.",
-  "You are stronger than you give yourself credit for.","I'm grateful for every version of you.",
-  "You are my favorite person to talk to about nothing.","Your heart is the safest place I know.",
-  "I will never get tired of choosing you.","You make me want to be better.",
-  "I believe in you, even on your hardest days.","You are deeply, endlessly loved.",
-  "You are allowed to rest. You're allowed to slow down.","Your dreams matter to me as much as mine.",
-  "I'm holding your hand even when I'm not beside you.","You are my home, wherever we are.",
-  "Your kindness changes people's days more than you realize.","You are worth the wait, the distance, all of it.",
-  "I notice the little things you do, and I love you for them.","You make me feel like anything is possible.",
-  "I'm proud to call you mine.","Your presence is a gift, every single day.",
-  "I would choose this — choose you — again and again.","You are the best decision I never had to think twice about.",
-  "Every star tonight is a little reminder that you're loved.","You don't have to be perfect to be enough for me.",
-  "I love watching you become who you're meant to be.","You make my ordinary life feel extraordinary."
-];
-function buildStarNotes(n){
-  const out = [];
-  let idx=0;
-  while(out.length<n){
-    out.push(starOpeners[idx % starOpeners.length]);
-    idx++;
-  }
-  return out;
-}
-const STAR_NOTES = buildStarNotes(200);
-
-/* ============================================================
-   RENDER WISHES (with "show more")
-   ============================================================ */
-(function(){
-  const grid = document.getElementById('wishes-grid');
-  const moreBtn = document.getElementById('wishes-more');
-  const sub = document.getElementById('wishes-sub');
-  sub.textContent = `${WISHES.length} wishes, one for each glowing petal.`;
-  let shown = 0;
-  const BATCH = 24;
-  function renderBatch(){
-    const next = WISHES.slice(shown, shown+BATCH);
-    next.forEach(w=>{
-      const d = document.createElement('div');
-      d.className = 'glass petal-card';
-      d.textContent = w;
-      grid.appendChild(d);
-    });
-    shown += next.length;
-    moreBtn.style.display = shown < WISHES.length ? 'inline-block' : 'none';
-  }
-  renderBatch();
-  moreBtn.addEventListener('click', renderBatch);
-})();
-
-/* ============================================================
-   RENDER REASONS (paginated by "month")
-   ============================================================ */
-(function(){
-  const grid = document.getElementById('reasons-grid');
-  const filterBar = document.getElementById('reasons-filter');
-  const counter = document.getElementById('reasons-counter');
-  const PER_PAGE = 30;
-  const totalPages = Math.ceil(REASONS.length / PER_PAGE);
-  let current = 0;
-
-  for(let p=0;p<totalPages;p++){
-    const btn = document.createElement('button');
-    btn.textContent = `${p*PER_PAGE+1}–${Math.min((p+1)*PER_PAGE, REASONS.length)}`;
-    btn.addEventListener('click', ()=> renderPage(p));
-    filterBar.appendChild(btn);
-  }
-  function renderPage(p){
-    current = p;
-    grid.innerHTML = '';
-    [...filterBar.children].forEach((b,i)=> b.classList.toggle('active', i===p));
-    const slice = REASONS.slice(p*PER_PAGE, (p+1)*PER_PAGE);
-    slice.forEach((r,i)=>{
-      const d = document.createElement('div');
-      d.className = 'glass heart-card';
-      d.textContent = `#${p*PER_PAGE+i+1} — ${r}`;
-      grid.appendChild(d);
-    });
-    counter.textContent = `Showing reasons ${p*PER_PAGE+1}–${Math.min((p+1)*PER_PAGE, REASONS.length)} of ${REASONS.length}`;
-  }
-  renderPage(0);
-})();
-
-/* ============================================================
-   GIFT ROOM
-   ============================================================ */
-(function(){
-  const gifts = [
-    {icon:'💌', text:"A tiny love letter, just for you: you make every ordinary day feel like a celebration."},
-    {icon:'🧸', text:"A teddy bear, for the nights I can't be there to hold you myself."},
-    {icon:'🌹', text:"A bouquet, because you deserve flowers for absolutely no reason at all."},
-    {icon:'🍫', text:"Chocolate, sweet — but nowhere near as sweet as you."},
-    {icon:'🎂', text:"A birthday cake, with a wish already made: more years of us."},
-    {icon:'💍', text:"A promise for our future — wherever life takes us, I'm taking you with me."},
-    {icon:'⭐', text:"A wish upon a star, already used on you before you even asked."},
-    {icon:'❤️', text:"A message: you are my greatest gift, today and every day."}
-  ];
-  const grid = document.getElementById('gift-grid');
-  const overlay = document.getElementById('gift-modal-overlay');
-  const iconEl = document.getElementById('gift-icon');
-  const textEl = document.getElementById('gift-text');
-  gifts.forEach(g=>{
-    const box = document.createElement('div');
-    box.className = 'gift-box';
-    box.textContent = '🎁';
-    box.addEventListener('click', ()=>{
-      box.classList.add('opened');
-      iconEl.textContent = g.icon;
-      textEl.textContent = g.text;
-      overlay.classList.add('show');
-    });
-    grid.appendChild(box);
+/* =========================================================
+   FINALE
+========================================================= */
+const finIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(()=>document.getElementById('fin1').classList.add('show'), 300);
+      setTimeout(()=>document.getElementById('fin2').classList.add('show'), 1600);
+      finIO.disconnect();
+    }
   });
-  document.getElementById('gift-close').addEventListener('click', ()=> overlay.classList.remove('show'));
-  overlay.addEventListener('click', e=>{ if(e.target===overlay) overlay.classList.remove('show'); });
-})();
+},{threshold:0.5});
+finIO.observe(document.getElementById('finale'));
 
-/* ============================================================
-   STAR FIELD
-   ============================================================ */
-(function(){
-  const field = document.getElementById('star-field');
-  const popup = document.getElementById('star-popup');
-  const noteText = document.getElementById('star-note-text');
-  const counterEl = document.getElementById('star-counter');
-  const discovered = new Set();
-  const NUM_STARS = 60; // visible stars, each maps to a rotating note pool
-
-  for(let i=0;i<NUM_STARS;i++){
-    const s = document.createElement('div');
-    s.className = 'twinkle-star';
-    const size = 2 + Math.random()*3;
-    s.style.width = size+'px';
-    s.style.height = size+'px';
-    s.style.left = (2+Math.random()*96) + '%';
-    s.style.top = (4+Math.random()*92) + '%';
-    s.style.animationDelay = (Math.random()*2.5)+'s';
-    s.dataset.idx = i;
-    s.addEventListener('click', ()=>{
-      const noteIdx = (i + discovered.size*7) % STAR_NOTES.length;
-      noteText.textContent = `"${STAR_NOTES[noteIdx]}"`;
-      popup.classList.add('show');
-      discovered.add(i+'-'+noteIdx);
-      counterEl.textContent = `${Math.min(discovered.size, 200)} of 200 stars discovered`;
-    });
-    field.appendChild(s);
-  }
-  document.getElementById('star-close').addEventListener('click', ()=> popup.classList.remove('show'));
-  popup.addEventListener('click', e=>{ if(e.target===popup) popup.classList.remove('show'); });
-})();
-
-/* ============================================================
-   FOREVER PATH / PROMISE
-   ============================================================ */
-(function(){
-  const heart = document.getElementById('forever-heart');
-  const promise = document.getElementById('promise-text');
-  heart.addEventListener('click', ()=>{
-    promise.classList.add('show');
-    promise.scrollIntoView({behavior:'smooth', block:'center'});
-  });
-})();
+document.getElementById('last-thing-btn').addEventListener('click', function(){
+  this.style.display='none';
+  burstEverything(70);
+  setTimeout(()=>document.getElementById('fin-love').classList.add('show'), 300);
+  setTimeout(()=>document.getElementById('fin-happy').classList.add('show'), 2200);
+  setTimeout(()=>document.getElementById('fin-quote').classList.add('show'), 4200);
+  setInterval(()=>burstEverything(14), 6000);
+});
 </script>
 </body>
 </html>
