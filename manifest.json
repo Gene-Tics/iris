@@ -1,0 +1,13 @@
+{
+  "name": "For Iris, My Safe Place",
+  "short_name": "Safe Place",
+  "description": "A quiet place made for Iris.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#EDE6F7",
+  "theme_color": "#EDE6F7",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
