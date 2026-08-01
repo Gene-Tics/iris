@@ -1,672 +1,1074 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>For Iris, My Safe Place</title>
-<meta name="description" content="A quiet place made for Iris.">
-<meta name="theme-color" content="#EDE6F7">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>For Iris — Happy 11 Months</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --lavender:#E7E1F5;
-    --lavender-deep:#C9BCE8;
-    --warm-white:#FBF8F3;
-    --cream:#F3ECDF;
-    --blush:#F5DCE2;
-    --sage:#B9C7B0;
-    --sage-deep:#8FA486;
-    --ink:#3E3A4A;
-    --ink-soft:#6B6577;
-    --glow:#E4B8C6;
-    --glass:rgba(255,255,255,0.45);
-    --glass-border:rgba(255,255,255,0.65);
-    --shadow:rgba(120,105,140,0.18);
-    --bg-grad:linear-gradient(180deg,#FBF8F3 0%,#EFE7F6 40%,#EAE6F2 70%,#F1EADD 100%);
-    --card-text:#3E3A4A;
-    --transition-speed:0.6s;
+    --cream:#F8F2E9;
+    --white-soft:#FFFDFB;
+    --lavender:#C7B7DE;
+    --lavender-deep:#8E7AA8;
+    --dusty-pink:#EAB8C0;
+    --warm-beige:#E6D6C2;
+    --plum:#3A3050;
+    --ink:#4A3F5C;
+    --gold:#D8B788;
+    --shadow:rgba(90,70,110,0.18);
+    --glass:rgba(255,255,255,0.38);
+    --glass-border:rgba(255,255,255,0.55);
+    --bg-grad: radial-gradient(ellipse at 20% 0%, #F3E8F5 0%, transparent 55%),
+               radial-gradient(ellipse at 90% 20%, #FCEEE7 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 100%, #EFE3F0 0%, transparent 60%),
+               linear-gradient(180deg, var(--cream), #F2E8DC 40%, #EDE1EF 100%);
+    --star-color: rgba(255,255,255,0.9);
+    --transition-slow: 1.4s cubic-bezier(.19,1,.22,1);
+    --transition-med: 0.8s cubic-bezier(.19,1,.22,1);
   }
-  [data-theme="dark"]{
-    --lavender:#2A2438;
-    --lavender-deep:#3B3050;
-    --warm-white:#1C1924;
-    --cream:#221E2C;
-    --blush:#3A2B33;
-    --sage:#3A4438;
-    --sage-deep:#4C5C48;
-    --ink:#EDE8F5;
-    --ink-soft:#B8AFC9;
-    --glow:#8A6478;
-    --glass:rgba(255,255,255,0.06);
+  html.dark{
+    --cream:#241E33;
+    --white-soft:#2C2440;
+    --lavender:#8E7AA8;
+    --lavender-deep:#B7A6D6;
+    --dusty-pink:#C98A96;
+    --warm-beige:#4A3D4F;
+    --plum:#F3E9F7;
+    --ink:#EAE0F0;
+    --gold:#E8C99A;
+    --shadow:rgba(0,0,0,0.4);
+    --glass:rgba(60,48,80,0.45);
     --glass-border:rgba(255,255,255,0.12);
-    --shadow:rgba(0,0,0,0.45);
-    --bg-grad:linear-gradient(180deg,#17141F 0%,#201A2C 45%,#1B1822 100%);
-    --card-text:#EDE8F5;
+    --bg-grad: radial-gradient(ellipse at 20% 0%, #2E2440 0%, transparent 55%),
+               radial-gradient(ellipse at 90% 20%, #24202E 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 100%, #1E1A2C 0%, transparent 60%),
+               linear-gradient(180deg, #1B1626, #221C33 40%, #191420 100%);
+    --star-color: rgba(255,255,255,0.95);
   }
-
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{scroll-behavior:smooth;}
   body{
-    font-family:'Quicksand',sans-serif;
+    font-family:'Poppins',sans-serif;
     background:var(--bg-grad);
     color:var(--ink);
     overflow-x:hidden;
     min-height:100vh;
-    transition:background var(--transition-speed) ease, color var(--transition-speed) ease;
-    position:relative;
+    transition:background 1.2s ease, color 1.2s ease;
   }
-  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
+  h1,h2,h3,.serif{font-family:'Playfair Display',serif;}
   @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
   }
+  a,button{font-family:inherit;}
+  ::selection{background:var(--lavender); color:#fff;}
 
-  /* ---------- Loading screen ---------- */
-  #loader{
-    position:fixed;inset:0;z-index:999;
-    background:var(--bg-grad);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:18px;
-    transition:opacity 0.9s ease, visibility 0.9s ease;
-  }
-  #loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
-  .loader-heart{
-    width:46px;height:46px;position:relative;
-    animation:breathe 2.2s ease-in-out infinite;
-  }
-  .loader-heart svg{width:100%;height:100%;fill:var(--glow);filter:drop-shadow(0 0 12px var(--glow));}
-  @keyframes breathe{
-    0%,100%{transform:scale(0.85);opacity:0.7;}
-    50%{transform:scale(1.05);opacity:1;}
-  }
-  .loader-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink-soft);letter-spacing:0.02em;}
+  /* ---------- background canvas ---------- */
+  #bgCanvas{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;}
 
-  /* ---------- Scroll progress ---------- */
-  #scroll-progress{
-    position:fixed;top:0;left:0;height:3px;
-    background:linear-gradient(90deg,var(--lavender-deep),var(--glow),var(--sage-deep));
-    width:0%;z-index:500;transition:width 0.1s ease-out;
-  }
-
-  /* ---------- Top controls ---------- */
-  #top-controls{
-    position:fixed;top:16px;right:16px;z-index:400;
-    display:flex;gap:10px;
+  /* ---------- top controls ---------- */
+  .controls{
+    position:fixed; top:16px; right:16px; z-index:1000;
+    display:flex; gap:10px;
   }
   .ctrl-btn{
     width:42px;height:42px;border-radius:50%;
-    background:var(--glass);
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    background:var(--glass); backdrop-filter:blur(10px);
     border:1px solid var(--glass-border);
     display:flex;align-items:center;justify-content:center;
-    cursor:pointer;font-size:1.1rem;
-    box-shadow:0 4px 16px var(--shadow);
-    transition:transform 0.25s ease, box-shadow 0.25s ease;
-    color:var(--ink);
+    cursor:pointer; font-size:18px; color:var(--ink);
+    box-shadow:0 4px 18px var(--shadow);
+    transition:transform 0.4s ease, background 0.4s ease;
   }
-  .ctrl-btn:active{transform:scale(0.88);}
-  .ctrl-btn:hover{box-shadow:0 6px 20px var(--shadow);}
+  .ctrl-btn:hover{transform:scale(1.08);}
+  .ctrl-btn.active{background:var(--lavender); color:#fff;}
 
-  /* ---------- Particles canvas ---------- */
-  #particle-canvas{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.9;}
-
-  /* ---------- Floating hearts ---------- */
-  .floating-heart{
-    position:fixed;bottom:-40px;z-index:2;pointer-events:none;
-    font-size:1.2rem;opacity:0.75;color:var(--glow);
-    animation:floatUp linear forwards;
-  }
-  @keyframes floatUp{
-    to{transform:translateY(-110vh) translateX(var(--drift,20px)) rotate(20deg);opacity:0;}
-  }
-
-  section, header.hero{
-    position:relative;z-index:5;
-    width:100%;
-    padding:80px 22px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;
-  }
-
-  /* ---------- Hero ---------- */
-  .hero{
+  /* ---------- sections base ---------- */
+  section{
+    position:relative; z-index:1;
     min-height:100vh;
-    padding-top:100px;
-    gap:22px;
-  }
-  .hero-glow{
-    position:absolute;
-    top:50%;left:50%;
-    width:280px;height:280px;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(circle, var(--glow) 0%, transparent 70%);
-    opacity:0.35;
-    filter:blur(30px);
-    animation:breathe 5s ease-in-out infinite;
-    z-index:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:80px 24px;
+    text-align:center;
   }
   .eyebrow{
-    font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;
-    color:var(--sage-deep);font-weight:600;
-    opacity:0;animation:fadeUp 1s ease forwards;
-    animation-delay:0.2s;
+    font-size:12px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--lavender-deep); font-weight:500; margin-bottom:18px;
+    opacity:0.85;
   }
-  .hero h1{
-    font-size:2.5rem;
-    font-weight:500;
-    line-height:1.25;
-    color:var(--ink);
-    max-width:340px;
-    opacity:0;animation:fadeUp 1s ease forwards;
-    animation-delay:0.5s;
-    position:relative;z-index:2;
+  .section-title{
+    font-size:clamp(28px,7vw,44px); font-weight:600; margin-bottom:20px; line-height:1.25;
+    color:var(--plum);
   }
-  .hero .subtitle{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:1.15rem;
-    color:var(--ink-soft);
-    max-width:320px;
-    opacity:0;animation:fadeUp 1s ease forwards;
-    animation-delay:0.85s;
+  .section-sub{
+    max-width:520px; font-weight:300; font-size:16px; line-height:1.9; color:var(--ink); opacity:0.85;
   }
-  .hero p.body-text{
-    font-size:0.98rem;line-height:1.75;color:var(--ink-soft);
-    max-width:340px;
-    opacity:0;animation:fadeUp 1s ease forwards;
-    animation-delay:1.15s;
+  .glass-card{
+    background:var(--glass);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border);
+    border-radius:28px;
+    box-shadow:0 12px 40px var(--shadow);
   }
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(18px);}
-    to{opacity:1;transform:translateY(0);}
+  .reveal{
+    opacity:0; transform:translateY(36px);
+    transition:opacity 1.4s cubic-bezier(.19,1,.22,1), transform 1.4s cubic-bezier(.19,1,.22,1);
   }
-  .cta-btn{
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- HERO ---------- */
+  #hero{ overflow:hidden; }
+  .hero-line{
+    font-family:'Playfair Display',serif; font-style:italic; font-weight:500;
+    font-size:clamp(20px,5.5vw,30px); color:var(--plum);
+    opacity:0; margin-bottom:14px; letter-spacing:0.5px;
+    transition:opacity 2.4s ease, transform 2.4s ease;
+    transform:translateY(14px);
+  }
+  .hero-line.show{opacity:1; transform:translateY(0);}
+  #heroTitle{
+    font-size:clamp(30px,8vw,52px); font-weight:700; color:var(--plum);
+    opacity:0; transform:translateY(14px);
+    transition:opacity 2.4s ease, transform 2.4s ease;
     margin-top:6px;
-    padding:16px 34px;
-    border:none;border-radius:50px;
-    background:linear-gradient(135deg,var(--lavender-deep),var(--glow));
-    color:#fff;font-family:'Quicksand',sans-serif;font-weight:600;font-size:1rem;
-    cursor:pointer;
+  }
+  #heroTitle.show{opacity:1; transform:translateY(0);}
+  #heroBtn{
+    margin-top:52px; opacity:0; transition:opacity 1.6s ease, transform 0.4s ease;
+    padding:16px 38px; border-radius:40px; border:none; cursor:pointer;
+    background:linear-gradient(135deg, var(--lavender), var(--dusty-pink));
+    color:#fff; font-size:15px; letter-spacing:1px; font-weight:500;
     box-shadow:0 10px 30px var(--shadow);
-    opacity:0;animation:fadeUp 1s ease forwards;
-    animation-delay:1.45s;
-    transition:transform 0.2s ease, box-shadow 0.2s ease;
-    -webkit-tap-highlight-color:transparent;
   }
-  .cta-btn:active{transform:scale(0.94);box-shadow:0 4px 14px var(--shadow);}
-  .scroll-hint{
-    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
-    font-size:0.7rem;letter-spacing:0.15em;color:var(--ink-soft);
-    opacity:0;animation:fadeUp 1s ease forwards, bob 2.4s ease-in-out infinite 2s;
-    animation-delay:1.8s;
-    text-transform:uppercase;
-  }
-  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
+  #heroBtn.show{opacity:1;}
+  #heroBtn:active{transform:scale(0.96);}
 
-  /* ---------- reveal ---------- */
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.9s ease, transform 0.9s ease;}
-  .reveal.in{opacity:1;transform:translateY(0);}
-
-  .section-label{
-    font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;
-    color:var(--sage-deep);font-weight:600;margin-bottom:14px;
-  }
-
-  /* ---------- Notebook card (Section 2) ---------- */
-  .notebook-card{
-    max-width:380px;width:100%;
-    background:var(--warm-white);
-    border-radius:18px;
-    padding:36px 26px;
-    box-shadow:0 18px 40px var(--shadow);
-    position:relative;
-    background-image:repeating-linear-gradient(var(--warm-white) 0 31px, rgba(180,160,190,0.14) 31px 32px);
-    border:1px solid var(--glass-border);
+  /* ---------- LETTER ---------- */
+  .letter-paper{
+    max-width:560px; width:100%; padding:48px 34px;
     text-align:left;
   }
-  .notebook-card::before{
-    content:'';position:absolute;left:26px;top:0;bottom:0;width:1px;
-    background:var(--blush);opacity:0.5;
+  .letter-title{font-size:clamp(24px,6vw,32px); margin-bottom:26px; text-align:center; color:var(--plum);}
+  .letter-body p{
+    font-family:'Playfair Display',serif; font-style:italic; font-weight:400;
+    font-size:17px; line-height:2.1; color:var(--ink); margin-bottom:16px;
+    opacity:0; transform:translateY(10px);
+    transition:opacity 1.2s ease, transform 1.2s ease;
   }
-  .notebook-card p{
-    font-family:'Cormorant Garamond',serif;
-    font-size:1.18rem;line-height:32px;
-    color:var(--card-text);
-    padding-left:14px;
-    white-space:pre-line;
-  }
+  .letter-body p.in{opacity:1; transform:translateY(0);}
+  .signature-line{text-align:right; margin-top:20px; font-family:'Playfair Display',serif; font-style:italic; color:var(--lavender-deep);}
 
-  /* ---------- Glass glow card (Section 3) ---------- */
-  .glow-card{
-    max-width:380px;width:100%;
-    background:var(--glass);
-    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-    border-radius:24px;
-    padding:38px 28px;
-    border:1px solid var(--glass-border);
-    position:relative;
-    box-shadow:0 0 0 1px rgba(255,255,255,0.05), 0 20px 50px var(--shadow);
-  }
-  .glow-card::after{
-    content:'';position:absolute;inset:-2px;border-radius:26px;
-    padding:2px;
-    background:linear-gradient(135deg,var(--glow),var(--lavender-deep),var(--sage));
-    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor;mask-composite:exclude;
-    opacity:0.55;
-    animation:glowShift 6s ease-in-out infinite;
-    pointer-events:none;
-  }
-  @keyframes glowShift{0%,100%{opacity:0.35;}50%{opacity:0.7;}}
-  .glow-card p{
-    font-size:0.98rem;line-height:1.9;color:var(--card-text);
-    white-space:pre-line;
-  }
-  .glow-card p.emphasis{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;margin:14px 0;color:var(--ink);}
-
-  /* ---------- Letter card (Section 4) ---------- */
-  .letter-card{
-    max-width:380px;width:100%;
-    background:var(--cream);
-    border-radius:6px;
-    padding:40px 30px;
-    box-shadow:0 16px 36px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.4);
-    position:relative;
+  /* ---------- MEMORY LANE ---------- */
+  .path-wrap{max-width:640px; width:100%; display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .stone{
+    position:relative; width:88%; max-width:420px;
+    padding:20px 24px; margin:8px 0; border-radius:22px;
+    display:flex; align-items:center; gap:16px; cursor:pointer;
     text-align:left;
-    transform:rotate(-0.6deg);
   }
-  .letter-card::before{
-    content:'✦';position:absolute;top:16px;right:20px;color:var(--sage-deep);opacity:0.5;font-size:1rem;
+  .stone:nth-child(even){ align-self:flex-end; }
+  .stone:nth-child(odd){ align-self:flex-start; }
+  .stone-icon{font-size:26px;}
+  .stone-label{font-weight:500; font-size:15px; color:var(--plum);}
+  .stone-msg{
+    max-height:0; overflow:hidden; font-size:13.5px; color:var(--ink); opacity:0.85;
+    font-weight:300; line-height:1.7; transition:max-height 0.6s ease, margin-top 0.6s ease;
   }
-  .letter-card p{
-    font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:1.15rem;line-height:1.85;color:var(--card-text);
-    white-space:pre-line;
-  }
-  .letter-sign{
-    margin-top:20px;font-size:1rem;text-align:right;color:var(--sage-deep);font-weight:600;font-style:normal;
-  }
+  .stone.open .stone-msg{max-height:200px; margin-top:10px;}
+  .stone-inner{display:flex; flex-direction:column;}
 
-  /* ---------- Little reminders ---------- */
-  .reminders-grid{
-    display:grid;grid-template-columns:1fr;gap:14px;
-    max-width:380px;width:100%;
+  /* ---------- LITTLE THINGS ---------- */
+  .cards-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:18px; max-width:720px; width:100%; margin-top:36px;
   }
-  .reminder-card{
-    background:var(--glass);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-border);
-    border-radius:16px;
-    padding:18px 20px;
-    display:flex;align-items:center;gap:14px;
-    text-align:left;
-    box-shadow:0 8px 24px var(--shadow);
-    animation:driftFloat 5s ease-in-out infinite;
+  .little-card{
+    padding:28px 20px; text-align:center; font-family:'Playfair Display',serif;
+    font-style:italic; font-size:15.5px; color:var(--plum); line-height:1.7;
+    transition:transform 0.5s ease;
   }
-  .reminder-card:nth-child(2n){animation-delay:0.6s;}
-  .reminder-card:nth-child(3n){animation-delay:1.2s;}
-  @keyframes driftFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-  .reminder-icon{font-size:1.4rem;flex-shrink:0;}
-  .reminder-card span.txt{font-size:0.95rem;color:var(--card-text);line-height:1.4;}
+  .little-card:hover{transform:translateY(-6px);}
 
-  /* ---------- Final section ---------- */
-  .final-section{min-height:90vh;gap:8px;}
-  .final-message p{
-    font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:1.35rem;line-height:1.9;color:var(--ink);
-    max-width:340px;
+  /* ---------- JAR ---------- */
+  .jar-wrap{display:flex; flex-direction:column; align-items:center; gap:34px;}
+  .jar-svg{width:200px; height:auto; cursor:pointer; transition:transform 0.3s ease;}
+  .jar-svg:active{transform:scale(0.95);}
+  .jar-reason{
+    max-width:420px; min-height:70px; padding:26px 30px;
+    font-family:'Playfair Display',serif; font-style:italic; font-size:17px;
+    color:var(--plum); display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity 0.6s ease;
   }
-  .final-message .always{
-    font-size:2.1rem;font-weight:500;margin-top:18px;
-    background:linear-gradient(135deg,var(--lavender-deep),var(--glow),var(--sage-deep));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+  .jar-reason.show{opacity:1;}
+  .jar-count{font-size:12px; opacity:0.6; letter-spacing:1px;}
+
+  /* ---------- FUTURE LETTER ---------- */
+  .future-bg{ background:linear-gradient(160deg, var(--lavender-deep), var(--plum)); }
+  html.dark .future-bg{ background:linear-gradient(160deg, #382C50, #1E1830); }
+  .future-bg .section-title, .future-bg .letter-title{color:#fff;}
+  .future-bg .letter-body p{color:rgba(255,255,255,0.92);}
+  .future-bg .signature-line{color:var(--dusty-pink);}
+  .future-bg .eyebrow{color:var(--dusty-pink);}
+
+  /* ---------- QUIET REASSURANCES ---------- */
+  #reassure{cursor:pointer;}
+  .reassure-msg{
+    font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(20px,5vw,28px);
+    color:var(--plum); max-width:480px; min-height:80px;
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity 0.5s ease, transform 0.5s ease;
   }
-  .typewriter{border-right:2px solid var(--glow);white-space:nowrap;overflow:hidden;display:inline-block;}
+  .tap-hint{margin-top:30px; font-size:12px; letter-spacing:2px; opacity:0.55; text-transform:uppercase;}
+
+  /* ---------- BENCH ---------- */
+  .bench-illustration{width:220px; margin-bottom:10px;}
+  .bench-question{
+    max-width:460px; padding:30px 34px; min-height:90px;
+    font-family:'Playfair Display',serif; font-style:italic; font-size:18px;
+    color:var(--plum); display:flex; align-items:center; justify-content:center;
+    margin:26px 0;
+  }
+  .bench-btn{
+    padding:14px 32px; border-radius:40px; border:1px solid var(--lavender-deep);
+    background:transparent; color:var(--lavender-deep); font-size:13px; letter-spacing:1px;
+    cursor:pointer; transition:all 0.4s ease;
+  }
+  .bench-btn:hover{background:var(--lavender-deep); color:#fff;}
+
+  /* ---------- PROMISE WALL ---------- */
+  .promise-list{display:flex; flex-direction:column; gap:60px; max-width:480px; width:100%; margin-top:20px;}
+  .promise{
+    font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(19px,4.6vw,24px);
+    color:var(--plum); opacity:0.15; transform:translateY(24px) scale(0.97);
+    transition:opacity 1.1s ease, transform 1.1s ease;
+  }
+  .promise.in{opacity:1; transform:translateY(0) scale(1);}
+  .promise-final{margin-top:70px; font-size:clamp(20px,5vw,26px); font-family:'Playfair Display',serif; font-style:italic; color:var(--lavender-deep); opacity:0; transition:opacity 1.6s ease;}
+  .promise-final.in{opacity:1;}
+
+  /* ---------- FINAL SCENE ---------- */
+  #finale{
+    background:linear-gradient(180deg, #241E33, #14101F 60%, #0D0A16);
+    min-height:140vh;
+  }
+  #finale .eyebrow, #finale .section-sub{color:rgba(255,255,255,0.7);}
+  #starSentence{
+    font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(20px,5.5vw,30px);
+    color:#fff; opacity:0; transition:opacity 2s ease; min-height:80px; max-width:600px;
+  }
+  #starSentence.in{opacity:1;}
+  #finaleTitle{
+    font-size:clamp(28px,7vw,42px); color:#fff; margin-top:26px; opacity:0; transition:opacity 2s ease 0.3s;
+  }
+  #finaleTitle.in{opacity:1;}
+  #finalePromise{
+    margin-top:40px; font-family:'Playfair Display',serif; font-style:italic; color:var(--dusty-pink);
+    font-size:clamp(18px,4.6vw,24px); opacity:0; transition:opacity 2s ease 0.6s;
+  }
+  #finalePromise.in{opacity:1;}
+  #finaleSig{
+    margin-top:70px; color:rgba(255,255,255,0.55); font-family:'Playfair Display',serif; font-style:italic;
+    font-size:16px; opacity:0; transition:opacity 2s ease 1s;
+  }
+  #finaleSig.in{opacity:1;}
+
+  /* ---------- hidden hearts ---------- */
+  .hidden-heart{
+    position:absolute; font-size:14px; opacity:0.25; cursor:pointer; z-index:5;
+    filter:grayscale(0.3); user-select:none;
+    transition:transform 0.3s ease, opacity 0.3s ease;
+  }
+  .hidden-heart:hover{opacity:0.6; transform:scale(1.3);}
+  .heart-popup{
+    position:fixed; left:50%; bottom:14%; transform:translateX(-50%) translateY(20px);
+    padding:16px 26px; z-index:2000; font-family:'Playfair Display',serif; font-style:italic;
+    font-size:15px; color:var(--plum); opacity:0; pointer-events:none;
+    transition:opacity 0.5s ease, transform 0.5s ease; max-width:80vw; text-align:center;
+  }
+  .heart-popup.show{opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto;}
 
   footer{
-    padding:60px 22px 100px;
-    text-align:center;
-  }
-  footer p{
-    font-family:'Cormorant Garamond',serif;font-style:italic;
-    font-size:1.15rem;color:var(--ink-soft);line-height:1.8;
-    max-width:320px;margin:0 auto;
-  }
-  footer .sign{
-    display:block;margin-top:16px;font-size:1.3rem;color:var(--ink);font-weight:500;
-  }
-
-  /* ---------- Back to top ---------- */
-  #back-to-top{
-    position:fixed;bottom:24px;right:20px;z-index:400;
-    width:48px;height:48px;border-radius:50%;
-    background:var(--glass);
-    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-border);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 24px var(--shadow);
-    opacity:0;pointer-events:none;
-    transform:translateY(10px);
-    transition:opacity 0.4s ease, transform 0.4s ease;
-    cursor:pointer;font-size:1.2rem;color:var(--ink);
-  }
-  #back-to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
-
-  @media (min-width:640px){
-    .hero h1{font-size:3.2rem;max-width:480px;}
-    .hero .subtitle, .hero p.body-text{max-width:440px;}
-    .notebook-card,.glow-card,.letter-card,.reminders-grid{max-width:460px;}
-    .final-message p{max-width:440px;}
+    text-align:center; padding:40px 20px; font-size:12px; opacity:0.35; position:relative; z-index:1;
+    color:var(--ink); background:#0D0A16;
   }
 </style>
 </head>
-<body data-theme="light">
+<body>
 
-<div id="loader">
-  <div class="loader-heart">
-    <svg viewBox="0 0 32 29"><path d="M23.6 0c-3 0-5.7 1.6-7.6 4.1C14.1 1.6 11.4 0 8.4 0 3.8 0 0 3.9 0 8.6c0 8.6 12.4 15.7 15.4 17.9.4.3.9.3 1.2 0C19.6 24.3 32 17.2 32 8.6 32 3.9 28.2 0 23.6 0z"/></svg>
-  </div>
-  <p class="loader-text">arriving, gently...</p>
+<canvas id="bgCanvas"></canvas>
+
+<div class="controls">
+  <button class="ctrl-btn" id="musicBtn" title="Music">🎵</button>
+  <button class="ctrl-btn" id="darkBtn" title="Dark mode">🌙</button>
 </div>
 
-<div id="scroll-progress"></div>
-<canvas id="particle-canvas"></canvas>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-line" id="line1">For Iris.</div>
+  <div class="hero-line" id="line2">A little place made just for you.</div>
+  <h1 id="heroTitle">Happy 11 Months, Wifey. ❤️</h1>
+  <button id="heroBtn">Open My Heart</button>
+</section>
 
-<div id="top-controls">
-  <button class="ctrl-btn" id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-  <button class="ctrl-btn" id="sound-toggle" aria-label="Toggle ambient music">🔇</button>
-</div>
-
-<header class="hero">
-  <div class="hero-glow"></div>
-  <p class="eyebrow">a quiet place, just for you</p>
-  <h1>For Iris,<br>My Safe Place</h1>
-  <p class="subtitle">To the woman who keeps showing up, even on the hardest days.</p>
-  <p class="body-text">I know how busy life has been lately. Between your OJT, work, studies, and everything else you're carrying, I know some days leave you completely exhausted. I just want you to know that someone is always cheering for you.</p>
-  <button class="cta-btn" onclick="document.getElementById('see-you').scrollIntoView({behavior:'smooth'})">Read My Heart ❤️</button>
-  <p class="scroll-hint">scroll gently ↓</p>
-</header>
-
-<section id="see-you">
-  <p class="section-label reveal">i see you</p>
-  <div class="notebook-card reveal">
-    <p>I know your OJT isn't easy.
-
-Every early morning.
-Every task.
-Every responsibility.
-Every time you keep going even when you're tired...
-
-I notice all of it.
-
-I'm proud of you—not just because you're working hard, but because of the person you are.
-
-Your effort never goes unnoticed in my eyes.
-
-Even if the days become exhausting, I'll always be here cheering you on.</p>
+<!-- LETTER -->
+<section id="letter">
+  <div class="glass-card letter-paper reveal">
+    <div class="letter-title serif">If You Ever Forget...</div>
+    <div class="letter-body" id="letterBody">
+      <p>If life ever becomes too loud...</p>
+      <p>If your days become exhausting...</p>
+      <p>If you ever question yourself...</p>
+      <p>Come back here.</p>
+      <p>Because this little place will always remind you how deeply you're loved.</p>
+      <p>Eleven months ago I decided to pursue you.</p>
+      <p>Looking back now...</p>
+      <p>I'd still make the exact same decision.</p>
+      <p>Every single time.</p>
+    </div>
+    <div class="signature-line">— Eugene</div>
   </div>
 </section>
 
-<section id="loving-you">
-  <p class="section-label reveal">loving you</p>
-  <div class="glow-card reveal">
-    <p>I don't expect you to always have energy.
+<!-- MEMORY LANE -->
+<section id="memoryLane">
+  <div class="eyebrow reveal">Not a timeline, but a path</div>
+  <h2 class="section-title reveal">Memory Lane</h2>
+  <p class="section-sub reveal">Tap each stone to remember.</p>
+  <div class="path-wrap" id="stonesWrap" style="margin-top:40px;"></div>
+</section>
 
-I don't expect perfect conversations every day.
+<!-- LITTLE THINGS -->
+<section id="littleThings">
+  <div class="eyebrow reveal">Things I see, even when unsaid</div>
+  <h2 class="section-title reveal">The Little Things You'll Never Notice</h2>
+  <div class="cards-grid" id="littleGrid"></div>
+</section>
 
-I don't expect you to carry everything alone.
-
-I simply want you to know this...</p>
-    <p class="emphasis">I love you.</p>
-    <p>Not only on your good days.
-Not only when life feels easy.
-Not only when you have lots of time.
-
-I love you during your busiest season.
-I love you when you're tired.
-I love you when you're stressed.
-I love you when you're quiet.
-
-Because my love isn't measured by how much time you can give me.
-
-It's simply because you're you.</p>
+<!-- JAR -->
+<section id="jar">
+  <div class="eyebrow reveal">Pull one out, anytime</div>
+  <h2 class="section-title reveal">A Jar of Reasons</h2>
+  <div class="jar-wrap reveal" style="margin-top:20px;">
+    <svg class="jar-svg" id="jarSvg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="55" y="18" width="90" height="26" rx="8" fill="var(--gold)" opacity="0.9"/>
+      <path d="M40 50 C40 40 60 34 100 34 C140 34 160 40 160 50 L168 210 C168 226 140 236 100 236 C60 236 32 226 32 210 Z"
+            fill="var(--glass)" stroke="var(--glass-border)" stroke-width="2"/>
+      <circle cx="80" cy="140" r="6" fill="var(--dusty-pink)"/>
+      <circle cx="115" cy="170" r="5" fill="var(--lavender)"/>
+      <circle cx="95" cy="100" r="4" fill="var(--gold)"/>
+      <circle cx="130" cy="120" r="5" fill="var(--dusty-pink)"/>
+      <circle cx="70" cy="185" r="4" fill="var(--lavender)"/>
+    </svg>
+    <div class="glass-card jar-reason" id="jarReason">Tap the jar</div>
+    <div class="jar-count" id="jarCount"></div>
   </div>
 </section>
 
-<section id="my-promise">
-  <p class="section-label reveal">my promise</p>
-  <div class="letter-card reveal">
-    <p>I know life will keep getting busy.
-
-There will be stressful days.
-
-There will be overwhelming days.
-
-There will be days when your OJT asks so much from you.
-
-But through every season...
-
-I'll continue choosing you.
-I'll continue believing in you.
-I'll continue praying for you.
-I'll continue loving you.
-
-Not because life is easy...
-
-But because you're worth loving every single day.</p>
-    <p class="letter-sign">— always</p>
+<!-- FUTURE LETTER -->
+<section id="futureLetter" class="future-bg">
+  <div class="eyebrow reveal">Years from now</div>
+  <h2 class="section-title reveal">To Future Iris</h2>
+  <div class="glass-card letter-paper reveal" style="margin-top:20px; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2);">
+    <div class="letter-body" id="futureBody">
+      <p>Wherever life has taken us by the time you read this again...</p>
+      <p>I hope you're smiling.</p>
+      <p>I hope you're proud of the woman you've become.</p>
+      <p>I hope, somewhere quiet in your heart, you know you have always been enough.</p>
+      <p>Not because of what you've achieved. Simply because of who you are.</p>
+    </div>
+    <div class="signature-line">— Future Eugene</div>
   </div>
 </section>
 
-<section id="reminders">
-  <p class="section-label reveal">little reminders</p>
-  <div class="reminders-grid">
-    <div class="reminder-card reveal"><span class="reminder-icon">❤️</span><span class="txt">You never have to earn my love.</span></div>
-    <div class="reminder-card reveal"><span class="reminder-icon">🌸</span><span class="txt">I'm proud of you every day.</span></div>
-    <div class="reminder-card reveal"><span class="reminder-icon">☁️</span><span class="txt">Rest whenever you need to.</span></div>
-    <div class="reminder-card reveal"><span class="reminder-icon">✨</span><span class="txt">Your effort matters.</span></div>
-    <div class="reminder-card reveal"><span class="reminder-icon">🌙</span><span class="txt">I'll always cheer for you.</span></div>
-    <div class="reminder-card reveal"><span class="reminder-icon">💜</span><span class="txt">I'll keep choosing you.</span></div>
-  </div>
+<!-- QUIET REASSURANCES -->
+<section id="reassure">
+  <div class="eyebrow reveal">Tap anywhere</div>
+  <h2 class="section-title reveal">Quiet Reassurances</h2>
+  <div class="reassure-msg glass-card" id="reassureMsg" style="padding:34px 30px; margin-top:24px;">Tap to begin</div>
+  <div class="tap-hint reveal">tap gently, as many times as you need</div>
 </section>
 
-<section class="final-section">
-  <div class="final-message reveal">
-    <p>No matter how busy life becomes...<br>no matter how tired you are...<br>no matter how long your days get...</p>
-    <p>I'll still be here.<br>Still praying for you.<br>Still believing in you.<br>Still loving you.</p>
-    <p class="always" id="always-text"></p>
-  </div>
+<!-- BENCH -->
+<section id="bench">
+  <div class="eyebrow reveal">A quiet corner, under a lavender tree</div>
+  <h2 class="section-title reveal">The Deep Talk Bench</h2>
+  <svg class="bench-illustration reveal" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="180" cy="35" rx="34" ry="34" fill="var(--lavender)" opacity="0.5"/>
+    <ellipse cx="150" cy="20" rx="26" ry="26" fill="var(--lavender)" opacity="0.4"/>
+    <rect x="176" y="60" width="6" height="45" fill="var(--warm-beige)"/>
+    <rect x="20" y="95" width="140" height="10" rx="3" fill="var(--gold)"/>
+    <rect x="26" y="105" width="6" height="22" fill="var(--gold)"/>
+    <rect x="148" y="105" width="6" height="22" fill="var(--gold)"/>
+    <rect x="20" y="70" width="8" height="30" rx="3" fill="var(--gold)"/>
+    <rect x="20" y="60" width="70" height="10" rx="3" fill="var(--gold)" opacity="0.8"/>
+  </svg>
+  <div class="glass-card bench-question reveal" id="benchQuestion">Sit for a moment.</div>
+  <button class="bench-btn reveal" id="benchBtn">Ask me something</button>
 </section>
 
-<footer>
-  <p class="reveal">I love you more than words can ever explain.
-    <span class="sign">— Eugene ❤️</span>
-  </p>
-</footer>
+<!-- PROMISE WALL -->
+<section id="promises">
+  <div class="eyebrow reveal">Written slowly, meant fully</div>
+  <h2 class="section-title reveal">The Promise Wall</h2>
+  <div class="promise-list" id="promiseList"></div>
+  <div class="promise-final" id="promiseFinal">Even after these eleven months... I'd still fall in love with you all over again.</div>
+</section>
 
-<div id="back-to-top">↑</div>
+<!-- FINALE -->
+<section id="finale">
+  <div class="eyebrow">As you reach the end</div>
+  <div id="starSentence">Thank you for letting me love you.</div>
+  <h2 id="finaleTitle">Happy 11 Months, My Wifey. ❤️</h2>
+  <div id="finalePromise">No matter how many months pass...<br>I'll always choose you.</div>
+  <div id="finaleSig">With all my love, Eugene. 🥰</div>
+</section>
+
+<footer>made slowly, for Iris — 11 months and counting</footer>
+
+<div class="heart-popup" id="heartPopup"></div>
 
 <script>
-/* ---------------- Loader ---------------- */
-window.addEventListener('load',()=>{
-  setTimeout(()=>{document.getElementById('loader').classList.add('hide');},700);
-});
+/* ============ DATA ============ */
+const STONES = [
+  {icon:'🌸', label:'The day I admired you', msg:"Before anything else, there was just the quiet noticing. I saw you and something in me went still."},
+  {icon:'❤️', label:'The day I decided to pursue you', msg:"I remember the nervousness. And underneath it, a certainty I couldn't explain. I chose to try."},
+  {icon:'☁️', label:'The days we laughed', msg:"The easy days. The ones where everything felt light and nothing needed explaining."},
+  {icon:'🌧️', label:'The days we struggled', msg:"We didn't always get it right. But we stayed. That mattered more than getting it perfect."},
+  {icon:'🌅', label:'The days we understood each other better', msg:"Slowly, we learned each other's quiet. We learned how to hold space without fixing everything."},
+  {icon:'🌸', label:'Today', msg:"Eleven months later, and I'd still choose this. I'd still choose you."}
+];
 
-/* ---------------- Theme toggle ---------------- */
-const themeBtn=document.getElementById('theme-toggle');
-const body=document.body;
-function setTheme(t){
-  body.setAttribute('data-theme',t);
-  themeBtn.textContent = t==='dark' ? '☀️' : '🌙';
-  localStorage.setItem('iris-theme',t);
+const LITTLE_THINGS = [
+  "I notice how hard you work.",
+  "I notice your quiet efforts.",
+  "I notice when you're tired.",
+  "I notice the way you keep going.",
+  "I notice how much love you give even when you're exhausted.",
+  "I notice your strength.",
+  "I notice you."
+];
+
+const JAR_REASONS = [
+  "I love how safe you make me feel.",
+  "I love how real you are.",
+  "I love your determination.",
+  "I love your kindness.",
+  "I love your laugh.",
+  "I love how you care.",
+  "I love your heart.",
+  "I love your mind.",
+  "I love that you're simply you.",
+  "I love how you try, even when it's hard.",
+  "I love the way you say my name.",
+  "I love how patient you are with me.",
+  "I love your quiet resilience.",
+  "I love the way you light up talking about things you care about.",
+  "I love how honest you are with me.",
+  "I love your sense of humor.",
+  "I love how you remember the little things.",
+  "I love how you never give up on the people you love.",
+  "I love the way you see the good in others.",
+  "I love how thoughtful you are.",
+  "I love how you carry so much and still smile.",
+  "I love your softness underneath all that strength.",
+  "I love how you make ordinary days feel warmer.",
+  "I love the way you think before you speak.",
+  "I love your loyalty.",
+  "I love how you handle hard days with grace.",
+  "I love the way your eyes look when you're genuinely happy.",
+  "I love how you always try to understand me.",
+  "I love your work ethic.",
+  "I love how you never stop growing.",
+  "I love the way you comfort people without even trying.",
+  "I love how deeply you feel things.",
+  "I love your gentle way of saying hard truths.",
+  "I love how you show up, even when it's inconvenient.",
+  "I love your curiosity about the world.",
+  "I love how you make me want to be better.",
+  "I love the calm you bring into a room.",
+  "I love how you fight for the people you love.",
+  "I love your voice.",
+  "I love how you get excited over small things.",
+  "I love your honesty, even when it's uncomfortable.",
+  "I love how you forgive without keeping score.",
+  "I love the way you take care of everyone but yourself sometimes.",
+  "I love how brave you are, even when you don't feel it.",
+  "I love your independence.",
+  "I love the way you always come back to me.",
+  "I love how you make the hard seasons feel survivable.",
+  "I love your ambition.",
+  "I love how you never make me feel small.",
+  "I love the way you listen, fully.",
+  "I love how you remember what I say weeks later.",
+  "I love your patience with yourself, when you have it.",
+  "I love how you carry your family in your heart.",
+  "I love the way you say sorry and mean it.",
+  "I love your discipline.",
+  "I love how you make plans for the future with me in them.",
+  "I love the way you hold my hand.",
+  "I love how you check on me even when you're the one struggling.",
+  "I love your stubbornness, honestly.",
+  "I love how you never let me feel alone.",
+  "I love the way you say 'we' instead of 'I'.",
+  "I love how you keep your promises.",
+  "I love your softness when you're sleepy.",
+  "I love how you try to fix things instead of walking away.",
+  "I love the way you trust me with your feelings.",
+  "I love how grounded you make me feel.",
+  "I love your excitement over small victories.",
+  "I love how you never stop believing in me.",
+  "I love the way you take responsibility for your mistakes.",
+  "I love your loyalty to the people who matter to you.",
+  "I love how you make hard conversations feel safe.",
+  "I love the way you say 'I'm proud of you.'",
+  "I love how you never make love feel conditional.",
+  "I love your quiet strength on your hardest days.",
+  "I love the way your presence calms me.",
+  "I love how you show love through action, not just words.",
+  "I love the way you remember our anniversaries.",
+  "I love how you take care of the people you love without being asked.",
+  "I love your ability to laugh at yourself.",
+  "I love how you never give up on us.",
+  "I love the way you dream about our future.",
+  "I love how you handle pressure with quiet grace.",
+  "I love your empathy.",
+  "I love how you make me feel chosen, every day.",
+  "I love the way you say goodnight.",
+  "I love how you never stop trying to grow together with me.",
+  "I love your gentle stubbornness to stay, even on hard days.",
+  "I love how you take pride in your work.",
+  "I love the way you protect your peace.",
+  "I love how you make space for my feelings.",
+  "I love your softness that you rarely show anyone else.",
+  "I love how you never let a fight end in silence.",
+  "I love the way you check in on my day.",
+  "I love how you never stop learning about yourself.",
+  "I love your quiet confidence.",
+  "I love the way you say 'us' like it's certain.",
+  "I love how you turn ordinary moments into memories.",
+  "I love your resilience after every hard season.",
+  "I love how you keep choosing effort over ease.",
+  "I love the way you make me feel like home.",
+  "I love how you never stop being you, for anyone.",
+  "I love the quiet ways you show you care.",
+  "I love that eleven months in, you still surprise me with your heart."
+];
+
+const FUTURE_EXTRA = [];
+
+const REASSURANCES = [
+  "❤️ You're never a burden.",
+  "🌸 You don't have to earn my love.",
+  "☁️ It's okay to rest.",
+  "🌙 I'm proud of you.",
+  "🌼 Thank you for trying.",
+  "✨ I'll still be here.",
+  "💜 I'll keep choosing you.",
+  "🌷 You are allowed to have bad days.",
+  "🕊️ Your feelings are never too much.",
+  "🌊 It's okay to not be okay sometimes.",
+  "🌟 You don't have to be perfect for me.",
+  "🍃 Breathe. You're doing better than you think.",
+  "🌻 I see how hard you're trying.",
+  "🫧 You don't have to carry everything alone.",
+  "🕯️ Slow progress is still progress.",
+  "🌾 You are safe here.",
+  "🎐 It's okay to ask for help.",
+  "🪷 Rest is productive too.",
+  "🐚 You don't need to perform strength for me.",
+  "🌼 I love you on your loud days and your quiet ones.",
+  "🌙 Your worth isn't measured by your productivity.",
+  "☀️ You matter, even on your low days.",
+  "🌈 It's okay to cry.",
+  "🍯 I'm not going anywhere.",
+  "🫶 You are enough, exactly as you are.",
+  "🌱 Growth takes time, be gentle with yourself.",
+  "💫 You are allowed to take up space.",
+  "🕊️ I'll never resent your bad days.",
+  "🌷 You don't owe anyone an explanation for resting.",
+  "🍀 Small steps still count.",
+  "🌊 Let yourself feel it, then let it go.",
+  "🌟 I still see you, even when you feel invisible.",
+  "🌼 You've survived every hard day so far. That's proof enough.",
+  "🕯️ I'm here for the version of you that's still healing.",
+  "🌻 Your pace is okay. There's no race.",
+  "💜 Even your quiet days matter to me.",
+  "🍃 I love you without conditions.",
+  "🌾 You don't have to hide your tired from me.",
+  "🎐 You are not too sensitive. You just feel deeply.",
+  "🪷 I'm proud of who you're becoming.",
+  "🐚 You can lean on me.",
+  "🌼 Being loved isn't something you have to work for.",
+  "🌙 You are worthy of softness.",
+  "☀️ I choose you, especially on your hard days.",
+  "🌈 You are not behind in life.",
+  "🍯 I'll wait for you to catch your breath.",
+  "🫶 You don't have to smile all the time for me.",
+  "🌱 Healing isn't linear, and that's okay.",
+  "💫 You are loved beyond what you've done.",
+  "🕊️ You are allowed to change your mind.",
+  "🌷 I'm not keeping score of your bad days.",
+  "🍀 You are doing better than you give yourself credit for.",
+  "🌊 It's safe to be honest with me.",
+  "🌟 I love your effort more than your outcomes.",
+  "🌼 Your struggles don't make you weak.",
+  "🕯️ I still choose you on the days you feel unlovable.",
+  "🌻 You don't need to be 'fine' all the time.",
+  "💜 I'm proud of you for showing up today.",
+  "🍃 Your pace is your pace.",
+  "🌾 You are not a burden to the people who love you.",
+  "🎐 You can rest without guilt.",
+  "🪷 I love the parts of you that you hide from everyone else.",
+  "🐚 I'm not tired of you.",
+  "🌼 You're allowed to need reassurance.",
+  "🌙 Even your worst days don't scare me away.",
+  "☀️ You bring more light than you realize.",
+  "🌈 You are worthy of the love you give others.",
+  "🍯 I promise you, you're not too much.",
+  "🫶 It's okay to lean on someone else's strength for a while.",
+  "🌱 I'm patient with your healing.",
+  "💫 You are still worthy, even mid-struggle.",
+  "🕊️ There's no timeline you have to keep up with.",
+  "🌷 You are safe to be exactly who you are with me.",
+  "🍀 I love your effort, even when it doesn't show results yet.",
+  "🌊 You are not alone in this.",
+  "🌟 I'm still here, even in the silence.",
+  "🌼 You don't have to explain your tiredness to me."
+];
+
+const BENCH_QUESTIONS = [
+  "What made you smile this week?",
+  "What's one dream you still carry?",
+  "What's something you're proud of lately?",
+  "What place feels peaceful to you?",
+  "If today had a color, what would it be?",
+  "What's something small that made your day better recently?",
+  "What's a memory that always makes you feel warm?",
+  "What do you need more of right now?",
+  "What's something you wish people understood about you?",
+  "What's a song that feels like this season of your life?",
+  "What's something you're looking forward to?",
+  "What's a fear you've quietly been carrying?",
+  "What's something you've forgiven yourself for?",
+  "What does 'home' feel like to you?",
+  "What's a small joy you don't talk about often?",
+  "What's something you needed to hear today?",
+  "What's a version of yourself you're proud of becoming?",
+  "What's something that feels heavy right now?",
+  "What's a place you'd love to visit with me?",
+  "What's something you're grateful for today?",
+  "What's a moment this month that stayed with you?",
+  "What's something that made you feel loved recently?",
+  "What's a quiet hope you haven't said out loud?",
+  "What's something you're learning about yourself lately?",
+  "What's a comfort food that reminds you of childhood?",
+  "What's something you want more time for?",
+  "What's a fear you've overcome, even a little?",
+  "What's a sound that makes you feel calm?",
+  "What's something you'd tell your younger self?",
+  "What's a value you never want to compromise on?",
+  "What's a habit you're proud you kept?",
+  "What's something that surprised you about yourself this year?",
+  "What's a moment you felt truly understood?",
+  "What's something you're still figuring out?",
+  "What's a small thing that always cheers you up?",
+  "What's a compliment you've never forgotten?",
+  "What's something you needed but didn't ask for?",
+  "What's a season of your life you look back on fondly?",
+  "What's something you're excited to build with me?",
+  "What's a way you've grown this year?",
+  "What's a memory of us that you replay sometimes?",
+  "What's something you wish you did more of?",
+  "What's a lesson that took you a while to learn?",
+  "What's a place that feels like it understands you?",
+  "What's something you're grateful I know about you?",
+  "What's a worry you can set down, even just for tonight?",
+  "What's something that made today a little lighter?",
+  "What's a part of yourself you're learning to accept?",
+  "What's something you want to remember about this year?",
+  "What's a quiet dream you haven't told many people?",
+  "What's something about today you'd like to hold onto?",
+  "What's a feeling you've had trouble naming lately?",
+  "What's something you're proud you didn't give up on?",
+  "What's a memory that still makes you laugh?",
+  "What's something you want to feel more of in your life?",
+  "What's a change you've noticed in yourself lately?",
+  "What's something small I do that makes you feel loved?",
+  "What's a moment you felt completely at peace?",
+  "What's something you're carrying that you haven't said out loud?",
+  "What's a version of the future you're hopeful for?",
+  "What's something that made you feel strong recently?",
+  "What's a thing you appreciate about your own resilience?",
+  "What's a hope you have for us?",
+  "What's something you needed permission to feel?",
+  "What's a moment you felt fully yourself?",
+  "What's something you want to let go of?",
+  "What's a quiet strength you don't give yourself credit for?",
+  "What's something that always brings you comfort?",
+  "What's a part of your day you look forward to most?",
+  "What's something you've learned about love this year?",
+  "What's a memory of us you'd like to make again?",
+  "What's something that's been on your mind lately?",
+  "What's a way I can support you better this month?",
+  "What's something you're proud of that no one noticed?",
+  "What's a place in your mind you go to feel safe?",
+  "What's something you hope never changes about us?",
+  "What's a small thing that made you feel cared for recently?",
+  "What's something you're still healing from, gently?",
+  "What's a feeling you want more of in your everyday life?",
+  "What's something about yourself you're finally at peace with?",
+  "What's a moment recently where you felt truly seen?",
+  "What's something you want to tell me but haven't yet?"
+];
+
+const HIDDEN_NOTES = [
+  "I miss you.",
+  "Drink some water.",
+  "I'm cheering for you.",
+  "You looked beautiful today.",
+  "I hope you're smiling.",
+  "I'm always proud of you.",
+  "Take a deep breath.",
+  "You're doing great.",
+  "I'm thinking of you right now.",
+  "Rest, if you need to.",
+  "You make my life softer.",
+  "I can't wait to see you again.",
+  "You're stronger than you think.",
+  "Eat something good today.",
+  "You've got this.",
+  "I love the way you laugh.",
+  "You're my favorite person.",
+  "Take your vitamins.",
+  "I'm grateful for you.",
+  "You're allowed to slow down.",
+  "I believe in you.",
+  "Your hard work doesn't go unnoticed.",
+  "I love you more today than yesterday.",
+  "You are so loved.",
+  "Sleep well tonight.",
+  "You make ordinary days better.",
+  "I'm here, always.",
+  "You inspire me.",
+  "Don't forget to stretch.",
+  "I adore you.",
+  "You're doing better than you think.",
+  "I hope today was kind to you.",
+  "You are my favorite hello.",
+  "I love your heart.",
+  "You deserve rest.",
+  "I'm holding you in my thoughts.",
+  "You make me want to be better.",
+  "I love every version of you.",
+  "You're worth the wait, always.",
+  "I hope you feel peace today.",
+  "You are my calm.",
+  "I love how you try.",
+  "Take care of yourself for me.",
+  "You are irreplaceable to me.",
+  "I love your quiet moments too.",
+  "You make my heart feel full.",
+  "I'm so lucky to love you.",
+  "You are my favorite chapter.",
+  "I hope this made you smile.",
+  "Forever grateful for you.",
+  "You're my home.",
+  "I choose you, again and again.",
+  "You are enough.",
+  "Thank you for being you."
+];
+
+const PROMISES = [
+  "I'll celebrate your victories.",
+  "I'll stay during the quiet seasons.",
+  "I'll understand when you're tired.",
+  "I'll never compete with your dreams.",
+  "I'll support your future.",
+  "I'll always respect your space.",
+  "I'll continue choosing you."
+];
+
+/* ============ helpers ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ============ background canvas: stars + particles ============ */
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let W,H,stars=[],hearts=[];
+function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+function initStars(){
+  stars = [];
+  const count = Math.floor((W*H)/16000);
+  for(let i=0;i<count;i++){
+    stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+0.3, o:Math.random(), spd:Math.random()*0.4+0.1, phase:Math.random()*Math.PI*2});
+  }
 }
-const savedTheme = localStorage.getItem('iris-theme') ||
-  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light');
-setTheme(savedTheme);
-themeBtn.addEventListener('click',()=>{
-  setTheme(body.getAttribute('data-theme')==='dark' ? 'light':'dark');
+initStars();
+window.addEventListener('resize', initStars);
+
+function initHearts(){
+  hearts = [];
+  for(let i=0;i<10;i++){
+    hearts.push({x:Math.random()*W, y:H+Math.random()*H, r:Math.random()*6+6, spd:Math.random()*0.25+0.1, drift:Math.random()*0.6-0.3, o:Math.random()*0.25+0.08});
+  }
+}
+initHearts();
+
+function drawHeart(x,y,size,opacity){
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--dusty-pink');
+  ctx.translate(x,y);
+  ctx.beginPath();
+  const s = size;
+  ctx.moveTo(0, s*0.3);
+  ctx.bezierCurveTo(0,-s*0.2, -s, -s*0.2, -s, s*0.3);
+  ctx.bezierCurveTo(-s, s*0.75, 0, s*1.1, 0, s*1.4);
+  ctx.bezierCurveTo(0, s*1.1, s, s*0.75, s, s*0.3);
+  ctx.bezierCurveTo(s, -s*0.2, 0, -s*0.2, 0, s*0.3);
+  ctx.fill();
+  ctx.restore();
+}
+
+let t=0;
+function animate(){
+  t+=0.016;
+  ctx.clearRect(0,0,W,H);
+  const isDark = document.documentElement.classList.contains('dark');
+  for(const s of stars){
+    s.y += s.spd*0.15;
+    if(s.y>H) s.y=0;
+    const flicker = 0.5+0.5*Math.sin(t*1.2+s.phase);
+    ctx.beginPath();
+    ctx.fillStyle = isDark ? `rgba(255,255,255,${0.15+flicker*0.5*s.o})` : `rgba(180,150,200,${0.10+flicker*0.25*s.o})`;
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  }
+  for(const h of hearts){
+    h.y -= h.spd;
+    h.x += Math.sin(t*0.4+h.y*0.01)*h.drift*0.3;
+    if(h.y< -20){ h.y = H+20; h.x = Math.random()*W; }
+    drawHeart(h.x,h.y,h.r,h.o);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ============ dark mode ============ */
+const darkBtn = document.getElementById('darkBtn');
+darkBtn.addEventListener('click', ()=>{
+  document.documentElement.classList.toggle('dark');
+  darkBtn.classList.toggle('active');
+  darkBtn.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
 });
 
-/* ---------------- Scroll progress ---------------- */
-const progressBar=document.getElementById('scroll-progress');
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement;
-  const scrolled=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
-  progressBar.style.width=scrolled+'%';
-  document.getElementById('back-to-top').classList.toggle('show', h.scrollTop>500);
-},{passive:true});
+/* ============ ambient music (Web Audio API, off by default) ============ */
+let audioCtx=null, musicOn=false, musicNodes=[], musicInterval=null;
+const musicBtn = document.getElementById('musicBtn');
 
-document.getElementById('back-to-top').addEventListener('click',()=>{
-  window.scrollTo({top:0,behavior:'smooth'});
+function playNote(freq, startTime, duration, gainMax=0.05){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type='sine';
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0, startTime);
+  gain.gain.linearRampToValueAtTime(gainMax, startTime+0.6);
+  gain.gain.linearRampToValueAtTime(0, startTime+duration);
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(startTime); osc.stop(startTime+duration+0.1);
+}
+
+const SCALE = [261.63,293.66,329.63,349.23,392.0,440.0,493.88,523.25,587.33,659.25]; // C major-ish, gentle
+
+function scheduleAmbient(){
+  if(!musicOn) return;
+  const now = audioCtx.currentTime;
+  const freq = SCALE[Math.floor(Math.random()*SCALE.length)];
+  playNote(freq, now+0.05, 3.2, 0.045);
+  if(Math.random()>0.5){
+    const freq2 = SCALE[Math.floor(Math.random()*SCALE.length)];
+    playNote(freq2, now+1.4, 2.6, 0.03);
+  }
+}
+
+musicBtn.addEventListener('click', ()=>{
+  if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  musicOn = !musicOn;
+  musicBtn.classList.toggle('active', musicOn);
+  musicBtn.textContent = musicOn ? '🔊' : '🎵';
+  if(musicOn){
+    if(audioCtx.state==='suspended') audioCtx.resume();
+    scheduleAmbient();
+    musicInterval = setInterval(scheduleAmbient, 3200);
+  } else {
+    clearInterval(musicInterval);
+  }
 });
 
-/* ---------------- Scroll reveal ---------------- */
-const revealEls=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
-  });
-},{threshold:0.15});
+/* ============ reveal-on-scroll ============ */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.2});
 revealEls.forEach(el=>io.observe(el));
 
-/* ---------------- Typewriter for "Always." ---------------- */
-const alwaysEl=document.getElementById('always-text');
-const alwaysObserver=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
+/* ============ HERO sequence ============ */
+window.addEventListener('load', ()=>{
+  setTimeout(()=>document.getElementById('line1').classList.add('show'), 600);
+  setTimeout(()=>document.getElementById('line2').classList.add('show'), 3000);
+  setTimeout(()=>document.getElementById('heroTitle').classList.add('show'), 5600);
+  setTimeout(()=>document.getElementById('heroBtn').classList.add('show'), 8000);
+});
+document.getElementById('heroBtn').addEventListener('click', ()=>{
+  document.getElementById('letter').scrollIntoView({behavior:'smooth'});
+});
+
+/* ============ Letter reveal on scroll ============ */
+const letterPs = document.querySelectorAll('#letterBody p, #futureBody p');
+const letterIO = new IntersectionObserver((entries)=>{
+  entries.forEach((e,idx)=>{
     if(e.isIntersecting){
-      let word="Always.";
-      let i=0;
-      alwaysEl.classList.add('typewriter');
-      const interval=setInterval(()=>{
-        alwaysEl.textContent=word.slice(0,i+1);
-        i++;
-        if(i===word.length){clearInterval(interval);}
-      },140);
-      alwaysObserver.unobserve(e.target);
+      const ps = e.target.parentElement.querySelectorAll('p');
+      ps.forEach((p,i)=> setTimeout(()=>p.classList.add('in'), i*260));
+      letterIO.unobserve(e.target.parentElement.parentElement);
     }
   });
+},{threshold:0.3});
+document.querySelectorAll('.letter-body').forEach(lb=>letterIO.observe(lb.firstElementChild));
+
+/* ============ Memory Lane stones ============ */
+const stonesWrap = document.getElementById('stonesWrap');
+STONES.forEach(s=>{
+  const div = document.createElement('div');
+  div.className='glass-card stone reveal';
+  div.innerHTML = `<div class="stone-icon">${s.icon}</div><div class="stone-inner"><div class="stone-label">${s.label}</div><div class="stone-msg">${s.msg}</div></div>`;
+  div.addEventListener('click', ()=> div.classList.toggle('open'));
+  stonesWrap.appendChild(div);
+  io.observe(div);
+});
+
+/* ============ Little Things cards ============ */
+const littleGrid = document.getElementById('littleGrid');
+LITTLE_THINGS.forEach(t=>{
+  const div = document.createElement('div');
+  div.className='glass-card little-card reveal';
+  div.textContent = t;
+  littleGrid.appendChild(div);
+  io.observe(div);
+});
+
+/* ============ Jar of reasons ============ */
+let jarPool = shuffle([...JAR_REASONS]);
+let jarIdx = 0;
+const jarSvg = document.getElementById('jarSvg');
+const jarReason = document.getElementById('jarReason');
+const jarCount = document.getElementById('jarCount');
+jarCount.textContent = `0 / ${JAR_REASONS.length} reasons found`;
+jarSvg.addEventListener('click', ()=>{
+  if(jarIdx>=jarPool.length){ jarPool = shuffle([...JAR_REASONS]); jarIdx=0; }
+  jarReason.classList.remove('show');
+  setTimeout(()=>{
+    jarReason.textContent = jarPool[jarIdx];
+    jarReason.classList.add('show');
+    jarIdx++;
+    jarCount.textContent = `${Math.min(jarIdx, JAR_REASONS.length)} / ${JAR_REASONS.length} reasons found`;
+  }, 220);
+});
+
+/* ============ Quiet Reassurances ============ */
+let reassurePool = shuffle([...REASSURANCES]);
+let reassureIdx = 0;
+const reassureSection = document.getElementById('reassure');
+const reassureMsg = document.getElementById('reassureMsg');
+reassureSection.addEventListener('click', ()=>{
+  if(reassureIdx>=reassurePool.length){ reassurePool = shuffle([...REASSURANCES]); reassureIdx=0; }
+  reassureMsg.style.opacity=0;
+  setTimeout(()=>{
+    reassureMsg.textContent = reassurePool[reassureIdx];
+    reassureMsg.style.opacity=1;
+    reassureIdx++;
+  },260);
+});
+
+/* ============ Bench ============ */
+let benchPool = shuffle([...BENCH_QUESTIONS]);
+let benchIdx = 0;
+const benchQuestion = document.getElementById('benchQuestion');
+document.getElementById('benchBtn').addEventListener('click', ()=>{
+  if(benchIdx>=benchPool.length){ benchPool = shuffle([...BENCH_QUESTIONS]); benchIdx=0; }
+  benchQuestion.style.opacity=0;
+  setTimeout(()=>{
+    benchQuestion.textContent = benchPool[benchIdx];
+    benchQuestion.style.opacity=1;
+    benchIdx++;
+  },260);
+});
+
+/* ============ Promise Wall ============ */
+const promiseList = document.getElementById('promiseList');
+PROMISES.forEach(p=>{
+  const div = document.createElement('div');
+  div.className='promise';
+  div.textContent = p;
+  promiseList.appendChild(div);
+});
+const promiseIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
 },{threshold:0.5});
-alwaysObserver.observe(document.querySelector('.final-message'));
+document.querySelectorAll('.promise').forEach(p=>promiseIO.observe(p));
+promiseIO.observe(document.getElementById('promiseFinal'));
+document.getElementById('promiseFinal').classList.remove('promise');
+new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.4}).observe(document.getElementById('promiseFinal'));
 
-/* ---------------- Floating particles (petals) ---------------- */
-const canvas=document.getElementById('particle-canvas');
-const ctx=canvas.getContext('2d');
-let W,H;
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-resize();
-window.addEventListener('resize',resize);
-
-const isDark=()=>body.getAttribute('data-theme')==='dark';
-const particles=Array.from({length:22},()=>({
-  x:Math.random()*W,
-  y:Math.random()*H,
-  r:2+Math.random()*3,
-  speedY:0.15+Math.random()*0.3,
-  speedX:(Math.random()-0.5)*0.3,
-  drift:Math.random()*Math.PI*2,
-  opacity:0.15+Math.random()*0.3
-}));
-
-function drawParticles(){
-  ctx.clearRect(0,0,W,H);
-  particles.forEach(p=>{
-    p.y-=p.speedY;
-    p.drift+=0.01;
-    p.x+=Math.sin(p.drift)*0.3 + p.speedX*0.2;
-    if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}
-    if(p.x<-10)p.x=W+10;
-    if(p.x>W+10)p.x=-10;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle = isDark() ? `rgba(200,180,220,${p.opacity})` : `rgba(230,190,205,${p.opacity+0.15})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawParticles);
+/* ============ Hidden hearts ============ */
+const heartPopup = document.getElementById('heartPopup');
+let popupTimeout;
+function showPopup(text){
+  clearTimeout(popupTimeout);
+  heartPopup.textContent = text;
+  heartPopup.classList.add('show');
+  popupTimeout = setTimeout(()=>heartPopup.classList.remove('show'), 2600);
 }
-if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  drawParticles();
-}
-
-/* ---------------- Occasional floating hearts ---------------- */
-function spawnHeart(){
-  const heart=document.createElement('div');
-  heart.className='floating-heart';
-  heart.textContent=['❤️','💜','🌸'][Math.floor(Math.random()*3)];
-  heart.style.left=Math.random()*90+'vw';
-  heart.style.setProperty('--drift', (Math.random()*60-30)+'px');
-  heart.style.animationDuration=(7+Math.random()*4)+'s';
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),12000);
-}
-if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  setInterval(spawnHeart, 6000);
-}
-
-/* ---------------- Ambient piano (Web Audio API), OFF by default ---------------- */
-let audioCtx=null;
-let ambientPlaying=false;
-let ambientNodes=[];
-const soundBtn=document.getElementById('sound-toggle');
-
-function playNote(freq, startTime, duration, gainTarget){
-  const osc=audioCtx.createOscillator();
-  const gain=audioCtx.createGain();
-  osc.type='sine';
-  osc.frequency.value=freq;
-  gain.gain.setValueAtTime(0,startTime);
-  gain.gain.linearRampToValueAtTime(gainTarget,startTime+0.6);
-  gain.gain.linearRampToValueAtTime(0,startTime+duration);
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.start(startTime);
-  osc.stop(startTime+duration+0.1);
-  return {osc,gain};
-}
-
-const scale=[261.6,293.7,329.6,392.0,440.0,523.3]; // C major-ish pentatonic-leaning
-
-function scheduleAmbientLoop(){
-  if(!ambientPlaying) return;
-  const now=audioCtx.currentTime;
-  const noteCount=3+Math.floor(Math.random()*2);
-  let t=now;
-  for(let i=0;i<noteCount;i++){
-    const freq=scale[Math.floor(Math.random()*scale.length)] / (Math.random()>0.6?2:1);
-    playNote(freq, t, 3.5, 0.045);
-    t += 1.6 + Math.random()*1.4;
-  }
-  ambientNodes.push(setTimeout(scheduleAmbientLoop, (t-now)*1000));
-}
-
-soundBtn.addEventListener('click',()=>{
-  if(!audioCtx){
-    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-  }
-  if(audioCtx.state==='suspended') audioCtx.resume();
-  ambientPlaying=!ambientPlaying;
-  soundBtn.textContent = ambientPlaying ? '🔊' : '🔇';
-  if(ambientPlaying){
-    scheduleAmbientLoop();
-  } else {
-    ambientNodes.forEach(id=>clearTimeout(id));
-    ambientNodes=[];
+const heartHostSections = ['letter','memoryLane','littleThings','jar','futureLetter','reassure','bench','promises'];
+let noteIdx = 0;
+const shuffledNotes = shuffle([...HIDDEN_NOTES]);
+heartHostSections.forEach(id=>{
+  const sec = document.getElementById(id);
+  if(!sec) return;
+  sec.style.position='relative';
+  const numHearts = 6 + Math.floor(Math.random()*2);
+  for(let i=0;i<numHearts && noteIdx<shuffledNotes.length;i++){
+    const h = document.createElement('div');
+    h.className='hidden-heart';
+    h.textContent='♡';
+    h.style.top = (8+Math.random()*84)+'%';
+    h.style.left = (4+Math.random()*90)+'%';
+    const note = shuffledNotes[noteIdx++];
+    h.addEventListener('click', (ev)=>{ ev.stopPropagation(); showPopup(note); });
+    sec.appendChild(h);
   }
 });
 
-/* ---------------- PWA service worker ---------------- */
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
+/* ============ Finale: star sentence + sequence ============ */
+const finale = document.getElementById('finale');
+const finaleIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(()=>document.getElementById('starSentence').classList.add('in'), 400);
+      setTimeout(()=>document.getElementById('finaleTitle').classList.add('in'), 1800);
+      setTimeout(()=>document.getElementById('finalePromise').classList.add('in'), 3200);
+      setTimeout(()=>document.getElementById('finaleSig').classList.add('in'), 4800);
+      finaleIO.unobserve(finale);
+    }
   });
-}
+},{threshold:0.3});
+finaleIO.observe(finale);
 </script>
 </body>
 </html>
