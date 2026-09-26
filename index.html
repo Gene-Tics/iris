@@ -2,1149 +2,487 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>For Iris</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For My Iris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   FOR IRIS — Anniversary Website
-   Made by Eugene. Edit freely — search "EDIT ME" to find every
-   spot meant to be personalized (text, dates, poems, memories).
-   ============================================================ */
-
 :root{
-  --lavender:#b9a4d6;
-  --lavender-deep:#8f76b8;
-  --blush:#f3c9d1;
-  --rose-gold:#d9a5a0;
-  --cream:#fdf6ef;
-  --cream-deep:#f7ede1;
-  --ink:#4a3f4f;
-  --ink-soft:#7a6d80;
-  --white:#ffffff;
-  --glass:rgba(255,255,255,0.55);
-  --glass-border:rgba(255,255,255,0.75);
-  --shadow:0 8px 30px rgba(140,110,150,0.15);
-  --serif:'Cormorant Garamond', 'Georgia', serif;
-  --sans:'Quicksand','Poppins',sans-serif;
-  --radius:22px;
-  --transition:0.6s cubic-bezier(.22,.9,.34,1);
+  --bg:#f7f3f8; --bg2:#efe6f2; --ink:#3b2f42; --ink-soft:#6a5c73;
+  --lav:#b9a4d4; --lav-deep:#8a6fb0; --pink:#e9c9d6; --cream:#fbf6f0; --brown:#8a6a5c;
+  --card:#ffffffcc; --card-b:1px solid #ffffff88; --shadow:0 8px 30px rgba(120,90,140,.12);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-
-html{ scroll-behavior:smooth; }
-
+:root:not([data-theme="light"]) { }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#221b28; --bg2:#2a2130; --ink:#f1e8f5; --ink-soft:#c9bad2;
+    --lav:#a78fd0; --lav-deep:#c6aee9; --pink:#d9a9bb; --cream:#2e2536; --brown:#c9a596;
+    --card:#3a2f43cc; --card-b:1px solid #ffffff14; --shadow:0 8px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#221b28; --bg2:#2a2130; --ink:#f1e8f5; --ink-soft:#c9bad2;
+  --lav:#a78fd0; --lav-deep:#c6aee9; --pink:#d9a9bb; --cream:#2e2536; --brown:#c9a596;
+  --card:#3a2f43cc; --card-b:1px solid #ffffff14; --shadow:0 8px 30px rgba(0,0,0,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
 body{
-  font-family:var(--sans);
-  color:var(--ink);
-  background:linear-gradient(160deg,var(--cream) 0%,var(--cream-deep) 50%, #f2e4ea 100%);
-  overflow-x:hidden;
-  min-height:100vh;
-  line-height:1.6;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--ink); font-family:'Quicksand',sans-serif;
+  min-height:100%; overflow-x:hidden; line-height:1.6;
+}
+.serif{font-family:'Cormorant Garamond',serif;}
+.wrap{max-width:520px;margin:0 auto;padding:0 24px;}
+section{padding:90px 0; position:relative;}
+h1,h2{font-family:'Cormorant Garamond',serif; font-weight:600;}
+.eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lav-deep);margin-bottom:10px;}
+.big{font-size:clamp(1.8rem,7vw,2.6rem); line-height:1.25;}
+p{color:var(--ink-soft); font-size:1.05rem; margin-top:14px;}
+.reveal{opacity:0; transform:translateY(24px); transition:opacity .9s ease, transform .9s ease;}
+.reveal.visible{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important; transform:none!important; transition:none!important;}
+  *{animation:none!important;}
 }
 
-body.dark{
-  --cream:#241f2b;
-  --cream-deep:#1c1720;
-  --ink:#f3e9f2;
-  --ink-soft:#c9b9cc;
-  --glass:rgba(60,50,68,0.55);
-  --glass-border:rgba(255,255,255,0.12);
-  background:linear-gradient(160deg,#241f2b 0%,#1c1720 60%,#150f1a 100%);
-}
-
-::selection{ background:var(--blush); color:var(--ink); }
-
-h1,h2,h3, .serif{ font-family:var(--serif); font-weight:600; }
-
-.section{
-  min-height:100vh;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:80px 24px;
-  position:relative;
-  text-align:center;
-}
-
-.eyebrow{
-  font-size:0.75rem;
-  letter-spacing:0.25em;
-  text-transform:uppercase;
-  color:var(--lavender-deep);
-  margin-bottom:14px;
-  opacity:0.8;
-}
-
-.section h2{
-  font-size:clamp(1.8rem,6vw,2.8rem);
-  margin-bottom:24px;
-  line-height:1.25;
-  max-width:680px;
-}
-
-.section p.lead{
-  font-size:1.05rem;
-  color:var(--ink-soft);
-  max-width:560px;
-  margin-bottom:20px;
-}
-
-.glass-card{
-  background:var(--glass);
-  border:1px solid var(--glass-border);
-  border-radius:var(--radius);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  box-shadow:var(--shadow);
-  padding:32px 26px;
-}
-
-button, .btn{
-  font-family:var(--sans);
-  border:none;
-  cursor:pointer;
-  outline:none;
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,var(--lavender),var(--rose-gold));
-  color:#fff;
-  padding:16px 36px;
-  border-radius:50px;
-  font-size:1rem;
-  font-weight:600;
-  box-shadow:0 10px 25px rgba(160,120,160,0.35);
-  transition:transform .3s ease, box-shadow .3s ease;
-  letter-spacing:0.02em;
-}
-.btn-primary:active{ transform:scale(0.96); }
-
-.btn-ghost{
-  background:transparent;
-  border:1.5px solid var(--lavender-deep);
-  color:var(--lavender-deep);
-  padding:12px 28px;
-  border-radius:50px;
-  font-size:0.9rem;
-  font-weight:600;
-  transition:all .3s ease;
-}
-.btn-ghost:active{ transform:scale(0.96); background:rgba(185,164,214,0.15); }
-
-/* particle canvas */
-#particles{
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-}
-
-/* top chrome */
-#chrome{
-  position:fixed; top:0; left:0; right:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 18px;
-  opacity:0; pointer-events:none;
-  transition:opacity .6s ease;
-}
-#chrome.show{ opacity:1; pointer-events:auto; }
-#chrome .pill{
-  display:flex; align-items:center; gap:10px;
-  background:var(--glass); border:1px solid var(--glass-border);
-  backdrop-filter:blur(10px); border-radius:50px; padding:8px 14px;
-  box-shadow:var(--shadow); font-size:0.85rem;
-}
-#chrome button.icon{
-  width:38px;height:38px;border-radius:50%;
-  background:var(--glass); border:1px solid var(--glass-border);
-  backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center;
-  font-size:1.1rem; box-shadow:var(--shadow);
-}
-
-#progress-track{
-  position:fixed; top:0; left:0; height:3px; z-index:60;
-  background:linear-gradient(90deg,var(--lavender),var(--rose-gold));
-  width:0%;
-  transition:width .15s ease-out;
-}
-
-/* ---------- SECTION 1: OPENING ---------- */
+/* Opening screen */
 #opening{
-  background:radial-gradient(circle at 50% 30%, rgba(217,165,160,0.25), transparent 60%);
+  position:fixed; inset:0; z-index:50; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  background:radial-gradient(circle at 50% 30%, var(--bg2), var(--bg));
+  padding:24px; transition:opacity .8s ease, visibility .8s ease;
 }
-#opening .envelope-wrap{
-  animation:floaty 5s ease-in-out infinite;
+#opening.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+#opening h1{font-size:clamp(1.8rem,8vw,2.4rem); margin-bottom:16px;}
+#opening p{max-width:280px;}
+.btn{
+  margin-top:36px; font-family:'Quicksand',sans-serif; font-weight:600;
+  background:linear-gradient(135deg,var(--lav),var(--lav-deep)); color:#fff; border:none;
+  padding:14px 30px; border-radius:40px; font-size:1rem; letter-spacing:.02em;
+  box-shadow:0 10px 24px rgba(138,111,176,.35); cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
-@keyframes floaty{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-
-#opening h1{
-  font-size:clamp(2.4rem,10vw,4rem);
-  margin-bottom:10px;
+.btn:active{transform:scale(.96);}
+.hearts-bg{position:absolute; inset:0; overflow:hidden; pointer-events:none;}
+.hearts-bg span{
+  position:absolute; bottom:-10%; font-size:1.2rem; color:var(--pink); opacity:.5;
+  animation:float 12s linear infinite;
 }
-#opening .sub{
-  font-family:var(--serif);
-  font-size:clamp(1.1rem,4vw,1.4rem);
-  color:var(--ink-soft);
-  max-width:480px;
-  margin:14px 0 26px;
-  font-style:italic;
-}
-#opening .note{
-  font-size:0.95rem;
-  color:var(--ink-soft);
-  max-width:400px;
-  margin-bottom:36px;
-  line-height:1.8;
-}
-
-/* ---------- fade wrapper for scroll reveal ---------- */
-.reveal{
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity 1s ease, transform 1s ease;
-}
-.reveal.in{ opacity:1; transform:translateY(0); }
-
-/* ---------- SECTION 2: counters ---------- */
-.counter-row{
-  display:flex; gap:16px; flex-wrap:wrap; justify-content:center;
-  margin:30px 0;
-}
-.counter-card{
-  min-width:130px;
-  padding:22px 18px;
-}
-.counter-num{
-  font-family:var(--serif);
-  font-size:2.6rem;
-  color:var(--lavender-deep);
-  font-weight:700;
-}
-.counter-label{
-  font-size:0.8rem;
-  color:var(--ink-soft);
-  margin-top:6px;
+@keyframes float{
+  0%{transform:translateY(0) rotate(0deg); opacity:0;}
+  10%{opacity:.6;}
+  90%{opacity:.4;}
+  100%{transform:translateY(-120vh) rotate(30deg); opacity:0;}
 }
 
-/* ---------- SECTION 3: timeline ---------- */
-.timeline{
-  max-width:600px; width:100%;
-  position:relative;
-  padding-left:28px;
-  text-align:left;
+/* Cards */
+.card{
+  background:var(--card); border:var(--card-b); border-radius:20px; padding:22px;
+  box-shadow:var(--shadow); backdrop-filter:blur(6px); margin-top:16px;
 }
-.timeline::before{
-  content:'';
-  position:absolute; left:8px; top:6px; bottom:6px; width:2px;
-  background:linear-gradient(var(--lavender),var(--rose-gold));
-  opacity:0.5;
+.tap-hint{font-size:.8rem; color:var(--lav-deep); margin-top:10px;}
+.grid{display:grid; gap:14px; margin-top:20px;}
+.tile{
+  background:var(--card); border:var(--card-b); border-radius:18px; padding:18px;
+  box-shadow:var(--shadow); cursor:pointer; min-height:76px;
+  transition:transform .3s ease;
 }
-.tl-item{
-  position:relative;
-  margin-bottom:18px;
+.tile:active{transform:scale(.98);}
+.tile h3{font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:600; color:var(--lav-deep);}
+.tile .answer{
+  max-height:0; overflow:hidden; opacity:0; transition:max-height .5s ease, opacity .5s ease, margin-top .5s ease;
 }
-.tl-dot{
-  position:absolute; left:-28px; top:22px;
-  width:14px;height:14px;border-radius:50%;
-  background:var(--rose-gold);
-  box-shadow:0 0 0 4px rgba(217,165,160,0.25);
-}
-.tl-card{
-  cursor:pointer;
-  padding:20px 22px;
-}
-.tl-title{
-  font-family:var(--serif);
-  font-size:1.2rem;
-  display:flex; justify-content:space-between; align-items:center;
-}
-.tl-body{
-  max-height:0; overflow:hidden;
-  transition:max-height .5s ease, margin-top .5s ease;
-  font-size:0.95rem; color:var(--ink-soft);
-}
-.tl-item.open .tl-body{ max-height:400px; margin-top:12px; }
-.tl-item.open .tl-arrow{ transform:rotate(180deg); }
-.tl-arrow{ transition:transform .3s ease; font-size:0.8rem; }
+.tile.open .answer{max-height:200px; opacity:1; margin-top:10px;}
+.tile .plus{float:right; color:var(--lav-deep); font-size:1.3rem; transition:transform .3s ease;}
+.tile.open .plus{transform:rotate(45deg);}
 
-/* ---------- SECTION 4: swipe cards ---------- */
-.swipe-wrap{
-  position:relative; width:100%; max-width:340px; height:340px;
-  display:flex; align-items:center; justify-content:center;
+/* Poems */
+.poem-trigger{
+  display:flex; align-items:center; gap:10px; color:var(--lav-deep); cursor:pointer;
+  font-size:.95rem; margin:26px 0; justify-content:center;
 }
-.swipe-card{
-  position:absolute; width:100%; height:100%;
-  padding:36px 26px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--serif); font-size:1.35rem; line-height:1.5;
-  transition:transform .45s ease, opacity .45s ease;
-  cursor:grab;
-  user-select:none;
-}
-.dots{ display:flex; gap:8px; margin-top:24px; }
-.dot{ width:8px;height:8px;border-radius:50%; background:rgba(150,120,150,0.25); transition:all .3s; }
-.dot.active{ background:var(--lavender-deep); width:22px; border-radius:5px; }
-.swipe-hint{ font-size:0.8rem; color:var(--ink-soft); margin-top:16px; }
-
-/* ---------- SECTION 5: letter ---------- */
-.letter-page{
-  max-width:600px; width:100%;
-  padding:40px 30px;
-  text-align:left;
-  font-family:var(--serif);
-  font-size:1.15rem;
-  line-height:2;
-  position:relative;
-}
-.letter-page::before{
-  content:'✦';
-  position:absolute; top:18px; right:24px;
-  color:var(--rose-gold); opacity:0.5;
-}
-.letter-sign{
-  margin-top:26px; text-align:right; font-style:italic; color:var(--ink-soft);
-}
-
-/* ---------- SECTION 6: poetry collection ---------- */
-.feeling-grid{
-  display:grid; grid-template-columns:1fr 1fr; gap:12px;
-  max-width:520px; width:100%; margin-top:8px;
-}
-.feeling-btn{
-  padding:16px 10px;
-  font-size:0.85rem;
-  border-radius:16px;
-  line-height:1.4;
-}
-
-.poem-list{
-  max-width:560px; width:100%; text-align:left;
-  display:flex; flex-direction:column; gap:14px;
-}
+.poem-trigger .h{font-size:1.3rem; animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
 .poem-card{
-  padding:22px 24px;
-  display:flex; flex-direction:column; gap:6px;
-  cursor:pointer;
+  display:none; background:var(--cream); border-radius:18px; padding:28px 24px;
+  box-shadow:var(--shadow); border:var(--card-b); position:relative;
+  font-family:'Cormorant Garamond',serif;
 }
-.poem-card .num{ font-size:0.75rem; color:var(--rose-gold); letter-spacing:0.15em; }
-.poem-card h3{ font-size:1.3rem; }
-.poem-card .preview{ font-size:0.9rem; color:var(--ink-soft); font-style:italic; }
-.poem-card .read-btn{ align-self:flex-start; margin-top:10px; font-size:0.8rem; color:var(--lavender-deep); font-weight:700; }
+.poem-card.shown{display:block;}
+.poem-card .title{font-size:1.15rem; letter-spacing:.05em; color:var(--lav-deep); margin-bottom:14px; text-transform:uppercase; font-family:'Quicksand',sans-serif; font-weight:600; font-size:.78rem;}
+.poem-card .body{font-size:1.25rem; font-style:italic; white-space:pre-line; color:var(--ink);}
+.poem-card .star{position:absolute; top:14px; right:18px; opacity:.4;}
+.poem-inline{margin-top:28px;}
 
-.poem-card.locked{ opacity:0.55; cursor:not-allowed; }
-.poem-card.locked .read-btn{ color:var(--ink-soft); }
+.quote{
+  font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.3rem;
+  white-space:pre-line; margin-top:16px; color:var(--ink);
+}
+.center{text-align:center;}
+.divider{width:46px; height:1px; background:var(--lav); margin:36px auto; opacity:.5;}
 
-/* poem modal */
-#poem-modal{
-  position:fixed; inset:0; z-index:200;
-  background:rgba(30,20,35,0.55);
-  backdrop-filter:blur(6px);
-  display:flex; align-items:flex-end; justify-content:center;
-  opacity:0; pointer-events:none;
-  transition:opacity .4s ease;
-}
-#poem-modal.show{ opacity:1; pointer-events:auto; }
-.poem-sheet{
-  background:var(--cream);
-  width:100%; max-width:640px;
-  max-height:88vh;
-  border-radius:28px 28px 0 0;
-  padding:34px 26px 40px;
-  overflow-y:auto;
-  transform:translateY(40px);
-  transition:transform .5s cubic-bezier(.22,.9,.34,1);
-  text-align:left;
-}
-#poem-modal.show .poem-sheet{ transform:translateY(0); }
-.poem-sheet h3{
-  font-size:1.7rem; text-align:center; margin-bottom:24px; color:var(--lavender-deep);
-}
-.poem-text{
-  font-family:var(--serif); font-size:1.2rem; line-height:2.1;
-  white-space:pre-line;
-  color:var(--ink);
-}
-.poem-footer{
-  margin-top:30px; text-align:center; color:var(--ink-soft); font-size:0.9rem; font-style:italic;
-}
-.poem-footer .signed{ margin-top:6px; font-family:var(--serif); font-size:1.1rem; }
-
-/* ---------- SECTION 7: reassurance ---------- */
-.reassure-grid{
-  display:flex; flex-direction:column; gap:12px; max-width:420px; width:100%;
-}
-.reassure-btn{
-  padding:16px 20px; text-align:left; border-radius:18px; font-size:0.95rem;
-  display:flex; justify-content:space-between; align-items:center;
-}
-.reassure-msg{
-  margin-top:16px; padding:24px; font-family:var(--serif); font-size:1.1rem; line-height:1.8;
-  display:none;
-}
-.reassure-msg.show{ display:block; }
-
-/* ---------- SECTION 8: playful ---------- */
-.poll{
-  max-width:480px; width:100%; padding:22px 24px; text-align:left; margin-bottom:14px;
-}
-.poll h4{ font-family:var(--serif); font-size:1.15rem; margin-bottom:12px; }
-.poll .opts{ display:flex; gap:10px; }
-.poll .opt{
-  flex:1; padding:12px; border-radius:14px; text-align:center; font-size:0.9rem;
-  background:rgba(255,255,255,0.4); border:1.5px solid transparent;
-}
-.poll .opt.selected{ border-color:var(--lavender-deep); background:rgba(185,164,214,0.25); font-weight:700; }
-.poll .result{ margin-top:10px; font-size:0.85rem; color:var(--ink-soft); display:none; }
-.poll .result.show{ display:block; }
-
-/* ---------- SECTION 9: reflections ---------- */
-.reflect-list{ max-width:520px; width:100%; text-align:left; display:flex; flex-direction:column; gap:16px; }
-.reflect-item{ padding:20px 22px; font-family:var(--serif); font-size:1.1rem; }
-
-/* ---------- SECTION 11: final ---------- */
-#final-btn-wrap{ }
-.typewriter{
-  font-family:var(--serif); font-size:1.3rem; line-height:2.1; max-width:520px;
-  min-height:200px; white-space:pre-line;
-}
-.blink{ animation:blink 1s step-end infinite; }
-@keyframes blink{ 50%{ opacity:0; } }
-
-/* ---------- FINAL SCREEN ---------- */
-#heart-glow{
-  width:120px;height:120px;
-  background:radial-gradient(circle,var(--rose-gold),var(--lavender));
-  border-radius:50%;
-  filter:blur(2px);
-  box-shadow:0 0 60px rgba(217,165,160,0.6);
-  animation:pulseHeart 2.4s ease-in-out infinite;
-  position:relative;
-}
-#heart-glow::after{
-  content:'❤';
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  font-size:2.6rem; color:#fff; filter:none;
-}
-@keyframes pulseHeart{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.08); } }
-
-/* music toggle */
-#music-toggle{
-  display:flex; align-items:center; gap:8px; font-size:0.8rem;
-}
-#music-toggle .track{
-  width:38px; height:20px; border-radius:20px; background:rgba(150,120,150,0.3); position:relative;
-}
-#music-toggle .knob{
-  width:16px;height:16px; border-radius:50%; background:#fff; position:absolute; top:2px; left:2px;
-  transition:left .3s ease; box-shadow:0 2px 5px rgba(0,0,0,0.2);
-}
-#music-toggle.on .knob{ left:20px; }
-#music-toggle.on .track{ background:var(--lavender-deep); }
-
-footer.tiny{
-  font-size:0.75rem; color:var(--ink-soft); opacity:0.7; margin-top:18px;
-}
-
-@media(min-width:760px){
-  .section{ padding:100px 40px; }
-  .feeling-grid{ grid-template-columns:1fr 1fr 1fr; }
-}
+/* Final */
+#final{padding:120px 0 160px; text-align:center;}
+#final .name{font-size:clamp(2.2rem,10vw,3rem);}
+#final .btn{margin-top:44px;}
+footer{text-align:center; padding-bottom:40px; font-size:.8rem; color:var(--ink-soft); opacity:.7;}
 </style>
 </head>
 <body>
 
-<canvas id="particles"></canvas>
-<div id="progress-track"></div>
-
-<div id="chrome">
-  <div class="pill">💜 <span id="progress-pct">0%</span></div>
-  <div style="display:flex; gap:10px;">
-    <button class="icon" id="music-icon" title="Music">🔈</button>
-    <button class="icon" id="theme-icon" title="Theme">🌙</button>
-  </div>
+<div id="opening">
+  <div class="hearts-bg" id="openHearts"></div>
+  <h1 class="serif">For my Iris 🤍</h1>
+  <p>There's something I really want you to know&hellip;</p>
+  <button class="btn" id="openBtn">Open this</button>
 </div>
 
-<!-- ============ SECTION 1: OPENING ============ -->
-<section class="section" id="opening">
-  <div class="envelope-wrap">
-    <div class="eyebrow">A private letter, digitally</div>
-    <h1 class="serif">For Iris</h1>
-    <p class="sub">Happy Anniversary to the person I've been pursuing, loving, and choosing.</p>
-    <p class="note">This is not just a website.<br>It's a little place I made for us.</p>
-    <button class="btn-primary" id="open-heart-btn">Open My Heart ❤️</button>
-  </div>
-</section>
+<main id="main">
 
-<!-- ============ SECTION 2: THE BEGINNING ============ -->
-<section class="section" id="beginning">
+<section class="wrap">
   <div class="reveal">
-    <div class="eyebrow">The Beginning</div>
-    <h2>It All Started With You.</h2>
-    <!-- EDIT ME: personalize this paragraph -->
-    <p class="lead">
-      I didn't plan on writing a website. I just kept thinking about you long enough
-      that words started forming on their own. This page marks another year of choosing
-      you — not because I have to, but because I keep wanting to.
-    </p>
-    <div class="counter-row">
-      <div class="glass-card counter-card">
-        <div class="counter-num" id="count-months" data-target="12">0</div>
-        <div class="counter-label">months of pursuing you</div>
-      </div>
-      <div class="glass-card counter-card">
-        <div class="counter-num" id="count-days" data-target="365">0</div>
-        <div class="counter-label">days of choosing you</div>
-      </div>
-    </div>
-    <!-- EDIT ME: [ANNIVERSARY DATE] -->
-    <p class="lead" style="font-style:italic;">Since September 2025.</p>
-    <p class="lead">And somehow, I still want more memories with you.</p>
+    <div class="eyebrow">i.</div>
+    <h2 class="big">I still can't believe it</h2>
+    <p id="s1"></p>
   </div>
 </section>
 
-<!-- ============ SECTION 3: OUR JOURNEY ============ -->
-<section class="section" id="journey">
-  <div class="reveal" style="width:100%; max-width:640px;">
-    <div class="eyebrow">Our Journey</div>
-    <h2>Somewhere Along The Way, You Became Important.</h2>
-    <div class="timeline" id="timeline">
-      <!-- EDIT ME: each tl-item's tl-body text is a placeholder memory -->
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">The Beginning <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">I remember not knowing exactly what this would become. I just knew I wanted to keep talking to you.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">Our First Meaningful Conversations <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">Somewhere between small talk and late replies, I realized I actually wanted to know you — not just talk to you.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">The Moments That Made Me Laugh <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">The random things you say without thinking too much about it are still some of my favorite parts of you.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">The Moments That Made Me Think <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">There were conversations that stayed with me longer than they should have — in a good way.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">Difficult Moments We Learned From <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">Not everything was easy. But even the hard parts taught me something about patience, and about you.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">When I Realized How Much You Meant To Me <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">It wasn't one big moment. It was a quiet, gradual realization that I wanted you around — a lot.</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="glass-card tl-card">
-          <div class="tl-title">Where We Are Now <span class="tl-arrow">▾</span></div>
-          <div class="tl-body">Here. Still learning you, still choosing you, still glad I did.</div>
-        </div>
-      </div>
-    </div>
+<div class="wrap">
+  <div class="poem-trigger reveal" data-poem="0">
+    <span class="h">🤍</span><span>There's something hidden here&hellip;</span>
   </div>
-</section>
-
-<!-- ============ SECTION 4: THINGS ABOUT YOU ============ -->
-<section class="section" id="things">
-  <div class="reveal">
-    <div class="eyebrow">Things About You</div>
-    <h2>Things About You That Stay With Me</h2>
-    <div class="swipe-wrap" id="swipe-wrap">
-      <!-- cards injected by JS, see THINGS_CARDS array -->
-    </div>
-    <div class="dots" id="swipe-dots"></div>
-    <p class="swipe-hint">swipe or tap →</p>
-  </div>
-</section>
-
-<!-- ============ SECTION 5: THE REAL PART ============ -->
-<section class="section" id="real-part">
-  <div class="reveal">
-    <div class="eyebrow">The Real Part</div>
-    <h2>I Want To Be Honest With You.</h2>
-    <div class="glass-card letter-page">
-      <!-- EDIT ME: Eugene's personal letter -->
-      <p>
-        Pursuing you was never about being perfect. If anything, it's shown me exactly
-        how much I still have to learn.<br><br>
-        I've caught myself overthinking things that didn't need it. I've asked questions
-        when I should have just listened. I've tried to prove things instead of just
-        being genuine about them.<br><br>
-        I'm still learning. But I hope you can see that I'm trying to become better —
-        not just because I care about you, but because loving someone has taught me
-        that I also need to grow.
-      </p>
-      <div class="letter-sign">— Eugene</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SECTION 6: POETRY COLLECTION ============ -->
-<section class="section" id="poetry-intro">
-  <div class="reveal">
-    <div class="eyebrow">Words I Couldn't Always Say Out Loud</div>
-    <h2>So I wrote them down for you.</h2>
-    <p class="lead">Pick a feeling, or just start from the beginning.</p>
-    <div class="feeling-grid" id="feeling-grid"></div>
-  </div>
-</section>
-
-<section class="section" id="poetry-list">
-  <div class="reveal" style="width:100%;">
-    <div class="eyebrow">The Collection</div>
-    <h2>A Little Library, Just For You</h2>
-    <div class="poem-list" id="poem-list"></div>
-  </div>
-</section>
-
-<!-- poem reading modal -->
-<div id="poem-modal">
-  <div class="poem-sheet">
-    <h3 id="poem-modal-title"></h3>
-    <div class="poem-text" id="poem-modal-text"></div>
-    <div class="poem-footer">
-      Written because sometimes I don't know how to say these things properly.
-      <div class="signed">— Eugene</div>
-    </div>
-    <div style="text-align:center; margin-top:26px;">
-      <button class="btn-ghost" id="poem-back-btn">Back to the collection</button>
-    </div>
-  </div>
+  <div class="poem-card" id="poem0"></div>
 </div>
 
-<!-- ============ SECTION 7: REASSURANCE ============ -->
-<section class="section" id="reassure">
-  <div class="reveal" style="width:100%;">
-    <div class="eyebrow">Whenever You Need It</div>
-    <h2>If You Ever Need A Reminder...</h2>
-    <div class="reassure-grid" id="reassure-grid"></div>
-  </div>
-</section>
-
-<!-- ============ SECTION 8: PLAYFUL ============ -->
-<section class="section" id="playful">
-  <div class="reveal" style="width:100%;">
-    <div class="eyebrow">A Little Break</div>
-    <h2>Okay, Enough Deep Stuff 😭</h2>
-    <div id="poll-list"></div>
-    <!-- EDIT ME: add your inside jokes here -->
-    <div class="glass-card" style="max-width:480px; margin-top:10px; padding:22px; text-align:left;">
-      <h4 class="serif" style="margin-bottom:10px;">Our Inside Jokes</h4>
-      <p style="font-size:0.9rem; color:var(--ink-soft);">[Add an inside joke here — the kind only the two of you understand.]</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SECTION 9: REFLECTIONS ============ -->
-<section class="section" id="learned">
-  <div class="reveal" style="width:100%;">
-    <div class="eyebrow">What This Journey Taught Me</div>
-    <h2>I Learned More Than I Expected.</h2>
-    <div class="reflect-list" id="reflect-list">
-      <div class="glass-card reflect-item">I learned that loving someone isn't about having the perfect answer.</div>
-      <div class="glass-card reflect-item">I learned that sometimes giving someone space is also a form of care.</div>
-      <div class="glass-card reflect-item">I learned that asking a thousand questions doesn't always mean understanding someone.</div>
-      <div class="glass-card reflect-item">I learned that being genuine sometimes means letting things happen naturally instead of preparing for every possible problem.</div>
-      <div class="glass-card reflect-item">I learned that I can reflect on my mistakes without turning every improvement into a performance.</div>
-      <div class="glass-card reflect-item">I learned that becoming better doesn't mean becoming perfect.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SECTION 10: THE PROMISE ============ -->
-<section class="section" id="promise">
+<section class="wrap">
   <div class="reveal">
-    <div class="eyebrow">My Promise</div>
-    <h2>I Can't Promise Perfection.</h2>
-    <div class="glass-card letter-page">
-      <p>
-        I can't promise that I'll always know the right thing to say.<br>
-        I can't promise that I'll never make mistakes.<br><br>
-        But I can promise that I want to keep learning.<br>
-        I want to understand you better.<br>
-        I want to become more genuine.<br><br>
-        And through all the things I'm still figuring out...<br>
-        I hope you know that pursuing you was never something I wanted to do halfway.
-      </p>
-      <!-- EDIT ME: add your own personal promise below -->
-      <p style="margin-top:22px; font-style:italic; color:var(--ink-soft);">
-        [Write your own promise here — simple, honest, real.]
-      </p>
-      <div class="letter-sign">— Eugene</div>
-    </div>
+    <div class="eyebrow">ii.</div>
+    <h2 class="big">Thank you for choosing me</h2>
+    <p id="s2"></p>
   </div>
 </section>
 
-<!-- ============ SECTION 11: ONE LAST THING ============ -->
-<section class="section" id="one-last-thing">
-  <div class="reveal" id="final-btn-wrap">
-    <button class="btn-primary" id="last-thing-btn">One Last Thing...</button>
-  </div>
-  <div class="typewriter" id="typewriter-text" style="display:none;"></div>
-</section>
+<div class="wrap">
+  <div class="poem-card shown poem-inline reveal" id="poem1"></div>
+</div>
 
-<!-- ============ FINAL SCREEN ============ -->
-<section class="section" id="the-end">
+<section class="wrap">
   <div class="reveal">
-    <div id="heart-glow"></div>
-    <p class="lead" style="margin-top:34px;">Made with love, patience, words, memories, and probably a little overthinking 😭❤️</p>
-    <h2 style="margin-top:10px;">For Iris.<br>Thank you for being you.</h2>
-    <div id="music-toggle" style="justify-content:center; margin-top:20px;">
-      <span>Background music</span>
-      <div class="track"><div class="knob"></div></div>
-    </div>
-    <footer class="tiny">a little place made by Eugene, for Iris</footer>
+    <div class="eyebrow">iii.</div>
+    <h2 class="big">I don't just love having a girlfriend</h2>
+    <p id="s3"></p>
   </div>
 </section>
+
+<div class="wrap">
+  <div class="poem-card shown poem-inline reveal" id="poem2"></div>
+</div>
+
+<section class="wrap">
+  <div class="reveal">
+    <div class="eyebrow">iv.</div>
+    <h2 class="big">The little things I'm grateful for</h2>
+    <p>Tap each one.</p>
+    <div class="grid" id="tiles"></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="reveal">
+    <div class="eyebrow">v.</div>
+    <h2 class="big">I choose to appreciate you</h2>
+    <p id="s5"></p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="poem-trigger reveal" data-poem="3">
+    <span class="h">🤍</span><span>One more, if you'd like to see it&hellip;</span>
+  </div>
+  <div class="poem-card" id="poem3"></div>
+</div>
+
+<section class="wrap center">
+  <div class="reveal">
+    <div class="eyebrow">vi.</div>
+    <h2 class="big">A short poem for you</h2>
+  </div>
+  <div class="poem-card shown poem-inline reveal" id="poem-main"></div>
+</section>
+
+<section class="wrap">
+  <div class="reveal">
+    <div class="eyebrow">vii.</div>
+    <h2 class="big">No big promises</h2>
+    <p id="s7"></p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="poem-trigger reveal" data-poem="4">
+    <span class="h">🤍</span><span>Almost there&hellip;</span>
+  </div>
+  <div class="poem-card" id="poem4"></div>
+</div>
+
+<section class="wrap center">
+  <div class="reveal">
+    <div class="divider"></div>
+    <h2 class="big">Thank you for being my girlfriend, Iris.</h2>
+    <p class="quote" id="s8"></p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="poem-card shown poem-inline reveal" id="poem5"></div>
+</div>
+
+<section id="final">
+  <div class="wrap reveal">
+    <div class="name serif">My girlfriend.</div>
+    <div class="name serif">My Iris. 🤍</div>
+    <p>Thank you for choosing us.</p>
+    <button class="btn" id="againBtn">Read it again</button>
+  </div>
+</section>
+
+<footer>made quietly, for you &mdash; Eugene</footer>
+</main>
 
 <script>
-/* ================= CONTENT — edit here ================= */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// EDIT ME: swipeable "things about you" cards
-const THINGS_CARDS = [
-  "I love the way you are unapologetically yourself.",
-  "Even when you're quiet, you somehow still have a presence.",
-  "I love the little things about you that you probably don't even realize are special.",
-  "I've learned that understanding someone sometimes means listening to the things they don't always say.",
-  "I don't need you to be perfect for you to matter to me.",
-  "You're simply you.\n\nAnd somehow, that became someone I genuinely care about."
-];
+const text = {
+  s1: `For so long, I was the one hoping, waiting, choosing you, and trying to show you how much you meant to me.
 
-// EDIT ME: poems. Each poem needs an id, title, preview line, feeling tag, and full text.
-// feeling values: distant, soft, seeMe, hard, romantic, silly
-const POEMS = [
-  { id:1, title:"The Lavender Fields", feeling:"soft",
-    preview:"You feel like a field I didn't know I was looking for.",
-    text:"I found peace in a field I never planted,\nsomewhere between your laugh and your silence.\n\nYou didn't try to be calm —\nyou just were,\nand somehow that made room for me to be calm too.\n\nMaybe that's what you are to me:\nnot a fire, not a storm,\nbut a field of lavender\nI keep wanting to return to." },
-  { id:2, title:"For the Days You Feel Far Away", feeling:"distant",
-    preview:"Distance isn't disappearance. I'll still be here.",
-    text:"If today you feel far,\nI won't chase the distance away.\nI'll just wait on this side of it,\nknowing you'll come back when you're ready.\n\nSpace isn't the opposite of love —\nsometimes it's just love, being patient.\n\nSo take your time.\nI'm not going anywhere." },
-  { id:3, title:"The Girl I Keep Choosing", feeling:"romantic",
-    preview:"Not just on the good days. On the ordinary ones too.",
-    text:"Anyone can choose someone\non the good days —\nthe easy ones,\nthe ones that look good from the outside.\n\nI want to choose you on the ordinary Tuesdays,\nthe tired evenings,\nthe days nothing special happens at all.\n\nBecause love that only shows up for the highlights\nisn't the kind I want to give you.\n\nI keep choosing you.\nQuietly. Repeatedly. On purpose." },
-  { id:4, title:"Your Quiet Has a Language", feeling:"seeMe",
-    preview:"I've been learning to read you without words.",
-    text:"You don't always say much,\nbut I've been learning your quiet —\nthe kind that means you're thinking,\nnot the kind that means you're gone.\n\nI used to mistake silence for distance.\nNow I know it's just another way you speak.\n\nSo I've stopped filling the quiet with questions.\nI just sit in it with you." },
-  { id:5, title:"Not Every Love Is Loud", feeling:"soft",
-    preview:"Some love just stays. Quietly. Every day.",
-    text:"Not every love announces itself.\nSome of it just shows up —\nin patience,\nin staying,\nin choosing not to leave when things get quiet.\n\nI think that's the love I have for you.\nNot loud. Not performative.\nJust steady." },
-  { id:6, title:"The Way You Exist", feeling:"seeMe",
-    preview:"The small things about you that I notice anyway.",
-    text:"It's not the big moments that undo me —\nit's the small ones.\nThe way you exist in a room without trying.\nThe way ordinary things become memorable\njust because you were there for them.\n\nI don't think you know how much I notice.\nBut I do." },
-  { id:7, title:"Even On Your Quiet Days", feeling:"hard",
-    preview:"You don't have to perform for me. Not ever.",
-    text:"You don't have to be at your best for me.\nYou don't have to bring energy you don't have.\nYou're allowed to have quiet days,\ntired days,\ndays where you have nothing to give.\n\nI'm not here for the performance.\nI'm here for you — however you show up." },
-  { id:8, title:"A Letter Disguised as a Poem", feeling:"romantic",
-    preview:"The longer one. The one I meant most.",
-    text:"If I'm honest, I don't always know how to say things clearly,\nso I write instead — hoping the words land\nwhere my voice couldn't quite reach.\n\nI think about the version of me before you,\nand the version of me now,\nand I notice the difference isn't dramatic —\nit's quiet. Steady. Like most real growth is.\n\nYou didn't fix me. That was never your job.\nBut being around you made me want to fix myself,\nand that's a different, better thing.\n\nSo this is me, trying to say plainly\nwhat I usually only manage to write:\nyou matter to me, in the ordinary and extraordinary ways,\nand I don't say that lightly." },
-  { id:9, title:"If I Could Put You Somewhere Beautiful", feeling:"romantic",
-    preview:"A field, a shoreline, a quiet morning — all of it, you.",
-    text:"If I could put you somewhere,\nit wouldn't be a grand cathedral\nor a crowded viewpoint.\n\nIt would be somewhere quiet —\na shoreline at low tide,\na field right before the sun fully rises,\nsomewhere the world hasn't gotten loud yet.\n\nBecause that's what you feel like to me:\nsomewhere peaceful,\nsomewhere I'd choose to stay." },
-  { id:10, title:"The Things I Learned While Loving You", feeling:"hard",
-    preview:"Growth, disguised as ordinary days with you.",
-    text:"I learned that love isn't proven,\nit's practiced.\nI learned that space isn't rejection,\nit's respect.\nI learned that listening is harder\nand more important\nthan having the right thing to say.\n\nI didn't expect to learn this much\nfrom simply choosing to stay.\nBut here we are." },
-  { id:11, title:"Somewhere Between Then and Now", feeling:"soft",
-    preview:"Looking back at how far this has come.",
-    text:"Somewhere between who I was\nwhen I first started noticing you,\nand who I am now —\nsomething shifted.\n\nI stopped pursuing you like a question\nI was trying to answer,\nand started choosing you\nlike an answer I already knew." },
-  { id:12, title:"To Iris", feeling:"silly",
-    preview:"Short. Simple. Just for you.",
-    text:"To Iris —\nthe reason my notes app has too many drafts,\nthe reason ordinary days stopped feeling ordinary,\nthe reason I keep writing when I usually wouldn't.\n\nJust you. Simply, entirely, gladly you." }
-];
+And now somehow, I get to call you my girlfriend.
 
-const FINAL_POEM = {
-  title:"For Iris, After All This Time",
-  text:"After all this time,\nafter everything I've tried to say\nand everything I probably said badly the first time —\n\nhere's the simplest version:\n\nI'm glad it was you.\nNot despite the hard parts.\nNot only because of the easy ones.\nJust — all of it, and I'm still glad it was you.\n\nMaybe I can't put everything I feel into words.\nBut I think I spent this entire website trying anyway.\n\nHappy Anniversary, Iris."
+My girl.
+
+And honestly&hellip; I'm still so grateful for that.`,
+  s2: `Thank you for giving us a chance. Thank you for trusting me. Thank you for letting me love you. Thank you for becoming my girlfriend. Thank you for staying. Thank you for choosing us.
+
+I'm not saying this because I expect anything more &mdash; I just don't want to take what we have right now for granted.`,
+  s3: `It isn't just that I finally have a girlfriend.
+
+It's that I finally get to say that YOU are my girlfriend.
+
+And that means so much more to me than I can properly explain.`,
+  s5: `Now that I get to call you mine, I don't want to forget how special that actually is.
+
+I don't want "girlfriend" to become just a word.
+
+I want to remember that behind that word is you. The person I waited for. The person I chose. The person who eventually chose me too.`,
+  s7: `I don't need to promise you a perfect relationship.
+
+I just want to keep learning you. Keep appreciating you. Keep choosing you. Keep growing with you.
+
+And every day that I get to call you my girlfriend, I want to remember how lucky I am that it is you.`,
+  s8: `I know I say a lot of things, but sometimes I just want you to know that underneath all of it is one very simple feeling:
+
+I'm grateful.
+
+Grateful that you gave us a chance.
+Grateful that you trusted me.
+Grateful that you chose me.
+Grateful that I get to love you.
+
+And most of all&hellip;
+
+I'm grateful that the girl I spent so much time pursuing is now the girl I get to call my girlfriend.
+
+You're my Iris.
+
+And I'm really, really thankful for you.`
 };
 
-// EDIT ME: reassurance messages
-const REASSURE = [
-  { label:"Open this when you're tired.", msg:"You don't have to earn rest. You're allowed to stop, even mid-sentence, even mid-day. I'll still be here when you're ready again." },
-  { label:"Open this when you doubt yourself.", msg:"Whatever you're doubting right now — I don't doubt it. I see the effort you don't think anyone notices." },
-  { label:"Open this when you feel alone.", msg:"You're not as alone as it feels right now. I'm one message away, even if I can't fix whatever it is." },
-  { label:"Open this when you wonder if I care.", msg:"I do. Even on the days I say it badly, or not at all, or too late — I do." },
-  { label:"Open this when you just want something from me.", msg:"Then ask. You don't have to hint at it or carry it alone. I'd rather you just tell me." }
+const poems = [
+  {title:"Now I Get To Call You Mine", body:`I used to say your name
+with a little bit of hope
+and a lot of patience
+
+Now I say it
+knowing you're my girl
+
+And somehow
+that still feels unreal
+
+After all the waiting
+all the wondering
+all the days of choosing you
+
+I finally get to say
+
+Iris is my girlfriend.
+
+And I'm still smiling about it.`},
+  {title:"You Chose Me Too", body:`I spent so long
+choosing you quietly
+
+in little moments
+in patient days
+in every time
+I decided to stay
+
+But the part I'll always be grateful for
+is that one day
+
+you chose me too.
+
+And suddenly
+all those little hopes
+became something real.
+
+Us.`},
+  {title:"My Favorite Word", body:`There are many words
+I could use for you
+
+beautiful
+precious
+special
+loved
+
+But lately
+there's one word
+that makes me smile the most
+
+girlfriend
+
+because somehow
+the word became
+
+you.`},
+  {title:"I Won't Take You For Granted", body:`I don't want to get so used to you
+that I forget how special this is.
+
+I don't want your presence
+to become something I simply expect.
+
+I want to notice you.
+
+Your little habits
+your quiet moments
+your smiles
+your tired days
+your happiness
+
+because being your boyfriend
+isn't something I want to become
+ordinary about.
+
+I want to stay grateful for you.`},
+  {title:"If I Could Tell You One Thing", body:`If I could leave you
+with only one thought
+from this little corner of the internet
+
+it would be this:
+
+I'm grateful.
+
+Not because everything is perfect
+not because I know what every tomorrow holds
+
+but because today
+I get to love you
+and you let me.
+
+And for me
+that's already something
+worth being thankful for.`},
+  {title:"My Iris", body:`You aren't just
+the girl I wanted.
+
+You're the girl
+who eventually wanted me too.
+
+And maybe that's why
+your name feels different now.
+
+Iris.
+
+A name I used to say
+with hope.
+
+A name I now say
+with gratitude.
+
+My girlfriend.
+
+My favorite person
+to thank God for.
+
+My Iris. 🤍`}
 ];
 
-// EDIT ME: playful poll questions
-const POLLS = [
-  { q:"Who is more makulit?", a:"Me 😅", b:"You, definitely" },
-  { q:"Who overthinks more?", a:"Also me", b:"You know it's you" },
-  { q:"Who takes longer to reply?", a:"Guilty", b:"We both know" },
-  { q:"Who would survive longer in a zombie apocalypse?", a:"Me, obviously", b:"You, actually" },
-  { q:"Who starts an argument over something random?", a:"Me lol", b:"You started it" }
+const tiles = [
+  {t:"Your presence", a:"I'm grateful for the simple fact that you're here."},
+  {t:"Your time", a:"Even the smallest amount of time you give me means something."},
+  {t:"Your trust", a:"I don't want to take the trust you've given me for granted."},
+  {t:"Your heart", a:"I'm grateful that I get to know the person behind everything you show the world."},
+  {t:"Us", a:"I'm grateful that somehow, after everything, there is an us."}
 ];
 
-const FEELINGS = [
-  { emoji:"🌙", label:"When you're feeling distant", tag:"distant" },
-  { emoji:"🌸", label:"When you want something soft", tag:"soft" },
-  { emoji:"❤️", label:"When you want to know how I see you", tag:"seeMe" },
-  { emoji:"🌧️", label:"When you're having a difficult day", tag:"hard" },
-  { emoji:"✨", label:"When you want something romantic", tag:"romantic" },
-  { emoji:"😭", label:"When you want something a little silly", tag:"silly" }
-];
-
-/* ================= PARTICLES ================= */
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let W,H,particles=[];
-function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
-resize(); window.addEventListener('resize', resize);
-const shapes = ['❤','✦','·'];
-function makeParticles(n){
-  particles = [];
-  for(let i=0;i<n;i++){
-    particles.push({
-      x:Math.random()*W, y:Math.random()*H,
-      size:Math.random()*10+6,
-      speed:Math.random()*0.4+0.15,
-      drift:Math.random()*0.6-0.3,
-      shape:shapes[Math.floor(Math.random()*shapes.length)],
-      opacity:Math.random()*0.35+0.1
-    });
-  }
+function renderPoem(el, p, ordered){
+  el.innerHTML = `<div class="title">${p.title}</div><div class="body">${p.body}</div><span class="star">✦</span>`;
 }
-makeParticles(window.innerWidth<600?18:30);
-function animateParticles(){
-  ctx.clearRect(0,0,W,H);
-  const isDark = document.body.classList.contains('dark');
-  particles.forEach(p=>{
-    ctx.globalAlpha = p.opacity;
-    ctx.fillStyle = isDark ? '#e6c9d6' : '#c9a3c0';
-    ctx.font = p.size+'px sans-serif';
-    ctx.fillText(p.shape, p.x, p.y);
-    p.y -= p.speed;
-    p.x += p.drift;
-    if(p.y < -20){ p.y = H+20; p.x = Math.random()*W; }
+
+document.addEventListener('DOMContentLoaded', () => {
+  Object.keys(text).forEach(id => { const n = document.getElementById(id); if(n) n.textContent = text[id]; });
+  renderPoem(document.getElementById('poem1'), poems[1]);
+  renderPoem(document.getElementById('poem2'), poems[2]);
+  renderPoem(document.getElementById('poem-main'), poems[0]);
+  renderPoem(document.getElementById('poem5'), poems[5]);
+
+  document.querySelectorAll('.poem-trigger').forEach(trig => {
+    trig.addEventListener('click', () => {
+      const idx = trig.dataset.poem;
+      const el = document.getElementById('poem'+idx);
+      if(!el.classList.contains('shown')){ renderPoem(el, poems[idx]); el.classList.add('shown'); }
+      trig.style.opacity = '.5';
+    }, {once:true});
   });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
 
-/* ================= PROGRESS + CHROME ================= */
-const progressTrack = document.getElementById('progress-track');
-const progressPct = document.getElementById('progress-pct');
-const chrome = document.getElementById('chrome');
-window.addEventListener('scroll', ()=>{
-  const h = document.documentElement;
-  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-  progressTrack.style.width = pct+'%';
-  progressPct.textContent = Math.round(pct)+'%';
-  if(window.scrollY > window.innerHeight * 0.6){ chrome.classList.add('show'); }
-  else { chrome.classList.remove('show'); }
-});
-
-/* ================= OPEN HEART / INTRO ================= */
-document.getElementById('open-heart-btn').addEventListener('click', ()=>{
-  document.getElementById('beginning').scrollIntoView({behavior:'smooth'});
-});
-
-/* ================= SCROLL REVEAL ================= */
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('in');
+  const tileWrap = document.getElementById('tiles');
+  tiles.forEach(tile => {
+    const d = document.createElement('div');
+    d.className = 'tile';
+    d.innerHTML = `<span class="plus">+</span><h3>${tile.t}</h3><div class="answer">${tile.a}</div>`;
+    d.addEventListener('click', () => d.classList.toggle('open'));
+    tileWrap.appendChild(d);
   });
-},{ threshold:0.2 });
-revealEls.forEach(el=>io.observe(el));
 
-/* ================= COUNTERS ================= */
-function animateCounter(el){
-  const target = parseInt(el.dataset.target,10);
-  let cur = 0;
-  const step = Math.max(1, Math.floor(target/60));
-  const iv = setInterval(()=>{
-    cur += step;
-    if(cur >= target){ cur = target; clearInterval(iv); }
-    el.textContent = cur;
-  }, 25);
-}
-const counterIo = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ animateCounter(e.target); counterIo.unobserve(e.target); }
-  });
-},{threshold:0.5});
-document.querySelectorAll('.counter-num').forEach(el=>counterIo.observe(el));
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* ================= TIMELINE ================= */
-document.querySelectorAll('.tl-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    card.parentElement.classList.toggle('open');
-  });
-});
-
-/* ================= SWIPE CARDS ================= */
-const swipeWrap = document.getElementById('swipe-wrap');
-const dotsWrap = document.getElementById('swipe-dots');
-let swipeIndex = 0;
-THINGS_CARDS.forEach((_,i)=>{
-  const d = document.createElement('div');
-  d.className = 'dot'+(i===0?' active':'');
-  dotsWrap.appendChild(d);
-});
-function renderSwipe(){
-  swipeWrap.innerHTML = '';
-  THINGS_CARDS.forEach((text,i)=>{
-    const card = document.createElement('div');
-    card.className = 'glass-card swipe-card';
-    card.textContent = text;
-    const offset = i - swipeIndex;
-    if(offset === 0){
-      card.style.transform = 'translateX(0) scale(1)';
-      card.style.zIndex = 3; card.style.opacity = 1;
-    } else if(offset === 1){
-      card.style.transform = 'translateX(40px) scale(0.92) rotate(4deg)';
-      card.style.zIndex = 2; card.style.opacity = 0.6;
-    } else if(offset === -1){
-      card.style.transform = 'translateX(-100%) scale(0.9)';
-      card.style.zIndex = 1; card.style.opacity = 0;
-    } else {
-      card.style.transform = 'translateX(120%) scale(0.85)';
-      card.style.zIndex = 0; card.style.opacity = 0;
-    }
-    swipeWrap.appendChild(card);
-  });
-  [...dotsWrap.children].forEach((d,i)=>d.classList.toggle('active', i===swipeIndex));
-}
-renderSwipe();
-function nextCard(){
-  if(swipeIndex < THINGS_CARDS.length-1){ swipeIndex++; renderSwipe(); }
-}
-swipeWrap.addEventListener('click', nextCard);
-let touchStartX = 0;
-swipeWrap.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; });
-swipeWrap.addEventListener('touchend', e=>{
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if(dx < -40) nextCard();
-  else if(dx > 40 && swipeIndex>0){ swipeIndex--; renderSwipe(); }
-});
-
-/* ================= FEELING BUTTONS ================= */
-const feelingGrid = document.getElementById('feeling-grid');
-FEELINGS.forEach(f=>{
-  const b = document.createElement('button');
-  b.className = 'glass-card feeling-btn';
-  b.innerHTML = f.emoji+'<br>'+f.label;
-  b.addEventListener('click', ()=>{
-    const match = POEMS.find(p=>p.feeling===f.tag);
-    if(match){
-      document.getElementById('poetry-list').scrollIntoView({behavior:'smooth'});
-      setTimeout(()=>openPoem(match.id), 500);
-    }
-  });
-  feelingGrid.appendChild(b);
-});
-
-/* ================= POEM LIST ================= */
-const poemListEl = document.getElementById('poem-list');
-POEMS.forEach((p,i)=>{
-  const card = document.createElement('div');
-  card.className = 'glass-card poem-card';
-  card.innerHTML = `
-    <div class="num">POEM ${String(i+1).padStart(2,'0')}</div>
-    <h3 class="serif">${p.title}</h3>
-    <div class="preview">"${p.preview}"</div>
-    <div class="read-btn">Read This One →</div>
-  `;
-  card.addEventListener('click', ()=>openPoem(p.id));
-  poemListEl.appendChild(card);
-});
-// locked final poem
-const lockedCard = document.createElement('div');
-lockedCard.className = 'glass-card poem-card locked';
-lockedCard.id = 'final-poem-card';
-lockedCard.innerHTML = `
-  <div class="num">ONE POEM REMAINS</div>
-  <h3 class="serif">${FINAL_POEM.title}</h3>
-  <div class="preview">You can open this at the very end.</div>
-  <div class="read-btn">🔒 Locked</div>
-`;
-poemListEl.appendChild(lockedCard);
-
-/* ================= POEM MODAL ================= */
-const poemModal = document.getElementById('poem-modal');
-const poemModalTitle = document.getElementById('poem-modal-title');
-const poemModalText = document.getElementById('poem-modal-text');
-function openPoem(id){
-  const p = POEMS.find(p=>p.id===id);
-  if(!p) return;
-  poemModalTitle.textContent = p.title;
-  poemModalText.textContent = p.text;
-  poemModal.classList.add('show');
-}
-function openFinalPoem(){
-  poemModalTitle.textContent = FINAL_POEM.title;
-  poemModalText.textContent = FINAL_POEM.text;
-  poemModal.classList.add('show');
-}
-document.getElementById('poem-back-btn').addEventListener('click', ()=>poemModal.classList.remove('show'));
-poemModal.addEventListener('click', (e)=>{ if(e.target===poemModal) poemModal.classList.remove('show'); });
-
-/* unlock final poem once user reaches "the end" section */
-let finalUnlocked = false;
-const endObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting && !finalUnlocked){
-      finalUnlocked = true;
-      const card = document.getElementById('final-poem-card');
-      card.classList.remove('locked');
-      card.querySelector('.preview').textContent = 'Now unlocked, just for you.';
-      card.querySelector('.read-btn').textContent = 'Read This One →';
-      card.addEventListener('click', ()=>{
-        openFinalPoem();
-        setTimeout(()=>{
-          if(!document.getElementById('post-final-msg')){
-            const msg = document.createElement('p');
-            msg.id = 'post-final-msg';
-            msg.className = 'poem-footer';
-            msg.style.marginTop = '18px';
-            msg.textContent = '';
-            document.querySelector('.poem-sheet').appendChild(msg);
-          }
-        }, 300);
-      });
-    }
-  });
-},{threshold:0.3});
-endObserver.observe(document.getElementById('the-end'));
-
-/* ================= REASSURANCE ================= */
-const reassureGrid = document.getElementById('reassure-grid');
-REASSURE.forEach((r,i)=>{
-  const wrap = document.createElement('div');
-  const btn = document.createElement('button');
-  btn.className = 'glass-card reassure-btn';
-  btn.innerHTML = `<span>${r.label}</span><span>→</span>`;
-  const msg = document.createElement('div');
-  msg.className = 'glass-card reassure-msg';
-  msg.textContent = r.msg;
-  btn.addEventListener('click', ()=> msg.classList.toggle('show'));
-  wrap.appendChild(btn); wrap.appendChild(msg);
-  reassureGrid.appendChild(wrap);
-});
-
-/* ================= PLAYFUL POLLS ================= */
-const pollList = document.getElementById('poll-list');
-POLLS.forEach((p,i)=>{
-  const card = document.createElement('div');
-  card.className = 'glass-card poll';
-  card.innerHTML = `
-    <h4>${p.q}</h4>
-    <div class="opts">
-      <div class="opt" data-choice="a">${p.a}</div>
-      <div class="opt" data-choice="b">${p.b}</div>
-    </div>
-    <div class="result">Locked in 😌</div>
-  `;
-  card.querySelectorAll('.opt').forEach(opt=>{
-    opt.addEventListener('click', ()=>{
-      card.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
-      opt.classList.add('selected');
-      card.querySelector('.result').classList.add('show');
-    });
-  });
-  pollList.appendChild(card);
-});
-
-/* ================= ONE LAST THING (typewriter) ================= */
-const FINAL_MESSAGE = `After all this time...
-
-after all the conversations,
-the laughter,
-the misunderstandings,
-the quiet moments,
-the things I've learned,
-and the things I'm still learning...
-
-I still look at this journey and think:
-
-I'm glad it was you.
-
-Happy Anniversary, Iris.
-Thank you for being part of my life.
-
-And wherever our journey continues from here...
-I hope we keep making memories worth remembering.
-
-— Eugene ❤️`;
-
-document.getElementById('last-thing-btn').addEventListener('click', function(){
-  this.style.display = 'none';
-  const tw = document.getElementById('typewriter-text');
-  tw.style.display = 'block';
-  let i = 0;
-  tw.textContent = '';
-  const cursor = document.createElement('span');
-  cursor.className = 'blink'; cursor.textContent = '|';
-  function type(){
-    if(i < FINAL_MESSAGE.length){
-      tw.textContent = FINAL_MESSAGE.slice(0,i+1);
-      tw.appendChild(cursor);
-      i++;
-      setTimeout(type, 28);
+  if(!reduced){
+    const hb = document.getElementById('openHearts');
+    for(let i=0;i<9;i++){
+      const s = document.createElement('span');
+      s.textContent = '🤍';
+      s.style.left = (Math.random()*90+5)+'%';
+      s.style.animationDelay = (Math.random()*10)+'s';
+      s.style.animationDuration = (9+Math.random()*8)+'s';
+      s.style.fontSize = (0.8+Math.random()*1.2)+'rem';
+      hb.appendChild(s);
     }
   }
-  type();
-});
 
-/* ================= MUSIC (never autoplay) ================= */
-let audioCtx=null, musicOn=false, musicNodes=null;
-function startAmbientMusic(){
-  audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-  const notes = [261.6,329.6,392.0,440.0,523.3];
-  musicNodes = [];
-  function pluck(){
-    if(!musicOn) return;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type='sine';
-    osc.frequency.value = notes[Math.floor(Math.random()*notes.length)];
-    gain.gain.setValueAtTime(0, audioCtx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime+0.3);
-    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime+2.2);
-    osc.connect(gain); gain.connect(audioCtx.destination);
-    osc.start(); osc.stop(audioCtx.currentTime+2.3);
-    setTimeout(pluck, 1800+Math.random()*1600);
-  }
-  pluck();
-}
-function toggleMusic(){
-  musicOn = !musicOn;
-  if(musicOn){
-    if(!audioCtx) startAmbientMusic();
-    else if(audioCtx.state==='suspended') audioCtx.resume();
-    localStorage.setItem && null; // no localStorage used per artifact rules
-  } else {
-    if(audioCtx) audioCtx.suspend();
-  }
-  document.getElementById('music-icon').textContent = musicOn ? '🔊' : '🔈';
-  const toggle = document.getElementById('music-toggle');
-  toggle.classList.toggle('on', musicOn);
-}
-document.getElementById('music-icon').addEventListener('click', toggleMusic);
-document.getElementById('music-toggle').addEventListener('click', toggleMusic);
+  document.getElementById('openBtn').addEventListener('click', () => {
+    document.getElementById('opening').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  });
+  document.getElementById('againBtn').addEventListener('click', () => {
+    window.scrollTo({top:0, behavior: reduced ? 'auto' : 'smooth'});
+    document.getElementById('opening').classList.remove('hidden');
+  });
 
-/* ================= THEME TOGGLE ================= */
-document.getElementById('theme-icon').addEventListener('click', ()=>{
-  document.body.classList.toggle('dark');
-  document.getElementById('theme-icon').textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  document.body.style.overflow = 'hidden';
 });
 </script>
 </body>
